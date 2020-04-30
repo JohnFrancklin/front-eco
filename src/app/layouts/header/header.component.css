@@ -1,5 +1,8 @@
 .md-dark { color: rgba(0, 0, 0, 0.74); }
 
+.row{
+    margin:0px;
+}
 
 .material-icons{
     cursor: pointer;
