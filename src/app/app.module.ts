@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PanierComponent } from './components/panier/panier.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RegisterComponent } from './components/register/register.component';
     HomeComponent,
     PanierComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
