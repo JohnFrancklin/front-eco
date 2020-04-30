@@ -15,6 +15,8 @@ import { MatToolbarModule, } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PanierComponent } from './components/panier/panier.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { PanierComponent } from './components/panier/panier.component';
     SidebarComponent,
     FooterComponent,
     HomeComponent,
-    PanierComponent
+    PanierComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
