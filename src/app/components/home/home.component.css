@@ -1,5 +1,92 @@
+
 .home-contener{
-    background-color: grey;
-    width: 100%;
-    height: 100%;
+    background-color: rgb(231, 231, 231);
+    margin-left: 308px;
+    border: 1px solid #d5d5d5;
 }
+
+.row{
+    margin:0px;
+}
+
+
+.tp-card {
+    display: inline-block;
+    margin-bottom: 15px;
+    background-color: white;
+    color: black;
+    box-shadow: none;
+    border: 1px solid #d5d5d5; 
+    outline:0!important;
+ }
+ /* .tp-header-image {
+    background-image: url('https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg');
+    background-size: cover;
+ } */
+
+ .mat-card-actions, .mat-card-subtitle, .mat-card-content {
+    display: block;
+    margin-bottom: 5px;
+}
+.action_card{
+    border: 1px solid #d5d5d5; 
+    margin-top: -8px;
+}
+
+.button_card{
+   cursor: pointer;
+   outline:0!important;
+}
+
+
+ .description_card{
+   margin-top: -5px;
+   height: 21px;
+   overflow: hidden;
+ }
+
+ .price_card{
+    margin: 0px;
+    float: right;
+    color: red;
+ }
+
+ .vote_card{
+    margin: 0;
+    background-color: rgb(1, 64, 107);
+    padding: 2px 5px 2px 5px;
+    border-radius: 2px;
+    color: white;
+ }
+
+ .icon_vote{
+    font-size: medium;
+ }
+
+ .filtreContener{
+   float: right;
+   background-color: white;
+   padding: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   border-radius: 4px;
+   display: flex;
+   border: 1px solid #d5d5d5;
+ }
+ 
+ .input_filtre_recherche{
+   padding-left: 7px;
+   width: 250px;
+   margin-right: 6px;
+   height: 30px;
+ }
+ .slct_filtre{
+   margin-left: 6px;
+   background-color: rgb(231, 231, 231);
+ }
+
+.produitTitre
+ {
+   margin: 17px 0px;
+   text-decoration: underline;
+ }

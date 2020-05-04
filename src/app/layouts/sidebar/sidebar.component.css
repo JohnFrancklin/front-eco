@@ -1,21 +1,26 @@
 .sidebar{
-    height: calc(100% - 0px);
+    /* height: calc(100% - 0px); */
     width: 300px;
     float: left;
-    background-color: chartreuse;
+    background-color: rgb(231, 231, 231);
+    border: 1px solid #d5d5d5;
+    /* margin-right: 5px; */
 }
 
 
-/* .vertical-menu {
-    width: 200px; 
-  } */
+.vertical-menu {
+  width: 243px;
+  margin: 0px 0px 0px 30px;
+  text-align: center;
+  }
   
   .vertical-menu a {
-    background-color: #eee; /* Grey background color */
+    background-color: white; /* Grey background color */
     color: black; /* Black text color */
     display: block; /* Make the links appear below each other */
     padding: 12px; /* Add some padding */
     text-decoration: none; /* Remove underline from links */
+    cursor: pointer;
   }
   
   .vertical-menu a:hover {
@@ -25,4 +30,18 @@
   .vertical-menu a.active {
     background-color: #4CAF50; /* Add a green color to the "active/current" link */
     color: white;
+  }
+
+  .menu{
+    width: 270px;
+    background-color: rgb(1, 64, 107);
+    height: 45px;
+    margin: 10px 10px 10px 15px;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+    font-size: medium;
+    padding-top: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
   }

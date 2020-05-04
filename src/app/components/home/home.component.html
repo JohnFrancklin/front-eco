@@ -1,4 +1,97 @@
 <div class="home-contener">
 
-      
+    <div class="row">
+        <div class="col-5">
+            <div class="produitTitre">
+             <h1>Produits</h1>   
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="filtreContener">
+                <input type="text"  placeholder="Filtrer les resulats...."  class="input_filtre_recherche"/>
+                <select class="slct_filtre">
+                    <option>Aucun</option>
+                    <option>Prix</option>
+                    <option>Vote</option>
+                    <option>Nom</option>
+                </select>
+            
+                <select class="slct_filtre">
+                    <option>Ascendant</option>
+                    <option>Descendant</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3" style="display: inline-block;" *ngFor="let p of produits">
+            <mat-card class="tp-card">
+                <!-- <mat-card-header>
+                   <mat-card-title>HTML5</mat-card-title>
+                   <mat-card-subtitle>HTML Basics</mat-card-subtitle>
+                </mat-card-header> -->
+                <img mat-card-image [routerLink]="['/detail']"  src="../../../assets/images/your-logo-png-8 - Copie.png" alt="Learn HTML5">
+                <mat-card-content>
+                    <p class="description_card">
+                        HTML5 is the next major revision dfjkdj fdkjkfd dfjkdfjk 
+                    </p>
+                    <p class="price_card">
+                        50.000 Ariary
+                    </p>
+                    <span class="vote_card">
+                        <span class="txt_vote">
+                            152
+                        </span>
+                        <span class="material-icons icon_vote">
+                            grade
+                        </span>
+                    </span>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="row action_card">
+                        <div class="col-4">
+                            <button mat-button class="button_card">
+                                <span class="material-icons icon_card">
+                                    grade
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button mat-button class="button_card">
+                                <span class="material-icons icon_card">
+                                    favorite
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button mat-button class="button_card">
+                                <span class="material-icons icon_card">
+                                    shopping_cart
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

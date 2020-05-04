@@ -1,12 +1,24 @@
 <div class="header-container">
     <div class="row">
-        <div class="col-3 logo">LOGO</div>
+        <div class="col-3 logo">
+
+            <div class="logo_dash_contener" [routerLink]="['/dashboard/produits']">
+                <span class="material-icons md-dark icon_dash">
+                    dashboard
+                </span>
+            </div>
+
+
+            <div class="logo_contener">
+                <img src="../../../assets/images/your-logo-png-8.png" class="image_logo">
+            </div>
+        </div>
         <div class="col-5 search-content">
             <div class="input-group search-group">
-                <input type="text" class="form-control search-input" placeholder="Rechercher">
+                <input type="text" class="form-control search-input" placeholder="Rechercher un produit">
                 <div class="input-group-append">
                     <button class="btn btn-secondary btn-search" type="button">
-                        <span class="material-icons">
+                        <span class="material-icons search-icon">
                             search
                         </span>
                     </button>
@@ -15,24 +27,28 @@
         </div>
         <div class="col-2 login-register">
             <div class="login-register-group">
-                <span><a [routerLink]="['/register']"> S'inscrire </a><span class="textseparator">|</span> <a [routerLink]="['/login']">Se connecter</a> </span> 
+                <span><a class="txt_login_register" [routerLink]="['/register']"> S'inscrire </a><span
+                        class="textseparator">|</span> <a class="txt_login_register" [routerLink]="['/login']">Se
+                        connecter</a> </span>
             </div>
         </div>
         <div class="col-2 panier-content">
             <div>
                 <ul>
-                    <li [routerLink]="['/home']">
+                    <li class="li-panier-header" [routerLink]="['/home']">
                         <span class="material-icons md-dark">
-                            home <hr class="separator">
+                            home
+                            <hr class="separator">
                         </span>
-                        
+
                     </li>
-                    <li [routerLink]="['/favorite']">
+                    <li class="li-panier-header" [routerLink]="['/favorite']">
                         <span class="material-icons md-dark">
-                            favorite <hr class="separator">
+                            favorite
+                            <hr class="separator">
                         </span>
                     </li>
-                    <li [routerLink]="['/panier']">
+                    <li class="li-panier-header" [routerLink]="['/panier']">
                         <span class="material-icons md-dark">
                             shopping_cart
                         </span>

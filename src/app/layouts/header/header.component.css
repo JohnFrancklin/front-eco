@@ -12,16 +12,19 @@
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none;
 }
+.search-icon{
+    margin-top: 10px;
+}
  
 
 .header-container{
     width: 100%;
     height: 100px;
-    background-color: blue;
+    margin-bottom: 8px;
 }
 
 .logo, .search-content, .login-register, .panier-content{
-    background-color: violet;
+    background-color: rgb(1, 64, 107);
     height: 100px;
     width: 100%;
     color: white;
@@ -44,11 +47,11 @@
 }
 
 .search-input{
-    height: 45px;
+    height: 55px;
 }
 
 .search-group{
-    margin-top: 30px;
+    margin-top: 22px;
 }
 
 .btn-search{
@@ -72,14 +75,14 @@ ul {
     border-radius: 5px;
   }
 
-li{
+.li-panier-header{
     display: inline;
     margin: 15px;
 }
 
-li:focus
+.li-panier-header:focus
 {
-    outline:0!important;;
+    outline:0!important;
 }
 
 .separator{
@@ -93,3 +96,25 @@ li:focus
 .textseparator{
     margin: 6px 12px 0px 7px;
 }
+
+.txt_login_register{
+    text-decoration: none;
+    color: white;
+}
+
+.image_logo{
+    height: 70px;
+}
+
+.logo_dash_contener{
+    float: left;
+    margin: 24px 30px 0px 0px;
+    background-color: white;
+    padding: 15px 15px 10px 15px;
+    border-radius: 4px;
+}
+
+.logo_contener{
+    margin:15px;
+}
+

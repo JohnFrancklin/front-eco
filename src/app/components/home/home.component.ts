@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+
+  produits = ["fdf","dfdf","rer","fdf","dfdf","rer","fdf","dfdf","rer","fdf","dfdf","rer"]
+
   constructor() { }
 
   ngOnInit(): void {

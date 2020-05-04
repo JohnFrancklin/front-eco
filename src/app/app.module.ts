@@ -18,6 +18,9 @@ import { PanierComponent } from './components/panier/panier.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { ProduitsComponent } from './components/dashbord/produits/produits.component';
+import { UsersComponent } from './components/dashbord/users/users.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     PanierComponent,
     LoginComponent,
     RegisterComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ProduitsComponent,
+    UsersComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
