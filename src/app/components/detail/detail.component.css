@@ -1,0 +1,36 @@
+.detail-contener{
+    background-color: rgb(231, 231, 231);
+    margin-left: 308px;
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+}
+
+.detail_image_miniature{
+
+}
+
+.detail_image_grand{
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #d5d5d5;
+}
+
+.liste_image_miniature{
+    margin-left: -40px;
+}
+
+.image_minuature{
+    list-style: none;
+    background-color: white;
+    margin-bottom: 7px;
+    margin-left: 20px;
+    padding: 5px;
+    border: 1px solid #d5d5d5;
+    width: 80%;
+}
+
+.detail_texte{
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #d5d5d5;
+}

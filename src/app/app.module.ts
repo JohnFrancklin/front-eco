@@ -15,6 +15,12 @@ import { MatToolbarModule, } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PanierComponent } from './components/panier/panier.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
+import { ProduitsComponent } from './components/dashbord/produits/produits.component';
+import { UsersComponent } from './components/dashbord/users/users.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 
 @NgModule({
@@ -24,7 +30,13 @@ import { PanierComponent } from './components/panier/panier.component';
     SidebarComponent,
     FooterComponent,
     HomeComponent,
-    PanierComponent
+    PanierComponent,
+    LoginComponent,
+    RegisterComponent,
+    FavoriteComponent,
+    ProduitsComponent,
+    UsersComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
