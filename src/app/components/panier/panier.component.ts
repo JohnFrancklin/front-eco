@@ -11,6 +11,10 @@ export class PanierComponent implements OnInit {
   
   panierTotal: any;
   step = 0;
+  prixTotal=0;
+  service = 200;
+  transport = 300;
+  netPayer = 0;
 
   // home : HomeComponent = new HomeComponent (ProduitService:ProduitService);
 
@@ -18,12 +22,18 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPanier();
+    this.calculTotal();
   }
 
 
   getPanier(){
     let panierOriginal = localStorage.getItem("panier");
     this.panierTotal = JSON.parse(panierOriginal);
+  }
+
+  setPanier(){
+    let paniers = JSON.stringify(this.panierTotal)
+    localStorage.setItem("panier",paniers);
   }
 
   removeFromPanier(id_produit){
@@ -43,6 +53,7 @@ export class PanierComponent implements OnInit {
 
     let paniers = JSON.stringify(this.panierTotal)
     localStorage.setItem("panier",paniers);
+    this.calculTotal();
   }
 
 
@@ -52,8 +63,8 @@ export class PanierComponent implements OnInit {
     let quantity = this.panierTotal[indexOfProduit].quantiteProduitPanier;
     let newQuantite = quantity + 1 ; 
     this.panierTotal[indexOfProduit].quantiteProduitPanier = newQuantite;
-    let paniers = JSON.stringify(this.panierTotal)
-    localStorage.setItem("panier",paniers);
+    this.setPanier();
+    this.calculTotal();
   }
 
   removeQuantity(id_produit){
@@ -64,9 +75,21 @@ export class PanierComponent implements OnInit {
     if(newQuantite<1){
       this.panierTotal[indexOfProduit].quantiteProduitPanier = 1;
     }
-    let paniers = JSON.stringify(this.panierTotal)
-    localStorage.setItem("panier",paniers);
+    this.setPanier();
+    this.calculTotal();
   }
+
+
+  calculTotal(){
+    this.getPanier();
+    this.prixTotal = 0;
+    for(let i=0; i<this.panierTotal.length; i++){
+      this.panierTotal[i].prixProduitPanier = this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
+      this.prixTotal = this.prixTotal + this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
+    }
+    this.netPayer = this.prixTotal + this.service + this.transport;
+  }
+
 
 
 

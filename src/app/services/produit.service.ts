@@ -34,7 +34,7 @@ export class ProduitService {
         taille: "m" // m,x,
       },
       prix: {
-        prix: 2510,
+        prix: 1000,
         prix_promotion: 500
       },
       favorie:[
@@ -76,7 +76,7 @@ export class ProduitService {
         taille: "m" // m,x,
       },
       prix: {
-        prix: 450,
+        prix: 500,
         prix_promotion: 500
       },
       favorie:[
@@ -117,7 +117,7 @@ export class ProduitService {
         taille: "m" // m,x,
       },
       prix: {
-        prix: 360000,
+        prix: 1500,
         prix_promotion: 500
       },
       favorie:[
