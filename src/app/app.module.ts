@@ -21,6 +21,10 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ProduitsComponent } from './components/dashbord/produits/produits.component';
 import { UsersComponent } from './components/dashbord/users/users.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { BoxclientComponent } from './layouts/header/boxclient/boxclient.component';
+import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -36,7 +40,8 @@ import { DetailComponent } from './components/detail/detail.component';
     FavoriteComponent,
     ProduitsComponent,
     UsersComponent,
-    DetailComponent
+    DetailComponent,
+    BoxclientComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,9 @@ import { DetailComponent } from './components/detail/detail.component';
     MatButtonModule,
     MatCardModule,
     MatProgressBarModule,
+    MatBadgeModule,
+    FormsModule,
+    MatExpansionModule
  
   ],
   providers: [],

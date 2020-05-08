@@ -90,3 +90,65 @@
    margin: 17px 0px;
    text-decoration: underline;
  }
+
+
+ app-sidebar{
+   position: absolute;
+   top: 108px;
+   left: 0px;
+ }
+
+
+ .search-icon {
+  margin-top: 10px;
+}
+
+
+.search-content{
+  position: absolute;
+  top: 0px;
+  left: 25%;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.search-input{
+  height: 55px;
+  border: none ;
+}
+.search-input:focus{
+  outline: 0 none!important;
+  box-shadow: none;
+  background-color: rgb(241, 251, 255);
+}
+
+.search-group{
+  margin-top: 22px;
+}
+
+.btn-search{
+  background-color: rgba(0, 0, 0, 0.74);
+}
+
+
+.clear_search{
+  border: none;
+  padding: 10px;
+  background-color: white;
+  opacity: 1!important;
+  outline: 0 none!important;
+}

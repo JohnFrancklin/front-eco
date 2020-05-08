@@ -1,18 +1,177 @@
-<p>panier works!</p>
+<app-boxclient #header></app-boxclient>
 
-<mat-card>
-    <mat-card-title>
-        title
-    </mat-card-title>
+<div class="panier-contener">
 
-    <mat-card-subtitle> Card subtitle</mat-card-subtitle>
-    <mat-card-content>
+    <div class="row">
 
-        Simple card
-    </mat-card-content>
-<button>go</button>
-    <mat-card-actions>
+        <div class="col-8 divisionProduits">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="step === 0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Vos paniers
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Les produits selectionnés
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+              
+                  <div class="contenu_global">
+                      <div class="content_panier_produit" *ngFor="let p of panierTotal">
+                        <div class="image_box">
+                            <div class="img">
+                              <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
+                            </div>
+                        </div>
+                        <div class="desc_box" style="height: 100px;">
+                            <h4 class="title_panier">
+                              {{p.title}}
+                            </h4>
 
-    </mat-card-actions>
+                            <p class="prix_panier">
+                              {{p.prix}} Ariary
+                            </p>
 
-</mat-card>
+                            <p class="desc_panier">
+                              {{p.description}}
+                            </p>
+                         
+                            <div class="button_box">
+                                <div class="quantity_button">
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-4">
+                                          <span class="material-icons" (click)="removeQuantity(p.id_produit)">
+                                            remove_circle_outline
+                                          </span>
+                                        </div>
+                                        <div class="col-4">
+                                            {{p.quantiteProduitPanier}}
+                                        </div>
+                                        <div class="col-4">
+                                          <span class="material-icons" (click)="addQantity(p.id_produit)">
+                                            add_circle_outline
+                                          </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="favoris_button">
+                                  <span class="material-icons panierIconButton">
+                                    favorite
+                                  </span>
+                                  <p class="txt_ajouterFavoris">
+                                    Ajouter au favoris
+                                  </p>
+                                </div>
+                                <div class="delete_button" (click)="removeFromPanier(p.id_produit);header.getPanier();home.modifierIcon(p.id_produit)">
+                                  <span class="material-icons panierIconButton">
+                                    delete
+                                    </span>
+                                    <p class="txt_enlever_panier">
+                                      Enlever du panier
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+           
+
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Adresse
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      votre adresse pour la livraison
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>votre adresse pour la livraison</p>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Mode de payment
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Payment methode ici
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+
+                    <p>Payment methode ici</p>
+
+
+                  </mat-expansion-panel>
+              </mat-accordion>
+              
+        </div>
+        <div class="col-4 divisionPrix">
+            <div class="content_total">
+              <div class="recap_title">
+                Récapitulatif
+              </div>
+
+              <div class="total">
+
+                <div class="each_content">
+                  <div class="txtTotal">
+                    Total
+                  </div>
+                  <div class="montantTotal">
+                    1245000
+                  </div>
+                </div>
+                <div class="each_content">
+                  <div class="txtService">
+                    Service
+                  </div>
+                  <div class="montantService">
+                    12454
+                  </div>
+                </div>
+                <div class="each_content">
+                  <div class="txtTransport">
+                    Transport
+                  </div>
+                  <div class="montantTransport">
+                    12000
+                  </div>
+                </div>
+
+                <div class="content_net">
+                  <div class="txtNetPayer">
+                    Net à payer
+                  </div>
+                  <div class="montantNet">
+                    12000
+                  </div>
+                </div>
+
+
+
+              </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+<!-- <button mat-button class="button_card" (click)="home.modifierIcon()">
+<span class="material-icons icon_card">
+    shopping_cart
+</span>
+</button> -->
+
+
+
+<app-home #home></app-home>

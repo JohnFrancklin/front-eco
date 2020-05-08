@@ -8,13 +8,29 @@
                 </span>
             </div>
 
+            <!-- <button (click)="home.getProduit()" >got produits</button> -->
+<!-- 
+            <button (click)="test()" >testone</button>
+
+            <button (click)="callMe()" >call me</button> -->
 
             <div class="logo_contener">
                 <img src="../../../assets/images/your-logo-png-8.png" class="image_logo">
             </div>
         </div>
         <div class="col-5 search-content">
-            <div class="input-group search-group">
+
+            <div class="slogan">
+                <h1 class="titre">
+                    e-Commerce | mi-Dév
+                </h1>
+                <h4>
+                    Ny hazo no vano ko ho lakana, ny tany naniriany no tsara
+                </h4>
+            </div>
+
+            
+            <!-- <div class="input-group search-group">
                 <input type="text" class="form-control search-input" placeholder="Rechercher un produit">
                 <div class="input-group-append">
                     <button class="btn btn-secondary btn-search" type="button">
@@ -23,7 +39,7 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="col-2 login-register">
             <div class="login-register-group">
@@ -32,30 +48,13 @@
                         connecter</a> </span>
             </div>
         </div>
-        <div class="col-2 panier-content">
-            <div>
-                <ul>
-                    <li class="li-panier-header" [routerLink]="['/home']">
-                        <span class="material-icons md-dark">
-                            home
-                            <hr class="separator">
-                        </span>
 
-                    </li>
-                    <li class="li-panier-header" [routerLink]="['/favorite']">
-                        <span class="material-icons md-dark">
-                            favorite
-                            <hr class="separator">
-                        </span>
-                    </li>
-                    <li class="li-panier-header" [routerLink]="['/panier']">
-                        <span class="material-icons md-dark">
-                            shopping_cart
-                        </span>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
+
+
+<!-- <app-home></app-home> -->
+
+<!-- <app-header (exampleOutput)="getPanier($event)"></app-header> -->
+
+<!-- <app-home (exampleOutput)="exampleMethodParent($event)"></app-home> -->

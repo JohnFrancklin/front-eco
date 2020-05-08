@@ -17,12 +17,15 @@
   <div class="menu">
     <span class="txt_menu">Contactez-nous</span>
   </div>
-  <div class="menu">
+  <div class="menu" *ngFor="let t of tab">
     <span class="txt_menu">Vendus</span>
   </div>
 
-  <div class="menu">
+  <div class="menu" *ngIf="show">
     <span class="txt_menu">Categories</span>
   </div>
+
+
+  <!-- <button (click)="exampleMethodChild()">click in app sidebar</button> -->
 
 </div>
