@@ -51,8 +51,7 @@ export class PanierComponent implements OnInit {
       // this.panierTotal.push(produitAjouter);
     }
 
-    let paniers = JSON.stringify(this.panierTotal)
-    localStorage.setItem("panier",paniers);
+    this.setPanier();
     this.calculTotal();
   }
 

@@ -56,9 +56,6 @@ export class ProduitService {
       categorie: 21212124545, //objectID
       quantite: 15,
       vote: [
-          13121345612,
-          21245454545,
-          21245454545
 
       ],
       
@@ -99,6 +96,7 @@ export class ProduitService {
       categorie: 21212124545, //objectID
       quantite: 5,
       vote: [
+          123456789,
           13121345612,
           21245454545
       ],
@@ -125,6 +123,44 @@ export class ProduitService {
         2154545454
       ]
     },
+    {
+      _id: "4",
+      title: "Montre home quartz",
+      description: "la nouvelle generation de montre avec toute sa splendeur",
+      categorie: 21212124545, //objectID
+      quantite: 17,
+      vote: [
+          123456789,
+          13121345612,
+          21245454545
+      ],
+      
+      images: [
+        "image1.png", "image2.png"
+      ],
+      detail_fabrication: {
+        numero_model: "1542DFD",
+        date_sortie: "5 Mars 2020"
+      },
+      detail_physique: {
+        poids: 50,
+        longueur: 20,
+        largueur: 15,
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 2000,
+        prix_promotion: 1500
+      },
+      favorie:[
+        2154545454,
+        2154545454
+      ]
+    },
+
+
+
+
   ]
   constructor() { }
 

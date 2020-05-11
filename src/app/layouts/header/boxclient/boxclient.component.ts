@@ -31,7 +31,6 @@ export class BoxclientComponent implements OnInit {
   getPanier(){
     let panierOriginal = localStorage.getItem("panier");
     this.panierTotal = JSON.parse(panierOriginal);
-    console.log("Le panier", this.panierTotal);
   }
 
   clearPanier(){

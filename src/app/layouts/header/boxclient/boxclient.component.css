@@ -14,17 +14,17 @@
 }
 ul {
     list-style-type: none;
-    margin: 0;
     background-color: white;
-    padding: 14px 5px 5px 5px;
-    margin-top: 20px;
-    width: 180px;
-    border-radius: 5px;
+    padding: 13px 0px 10px 2px;
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 158px;
+    border-radius: 2px;
   }
 
 .li-panier-header{
     display: inline;
-    margin: 15px;
+    margin: 12px;
 }
 
 .li-panier-header:focus
@@ -34,9 +34,9 @@ ul {
 
 .separator{
     width: 1px;
-    height: 46px;
+    height: 32px;
     background-color: lightgray;
-    margin: -10px -12px 0px 15px;
+    margin: -5px -12px 0px 15px;
     float: right;
 }
 
@@ -46,5 +46,5 @@ ul {
     right: 0px;
     float: right;
     background-color: rgb(1, 64, 107);
-    height: 100px;
+    height: 75px;
 }

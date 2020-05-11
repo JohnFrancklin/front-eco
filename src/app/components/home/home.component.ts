@@ -7,7 +7,7 @@ import { ProduitService } from 'src/app/services/produit.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit,OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
 
   keySearch: string;
   searchFilter: string;
@@ -15,8 +15,13 @@ export class HomeComponent implements OnInit,OnDestroy {
   /* Variable pour le panier */
   panierTotal = [];
   /************************* */
-  produits:any;
+  produits: any;
 
+  /****id_user simulation */
+  id_user = 123456789;
+
+  /**** nouveau vote */
+  voteNew;
 
   constructor(private produitService: ProduitService) { }
 
@@ -24,116 +29,138 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.getKeySearch();
     this.getPanier();
     this.getProduit();
+
   }
 
-  getProduit(){
+  getProduit() {
     this.produits = this.produitService.getProduit();
     let panierOriginal = localStorage.getItem("panier");
-    if(!panierOriginal){
-      localStorage.setItem("panier",'[]');
+    if (!panierOriginal) {
+      localStorage.setItem("panier", '[]');
       let panier = localStorage.getItem("panier");
       this.panierTotal = JSON.parse(panier);
-    }else{
-      this.panierTotal = JSON.parse(panierOriginal);      
+    } else {
+      this.panierTotal = JSON.parse(panierOriginal);
     }
-    for(let i=0; i<this.produits.length; i++){
-      for(let j=0; j<this.panierTotal.length; j++){
-        if(this.produits[i]._id === this.panierTotal[j].id_produit){
-          this.produits[i].panier = 'red';
-          console.log(i,this.produits[i]);
+    for (let i = 0; i < this.produits.length; i++) {
+      for (let j = 0; j < this.panierTotal.length; j++) {
+        if (this.produits[i]._id === this.panierTotal[j].id_produit) {
+          this.produits[i].panier = true;
         }
         // else{
         //   this.produits[i].panier = 'green';
         // }
       }
     }
+
+    // vote
+    for (let i = 0; i < this.produits.length; i++) {
+      const a_voter = this.produits[i].vote.includes(this.id_user);
+      if (a_voter) {
+        this.produits[i].a_vote = true;
+      }
+      else {
+        this.produits[i].a_vote = false;
+      }
+    }
   }
 
 
-  ngOnDestroy(){
- 
+  ngOnDestroy() {
+
   }
 
 
-  rechercheProduit(key){
-    document.cookie = "keySearch = " + this.keySearch + "";   
+  rechercheProduit(key) {
+    document.cookie = "keySearch = " + this.keySearch + "";
   }
 
-  getKeySearch(){
+  getKeySearch() {
     let a = `; ${document.cookie}`.match(`;\\s*${'keySearch'}=([^;]+)`);
     this.keySearch = a ? a[1] : '';
     return a ? a[1] : '';
   }
 
-  clearInputSearch(){
+  clearInputSearch() {
     this.keySearch = "";
-    document.cookie = "keySearch=keySearch; expires=Thu,01 Jan 1970 00:00:00 UTC;"; 
+    document.cookie = "keySearch=keySearch; expires=Thu,01 Jan 1970 00:00:00 UTC;";
   }
 
-  getPanier(){
+  getPanier() {
     let panierOriginal = localStorage.getItem("panier");
     this.panierTotal = JSON.parse(panierOriginal);
   }
 
-  addOrRemovePanier(produits){
+  setPanier() {
+    let paniers = JSON.stringify(this.panierTotal)
+    localStorage.setItem("panier", paniers);
+  }
+
+  addOrRemovePanier(produits) {
     // il faut utiliser le session ici, mais pour l'instant on va utiliser le cookie
-      /**recuperer ce qu il ya dans le panier */
+    /**recuperer ce qu il ya dans le panier */
     this.getPanier();
- 
+
     let quantite = 1;
     let produitAjouter = {};
-
     let id_produit = produits._id;
-
 
     produitAjouter['id_produit'] = id_produit;
     produitAjouter['title'] = produits.title;
     produitAjouter['description'] = produits.description;
     produitAjouter['prix'] = produits.prix.prix;
     produitAjouter['quantite'] = produits.quantite;
-    produitAjouter['quantiteProduitPanier'] = quantite; 
-    
-    
+    produitAjouter['quantiteProduitPanier'] = quantite;
+
     /**check si id_produit existe dans le panier */
     const checkIdProduit = obj => obj.id_produit === id_produit;
-    let result:boolean = this.panierTotal.some(checkIdProduit);    // if produit exist, return true
-    if(result == true){
+    let result: boolean = this.panierTotal.some(checkIdProduit);    // if produit exist, return true
+    if (result == true) {
       /**enlever du panier si le produit existe deja dedans */
-      this.panierTotal = this.panierTotal.filter(function(item) { 
-        return item.id_produit !== id_produit; 
+      this.panierTotal = this.panierTotal.filter((item) => {
+        return item.id_produit !== id_produit;
       });
-    }else{
+    } else {
       /**ajouter dans le panier si le produit n'y est encore pas */
       this.panierTotal.push(produitAjouter);
     }
 
-    let paniers = JSON.stringify(this.panierTotal)
-    localStorage.setItem("panier",paniers);
+    this.setPanier();
 
     const indexOfProduit = this.produits.map(e => e._id).indexOf(id_produit);
-    console.log("l'index de produits", indexOfProduit);
-    
-    if(this.produits[indexOfProduit].panier == 'red'){
+    if (this.produits[indexOfProduit].panier == true) {
       this.produits[indexOfProduit].panier = "";
-    }else{
-      this.produits[indexOfProduit].panier = "red";
+    } else {
+      this.produits[indexOfProduit].panier = true;
     }
-  
+
+  }
+
+  addOrRemoveVote(produits) {
+    // check if id_user exists dans le vote du produits
+    const a_voter = produits.vote.includes(this.id_user);
+    const indexOfIdUser = produits.vote.indexOf(this.id_user);
+
+    if (a_voter) {
+      produits.vote.splice(indexOfIdUser, 1);
+      produits.a_vote = false;
+    }
+    else {
+      produits.vote.push(this.id_user);
+      produits.a_vote = true;
+    }
   }
 
 
-  modifierIcon(id_produit){
-    console.log("id_produits got", id_produit);
-    this.getProduit();
-
+  modifierIcon(id_produit) {
+    //icon du panier//
     const indexOfProduit = this.produits.map(e => e._id).indexOf(id_produit);
-
-    if(this.produits[indexOfProduit].panier == 'red'){
+    if (this.produits[indexOfProduit].panier == true) {
       this.produits[indexOfProduit].panier = "";
-    }else{
-      this.produits[indexOfProduit].panier = "red";
+    } else {
+      this.produits[indexOfProduit].panier = true;
     }
-    
+
   }
 
 

@@ -1,6 +1,6 @@
 .panier-contener{
     background-color: rgb(231, 231, 231);
-    margin-left: 308px;
+    margin-left: 305px;
     border: 1px solid #d5d5d5;
     /* padding:8px; */
 }
@@ -108,11 +108,12 @@ mat-panel-title, mat-panel-description {
 
 .title_panier{
     margin: 0px 0px 3px 15px;
-    font-size: large;
+    font-size: medium;
 }
 
 .desc_panier{
     margin:0px 0px 7px 15px;
+    font-size: small;
 }
 
 .prix_panier{

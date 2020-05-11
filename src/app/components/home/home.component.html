@@ -23,7 +23,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -59,8 +58,8 @@
     <div class="row">
         <div class="col-3" style="display: inline-block;" *ngFor="let p of produits">
             <mat-card class="tp-card">
-                <img mat-card-image [routerLink]="['/detail']" src="../../../assets/images/your-logo-png-8 - Copie.png"
-                    alt="Learn HTML5">
+                <img mat-card-image [routerLink]="['/detail/', p._id]" [queryParams]="{ produitselected:p | json }"
+                    src="../../../assets/images/your-logo-png-8 - Copie.png" alt="Learn HTML5">
                 <mat-card-content>
                     <p class="description_card">
                         {{p.description}}
@@ -80,7 +79,8 @@
                 <mat-card-actions>
                     <div class="row action_card">
                         <div class="col-4">
-                            <button mat-button class="button_card">
+                            <button mat-button class="button_card" (click)="addOrRemoveVote(p)"
+                                [ngStyle]="{'color':p.a_vote=== true ? 'red': ''}">
                                 <span class="material-icons icon_card">
                                     grade
                                 </span>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-4">
                             <button mat-button class="button_card" (click)="addOrRemovePanier(p);header.getPanier()"
-                                [ngStyle]="{'color':p.panier}">
+                                [ngStyle]="{'color':p.panier=== true ? 'red': ''}">
                                 <span class="material-icons icon_card">
                                     shopping_cart
                                 </span>
@@ -109,5 +109,3 @@
     </div>
 
 </div>
-
-

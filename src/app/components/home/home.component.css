@@ -1,7 +1,7 @@
 
 .home-contener{
     background-color: rgb(231, 231, 231);
-    margin-left: 308px;
+    margin-left: 305px;
     border: 1px solid #d5d5d5;
 }
 
@@ -64,14 +64,14 @@
  }
 
  .filtreContener{
-   float: right;
-   background-color: white;
-   padding: 10px;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   border-radius: 4px;
-   display: flex;
-   border: 1px solid #d5d5d5;
+  float: right;
+  background-color: white;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  display: flex;
+  border: 1px solid #d5d5d5;
  }
  
  .input_filtre_recherche{
@@ -87,8 +87,8 @@
 
 .produitTitre
  {
-   margin: 17px 0px;
-   text-decoration: underline;
+  margin: 4px 0px;
+  text-decoration: underline;
  }
 
 
@@ -100,7 +100,7 @@
 
 
  .search-icon {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 
@@ -127,8 +127,8 @@
 }
 
 .search-input{
-  height: 55px;
-  border: none ;
+  height: 45px;
+  border: none;
 }
 .search-input:focus{
   outline: 0 none!important;
@@ -137,7 +137,7 @@
 }
 
 .search-group{
-  margin-top: 22px;
+  margin-top: 15px;
 }
 
 .btn-search{
