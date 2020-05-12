@@ -21,7 +21,7 @@ export class ProduitService {
       ],
       
       images: [
-        "image1.png", "image2.png"
+        "image1.png", "image2.png", "image3.png"
       ],
       detail_fabrication: {
         numero_model: "A123X",
@@ -102,7 +102,7 @@ export class ProduitService {
       ],
       
       images: [
-        "image1.png", "image2.png"
+        "image1.png"
       ],
       detail_fabrication: {
         numero_model: "A123X",

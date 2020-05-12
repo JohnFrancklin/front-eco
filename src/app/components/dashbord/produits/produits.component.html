@@ -1,1 +1,137 @@
-<p>produits works!</p>
+<app-boxclient #header></app-boxclient>
+<div class="dashboard-contener">
+    <div class="row">
+        <div class="menu_gauche">
+            <div class="menu_content">
+                utilisateurs, produits, commandes, home, reporting, kpi, liste des feedbacks,logs sns
+            </div>
+        </div>
+        <div class="list_centre">
+            <!-- <div>
+                <input type="text" placeholder="Rechercher">
+            </div> -->
+            <div class="content_dans_list">
+                <div class="menu_dans_list">
+                    <p class="menu_item">
+                        Ordinateur
+                    </p>
+                    <p class="menu_item">
+                        Ordinateur
+                    </p>
+                    <p class="menu_item">
+                        Ordinateur
+                    </p>
+                    <p class="menu_item">
+                        Ordinateur
+                    </p>
+                    <p class="menu_item">
+                        Ordinateur
+                    </p>
+                </div>
+                <div class="list_dans_list">
+                    <button class="element_un" *ngFor="let p of produits" (click)="getOneProduit(p)"> 
+                        <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
+                    </button>
+                </div>
+            </div>
+            <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
+            <div class="content_stat_image">
+                <div class="stat">
+                    
+                    histogramme - chart ici
+
+                </div>
+                <div class="imageCont">
+                    <div class="box_image" *ngFor="let i of oneProduit.images">
+                        <img src="../../../../assets/images/your-logo-png-8.png" alt="" class="image_produit">
+                    </div>
+                    <div class="box_image" *ngIf="oneProduit.images.length!=3">
+                        Ajouter une image
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail_droit">
+
+            <h3 class="lbl_h3_detail">Detail du produit</h3>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer"> 
+                <div class="label_change">
+                    Title
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="oneProduit.description"> 
+                <div class="label_change">
+                    Description
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix"> 
+                <div class="label_change">
+                    Prix
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_promotion"> 
+                <div class="label_change">
+                    Prix de promotion
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.numero_model"> 
+                <div class="label_change">
+                    Numero de model
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.date_sortie"> 
+                <div class="label_change">
+                    Date de sortie
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.quantite"> 
+                <div class="label_change">
+                    Quantité en stock
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille"> 
+                <div class="label_change">
+                    Taille
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur"> 
+                <div class="label_change">
+                    Longueur
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.largueur"> 
+                <div class="label_change">
+                    Largeur
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.poids"> 
+                <div class="label_change">
+                    Poids
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <button class="btn_modifier">
+                    Modifier
+                </button>
+                <button class="btn_supprimer">
+                    Supprimer
+                </button>
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>

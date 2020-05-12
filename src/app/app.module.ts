@@ -55,7 +55,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatProgressBarModule,
     MatBadgeModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
  
   ],
   providers: [],
