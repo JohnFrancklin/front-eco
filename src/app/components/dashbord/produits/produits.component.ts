@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
-import * as CanvasJS from 'canvasjs';
 
 
 @Component({
