@@ -47,9 +47,10 @@
 
 .menu_dans_list{
     width: 20%;
-    height: 100%;
-    background-color: rgb(231, 231, 231);
+    height: calc(100% - 5px);
+    background-color: white;
     float: left;
+    border: 1px solid #d5d5d5;
 }
 
 .list_dans_list{
@@ -60,12 +61,26 @@
     overflow-y: scroll;
 }
 
-.menu_item{
-    width: Calc(100% -10px);
-    padding: 5px 0px 5px 0px;
+.titleItem{
+    padding: 18px 0px 17px 0px;
     text-align: center;
-    background-color: blanchedalmond;
-    margin: 5px;
+    background-color: lightgray;
+    margin: 0px 0px 10px 0px;
+    font-size: larger;
+}
+
+.menu_item{
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    background-color: rgb(231, 231, 231);
+    margin: 0px 5px 10px 5px;
+    border: 1px solid #d5d5d5;
+    cursor: pointer;
+}
+
+.menu_item:hover{
+    background-color: rgb(1, 64, 107);
+    color: white;
 }
 
 .element_un
@@ -164,6 +179,7 @@
     background-color: white;
     border: 1px solid #d5d5d5;
     float: right;
+    overflow: hidden;
 }
 
 .box_image{
@@ -172,12 +188,37 @@
     overflow-y: hidden;
     padding: 10px;
     margin: 10px 5px 0px 8px;
-    border: 1px solid;
+    border: 1px solid #d5d5d5;
     display: inline-block;
     text-align: center;
-    min-height: 145px;
+    height: 150px;
 }
 
 .image_produit{
     width: 100%;
+}
+
+.recherche_box{
+    width: calc(100% - 10px);
+    padding: 10px 10px 10px 6px;
+    background-color: lightgray;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.input_search{
+    width: calc(85% - 10px);
+    height: 35px;
+    margin: 0px 0px 0px 4px;
+    padding: 0px 0px 0px 10px;
+}
+
+.btn_search{
+    width: 15%;
+    height: 35px;
+}
+
+.add_image{
+    font-size: 80px;
+    color: grey;
 }

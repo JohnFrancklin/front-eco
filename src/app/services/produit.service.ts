@@ -158,6 +158,42 @@ export class ProduitService {
       ]
     },
 
+    {
+      _id: "5",
+      title: "Ballon de basket",
+      description: "Ballon en gomme basket ",
+      categorie: 21212124545, //objectID
+      quantite: 17,
+      vote: [
+          123456789,
+          13121345612,
+          21245454545
+      ],
+      
+      images: [
+        "image1.png", "image2.png"
+      ],
+      detail_fabrication: {
+        numero_model: "1542DFD",
+        date_sortie: "5 Mars 2020"
+      },
+      detail_physique: {
+        poids: 50,
+        longueur: 20,
+        largueur: 15,
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 2000,
+        prix_promotion: 1500
+      },
+      favorie:[
+        2154545454,
+        2154545454
+      ]
+    },
+
+
 
 
 
