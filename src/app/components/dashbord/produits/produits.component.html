@@ -35,7 +35,7 @@
                 </div>
                 <div class="list_dans_list">
                     <div class="selectionner">
-                        <label class="container" style="font-size: small;">
+                        <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
                             Selectionner
                             <input type="checkbox" (click)="toggleOneAndAll()">
                             <span class="checkmark"></span>
@@ -49,10 +49,11 @@
                     </div>
 
 
-                    <div class="contenu_element">
-              
+                    <div class="contenu_element" id="element">
+
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let p of produits" (click)="getOneProduit(p)">
+                            <button class="element_un" *ngFor="let p of produits" id="{{p._id}}"
+                                (click)="getOneProduit(p)" title="{{p.description}}">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 {{p.title}}
                             </button>
@@ -60,9 +61,9 @@
 
 
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits">
-                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}"
-                                    (click)="selectProduit(p);">
+                            <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}">
+                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
+                                    (click)="selectProduit(p);" title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 {{p.title}}
                             </div>
@@ -177,14 +178,15 @@
                     </button>
                 </div>
 
+
             </div>
 
             <div *ngIf="!oneAndAll">
                 <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
-                    <div class="element_un_selected" *ngFor="let p of produitSelected"
-                        (click)="removeFromProduitSelected(p)">
+                    <div class="element_un_selected" *ngFor="let p of produitSelected" title="{{p.description}}">
                         <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
-                        <span class="material-icons icon_remove_ticket">
+                        <span class="material-icons icon_remove_ticket" (click)="removeFromProduitSelected(p)"
+                            title="Enlever le produit">
                             remove_circle_outline
                         </span>
                     </div>
@@ -192,7 +194,9 @@
 
 
 
-                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">Supprimer les selectionnés</button>
+
+                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">Supprimer les
+                    selectionnés</button>
 
             </div>
 
