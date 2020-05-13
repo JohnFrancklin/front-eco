@@ -3,7 +3,8 @@
     <div class="row">
         <div class="menu_gauche">
             <div class="menu_content">
-                utilisateurs, produits, commandes, home, reporting, kpi, liste des feedbacks,logs sns
+                utilisateurs, produits, commandes, home, reporting, kpi, liste des feedbacks, Historiques des
+                recherches, logs sns
             </div>
         </div>
         <div class="list_centre">
@@ -33,18 +34,45 @@
                     </p>
                 </div>
                 <div class="list_dans_list">
-
-                    <p class="recherche_box">
+                    <div class="selectionner">
+                        <label class="container" style="font-size: small;">
+                            Selectionner
+                            <input type="checkbox" (click)="toggleOneAndAll()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="recherche_box">
                         <input type="text" placeholder="Rechercher produit.." class="input_search">
                         <button class="btn_search">
                             Rechercher
                         </button>
-                    </p>
+                    </div>
 
 
-                    <button class="element_un" *ngFor="let p of produits" (click)="getOneProduit(p)">
-                        <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
-                    </button>
+                    <div class="contenu_element">
+              
+                        <div *ngIf="oneAndAll">
+                            <button class="element_un" *ngFor="let p of produits" (click)="getOneProduit(p)">
+                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                {{p.title}}
+                            </button>
+                        </div>
+
+
+                        <div *ngIf="!oneAndAll">
+                            <div class="element_un_check" *ngFor="let p of produits">
+                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}"
+                                    (click)="selectProduit(p);">
+                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                {{p.title}}
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
@@ -56,7 +84,7 @@
                 </div>
                 <div class="imageCont">
                     <div class="box_image" *ngFor="let i of oneProduit.images">
-                        <img src="../../../../assets/images/your-logo-png-8.png" alt="" class="image_produit">
+                        <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit">
                     </div>
                     <div class="box_image" *ngIf="oneProduit.images.length!=3" (click)="file.click()">
                         <span class="material-icons add_image">
@@ -68,87 +96,106 @@
                 </div>
             </div>
         </div>
+
         <div class="detail_droit">
 
             <h3 class="lbl_h3_detail">Detail du produit</h3>
 
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer">
-                <div class="label_change">
-                    Title
+            <div *ngIf="oneAndAll">
+                <div class="detail_to_change">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer">
+                    <div class="label_change">
+                        Title
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="oneProduit.description">
-                <div class="label_change">
-                    Description
+                <div class="detail_to_change">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.description">
+                    <div class="label_change">
+                        Description
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix">
-                <div class="label_change">
-                    Prix
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix">
+                    <div class="label_change">
+                        Prix
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_promotion">
-                <div class="label_change">
-                    Prix de promotion
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_promotion">
+                    <div class="label_change">
+                        Prix de promotion
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.numero_model">
-                <div class="label_change">
-                    Numero de model
+                <div class="detail_to_change">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.numero_model">
+                    <div class="label_change">
+                        Numero de model
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
-                <div class="label_change">
-                    Date de sortie
+                <div class="detail_to_change">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
+                    <div class="label_change">
+                        Date de sortie
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.quantite">
-                <div class="label_change">
-                    Quantité en stock
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.quantite">
+                    <div class="label_change">
+                        Quantité en stock
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille">
-                <div class="label_change">
-                    Taille
+                <div class="detail_to_change">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille">
+                    <div class="label_change">
+                        Taille
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur">
-                <div class="label_change">
-                    Longueur
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur">
+                    <div class="label_change">
+                        Longueur
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.largueur">
-                <div class="label_change">
-                    Largeur
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.largueur">
+                    <div class="label_change">
+                        Largeur
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.poids">
-                <div class="label_change">
-                    Poids
+                <div class="detail_to_change">
+                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.poids">
+                    <div class="label_change">
+                        Poids
+                    </div>
                 </div>
-            </div>
-            <div class="detail_to_change">
-                <button class="btn_modifier">
-                    Modifier
-                </button>
-                <button class="btn_supprimer">
-                    Supprimer
-                </button>
+                <div class="detail_to_change">
+                    <button class="btn_modifier">
+                        Modifier
+                    </button>
+                    <button class="btn_supprimer">
+                        Supprimer
+                    </button>
+                </div>
+
             </div>
 
+            <div *ngIf="!oneAndAll">
+                <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
+                    <div class="element_un_selected" *ngFor="let p of produitSelected"
+                        (click)="removeFromProduitSelected(p)">
+                        <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
+                        <span class="material-icons icon_remove_ticket">
+                            remove_circle_outline
+                        </span>
+                    </div>
+                </div>
+
+
+
+                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">Supprimer les selectionnés</button>
+
+            </div>
 
 
         </div>
     </div>
-</div>
