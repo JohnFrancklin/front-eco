@@ -18,22 +18,62 @@
                         Categories
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Tout
                     </p>
                     <p class="menu_item">
                         Ordinateur
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Vêtements
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Téléphone
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Voiture
                     </p>
                 </div>
                 <div class="list_dans_list">
+
+
+
+                    <div class="filter" [ngStyle]="{'background-color':showFilter===true ? 'lightgrey' : '#fafafa'}">
+                        <button class="btn_filter" (click)="afficherFiltre()" title="Filtrer les resultats">
+                            <span class="material-icons">
+                                sort
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="filter_content" *ngIf="!showFilter">
+                        <input type="text" class="input_filter" placeholder="Filtrer par nom...">
+
+
+                        <p class="title_filter">Choisissez votre filtre</p>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_asc" name="filtre">
+                        <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_desc" name="filtre">
+                        <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix descendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_asc" name="filtre">
+                        <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_desc" name="filtre">
+                        <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote descendant</label>
+                        <hr class="hr_filtre">
+
+                        
+
+
+
+                    </div>
+
+
+
+
+
                     <div class="selectionner">
                         <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
                             Selectionner
@@ -41,6 +81,7 @@
                             <span class="checkmark"></span>
                         </label>
                     </div>
+
                     <div class="recherche_box">
                         <input type="text" placeholder="Rechercher produit.." class="input_search">
                         <button class="btn_search">
@@ -100,7 +141,10 @@
 
         <div class="detail_droit">
 
-            <h3 class="lbl_h3_detail">Detail du produit</h3>
+
+            <h3 class="lbl_h3_detail" *ngIf="oneAndAll">Detail du produit</h3>
+
+            <h3 class="lbl_h3_detail"*ngIf="!oneAndAll && produitSelected.length!=0">Nombre: {{produitSelected.length}}</h3>
 
             <div *ngIf="oneAndAll">
                 <div class="detail_to_change">
@@ -202,4 +246,9 @@
 
 
         </div>
+    </div>
+
+
+    <div class="transparant_overlay" *ngIf="!Transparent_overlay" (click)="hideOverlay()">
+
     </div>

@@ -26,6 +26,7 @@ import { BoxclientComponent } from './layouts/header/boxclient/boxclient.compone
 import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatBadgeModule,
     FormsModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
  
   ],
   providers: [],

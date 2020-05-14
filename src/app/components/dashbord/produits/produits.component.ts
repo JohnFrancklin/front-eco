@@ -17,6 +17,9 @@ export class ProduitsComponent implements OnInit {
 
   oneAndAll: boolean = true;
 
+  showFilter: boolean = true;
+  Transparent_overlay:boolean = true;
+
   title = "Smartphone G10 2e";
 
 
@@ -93,7 +96,21 @@ export class ProduitsComponent implements OnInit {
     }
   }
 
+  afficherFiltre(){
+    if(this.showFilter == false){
+      this.showFilter = true;
+      this.Transparent_overlay = true;
+    }
+    else {this.showFilter = false;
+      this.Transparent_overlay = false;}
+  }
+  hideOverlay(){
+    this.Transparent_overlay = true;
+    this.afficherFiltre();
+  }
 
 
+
+  
 
 }
