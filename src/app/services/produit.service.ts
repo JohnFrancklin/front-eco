@@ -9,10 +9,13 @@ export class ProduitService {
   produits= [
     {
       _id: "1",
-      title: "Simsong One mobile phone",
+      title: "Simsong One mobile",
       description: "la plus grande marque de telephone actuellement",
       categorie: 21212124545, //objectID
       quantite: 10,
+      garantie: 15,
+      provenance : "Madagascar",
+      vu: 150,
       vote: [
           13121345612,
           21245454545,
@@ -31,6 +34,7 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "rouge",
         taille: "m" // m,x,
       },
       prix: {
@@ -51,12 +55,17 @@ export class ProduitService {
 
     {
       _id: "2",
-      title: "Ordinateur",
-      description: "MAC BOOK",
+      title: "Tele plasma",
+      description: "Regarder votre television sous un autre angle :p",
       categorie: 21212124545, //objectID
-      quantite: 15,
+      quantite: 20,
+      garantie: 150,
+      provenance : "France",
+      vu: 12,
       vote: [
-
+          13121345612,
+          21245454545,
+          21245454545,
       ],
       
       images: [
@@ -70,17 +79,15 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "noir",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 500,
+        prix: 1000,
         prix_promotion: 500
       },
       favorie:[
         2154545454,
-        2154545454,
-        21245454545,
-        21245454545,
         21245454545,
         21245454545,
         21245454545,
@@ -88,17 +95,19 @@ export class ProduitService {
       ]
     },
 
-
     {
       _id: "3",
-      title: "BMW",
-      description: "VOITURE",
+      title: "Ventilateur rapide",
+      description: "Le vent souffle ",
       categorie: 21212124545, //objectID
-      quantite: 5,
+      quantite: 10,
+      garantie: 15,
+      provenance : "Paris",
+      vu: 150,
       vote: [
-          123456789,
           13121345612,
-          21245454545
+          21245454545,
+          21245454545,
       ],
       
       images: [
@@ -112,93 +121,24 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "blanc",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 1500,
-        prix_promotion: 500
+        prix: 1200,
+        prix_promotion: 600
       },
       favorie:[
-        2154545454,
-        2154545454
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
       ]
     },
-    {
-      _id: "4",
-      title: "Montre home quartz",
-      description: "la nouvelle generation de montre avec toute sa splendeur",
-      categorie: 21212124545, //objectID
-      quantite: 17,
-      vote: [
-          123456789,
-          13121345612,
-          21245454545
-      ],
-      
-      images: [
-        "image1.png", "image2.png"
-      ],
-      detail_fabrication: {
-        numero_model: "1542DFD",
-        date_sortie: "5 Mars 2020"
-      },
-      detail_physique: {
-        poids: 50,
-        longueur: 20,
-        largueur: 15,
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 2000,
-        prix_promotion: 1500
-      },
-      favorie:[
-        2154545454,
-        2154545454
-      ]
-    },
-
-    {
-      _id: "5",
-      title: "Ballon de basket",
-      description: "Ballon en gomme basket ",
-      categorie: 21212124545, //objectID
-      quantite: 17,
-      vote: [
-          123456789,
-          13121345612,
-          21245454545
-      ],
-      
-      images: [
-        "image1.png", "image2.png"
-      ],
-      detail_fabrication: {
-        numero_model: "1542DFD",
-        date_sortie: "5 Mars 2020"
-      },
-      detail_physique: {
-        poids: 50,
-        longueur: 20,
-        largueur: 15,
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 2000,
-        prix_promotion: 1500
-      },
-      favorie:[
-        2154545454,
-        2154545454
-      ]
-    },
-
-
-
-
-
-
-
+    
+    
 
 
 

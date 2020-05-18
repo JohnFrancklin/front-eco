@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -62,6 +63,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatTooltipModule,
     MatMenuModule,
+    MatDialogModule
     
  
   ],

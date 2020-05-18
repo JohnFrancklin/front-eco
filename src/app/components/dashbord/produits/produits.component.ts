@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
-import { async } from '@angular/core/testing';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
 
 
 @Component({
@@ -17,14 +17,20 @@ export class ProduitsComponent implements OnInit {
 
   oneAndAll: boolean = true;
 
-  showFilter: boolean = true;
-  Transparent_overlay:boolean = true;
+  showFilter: boolean = false;
+  showDetailListStat: boolean = false;
+  listDetailToShow: string;  // vote ou favoris ou vu ou commande
+  titleDetailListStat: string;
+  Transparent_overlay: boolean = false;
+
+  createType: boolean = false;
 
   title = "Smartphone G10 2e";
 
+  @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
 
-  constructor(private produitService: ProduitService) { }
+  constructor(private produitService: ProduitService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getProduit();
@@ -33,11 +39,57 @@ export class ProduitsComponent implements OnInit {
   getProduit() {
     this.produits = this.produitService.getProduit();
     this.oneProduit = this.produits[0];
+    console.log(this.oneProduit);
+
+  }
+
+  createProduit() {
+    this.oneProduit = {
+      categorie: 21212124545,
+      description: "",
+      vu: 0,
+      garantie: 0,
+      provenance: "",
+      detail_fabrication: {
+        date_sortie: "",
+        numero_model: "",
+      },
+      detail_physique: {
+        largueur: 0,
+        longueur: 0,
+        poids: 0,
+        taille: ""
+      },
+      favorie: [],
+      images: [],
+      prix: {
+        prix: 0,
+        prix_promotion: 0
+      },
+      quantite: 0,
+      title: "",
+      vote: [],
+    };
+
+    //********************************************/
+
+    this.createType = true;
+
+
+    //***************************************** */
+
+  }
+
+  cancelCreate(){
+    this.createType = false;
+    this.oneProduit = this.produits[0];
   }
 
 
   getOneProduit(oneProduit) {
     this.oneProduit = oneProduit;
+    this.createType = false;
+    
   }
 
 
@@ -96,21 +148,50 @@ export class ProduitsComponent implements OnInit {
     }
   }
 
-  afficherFiltre(){
-    if(this.showFilter == false){
+  afficherFiltre() {
+    if (this.showFilter == false) {
       this.showFilter = true;
       this.Transparent_overlay = true;
     }
-    else {this.showFilter = false;
-      this.Transparent_overlay = false;}
+    else {
+      this.showFilter = false;
+      this.Transparent_overlay = false;
+    }
+
+    this.showDetailListStat = false;
+
+
   }
-  hideOverlay(){
+
+
+
+
+  hideOverlay() {
+    this.Transparent_overlay = false;
+    this.showFilter = false;
+    this.showDetailListStat = false;
+  }
+
+  popupImageProduits(): void {
+    this.dialog.open(this.imageProduit, {
+      width: '400px',
+    });
+  }
+
+  showDetailstatistic(stat, title) {
+    this.showDetailListStat = true;
     this.Transparent_overlay = true;
-    this.afficherFiltre();
+    this.listDetailToShow = stat;
+    this.titleDetailListStat = title;
+
+
+  }
+
+  hideAllPopup() {
+
   }
 
 
 
-  
 
 }
