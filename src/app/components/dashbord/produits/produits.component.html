@@ -35,7 +35,7 @@
                     Historique des recherches
                 </div>
                 <div class="menu_produits">
-                    LOGS
+                    Logs
                 </div>
 
             </div>
@@ -155,7 +155,13 @@
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="getOneProduit(p)" title="{{p.description}}">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
-                                {{p.title}}
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
                             </button>
                         </div>
 
@@ -166,7 +172,13 @@
                                 <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
                                     (click)="selectProduit(p);" title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
-                                {{p.title}}
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list" title="Etats du produit"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
                             </div>
                         </div>
 
@@ -183,7 +195,8 @@
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
             <div class="content_stat_image">
                 <div class="stat">
-                    <p class="titlte_statistique">Interactions</p> <!--anciennement appelé statitstique--> 
+                    <p class="titlte_statistique">Interactions</p>
+                    <!--anciennement appelé statitstique-->
 
                     <div class="stat_vote_content">
 
@@ -340,6 +353,12 @@
 
             <h3 class="lbl_h3_detail" *ngIf="oneAndAll">Detail du produit</h3>
 
+            <button class="button_change_state" *ngIf="oneAndAll"
+                [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live' ? 'orange' : 'red'}"
+                [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
+                {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+
             <h3 class="lbl_h3_detail" *ngIf="!oneAndAll && produitSelected.length!=0">Nombre: {{produitSelected.length}}
             </h3>
 
@@ -357,6 +376,28 @@
                         Description
                     </div>
                 </div>
+
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled>
+                            <div class="label_change">
+                                Etat
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.marque">
+                            <div class="label_change">
+                                Marque
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="groupe_content">
                     <div class="leftSide sideToside">

@@ -159,7 +159,7 @@
 .detail_to_change{
     width: 100%;
     background-color: white;
-    height: 60px;
+    height: 52px;
     padding: 5px;
 }
 
@@ -174,7 +174,7 @@
 .textarea_change{
     float: left;
     width: 100%;
-    height: 80px;
+    height: 60px;
     border: 0.5px solid #d5d5d5;
     /* border-top: 0px; */
     /* border-right: 0px; */
@@ -672,4 +672,29 @@
 
 .active_menu{
     border: 1px solid blue;
+}
+
+.state_produit_on_list{
+    float: right;
+    margin-top: 28px;
+    margin-left: 6px;
+    font-size: smaller;
+}
+
+.title_produit_list{
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 5px;
+}
+
+.button_change_state{
+    float: right;
+    margin-right: 2px;
+    min-width: 80px;
+    background-color: #73be00;
+    color: white;
+    border: none;
+    padding: 2px;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 0px grey;
 }
