@@ -3,8 +3,41 @@
     <div class="row">
         <div class="menu_gauche">
             <div class="menu_content">
-                utilisateurs, produits, commandes, home, reporting, kpi, liste des feedbacks, Historiques des
-                recherches, logs sns
+
+
+                <div class="menu_aller_au_site" title="Revenir au site de commerce" [routerLink]="['/home/']">
+                    <span class="material-icons">
+                        store
+                    </span>
+                    <span class="label_aller_au_site">
+                        Aller au site
+                    </span>
+                </div>
+                <div class="menu_produits active_menu">
+                    Produits
+                </div>
+                <div class="menu_produits">
+                    Utilisateurs
+                </div>
+                <div class="menu_produits">
+                    Commandes
+                </div>
+                <div class="menu_produits">
+                    Reporting
+                </div>
+                <div class="menu_produits">
+                    K.P.I
+                </div>
+                <div class="menu_produits">
+                    Feedbacks
+                </div>
+                <div class="menu_produits">
+                    Historique des recherches
+                </div>
+                <div class="menu_produits">
+                    LOGS
+                </div>
+
             </div>
         </div>
         <div class="list_centre">
@@ -140,8 +173,8 @@
                     </div>
 
                     <div class="loadMore" *ngIf="loadMore">
-                        <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale"
-                            size="5px" [bdColor]="spinner_background">
+                        <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
+                            [bdColor]="spinner_background">
                         </ngx-spinner>
                     </div>
 
@@ -150,7 +183,7 @@
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
             <div class="content_stat_image">
                 <div class="stat">
-                    <p class="titlte_statistique">Statistiques</p>
+                    <p class="titlte_statistique">Interactions</p> <!--anciennement appelé statitstique--> 
 
                     <div class="stat_vote_content">
 

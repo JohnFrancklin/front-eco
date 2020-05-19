@@ -18,11 +18,11 @@
 }
 
 .menu_gauche{
-    height: 400px;
-    padding: 0px;
+    /* height: 400px; */
+    padding: 6px;
     width: 15%;
-    background-color: rgb(231, 231, 231); 
     border: 1px solid #d5d5d5;
+    background-color: #f6f6f6;
 }
 
 .list_centre{
@@ -30,7 +30,7 @@
     padding: 5px;
     width: calc(60% - 10px) ;
     margin:0px 5px 0px 5px;
-    background-color: rgb(231, 231, 231); 
+    background-color: rgb(246, 246, 246);
     border: 1px solid #d5d5d5;
     height: 650px;
 }
@@ -58,7 +58,7 @@
 
 .menu_dans_list{
     width: 20%;
-    height: calc(100% - 5px);
+    height: calc(100% - 30px);
     background-color: white;
     float: left;
     border: 1px solid #d5d5d5;
@@ -67,7 +67,7 @@
 .list_dans_list{
     width: calc(80%);
     height: 80%;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(246, 246, 246);
     float: right;
     /* overflow-y: scroll; */
 }
@@ -81,20 +81,21 @@
 }
 
 .categorieItem{
-    padding: 8px 0px 8px 0px;
-    text-align: center;
+    padding: 8px 0px 8px 30px;
+    /* text-align: center; */
     margin: 7px 0px 0px 0px;
-    border: 1px solid #d5d5d5;
+    /* border: 1px solid #d5d5d5; */
     border-left: none;
     border-right: none;
+    background-color: #f6f6f6;
 }
 
 .menu_item{
-    padding: 5px 0px 5px 0px;
-    text-align: center;
-    background-color: rgb(231, 231, 231);
+    padding: 5px 0px 5px 30px;
+    /* text-align: center; */
+    background-color: white;
     margin: 0px 5px 5px 5px;
-    border: 1px solid #d5d5d5;
+    /* border: 1px solid #d5d5d5; */
     cursor: pointer;
 }
 
@@ -238,17 +239,16 @@
     display: inline-table;
     width: calc(46% - 6px);
     height: 30px;
-    background-color: white;
+    /* background-color: white; */
     color: rgb(1, 64, 107);
-    border: 1px solid rgb(1, 64, 107);
-    border-radius: 2px;
+    /* border: 1px solid rgb(1, 64, 107); */
+    /* border-radius: 2px; */
     outline: 0 none!important;
     margin-left: 14px;
     margin-top: 25px;
 }
 
 .btn_supprimer{
-    border: 1px solid red;
     color:red;
 }
 
@@ -348,11 +348,7 @@
     width: calc(100% - 30px);
     height: 35px;
     color: red;
-    background-color: white;
-    border: none;
-    border: 1px solid;
     margin: 0px 15px 0px 15px;
-    border-radius: 1px;
 }
 
 /***** checkbox******/
@@ -509,7 +505,7 @@
 .titlte_statistique{
     width: 100%;
     height: 30px;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(246, 246, 246);
     text-align: center;
     padding: 5px;
     /* border: 1px solid #d5d5d5; */
@@ -627,7 +623,7 @@
     width: calc(100% - 10px);
     height: 30px;
     margin: 1px 5px 10px 5px;
-    border: 1px solid rgb(1, 64, 107);
+    /* border: 1px solid rgb(1, 64, 107); */
     font-size: small;
     color: rgb(1, 64, 107);
 }
@@ -642,4 +638,38 @@
     background-color: blanchedalmond;
     text-align: center;
     position: relative;
+}
+
+.menu_produits{
+    width: 100%;
+    padding: 5px 5px 5px 15px;
+    /* background-color: blanchedalmond; */
+    text-align: start;
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+
+.menu_produits:hover{
+    /* background-color:#e7e7e7; */
+    background-color: rgb(1, 64, 107);
+    color: white;
+}
+
+.menu_aller_au_site{
+    width: 100%;
+    padding: 5px;
+    background-color: lightgrey;
+    text-align: start;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.label_aller_au_site{
+    position: absolute;
+    margin-left: 7px;
+    margin-top: 3px;
+}
+
+.active_menu{
+    border: 1px solid blue;
 }
