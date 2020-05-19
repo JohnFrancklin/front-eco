@@ -1,49 +1,125 @@
+<app-boxclient #header></app-boxclient>
+<app-sidebar></app-sidebar>
+
 <div class="detail-contener">
     <div class="row">
-        <div class="col-6">
+        <div class="image_detail_bloc">
             <div class="detail_image_content">
-
-                <div class="row">
-                    <div class="col-3">
-                        <div class="detail_image_miniature">
-                            <ul class="liste_image_miniature">
-                                <li class="image_minuature" *ngFor="let image of images">
-                                    <img src="../../../assets/images/your-logo-png-8.png" width="100%">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="detail_image_grand">
+                <div class="detail_image_miniature">
+                    <div class="liste_image_miniature">
+                        <div class="image_minuature" *ngFor="let image of images">
                             <img src="../../../assets/images/your-logo-png-8.png" width="100%">
                         </div>
                     </div>
                 </div>
-
+                <div class="detail_image_grand">
+                    <img src="../../../assets/images/your-logo-png-8.png" width="100%">
+                </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="detail_desc_bloc">
             <div class="detail_texte">
+
+                <div class="favoris">
+                    <span class="material-icons icon_heart">
+                        favorite_outline
+                        <!-- {{produit.panier === true ? 'favorite' : 'favorite_outline' }} -->
+                    </span>
+                </div>
+
                 <div class="titre_produit">
-                    <h1>Ordinateur portable MSI Gaming </h1>
+                    <h1 class="title_produit">{{produit.title}}</h1>
                 </div>
 
-                <div class="Categorie_detail">
-                    High tech
+
+                <div class="vote">
+                    <span class="material-icons icon_vote" (click)="home.addOrRemoveVote(produit)"
+                    [ngStyle]="{'color':produit.a_vote=== true ? 'red': ''}">
+                        grade
+                    </span>
                 </div>
 
-                <div class="detail_prix">
-                    Prix : 15.000 Ariary
-                </div>
-
-                <div>
+                <div class="soyez_le_premier_a_voter" *ngIf="produit.vote.length==0">
                     Soyez la première à voter ce produit!
                 </div>
 
-                
+
+                <div class="detail_prix">
+                    <h2>
+                        Prix : {{produit.prix.prix}} Ariary
+                    </h2>
+                </div>
+
+
+                <div class="nombre_vote">
+                    Vote: <span>{{produit.vote.length}}</span>
+                </div>
+
+                <div class="detail_fabrication">
+                    <ul>
+                        <li class="detail_li">
+                            Numéro de model: <span class="detRight">{{produit.detail_fabrication.numero_model}}</span>
+                        </li>
+                        <li class="detail_li">
+                            Date de sortie: <span class="detRight">{{produit.detail_fabrication.date_sortie}}</span>
+                        </li>
+                        <li class="detail_li">
+                            Categorie: <span class="detRight">{{produit.categorie}}</span>
+                        </li>
+                        <li class="detail_li">
+                            Quantité en stock: <span class="detRight">{{produit.quantite}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="detail_physique">
+                    <ul>
+                        <li class="detail_li_2">
+                            Taille: <span class="detRight">{{produit.detail_physique.taille}}</span>
+                        </li>
+                        <li class="detail_li_2">
+                            Poids: <span class="detRight">{{produit.detail_physique.poids}}</span>
+                        </li>
+                        <li class="detail_li_2">
+                            longueur: <span class="detRight">{{produit.detail_physique.longueur}}</span>
+                        </li>
+                        <li class="detail_li_2">
+                            largeur: <span class="detRight">{{produit.detail_physique.largueur}}</span>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <div class="btn_content">
+                    <!-- <button class="btn_ajouter" *ngIf="produit.panier!='red'"> -->
+                    <button class="btn_ajouter" (click) ="addOrRemovePanier();header.getPanier();home.modifierIcon(produit._id)"
+                    [ngStyle]="{'color':produit.panier===true ? 'red' : 'green' , 'border':produit.panier===true?'1.5px solid red' : '1.5px solid green'}">
+                        {{produit.panier === true ? 'Enlever du panier' : 'Ajouter au panier' }}
+                    </button>
+                    <button class="btn_acheter">
+                        Acheter maintant
+                    </button>
+                </div>
+
+
+
+
+
+                <div class="description_detail">
+                    <div class="desc_text_title">
+                        Description
+                    </div>
+                    <p class="paragraphe_description">
+                        {{produit.description}}
+                    </p>
+                </div>
 
 
             </div>
         </div>
     </div>
 </div>
+
+
+<app-home #home></app-home>

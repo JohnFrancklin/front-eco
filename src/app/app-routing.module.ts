@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'panier', component: PanierComponent },
   { path: 'favorite', component: FavoriteComponent },
   { path: 'dashboard/produits', component: ProduitsComponent },
-  { path: 'detail', component: DetailComponent },
+  { path: 'detail/:id', component: DetailComponent },
 
 
   // Les restents redirigent a home

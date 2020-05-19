@@ -1,7 +1,7 @@
 
 .home-contener{
     background-color: rgb(231, 231, 231);
-    margin-left: 308px;
+    margin-left: 305px;
     border: 1px solid #d5d5d5;
 }
 
@@ -64,14 +64,14 @@
  }
 
  .filtreContener{
-   float: right;
-   background-color: white;
-   padding: 10px;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   border-radius: 4px;
-   display: flex;
-   border: 1px solid #d5d5d5;
+  float: right;
+  background-color: white;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  display: flex;
+  border: 1px solid #d5d5d5;
  }
  
  .input_filtre_recherche{
@@ -87,6 +87,68 @@
 
 .produitTitre
  {
-   margin: 17px 0px;
-   text-decoration: underline;
+  margin: 4px 0px;
+  text-decoration: underline;
  }
+
+
+ app-sidebar{
+  position: absolute;
+  top: 80px;
+  left: 0px;
+ }
+
+
+ .search-icon {
+  margin-top: 0px;
+}
+
+
+.search-content{
+  position: absolute;
+  top: 0px;
+  left: 25%;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.search-input{
+  height: 45px;
+  border: none;
+}
+.search-input:focus{
+  outline: 0 none!important;
+  box-shadow: none;
+  background-color: rgb(241, 251, 255);
+}
+
+.search-group{
+  margin-top: 15px;
+}
+
+.btn-search{
+  background-color: rgba(0, 0, 0, 0.74);
+}
+
+
+.clear_search{
+  border: none;
+  padding: 10px;
+  background-color: white;
+  opacity: 1!important;
+  outline: 0 none!important;
+}

@@ -1,21 +1,53 @@
+<app-boxclient #header></app-boxclient>
+<app-sidebar></app-sidebar>
+
+<div>
+    <div class="col-3">
+    </div>
+    <div class="col-5 search-content">
+        <div class="input-group search-group">
+            <input type="text" class="form-control search-input" id="inputSearch" [(ngModel)]="keySearch"
+                placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)">
+
+            <button type="button" class="close clear_search" *ngIf="keySearch!=''" aria-label="Close"
+                (click)="clearInputSearch()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <div class="input-group-append">
+                <button class="btn btn-secondary btn-search" type="button" id="btnSearch"
+                    (click)="rechercheProduit(keySearch)">
+                    <span class="material-icons search-icon">
+                        search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="home-contener">
 
     <div class="row">
         <div class="col-5">
             <div class="produitTitre">
-             <h1>Produits</h1>   
+                <h1>Produits</h1>
             </div>
         </div>
         <div class="col-7">
             <div class="filtreContener">
-                <input type="text"  placeholder="Filtrer les resulats...."  class="input_filtre_recherche"/>
+                <input type="text" placeholder="Filtrer les resulats...." class="input_filtre_recherche"
+                    [(ngModel)]="searchFilter" />
                 <select class="slct_filtre">
                     <option>Aucun</option>
                     <option>Prix</option>
                     <option>Vote</option>
                     <option>Nom</option>
+                    <option>Popularité</option>
                 </select>
-            
+
                 <select class="slct_filtre">
                     <option>Ascendant</option>
                     <option>Descendant</option>
@@ -27,21 +59,18 @@
     <div class="row">
         <div class="col-3" style="display: inline-block;" *ngFor="let p of produits">
             <mat-card class="tp-card">
-                <!-- <mat-card-header>
-                   <mat-card-title>HTML5</mat-card-title>
-                   <mat-card-subtitle>HTML Basics</mat-card-subtitle>
-                </mat-card-header> -->
-                <img mat-card-image [routerLink]="['/detail']"  src="../../../assets/images/your-logo-png-8 - Copie.png" alt="Learn HTML5">
+                <img mat-card-image [routerLink]="['/detail/', p._id]" [queryParams]="{ produitselected:p | json }"
+                    src="../../../assets/images/your-logo-png-8 - Copie.png" alt="Learn HTML5">
                 <mat-card-content>
                     <p class="description_card">
-                        HTML5 is the next major revision dfjkdj fdkjkfd dfjkdfjk 
+                        {{p.description}}
                     </p>
                     <p class="price_card">
-                        50.000 Ariary
+                        {{p.prix.prix}} Ariary
                     </p>
                     <span class="vote_card">
                         <span class="txt_vote">
-                            152
+                            {{p.vote.length}}
                         </span>
                         <span class="material-icons icon_vote">
                             grade
@@ -51,7 +80,8 @@
                 <mat-card-actions>
                     <div class="row action_card">
                         <div class="col-4">
-                            <button mat-button class="button_card">
+                            <button mat-button class="button_card" (click)="addOrRemoveVote(p)"
+                                [ngStyle]="{'color':p.a_vote=== true ? 'red': ''}">
                                 <span class="material-icons icon_card">
                                     grade
                                 </span>
@@ -65,7 +95,8 @@
                             </button>
                         </div>
                         <div class="col-4">
-                            <button mat-button class="button_card">
+                            <button mat-button class="button_card" (click)="addOrRemovePanier(p);header.getPanier()"
+                                [ngStyle]="{'color':p.panier=== true ? 'red': ''}">
                                 <span class="material-icons icon_card">
                                     shopping_cart
                                 </span>
@@ -77,21 +108,5 @@
             </mat-card>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>

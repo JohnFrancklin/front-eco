@@ -1,0 +1,27 @@
+
+<div class="raw"> 
+    <div class="col-2 boxclient">
+        <ul>
+            <li class="li-panier-header" [routerLink]="['/home']">
+                <span class="material-icons md-dark">
+                    home
+                    <hr class="separator">
+                </span>
+    
+            </li>
+            <li class="li-panier-header" [routerLink]="['/favorite']">
+                <span class="material-icons md-dark">
+                    favorite
+                    <hr class="separator">
+                </span>
+            </li>
+            <li class="li-panier-header" [routerLink]="['/panier']">
+                <span class="material-icons md-dark" [matBadge]="panierTotal.length" [matBadgeHidden]="panierTotal.length==0"  matBadgeColor="warn">
+                    shopping_cart
+                </span>
+            </li>
+    
+        </ul>
+    </div>
+
+</div>

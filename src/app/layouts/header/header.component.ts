@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren } from '@angular/core';
+import { HomeComponent } from 'src/app/components/home/home.component';
+import { ProduitService } from 'src/app/services/produit.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+
+  // panier = 0;
+
+  // @ViewChildren (HomeComponent) homeComponent: HomeComponent;
+
+   @ViewChildren (HomeComponent) homeComponent = new HomeComponent(this.produitService);
+
+
+  constructor(private produitService: ProduitService) {
+
+   }
 
   ngOnInit(): void {
+
   }
+  
+
+
 
 }
