@@ -29,6 +29,7 @@ export class ProduitsComponent implements OnInit {
   scrollSpace = 0;  // espace vide scroll
 
   paramGetCustomized = 1;
+  state_to_change="";
 
   //--------Variables pour spinner-------//spinner_loadMore
   spinner_list_Produit = "spinner_list_Produit";
@@ -62,14 +63,33 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  getProduit() {
 
-    console.log("Le parametre de recuperation", this.paramGetCustomized);
+  changeEtat(event){
     
+
+    console.log(this.produitSelected);
+    
+
+    for ( let i = 0; i<this.produitSelected.length; i++ ){
+
+    const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
+    checkElement.checked = false;
+    }
+
+    this.produitSelected = [];
+
+    this.state_to_change = event.target.value;
+
+
+
+    
+  }
+
+  getProduit() {
+    console.log("Le parametre de recuperation", this.paramGetCustomized);
     this.produits = this.produitService.getProduit();
     this.oneProduit = this.produits[0];
     // console.log(this.oneProduit);
-
   }
 
   createProduit() {

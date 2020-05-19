@@ -698,3 +698,25 @@
     font-weight: 500;
     box-shadow: 1px 1px 2px 0px grey;
 }
+
+.etatContent{
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+.title_etatContent{
+    background-color: lightgray;
+    padding: 4px;
+}
+
+.etatProduitSelect{
+    display: inline-table;
+    width: 30%;
+    /* margin: 5px; */
+    text-align: center;
+}
+
+.labelEtat{
+    margin-left: 5px;
+}

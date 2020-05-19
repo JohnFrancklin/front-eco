@@ -168,9 +168,11 @@
 
 
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}">
+                            <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
+                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
-                                    (click)="selectProduit(p);" title="Cocher ici pour selection le produit">
+                                    [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
+                                    title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.title}}
@@ -353,11 +355,43 @@
 
             <h3 class="lbl_h3_detail" *ngIf="oneAndAll">Detail du produit</h3>
 
+            <!-- Non selection -->
             <button class="button_change_state" *ngIf="oneAndAll"
                 [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live' ? 'orange' : 'red'}"
                 [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
             </button>
+            <!-- Selection -->
+            <button class="button_change_state" *ngIf="!oneAndAll && state_to_change!='' && produitSelected.length!=0"
+                [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live' ? 'orange' : 'red'}"
+                [title]="state_to_change == 'sandbox' ? 'Vous pouvez lancer le produit en live' : state_to_change == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
+                {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+
+
+            <div class="" *ngIf="!oneAndAll">
+                <div class="etatContent">
+                    <p class="title_etatContent">Selectionner l'etat du produit</p>
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="sandbox" name="etat" value="sandbox" (change)="changeEtat($event)"
+                            [checked]="state_to_change=='sandbox'">
+                        <label class="labelEtat" for="sandbox">sandbox</label>
+                    </div>
+
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="live" name="etat" value="live" (change)="changeEtat($event)"
+                            [checked]="state_to_change =='live'">
+                        <label class="labelEtat" for="live">live</label>
+                    </div>
+
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="archived" name="etat" value="archived" (change)="changeEtat($event)"
+                            [checked]="state_to_change =='archived'">
+                        <label class="labelEtat" for="archived">archived</label>
+                    </div>
+                </div>
+            </div>
+
 
             <h3 class="lbl_h3_detail" *ngIf="!oneAndAll && produitSelected.length!=0">Nombre: {{produitSelected.length}}
             </h3>
@@ -522,11 +556,12 @@
 
 
                 <div class="detail_to_change_button">
-                    <button class="btn_modifier" *ngIf="!createType">
+                    <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'"
+                        [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
                         Modifier
                     </button>
                     <button class="btn_supprimer" *ngIf="!createType">
-                        Supprimer
+                        {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
                     </button>
                     <button class="btn_modifier" *ngIf="createType">
                         Créer
@@ -540,7 +575,7 @@
             </div>
 
             <div *ngIf="!oneAndAll">
-                <div style="height: 565px; overflow-y: scroll; padding-right: 10px;">
+                <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
                     <div class="element_un_selected" *ngFor="let p of produitSelected" title="{{p.description}}">
                         <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
                         <span class="material-icons icon_remove_ticket" (click)="removeFromProduitSelected(p)"
@@ -551,7 +586,7 @@
                 </div>
 
                 <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">
-                    Supprimer les selectionnés
+                    {{state_to_change == 'live' ? 'Archiver les selectionnés' : 'Supprimer les selectionnés'}}
                 </button>
 
             </div>
