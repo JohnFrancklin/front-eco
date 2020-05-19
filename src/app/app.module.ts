@@ -25,6 +25,11 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { BoxclientComponent } from './layouts/header/boxclient/boxclient.component';
 import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 
 @NgModule({
@@ -56,6 +61,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatBadgeModule,
     FormsModule,
     MatExpansionModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatDialogModule,
+    NgxSpinnerModule
+    
  
   ],
   providers: [],

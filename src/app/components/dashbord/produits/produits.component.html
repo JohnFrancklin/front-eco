@@ -3,8 +3,41 @@
     <div class="row">
         <div class="menu_gauche">
             <div class="menu_content">
-                utilisateurs, produits, commandes, home, reporting, kpi, liste des feedbacks, Historiques des
-                recherches, logs sns
+
+
+                <div class="menu_aller_au_site" title="Revenir au site de commerce" [routerLink]="['/home/']">
+                    <span class="material-icons">
+                        store
+                    </span>
+                    <span class="label_aller_au_site">
+                        Aller au site
+                    </span>
+                </div>
+                <div class="menu_produits active_menu">
+                    Produits
+                </div>
+                <div class="menu_produits">
+                    Utilisateurs
+                </div>
+                <div class="menu_produits">
+                    Commandes
+                </div>
+                <div class="menu_produits">
+                    Reporting
+                </div>
+                <div class="menu_produits">
+                    K.P.I
+                </div>
+                <div class="menu_produits">
+                    Feedbacks
+                </div>
+                <div class="menu_produits">
+                    Historique des recherches
+                </div>
+                <div class="menu_produits">
+                    Logs
+                </div>
+
             </div>
         </div>
         <div class="list_centre">
@@ -15,32 +48,94 @@
                 <div class="menu_dans_list">
 
                     <p class="titleItem">
-                        Categories
+                        Produits
+                    </p>
+
+                    <button class="btn_creer" (click)="createProduit()" title="Créer un nouveau produit"
+                        [disabled]="createType">
+                        <span class="material-icons add_produit_icon">
+                            add
+                        </span>
+                        Créer un nouveau
+                    </button>
+
+
+                    <div class="categorieItem">
+                        Les catégories
+                    </div>
+
+                    <p class="menu_item">
+                        Tout
                     </p>
                     <p class="menu_item">
                         Ordinateur
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Vêtements
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Téléphone
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Voiture
                     </p>
                     <p class="menu_item">
-                        Ordinateur
+                        Imprimente
                     </p>
+                    <p class="menu_item">
+                        Accessoires
+                    </p>
+
                 </div>
+
+
+
                 <div class="list_dans_list">
+
+                    <div class="filter" [ngStyle]="{'background-color':showFilter===true ? '#fafafa' : 'lightgrey'}">
+                        <button class="btn_filter" (click)="afficherFiltre()" title="Filtrer les resultats">
+                            <span class="material-icons">
+                                sort
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="filter_content" *ngIf="showFilter">
+                        <input type="text" class="input_filter" placeholder="Filtrer par nom...">
+
+
+                        <p class="title_filter">Choisissez votre filtre</p>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="none" name="filtre">
+                        <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_asc" name="filtre">
+                        <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_desc" name="filtre">
+                        <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix
+                            descendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_asc" name="filtre">
+                        <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_desc" name="filtre">
+                        <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote
+                            descendant</label>
+                        <hr class="hr_filtre">
+
+                    </div>
+
                     <div class="selectionner">
-                        <label class="container" style="font-size: small;">
-                            Selectionner
+                        <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
+                            {{oneAndAll == true ? 'selectionner' : 'Déselectionner' }}
                             <input type="checkbox" (click)="toggleOneAndAll()">
                             <span class="checkmark"></span>
                         </label>
                     </div>
+
                     <div class="recherche_box">
                         <input type="text" placeholder="Rechercher produit.." class="input_search">
                         <button class="btn_search">
@@ -49,28 +144,52 @@
                     </div>
 
 
-                    <div class="contenu_element">
-              
+                    <div class="contenu_element" (scroll)="scrolled()" id="element">
+                        <ngx-spinner [name]="spinner_list_Produit" [fullScreen]="false" [type]="spinner_type"
+                            [size]="spinner_size" [bdColor]="spinner_background"></ngx-spinner>
+
+
+
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let p of produits" (click)="getOneProduit(p)">
+                            <button class="element_un" *ngFor="let p of produits" id="{{p._id}}"
+                                [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
+                                (click)="getOneProduit(p)" title="{{p.description}}">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
-                                {{p.title}}
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
                             </button>
                         </div>
 
 
+
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits">
-                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}"
-                                    (click)="selectProduit(p);">
+                            <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
+                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
+                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
+                                    [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
+                                    title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
-                                {{p.title}}
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list" title="Etats du produit"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
                             </div>
-
-
-
                         </div>
 
+                    </div>
+
+                    <div class="loadMore" *ngIf="loadMore">
+                        <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
+                            [bdColor]="spinner_background">
+                        </ngx-spinner>
                     </div>
 
                 </div>
@@ -78,12 +197,146 @@
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
             <div class="content_stat_image">
                 <div class="stat">
+                    <p class="titlte_statistique">Interactions</p>
+                    <!--anciennement appelé statitstique-->
 
-                    histogramme - chart ici
+                    <div class="stat_vote_content">
+
+                        <div class="content_list_statistics" *ngIf="showDetailListStat" id="detailStat"
+                            [ngStyle]="{'margin-top': listDetailToShow==='vote' ? '-367px': listDetailToShow ==='favoris' ? '-336px' : listDetailToShow ==='vu'? '-305px' : '' }">
+
+
+                            <div class="ici_le_contenu">
+                                <div class="title_detail_stat_list">
+                                    {{titleDetailListStat}}
+                                </div>
+                                <div class="la_liste">
+
+                                    <ngx-spinner [name]="spinner_list_user" [fullScreen]="false" [type]="spinner_type"
+                                        [size]="spinner_size" [bdColor]="spinner_background">
+                                    </ngx-spinner>
+
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            RAZAFINARIVO John Francklin
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Antananarivo Lot A69 Anjanahary 2N
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            RANDY Orton WWE Superstart
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Chicago, Etats Unis 21K KL21000
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            The Undertaker, brother of destruction WWE universe
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Cinetière, Los angeles, great park 2351MD
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            Cristiano Ronaldo CR7
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Espaigne, madrid, santiago bernabeu
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="triangle-left"></div>
+
+
+                        </div>
+
+
+
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    grade
+                                </span>
+                                Votes :
+                            </div>
+                            <div class="info_s" title="Nombre de vote">
+                                <span class="number">
+                                    {{oneProduit.vote.length}}
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('vote','Liste client qui a voté ce produit')"
+                                    title="Liste des clients qui a voté ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    favorite
+                                </span>
+                                Favoris :
+                            </div>
+                            <div class="info_s" title="Nombre de favoris">
+                                <span class="number">
+                                    {{oneProduit.favorie.length}}
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('favoris','Liste client qui a favorisé ce produit')"
+                                    title="Liste des clients qui a favorisé ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    visibility
+                                </span>
+                                Vus :
+                            </div>
+                            <div class="info_s" title="nombre de vu">
+                                <span class="number">
+                                    {{oneProduit.vu}}
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('vu','Liste client qui a vu ce produit')"
+                                    title="Liste des clients qui a vu ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    shop
+                                </span>
+                                Commandes :
+                            </div>
+                            <div class="info_s" title="nombre de commande">
+                                <span class="number">
+                                    15
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('commande','Liste client qui a commandé ce produit')"
+                                    title="Liste des clients qui a commandé ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
                 <div class="imageCont">
-                    <div class="box_image" *ngFor="let i of oneProduit.images">
+                    <div class="box_image" *ngFor="let i of oneProduit.images" (click)="popupImageProduits()">
                         <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit">
                     </div>
                     <div class="box_image" *ngIf="oneProduit.images.length!=3" (click)="file.click()">
@@ -99,7 +352,49 @@
 
         <div class="detail_droit">
 
-            <h3 class="lbl_h3_detail">Detail du produit</h3>
+
+            <h3 class="lbl_h3_detail" *ngIf="oneAndAll">Detail du produit</h3>
+
+            <!-- Non selection -->
+            <button class="button_change_state" *ngIf="oneAndAll"
+                [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live' ? 'orange' : 'red'}"
+                [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
+                {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+            <!-- Selection -->
+            <button class="button_change_state" *ngIf="!oneAndAll && state_to_change!='' && produitSelected.length!=0"
+                [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live' ? 'orange' : 'red'}"
+                [title]="state_to_change == 'sandbox' ? 'Vous pouvez lancer le produit en live' : state_to_change == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
+                {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+
+
+            <div class="" *ngIf="!oneAndAll">
+                <div class="etatContent">
+                    <p class="title_etatContent">Selectionner l'etat du produit</p>
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="sandbox" name="etat" value="sandbox" (change)="changeEtat($event)"
+                            [checked]="state_to_change=='sandbox'">
+                        <label class="labelEtat" for="sandbox">sandbox</label>
+                    </div>
+
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="live" name="etat" value="live" (change)="changeEtat($event)"
+                            [checked]="state_to_change =='live'">
+                        <label class="labelEtat" for="live">live</label>
+                    </div>
+
+                    <div class="etatProduitSelect">
+                        <input type="radio" id="archived" name="etat" value="archived" (change)="changeEtat($event)"
+                            [checked]="state_to_change =='archived'">
+                        <label class="labelEtat" for="archived">archived</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <h3 class="lbl_h3_detail" *ngIf="!oneAndAll && produitSelected.length!=0">Nombre: {{produitSelected.length}}
+            </h3>
 
             <div *ngIf="oneAndAll">
                 <div class="detail_to_change">
@@ -108,94 +403,203 @@
                         Title
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.description">
+                <div class="detail_to_change_description">
+                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description"
+                        placeholder="Description du produit..."></textarea>
                     <div class="label_change">
                         Description
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix">
-                    <div class="label_change">
-                        Prix
+
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled>
+                            <div class="label_change">
+                                Etat
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.marque">
+                            <div class="label_change">
+                                Marque
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_promotion">
-                    <div class="label_change">
-                        Prix de promotion
+
+
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.provenance">
+                            <div class="label_change">
+                                Provenance
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.quantite">
+                            <div class="label_change">
+                                Quantité en stock
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.numero_model">
-                    <div class="label_change">
-                        Numero de model
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.couleur">
+                            <div class="label_change">
+                                Couleur
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.garantie">
+                            <div class="label_change">
+                                Garantie
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
-                    <div class="label_change">
-                        Date de sortie
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix">
+                            <div class="label_change">
+                                Prix
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.prix.prix_promotion">
+                            <div class="label_change">
+                                Prix de promotion
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.quantite">
-                    <div class="label_change">
-                        Quantité en stock
+
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change"
+                                [(ngModel)]="oneProduit.detail_fabrication.numero_model">
+                            <div class="label_change">
+                                Numero de model
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
+                            <div class="label_change">
+                                Date de sortie
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille">
-                    <div class="label_change">
-                        Taille
+
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille">
+                            <div class="label_change">
+                                Taille
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_physique.poids">
+                            <div class="label_change">
+                                Poids
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur">
-                    <div class="label_change">
-                        Longueur
+                <div class="groupe_content">
+                    <div class="leftSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur">
+                            <div class="label_change">
+                                Longueur
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.largueur">
-                    <div class="label_change">
-                        Largeur
+                    <div class="rightSide sideToside">
+                        <div class="detail_to_change">
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_physique.largueur">
+                            <div class="label_change">
+                                Largeur
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <div class="detail_to_change">
-                    <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.poids">
-                    <div class="label_change">
-                        Poids
-                    </div>
-                </div>
-                <div class="detail_to_change">
-                    <button class="btn_modifier">
+
+
+
+                <div class="detail_to_change_button">
+                    <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'"
+                        [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
                         Modifier
                     </button>
-                    <button class="btn_supprimer">
-                        Supprimer
+                    <button class="btn_supprimer" *ngIf="!createType">
+                        {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+                    </button>
+                    <button class="btn_modifier" *ngIf="createType">
+                        Créer
+                    </button>
+                    <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
+                        Annuler
                     </button>
                 </div>
+
 
             </div>
 
             <div *ngIf="!oneAndAll">
                 <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
-                    <div class="element_un_selected" *ngFor="let p of produitSelected"
-                        (click)="removeFromProduitSelected(p)">
+                    <div class="element_un_selected" *ngFor="let p of produitSelected" title="{{p.description}}">
                         <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{p.title}}
-                        <span class="material-icons icon_remove_ticket">
+                        <span class="material-icons icon_remove_ticket" (click)="removeFromProduitSelected(p)"
+                            title="Enlever le produit">
                             remove_circle_outline
                         </span>
                     </div>
                 </div>
 
-
-
-                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">Supprimer les selectionnés</button>
+                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">
+                    {{state_to_change == 'live' ? 'Archiver les selectionnés' : 'Supprimer les selectionnés'}}
+                </button>
 
             </div>
 
 
         </div>
+    </div>
+
+
+    <ng-template #imageProduit style="background-color: white;">
+        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+    </ng-template>
+
+
+    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
     </div>

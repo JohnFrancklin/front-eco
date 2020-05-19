@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -10,72 +12,272 @@ import { ProduitService } from 'src/app/services/produit.service';
 export class ProduitsComponent implements OnInit {
 
 
-  produits:any;
-  oneProduit:any;
+  produits: any;
+  oneProduit: any;
   produitSelected = [];
 
-  oneAndAll:boolean = true;
+  oneAndAll: boolean = true;
+
+  showFilter: boolean = false;
+  showDetailListStat: boolean = false;
+  listDetailToShow: string;  // vote ou favoris ou vu ou commande
+  titleDetailListStat: string;
+  Transparent_overlay: boolean = false;
+
+  createType: boolean = false;
+  loadMore: boolean = false;
+  scrollSpace = 0;  // espace vide scroll
+
+  paramGetCustomized = 1;
+  state_to_change="";
+
+  //--------Variables pour spinner-------//spinner_loadMore
+  spinner_list_Produit = "spinner_list_Produit";
+  spinner_list_user = "spinner_list_user";
+  spinner_loadMore = "spinner_loadMore";
+
+  spinner_type = "line-scale";
+  spinner_size = "10px";
+  spinner_background = "rgba(100,100,100,0.1)"
+  //------------------------------------//
+
 
   title = "Smartphone G10 2e";
 
+  @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
 
-
-
-
-
-
-  constructor(private produitService: ProduitService) { }
+  constructor(
+    private produitService: ProduitService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getProduit();
 
+    /**************SPINNER TEST ************* */
+    this.spinner.show(this.spinner_list_Produit);//start loader
+    setTimeout(() => {
+      this.spinner.hide(this.spinner_list_Produit);//stop loader
+    }, 1000);
+    /************************************** */
+  }
+
+
+  changeEtat(event){
+    
+
+    console.log(this.produitSelected);
+    
+
+    for ( let i = 0; i<this.produitSelected.length; i++ ){
+
+    const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
+    checkElement.checked = false;
+    }
+
+    this.produitSelected = [];
+
+    this.state_to_change = event.target.value;
+
+
+
+    
   }
 
   getProduit() {
+    console.log("Le parametre de recuperation", this.paramGetCustomized);
     this.produits = this.produitService.getProduit();
+    this.oneProduit = this.produits[0];
+    // console.log(this.oneProduit);
+  }
+
+  createProduit() {
+    this.oneProduit = {
+      categorie: 21212124545,
+      description: "",
+      vu: 0,
+      garantie: 0,
+      provenance: "",
+      detail_fabrication: {
+        date_sortie: "",
+        numero_model: "",
+      },
+      detail_physique: {
+        largueur: 0,
+        longueur: 0,
+        poids: 0,
+        taille: ""
+      },
+      favorie: [],
+      images: [],
+      prix: {
+        prix: 0,
+        prix_promotion: 0
+      },
+      quantite: 0,
+      title: "",
+      vote: [],
+    };
+
+    //********************************************/
+
+    this.createType = true;
+
+
+    //***************************************** */
+
+  }
+
+  cancelCreate() {
+    this.createType = false;
     this.oneProduit = this.produits[0];
   }
 
-  getOneProduit(oneProduit){
-    console.log(oneProduit);
+
+  getOneProduit(oneProduit) {
     this.oneProduit = oneProduit;
+    this.createType = false;
+
   }
 
 
-  toggleOneAndAll(){
-    if(this.oneAndAll == true){
+  toggleOneAndAll() {
+    if (this.oneAndAll == true) {
       this.oneAndAll = false;
-    }else{
+
+      /** attendre le chargement de la vue */
+      setTimeout(() => {
+        this.setCheckedProduit();
+      }, 10);
+      //********************************** */
+    } else {
       this.oneAndAll = true;
     }
   }
 
-  selectProduit(p){
+  selectProduit(p) {
     /**check si id_produit existe dans le produitSelected */
     const checkIdProduit = obj => obj._id === p._id;
-    let result:boolean = this.produitSelected.some(checkIdProduit); 
-    if(result == true){
+    let result: boolean = this.produitSelected.some(checkIdProduit);
+    if (result == true) {
       /**enlever du produitSelected si le produit existe deja dedans */
-      this.produitSelected = this.produitSelected.filter(function(item) { 
-        return item._id !== p._id; 
+      this.produitSelected = this.produitSelected.filter(function (item) {
+        return item._id !== p._id;
       });
-    }else{
+    } else {
       /**ajouter dans le produitSelected si le produit n'y est encore pas */
       this.produitSelected.push(p);
     }
   }
 
-  removeFromProduitSelected(p){
+  removeFromProduitSelected(p) {
     //***supprimer du tableau */
-    this.produitSelected = this.produitSelected.filter(function(item) { 
-      return item._id !== p._id; });
+    this.produitSelected = this.produitSelected.filter(function (item) {
+      return item._id !== p._id;
+    });
     //**** dechecker le produit */  
     const checkElement = document.getElementById(p._id) as HTMLInputElement;
     checkElement.checked = false;
 
-    
   }
+
+  setCheckedProduit() {
+    let idChecked = [];
+    for (let i = 0; i < this.produits.length; i++) {
+      for (let j = 0; j < this.produitSelected.length; j++) {
+        if (this.produits[i]._id === this.produitSelected[j]._id) {
+          idChecked.push(this.produits[i]._id);
+        }
+      }
+    } //on peut fusionner les boucles, mais ca crée un bug apres
+    for (let i = 0; i < idChecked.length; i++) {
+      const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
+      checkElement.checked = true;
+    }
+  }
+
+  afficherFiltre() {
+    if (this.showFilter == false) {
+      this.showFilter = true;
+      this.Transparent_overlay = true;
+    }
+    else {
+      this.showFilter = false;
+      this.Transparent_overlay = false;
+    }
+
+    this.showDetailListStat = false;
+  }
+
+
+  hideOverlay() {
+    this.Transparent_overlay = false;
+    this.showFilter = false;
+    this.showDetailListStat = false;
+  }
+
+  popupImageProduits(): void {
+    this.dialog.open(this.imageProduit, {
+      width: '400px',
+    });
+  }
+
+  showDetailstatistic(stat, title) {
+    this.showDetailListStat = true;
+    this.Transparent_overlay = true;
+    this.listDetailToShow = stat;
+    this.titleDetailListStat = title;
+
+    this.spinner.show(this.spinner_list_user);//start loader
+    setTimeout(() => {
+      this.spinner.hide(this.spinner_list_user);//stop loader
+    }, 1000);
+
+  }
+
+  hideAllPopup() {
+
+  }
+
+  scrolled() {
+
+    let element = document.getElementById('element');
+
+    // console.log("scrollheight",element.scrollHeight);
+    // console.log("scrolltop", element.scrollTop);
+    // console.log("offsetHeight", element.offsetHeight);
+    // console.log("total ",element.offsetHeight + element.scrollTop);
+
+    let total = element.offsetHeight + element.scrollTop - this.scrollSpace;
+    total = total + 1; // pour le decalage sur firefox
+
+    if (element.scrollHeight <= total) {
+
+
+      this.paramGetCustomized = this.paramGetCustomized + 1;
+      console.log("Le parametre de recuperation", this.paramGetCustomized);
+
+      this.loadMore = true;
+      this.spinner.show(this.spinner_loadMore);
+      this.scrollSpace = 20;
+
+      setTimeout(() => {
+        this.spinner.hide(this.spinner_loadMore);
+        // this.loadMore = false;
+        this.scrollSpace = 0;
+        let newProduits = this.produitService.getProduit();
+        //concatenation produit a newProduit
+        this.produits = this.produits.concat(newProduits);
+        // console.log("aprs concat", this.produits);
+        
+      }, 2000);
+
+    }
+
+  }
+
+
 
 
 

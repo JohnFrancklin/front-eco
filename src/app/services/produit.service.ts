@@ -9,10 +9,15 @@ export class ProduitService {
   produits= [
     {
       _id: "1",
-      title: "Simsong One mobile phone",
+      title: "Simsong One mobile",
       description: "la plus grande marque de telephone actuellement",
       categorie: 21212124545, //objectID
       quantite: 10,
+      garantie: 15,
+      etat: "sandbox",
+      marque : "samsung",
+      provenance : "Madagascar",
+      vu: 150,
       vote: [
           13121345612,
           21245454545,
@@ -31,6 +36,7 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "rouge",
         taille: "m" // m,x,
       },
       prix: {
@@ -51,12 +57,19 @@ export class ProduitService {
 
     {
       _id: "2",
-      title: "Ordinateur",
-      description: "MAC BOOK",
+      title: "Tele plasma",
+      description: "Regarder votre television sous un autre angle :p",
       categorie: 21212124545, //objectID
-      quantite: 15,
+      quantite: 20,
+      garantie: 150,
+      etat: "live",
+      marque : "JVC",
+      provenance : "France",
+      vu: 12,
       vote: [
-
+          13121345612,
+          21245454545,
+          21245454545,
       ],
       
       images: [
@@ -70,10 +83,100 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "noir",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 500,
+        prix: 1000,
+        prix_promotion: 500
+      },
+      favorie:[
+        2154545454,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
+      ]
+    },
+
+    {
+      _id: "3",
+      title: "Ventilateur rapide",
+      description: "Le vent souffle ",
+      categorie: 21212124545, //objectID
+      quantite: 10,
+      garantie: 15,
+      etat: "archived",
+      marque : "Vista France",
+      provenance : "Paris",
+      vu: 150,
+      vote: [
+          13121345612,
+          21245454545,
+          21245454545,
+      ],
+      
+      images: [
+        "image1.png"
+      ],
+      detail_fabrication: {
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
+      },
+      detail_physique: {
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "blanc",
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 1200,
+        prix_promotion: 600
+      },
+      favorie:[
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
+      ]
+    },
+    {
+      _id: "4",
+      title: "Simsong One mobile",
+      description: "la plus grande marque de telephone actuellement",
+      categorie: 21212124545, //objectID
+      quantite: 10,
+      garantie: 15,
+      etat: "sandbox",
+      marque : "samsung",
+      provenance : "Madagascar",
+      vu: 150,
+      vote: [
+          13121345612,
+          21245454545,
+          21245454545,
+          21245454545
+      ],
+      
+      images: [
+        "image1.png", "image2.png", "image3.png"
+      ],
+      detail_fabrication: {
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
+      },
+      detail_physique: {
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "rouge",
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 1000,
         prix_promotion: 500
       },
       favorie:[
@@ -88,17 +191,65 @@ export class ProduitService {
       ]
     },
 
+    {
+      _id: "5",
+      title: "Tele plasma",
+      description: "Regarder votre television sous un autre angle :p",
+      categorie: 21212124545, //objectID
+      quantite: 20,
+      garantie: 150,
+      etat: "live",
+      marque : "JVC",
+      provenance : "France",
+      vu: 12,
+      vote: [
+          13121345612,
+          21245454545,
+          21245454545,
+      ],
+      
+      images: [
+        "image1.png", "image2.png"
+      ],
+      detail_fabrication: {
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
+      },
+      detail_physique: {
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "noir",
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 1000,
+        prix_promotion: 500
+      },
+      favorie:[
+        2154545454,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
+      ]
+    },
 
     {
-      _id: "3",
-      title: "BMW",
-      description: "VOITURE",
+      _id: "6",
+      title: "Ventilateur rapide",
+      description: "Le vent souffle ",
       categorie: 21212124545, //objectID
-      quantite: 5,
+      quantite: 10,
+      garantie: 15,
+      etat: "archived",
+      marque : "Vista France",
+      provenance : "Paris",
+      vu: 150,
       vote: [
-          123456789,
           13121345612,
-          21245454545
+          21245454545,
+          21245454545,
       ],
       
       images: [
@@ -112,93 +263,164 @@ export class ProduitService {
         poids: 350,
         longueur: 10,
         largueur: 10,
+        couleur: "blanc",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 1500,
+        prix: 1200,
+        prix_promotion: 600
+      },
+      favorie:[
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
+      ]
+    }
+    ,{
+      _id: "7",
+      title: "Simsong One mobile",
+      description: "la plus grande marque de telephone actuellement",
+      categorie: 21212124545, //objectID
+      quantite: 10,
+      garantie: 15,
+      etat: "sandbox",
+      marque : "samsung",
+      provenance : "Madagascar",
+      vu: 150,
+      vote: [
+          13121345612,
+          21245454545,
+          21245454545,
+          21245454545
+      ],
+      
+      images: [
+        "image1.png", "image2.png", "image3.png"
+      ],
+      detail_fabrication: {
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
+      },
+      detail_physique: {
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "rouge",
+        taille: "m" // m,x,
+      },
+      prix: {
+        prix: 1000,
         prix_promotion: 500
       },
       favorie:[
         2154545454,
-        2154545454
+        2154545454,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
       ]
     },
+
     {
-      _id: "4",
-      title: "Montre home quartz",
-      description: "la nouvelle generation de montre avec toute sa splendeur",
+      _id: "8",
+      title: "Tele plasma",
+      description: "Regarder votre television sous un autre angle :p",
       categorie: 21212124545, //objectID
-      quantite: 17,
+      quantite: 20,
+      garantie: 150,
+      etat: "live",
+      marque : "JVC",
+      provenance : "France",
+      vu: 12,
       vote: [
-          123456789,
           13121345612,
-          21245454545
+          21245454545,
+          21245454545,
       ],
       
       images: [
         "image1.png", "image2.png"
       ],
       detail_fabrication: {
-        numero_model: "1542DFD",
-        date_sortie: "5 Mars 2020"
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
       },
       detail_physique: {
-        poids: 50,
-        longueur: 20,
-        largueur: 15,
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "noir",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 2000,
-        prix_promotion: 1500
+        prix: 1000,
+        prix_promotion: 500
       },
       favorie:[
         2154545454,
-        2154545454
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
       ]
     },
 
     {
-      _id: "5",
-      title: "Ballon de basket",
-      description: "Ballon en gomme basket ",
+      _id: "9",
+      title: "Ventilateur rapide",
+      description: "Le vent souffle ",
       categorie: 21212124545, //objectID
-      quantite: 17,
+      quantite: 10,
+      garantie: 15,
+      etat: "archived",
+      marque : "Vista France",
+      provenance : "Paris",
+      vu: 150,
       vote: [
-          123456789,
           13121345612,
-          21245454545
+          21245454545,
+          21245454545,
       ],
       
       images: [
-        "image1.png", "image2.png"
+        "image1.png"
       ],
       detail_fabrication: {
-        numero_model: "1542DFD",
-        date_sortie: "5 Mars 2020"
+        numero_model: "A123X",
+        date_sortie: "2 jan 2020"
       },
       detail_physique: {
-        poids: 50,
-        longueur: 20,
-        largueur: 15,
+        poids: 350,
+        longueur: 10,
+        largueur: 10,
+        couleur: "blanc",
         taille: "m" // m,x,
       },
       prix: {
-        prix: 2000,
-        prix_promotion: 1500
+        prix: 1200,
+        prix_promotion: 600
       },
       favorie:[
-        2154545454,
-        2154545454
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545,
+        21245454545
       ]
-    },
+    }
 
 
 
 
 
-
-
+    
 
 
 
