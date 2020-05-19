@@ -1,1 +1,109 @@
-<p>register works!</p>
+<div class="container">
+		<form #addUserForm="ngForm">
+			<div class="row">
+					<div class="col-sm-4 col-xs-4">
+
+							<label for="email">Email *</label>
+							<input type="text" class="form-control" id="email" placeholder="Votre Email" 
+							required
+							[(ngModel)]="users.email" name="email" #email="ngModel">
+
+							<div [hidden]="email.valid || email.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="username">Username *</label>
+							<input type="text" class="form-control" id="username" placeholder="Votre Username" 
+							required
+							[(ngModel)]="users.username" name="username" #username="ngModel">
+
+							<div [hidden]="username.valid || username.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="password">Password *</label>
+							<input type="text" class="form-control" id="password" placeholder="Votre Password" 
+							required
+							[(ngModel)]="users.password" name="password" #password="ngModel">
+
+							<div [hidden]="password.valid || password.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+					</div>
+					<div class="col-sm-4 col-xs-4">
+
+							<label for="nom">Nom *</label>
+							<input type="text" class="form-control" id="nom" placeholder="Votre Nom" 
+							required
+							[(ngModel)]="users.nom" name="nom" #nom="ngModel">
+
+							<div [hidden]="nom.valid || nom.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="prenom">Prenom</label>
+							<input type="text" class="form-control" id="prenom" placeholder="Votre Prenom" 
+							required
+							[(ngModel)]="users.prenom" name="prenom" #prenom="ngModel">
+
+							<div [hidden]="prenom.valid || prenom.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="adresse">Adresse</label>
+							<input type="text" class="form-control" id="adresse" placeholder="Votre Adresse" 
+							required
+							[(ngModel)]="users.adresse" name="adresse" #adresse="ngModel">
+
+							<div [hidden]="adresse.valid || adresse.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+					</div>
+					<div class="col-sm-4 col-xs-4">
+
+							<label for="tel">Telephone</label>
+							<input type="text" class="form-control" id="tel" placeholder="Votre Telephone" 
+							required
+							[(ngModel)]="users.tel" name="tel" #tel="ngModel">
+
+							<div [hidden]="tel.valid || tel.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="role">Role</label>
+							<input type="text" class="form-control" id="tel" placeholder="Votre Role" 
+							required
+							[(ngModel)]="users.role" name="role" #role="ngModel">
+
+							<div [hidden]="role.valid || role.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+
+							<label for="avatar">Avatar</label>
+							<input type="text" class="form-control" id="avatar" placeholder="Votre avatar" 
+							required
+							[(ngModel)]="users.avatar" name="avatar" #avatar="ngModel">
+
+							<div [hidden]="avatar.valid || avatar.pristine"
+								 class="alert alert-danger">
+								Veuillez renseigner ce champ.
+							</div>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col-md-12">
+						<!-- <button class="btn btn-info" (click)="addUsers()" [disabled]="!addOperateurForm.form.valid">Inscription</button> -->	
+						<button class="btn btn-info" (click)="addUsers()">Inscription</button>
+							
+					</div>
+			</div>
+	</form>
+</div>

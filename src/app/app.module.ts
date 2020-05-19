@@ -21,6 +21,8 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ProduitsComponent } from './components/dashbord/produits/produits.component';
 import { UsersComponent } from './components/dashbord/users/users.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { DetailComponent } from './components/detail/detail.component';
     MatButtonModule,
     MatCardModule,
     MatProgressBarModule,
+    FormsModule,
  
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
