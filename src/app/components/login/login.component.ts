@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  displayPopup = 'none';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showPopup() {
+    this.displayPopup = 'block';
+  }
+
+  closeState() {
+    this.displayPopup = 'none';
   }
 
 }

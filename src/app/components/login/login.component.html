@@ -1,1 +1,73 @@
 <app-boxclient #header></app-boxclient>
+<div class="container">
+    <div class="login-wrap shadow">
+        <form>
+            <h2 class="form-login-heading text-uppercase text-center">connexion</h2>
+            <hr class="horizontal">
+            <div class="form-group mt-3 mb-3 shadow">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>email</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" placeholder="Email" type="email">
+                </div>
+            </div>
+
+            <div class="form-group shadow mb-5">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>lock_open</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" placeholder="Password" type="password">
+                </div>
+            </div>
+            <div class="custom-control custom-checkbox mt-3 text-center">
+                <input type="checkbox" class="custom-control-input" id="customCheckLogin">
+                <label class="custom-control-label" for="customCheckLogin">Se souvenir de moi?</label>
+
+                <span class="pull-right ml-5">
+                    <a class="btn-reset" (click)="showPopup()">Mot de passe oublié?</a>
+                </span>
+            </div>
+            
+            <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
+                style="background-color: rgb(1, 64, 107);"><i class=""></i>se connecter</button>
+
+            <div class="registration text-center mt-3">
+                Besoin d'un compte?<br />
+                <a class="" [routerLink]="['/register']">
+                    S'inscrire
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="reset-password-section shadow" [ngStyle]="{display: displayPopup}">
+    <div class="popup-content">
+        <div class="inner-popup-content">
+            <h2 class="text-uppercase title">Récupération du compte</h2>
+            <hr>
+            <p class="text-reset">Entrer votre adresse email:</p>
+            <div class="form-group shadow">            
+                <div class="input-group input-group-alternative">                
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>email</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" type="mail" placeholder="Email">
+                </div>
+            </div>
+            <div class="reset-button">
+                <button class="btn btn-outline-danger" (click)="closeState()">Fermer</button>
+                <button class="btn btn-success">Envoyer</button>
+            </div>
+        </div>
+    </div>
+</div>
