@@ -28,7 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -63,7 +63,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatExpansionModule,
     MatTooltipModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
     
  
   ],

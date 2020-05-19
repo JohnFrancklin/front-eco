@@ -15,16 +15,21 @@
                 <div class="menu_dans_list">
 
                     <p class="titleItem">
-                        Les produits
+                        Produits
                     </p>
 
-                    <button class="btn_creer" (click)="createProduit()" title="Créer un nouveau produit" 
-                     [disabled]="createType">
+                    <button class="btn_creer" (click)="createProduit()" title="Créer un nouveau produit"
+                        [disabled]="createType">
                         <span class="material-icons add_produit_icon">
                             add
                         </span>
                         Créer un nouveau
                     </button>
+
+
+                    <div class="categorieItem">
+                        Les catégories
+                    </div>
 
                     <p class="menu_item">
                         Tout
@@ -41,10 +46,18 @@
                     <p class="menu_item">
                         Voiture
                     </p>
+                    <p class="menu_item">
+                        Imprimente
+                    </p>
+                    <p class="menu_item">
+                        Accessoires
+                    </p>
+
                 </div>
+
+
+
                 <div class="list_dans_list">
-
-
 
                     <div class="filter" [ngStyle]="{'background-color':showFilter===true ? '#fafafa' : 'lightgrey'}">
                         <button class="btn_filter" (click)="afficherFiltre()" title="Filtrer les resultats">
@@ -84,7 +97,7 @@
 
                     <div class="selectionner">
                         <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
-                            Selectionner
+                            {{oneAndAll == true ? 'selectionner' : 'Déselectionner' }}
                             <input type="checkbox" (click)="toggleOneAndAll()">
                             <span class="checkmark"></span>
                         </label>
@@ -98,7 +111,11 @@
                     </div>
 
 
-                    <div class="contenu_element" id="element">
+                    <div class="contenu_element" (scroll)="scrolled()" id="element">
+                        <ngx-spinner [name]="spinner_list_Produit" [fullScreen]="false" [type]="spinner_type"
+                            [size]="spinner_size" [bdColor]="spinner_background"></ngx-spinner>
+
+
 
                         <div *ngIf="oneAndAll">
                             <button class="element_un" *ngFor="let p of produits" id="{{p._id}}"
@@ -109,6 +126,8 @@
                             </button>
                         </div>
 
+
+
                         <div *ngIf="!oneAndAll">
                             <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}">
                                 <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
@@ -118,6 +137,12 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="loadMore" *ngIf="loadMore">
+                        <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale"
+                            size="5px" [bdColor]="spinner_background">
+                        </ngx-spinner>
                     </div>
 
                 </div>
@@ -132,12 +157,17 @@
                         <div class="content_list_statistics" *ngIf="showDetailListStat" id="detailStat"
                             [ngStyle]="{'margin-top': listDetailToShow==='vote' ? '-367px': listDetailToShow ==='favoris' ? '-336px' : listDetailToShow ==='vu'? '-305px' : '' }">
 
-                            
+
                             <div class="ici_le_contenu">
                                 <div class="title_detail_stat_list">
                                     {{titleDetailListStat}}
                                 </div>
                                 <div class="la_liste">
+
+                                    <ngx-spinner [name]="spinner_list_user" [fullScreen]="false" [type]="spinner_type"
+                                        [size]="spinner_size" [bdColor]="spinner_background">
+                                    </ngx-spinner>
+
                                     <div class="list_client_stat">
                                         <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
                                             RAZAFINARIVO John Francklin
@@ -167,10 +197,10 @@
                                             Cristiano Ronaldo CR7
                                         </div>
                                         <div class="adress_client_stat">
-                                            Espaigne, madrid, santiago bernabeu 
+                                            Espaigne, madrid, santiago bernabeu
                                         </div>
                                     </div>
-                                                     
+
                                 </div>
                             </div>
 
@@ -192,7 +222,9 @@
                                 <span class="number">
                                     {{oneProduit.vote.length}}
                                 </span>
-                                <span class="material-icons icon_list" (click)="showDetailstatistic('vote','Liste client qui a voté ce produit')" title="Liste des clients qui a voté ce produit">
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('vote','Liste client qui a voté ce produit')"
+                                    title="Liste des clients qui a voté ce produit">
                                     list
                                 </span>
                             </div>
@@ -208,7 +240,9 @@
                                 <span class="number">
                                     {{oneProduit.favorie.length}}
                                 </span>
-                                <span class="material-icons icon_list" (click)="showDetailstatistic('favoris','Liste client qui a favorisé ce produit')" title="Liste des clients qui a favorisé ce produit">
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('favoris','Liste client qui a favorisé ce produit')"
+                                    title="Liste des clients qui a favorisé ce produit">
                                     list
                                 </span>
                             </div>
@@ -224,7 +258,9 @@
                                 <span class="number">
                                     {{oneProduit.vu}}
                                 </span>
-                                <span class="material-icons icon_list" (click)="showDetailstatistic('vu','Liste client qui a vu ce produit')" title="Liste des clients qui a vu ce produit">
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('vu','Liste client qui a vu ce produit')"
+                                    title="Liste des clients qui a vu ce produit">
                                     list
                                 </span>
                             </div>
@@ -240,7 +276,9 @@
                                 <span class="number">
                                     15
                                 </span>
-                                <span class="material-icons icon_list" (click)="showDetailstatistic('commande','Liste client qui a commandé ce produit')" title="Liste des clients qui a commandé ce produit">
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('commande','Liste client qui a commandé ce produit')"
+                                    title="Liste des clients qui a commandé ce produit">
                                     list
                                 </span>
                             </div>
@@ -280,7 +318,8 @@
                     </div>
                 </div>
                 <div class="detail_to_change_description">
-                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description" placeholder="Description du produit..."></textarea>
+                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description"
+                        placeholder="Description du produit..."></textarea>
                     <div class="label_change">
                         Description
                     </div>
@@ -294,7 +333,7 @@
                                 Provenance
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
                             <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.quantite">
@@ -313,7 +352,7 @@
                                 Couleur
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
                             <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.garantie">
@@ -332,11 +371,12 @@
                                 Prix
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.prix.prix_promotion">
-                            <div class="label_change"> 
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.prix.prix_promotion">
+                            <div class="label_change">
                                 Prix de promotion
                             </div>
                         </div>
@@ -347,15 +387,17 @@
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
                         <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_fabrication.numero_model">
+                            <input type="text" class="input_change"
+                                [(ngModel)]="oneProduit.detail_fabrication.numero_model">
                             <div class="label_change">
                                 Numero de model
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
-                            <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
+                            <input type="text" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_fabrication.date_sortie">
                             <div class="label_change">
                                 Date de sortie
                             </div>
@@ -371,10 +413,11 @@
                                 Taille
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.detail_physique.poids">
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_physique.poids">
                             <div class="label_change">
                                 Poids
                             </div>
@@ -389,10 +432,11 @@
                                 Longueur
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.detail_physique.largueur">
+                            <input type="number" class="input_change rightNumber"
+                                [(ngModel)]="oneProduit.detail_physique.largueur">
                             <div class="label_change">
                                 Largeur
                             </div>
@@ -402,7 +446,7 @@
                 </div>
 
 
-                
+
                 <div class="detail_to_change_button">
                     <button class="btn_modifier" *ngIf="!createType">
                         Modifier

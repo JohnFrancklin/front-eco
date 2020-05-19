@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -24,22 +25,50 @@ export class ProduitsComponent implements OnInit {
   Transparent_overlay: boolean = false;
 
   createType: boolean = false;
+  loadMore: boolean = false;
+  scrollSpace = 0;  // espace vide scroll
+
+  paramGetCustomized = 1;
+
+  //--------Variables pour spinner-------//spinner_loadMore
+  spinner_list_Produit = "spinner_list_Produit";
+  spinner_list_user = "spinner_list_user";
+  spinner_loadMore = "spinner_loadMore";
+
+  spinner_type = "line-scale";
+  spinner_size = "10px";
+  spinner_background = "rgba(100,100,100,0.1)"
+  //------------------------------------//
+
 
   title = "Smartphone G10 2e";
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
 
-  constructor(private produitService: ProduitService, public dialog: MatDialog) { }
+  constructor(
+    private produitService: ProduitService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getProduit();
+
+    /**************SPINNER TEST ************* */
+    this.spinner.show(this.spinner_list_Produit);//start loader
+    setTimeout(() => {
+      this.spinner.hide(this.spinner_list_Produit);//stop loader
+    }, 1000);
+    /************************************** */
   }
 
   getProduit() {
+
+    console.log("Le parametre de recuperation", this.paramGetCustomized);
+    
     this.produits = this.produitService.getProduit();
     this.oneProduit = this.produits[0];
-    console.log(this.oneProduit);
+    // console.log(this.oneProduit);
 
   }
 
@@ -80,7 +109,7 @@ export class ProduitsComponent implements OnInit {
 
   }
 
-  cancelCreate(){
+  cancelCreate() {
     this.createType = false;
     this.oneProduit = this.produits[0];
   }
@@ -89,7 +118,7 @@ export class ProduitsComponent implements OnInit {
   getOneProduit(oneProduit) {
     this.oneProduit = oneProduit;
     this.createType = false;
-    
+
   }
 
 
@@ -159,11 +188,7 @@ export class ProduitsComponent implements OnInit {
     }
 
     this.showDetailListStat = false;
-
-
   }
-
-
 
 
   hideOverlay() {
@@ -184,12 +209,56 @@ export class ProduitsComponent implements OnInit {
     this.listDetailToShow = stat;
     this.titleDetailListStat = title;
 
+    this.spinner.show(this.spinner_list_user);//start loader
+    setTimeout(() => {
+      this.spinner.hide(this.spinner_list_user);//stop loader
+    }, 1000);
 
   }
 
   hideAllPopup() {
 
   }
+
+  scrolled() {
+
+    let element = document.getElementById('element');
+
+    // console.log("scrollheight",element.scrollHeight);
+    // console.log("scrolltop", element.scrollTop);
+    // console.log("offsetHeight", element.offsetHeight);
+    // console.log("total ",element.offsetHeight + element.scrollTop);
+
+    let total = element.offsetHeight + element.scrollTop - this.scrollSpace;
+    total = total + 1; // pour le decalage sur firefox
+
+    if (element.scrollHeight <= total) {
+
+
+      this.paramGetCustomized = this.paramGetCustomized + 1;
+      console.log("Le parametre de recuperation", this.paramGetCustomized);
+
+      this.loadMore = true;
+      this.spinner.show(this.spinner_loadMore);
+      this.scrollSpace = 20;
+
+      setTimeout(() => {
+        this.spinner.hide(this.spinner_loadMore);
+        // this.loadMore = false;
+        this.scrollSpace = 0;
+        let newProduits = this.produitService.getProduit();
+        //concatenation produit a newProduit
+        this.produits = this.produits.concat(newProduits);
+        // console.log("aprs concat", this.produits);
+        
+      }, 2000);
+
+    }
+
+  }
+
+
+
 
 
 
