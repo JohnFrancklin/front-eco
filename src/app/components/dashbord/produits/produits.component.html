@@ -66,24 +66,45 @@
 
                     <p class="menu_item">
                         Tout
+                        <span class="compte_produit" title="Nombre de tout les produits dans la base">
+                            15/2630
+                        </span>
                     </p>
                     <p class="menu_item">
                         Ordinateur
+                        <span class="compte_produit">
+                            654
+                        </span>
                     </p>
                     <p class="menu_item">
                         Vêtements
+                        <span class="compte_produit">
+                            1520
+                        </span>
                     </p>
                     <p class="menu_item">
                         Téléphone
+                        <span class="compte_produit">
+                            987
+                        </span>
                     </p>
                     <p class="menu_item">
                         Voiture
+                        <span class="compte_produit">
+                            45
+                        </span>
                     </p>
                     <p class="menu_item">
                         Imprimente
+                        <span class="compte_produit">
+                            63
+                        </span>
                     </p>
                     <p class="menu_item">
                         Accessoires
+                        <span class="compte_produit">
+                            1263
+                        </span>
                     </p>
 
                 </div>
@@ -397,6 +418,9 @@
             </h3>
 
             <div *ngIf="oneAndAll">
+
+                <p class="dateCreationContent"> Crée le <span class="infoDate">12 Septembre 2013</span>  par <span class="infoDate">Rakoto</span> </p>
+
                 <div class="detail_to_change">
                     <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer">
                     <div class="label_change">
@@ -415,7 +439,7 @@
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
                         <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled>
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled style="background-color: white;">
                             <div class="label_change">
                                 Etat
                             </div>
@@ -550,9 +574,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
 
 
                 <div class="detail_to_change_button">
