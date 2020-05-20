@@ -1,0 +1,71 @@
+.container {    
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.container .inscription {    
+    width: 900px;    
+    padding: 40px 45px 20px 45px;
+    background: #f7f9fa;
+    border-radius: 10px;  
+}
+
+.container .inscription h2.titre {
+    letter-spacing: 2px;
+    font-size: 30px;
+    font-weight : 600;
+    text-align: center; 
+    margin-bottom: 0.8em;
+    color: rgb(1, 64, 107);
+    border-radius: 10px 0px 0px;
+    margin-top: 0px;
+}
+
+
+.form-group {
+    border-radius: 5px;
+    border: 0;
+    opacity: 0.6;
+}
+
+.form-group:focus-within {
+    opacity: 1;
+}
+
+input.form-control:focus {
+    box-shadow: none;    
+}
+
+input.form-control {
+    border: 0;
+    height: 44px;
+}
+
+
+textarea.form-control {
+    border: 0;
+    height: 84px;
+}
+
+textarea.form-control:focus {
+    box-shadow: none;    
+}
+
+.input-group .input-group-text {
+    background-color: #fff;
+    border: none;
+    height: 42px;
+}
+
+.custom-control-label {
+    color: rgb(158, 156, 156);
+}
