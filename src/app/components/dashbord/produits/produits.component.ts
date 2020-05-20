@@ -59,7 +59,7 @@ export class ProduitsComponent implements OnInit {
     this.spinner.show(this.spinner_list_Produit);//start loader
     setTimeout(() => {
       this.spinner.hide(this.spinner_list_Produit);//stop loader
-    }, 1000);
+    }, 500);
     /************************************** */
   }
 
