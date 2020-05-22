@@ -1,6 +1,6 @@
 .container {    
     width: 100%;
-    min-height: 100vh;
+    height: 85vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -15,8 +15,9 @@
 .container .login-wrap {    
     width: 450px;    
     padding: 40px 45px 20px 45px;
-    background: #f7f9fa;
+    background: #fff;
     border-radius: 10px;  
+    background-color: #f6f6f6;
 }
 
 .container .login-wrap h2.form-login-heading {
@@ -31,9 +32,10 @@
 }
 
 .form-group {
-    border-radius: 5px;
+    border-radius: 3px;
     border: 0;
     opacity: 0.6;
+    border-bottom: 1px solid #d5d5d5;
 }
 
 .form-group:focus-within {
@@ -46,7 +48,6 @@ input.form-control:focus {
 
 input.form-control {
     border: 0;
-    height: 44px;
 }
 
 .input-group .input-group-text {
@@ -66,7 +67,6 @@ input.form-control {
     width:100%;
     height:100vh; 
     z-index: 5;
-    cursor: wait;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 2;
     opacity: 3;    
@@ -78,13 +78,14 @@ input.form-control {
     width: 90%;    
     padding: 30px 30px 5px 30px;
     background: #fff;
-    border-radius: 5px; 
-    height: 40vh;
+    border-radius: 2px; 
+    height: 35vh;
  } 
 
  .reset-button .btn {
      width: 100px;
      margin: 3px;
+     border-radius: 2px;
  }
 
  .reset-button {

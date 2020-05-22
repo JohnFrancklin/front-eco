@@ -1,21 +1,21 @@
 <app-boxclient #header></app-boxclient>
 <div class="container">
-    <div class="login-wrap shadow">
+    <div class="login-wrap">
         <form>
             <h2 class="form-login-heading text-uppercase text-center">connexion</h2>
             <hr class="horizontal">
-            <div class="form-group mt-3 mb-3 shadow">
+            <div class="form-group mt-3 mb-3">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                            <mat-icon>email</mat-icon>
+                            <mat-icon>person</mat-icon>
                         </span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control" placeholder="Username" type="username">
                 </div>
             </div>
 
-            <div class="form-group shadow mb-5">
+            <div class="form-group mb-5">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -48,13 +48,13 @@
 
 </div>
 
-<div class="reset-password-section shadow" [ngStyle]="{display: displayPopup}">
+<div class="reset-password-section" [ngStyle]="{display: displayPopup}">
     <div class="popup-content">
         <div class="inner-popup-content">
             <h2 class="text-uppercase title">Récupération du compte</h2>
             <hr>
             <p class="text-reset">Entrer votre adresse email:</p>
-            <div class="form-group shadow">            
+            <div class="form-group">            
                 <div class="input-group input-group-alternative">                
                     <div class="input-group-prepend">
                         <span class="input-group-text">
