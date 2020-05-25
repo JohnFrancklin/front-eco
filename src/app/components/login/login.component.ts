@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   displayPopup = 'none';
+  show: boolean;
 
-  constructor() { }
+  constructor() { 
+    this.show = false;
+  }
 
   ngOnInit(): void {
   }
@@ -20,6 +23,10 @@ export class LoginComponent implements OnInit {
 
   closeState() {
     this.displayPopup = 'none';
+  }
+
+  password() {
+    this.show = !this.show; 
   }
 
 }
