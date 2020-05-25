@@ -32,8 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -72,9 +71,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatDialogModule,
     NgxSpinnerModule,
     MatTableModule,
-    MatSortModule
-    
- 
+    MatSortModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
