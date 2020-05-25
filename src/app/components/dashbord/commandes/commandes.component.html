@@ -155,59 +155,43 @@
 
                         <div *ngIf="oneAndAll">
 
-                            <table id="content-table">
-                                <thead>
-                                    <tr>
-                                        <th class="id">
-                                            ID
-                                            <a (click)="sort(true, 'id', 'content-table');"><mat-icon>expand_less</mat-icon></a>
-                                            <a (click)="sort(false, 'id', 'content-table');"><mat-icon>expand_more</mat-icon></a>
-                                        </th>
-                                        <th class="country">
-                                            Country
-                                            <a (click)="sort(true, 'country', 'content-table');"><mat-icon>expand_less</mat-icon></a>
-                                            <a (click)="sort(false, 'country', 'content-table');"><mat-icon>expand_more</mat-icon></a>
-                                        </th>
-                                        <th class="some-fact">
-                                            Some fact
-                                            <a (click)="sort(true, 'some-fact', 'content-table');"><mat-icon>expand_less</mat-icon></a>
-                                            <a (click)="sort(false, 'some-fact', 'content-table');"><mat-icon>expand_more</mat-icon></a>
-                                        </th>
-                                        <th class="some-date">
-                                            Some date
-                                            <a (click)="sort(true, 'some-date', 'content-table');"><mat-icon>expand_less</mat-icon></a>
-                                            <a (click)="sort(false, 'some-date', 'content-table');"><mat-icon>expand_more</mat-icon></a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="id">001</td>
-                                        <td class="country">Germany</td>
-                                        <td class="some-fact">16.405</td>
-                                        <td class="some-date">06/06/2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">002</td>
-                                        <td class="country">France</td>
-                                        <td class="some-fact">10.625</td>
-                                        <td class="some-date">05/06/2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">003</td>
-                                        <td class="country">UK</td>
-                                        <td class="some-fact">15.04</td>
-                                        <td class="some-date">04/06/2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">004</td>
-                                        <td class="country">China</td>
-                                        <td class="some-fact">13.536</td>
-                                        <td class="some-date">05/07/2020</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                            <div class="table_container">
+                                <table id="table_commande" class="table_commande">
+                                    <thead>
+                                        <tr>
+                                            <th class="numero_commande">
+                                                <a (click)="sort(true, 'numero_commande', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                Numero
+                                                <a (click)="sort(false, 'numero_commande', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                            </th>
+                                            <th class="client">
+                                                
+                                                <a (click)="sort(true, 'client', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                Client
+                                                <a (click)="sort(false, 'client', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                            </th>
+                                            <th class="etat">
+                                                <a (click)="sort(true, 'etat', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                Etat
+                                                <a (click)="sort(false, 'etat', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                            </th>
+                                            <th class="date_creation">  
+                                                <a (click)="sort(true, 'date_creation', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                Date
+                                                <a (click)="sort(false, 'date_creation', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let c of commandes">
+                                            <td class="numero_commande">{{c.numero_commande}}</td>
+                                            <td class="client">{{c.client}}</td>
+                                            <td class="etat">{{c.etat}}</td>
+                                            <td class="date_creation">{{c.date_creation}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 

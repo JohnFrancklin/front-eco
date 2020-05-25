@@ -2,16 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-
+import { CommandesService } from 'src/app/services/commandes.service';
 
 
 @Component({
@@ -27,6 +18,8 @@ export class CommandesComponent implements OnInit {
   listDetailToShow: string;  // vote ou favoris ou vu ou commande
   titleDetailListStat: string;
   loadMore: boolean = false;
+
+  commandes: any;
 
   scrollSpace = 0;  // espace vide scroll
   createType: boolean = false;
@@ -46,7 +39,9 @@ export class CommandesComponent implements OnInit {
 
   //---------------------------------------------------//
 
-  constructor(private spinner: NgxSpinnerService) {
+  constructor(
+              private spinner: NgxSpinnerService,
+              private commandesService: CommandesService) {
 
    }
 
@@ -59,6 +54,14 @@ export class CommandesComponent implements OnInit {
         }, 500);
         /************************************** */
 
+        this.getCommandes();
+  }
+
+
+  getCommandes(){     
+    this.commandes = this.commandesService.getCommandes();
+    console.log("les commandes", this.commandes);
+    
   }
 
 
@@ -129,6 +132,7 @@ export class CommandesComponent implements OnInit {
     this.showFilter = false;
     this.showDetailListStat = false;
   }
+
 
 
   scrolled() {
