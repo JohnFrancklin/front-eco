@@ -19,7 +19,7 @@
                 <div class="menu_produits active_menu" [routerLink]="['/dashboard/users']">
                     Utilisateurs
                 </div>
-                <div class="menu_produits">
+                <div class="menu_produits" [routerLink]="['/dashboard/commandes']">
                     Commandes
                 </div>
                 <div class="menu_produits">
@@ -65,25 +65,25 @@
 
                     <p class="menu_item">
                         Tout
-                        <span class="compte_produit" title="Nombre de tout les produits dans la base">
+                        <span class="compte_categorie" title="Nombre de tout les produits dans la base">
                             15/2630
                         </span>
                     </p>
                     <p class="menu_item">
                         Abonnés
-                        <span class="compte_produit">
+                        <span class="compte_categorie">
                             654
                         </span>
                     </p>
                     <p class="menu_item">
                         Administrateurs
-                        <span class="compte_produit">
+                        <span class="compte_categorie">
                             1520
                         </span>
                     </p>
                     <p class="menu_item">
                         Super-Admin
-                        <span class="compte_produit">
+                        <span class="compte_categorie">
                             987
                         </span>
                     </p>
@@ -340,16 +340,7 @@
 
                 </div>
                 <div class="imageCont">
-                    <div class="box_image">
-                        <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit">
-                    </div>
-                    <div class="box_image" (click)="file.click()">
-                        <span class="material-icons add_image">
-                            add
-                        </span> <br>
-                        Ajouter une image
-                    </div>
-                    <input type="file" name="" id="" hidden #file>
+                    espace vide
                 </div>
             </div>
         </div>

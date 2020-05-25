@@ -8,6 +8,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { CommandesComponent } from './components/dashbord/commandes/commandes.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -29,6 +30,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+
+
 
 
 
@@ -46,7 +51,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ProduitsComponent,
     UsersComponent,
     DetailComponent,
-    BoxclientComponent
+    BoxclientComponent,
+    CommandesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatTooltipModule,
     MatMenuModule,
     MatDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTableModule,
+    MatSortModule
     
  
   ],
