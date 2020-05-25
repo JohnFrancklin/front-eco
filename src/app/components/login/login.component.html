@@ -23,7 +23,7 @@
                         </span>
                     </div>
                     <input class="form-control" placeholder="Password" [type]="show ? 'text' : 'password'">
-                    <button (click)="password()" class="btn-eye"><mat-icon>visibility</mat-icon></button>
+                    <button (click)="password()" class="btn-eye"><mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon></button>
                 </div>
             </div>
             <div class="custom-control custom-checkbox mt-3 text-center">
