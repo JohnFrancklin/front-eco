@@ -1,1 +1,365 @@
-<p>users works!</p>
+<app-boxclient #header></app-boxclient>
+<div class="dashboard-contener">
+    <div class="row">
+        <div class="menu_gauche">
+            <div class="menu_content">
+
+
+                <div class="menu_aller_au_site" title="Revenir au site de commerce" [routerLink]="['/home/']">
+                    <span class="material-icons">
+                        store
+                    </span>
+                    <span class="label_aller_au_site">
+                        Aller au site
+                    </span>
+                </div>
+                <div class="menu_produits" [routerLink]="['/dashboard/produits']">
+                    Produits
+                </div>
+                <div class="menu_produits active_menu" [routerLink]="['/dashboard/users']">
+                    Utilisateurs
+                </div>
+                <div class="menu_produits" [routerLink]="['/dashboard/commandes']">
+                    Commandes
+                </div>
+                <div class="menu_produits">
+                    Reporting
+                </div>
+                <div class="menu_produits">
+                    K.P.I
+                </div>
+                <div class="menu_produits">
+                    Feedbacks
+                </div>
+                <div class="menu_produits">
+                    Historique des recherches
+                </div>
+                <div class="menu_produits">
+                    Logs
+                </div>
+
+            </div>
+        </div>
+        <div class="list_centre">
+            <!-- <div>
+                <input type="text" placeholder="Rechercher">
+            </div> -->
+            <div class="content_dans_list">
+                <div class="menu_dans_list">
+
+                    <p class="titleItem">
+                        Utilisateurs
+                    </p>
+
+                    <button class="btn_creer" title="Créer un nouveau produit" [disabled]="createType">
+                        <span class="material-icons add_produit_icon">
+                            add
+                        </span>
+                        Créer un nouveau
+                    </button>
+
+
+                    <div class="categorieItem">
+                        Les catégories
+                    </div>
+
+                    <p class="menu_item">
+                        Tout
+                        <span class="compte_categorie" title="Nombre de tout les produits dans la base">
+                            15/2630
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        Abonnés
+                        <span class="compte_categorie">
+                            654
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        Administrateurs
+                        <span class="compte_categorie">
+                            1520
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        Super-Admin
+                        <span class="compte_categorie">
+                            987
+                        </span>
+                    </p>
+
+                </div>
+
+
+
+                <div class="list_dans_list">
+
+                    <div class="filter" [ngStyle]="{'background-color':showFilter===true ? '#fafafa' : 'lightgrey'}">
+                        <button class="btn_filter" (click)="afficherFiltre()" title="Filtrer les resultats">
+                            <span class="material-icons">
+                                sort
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="filter_content" *ngIf="showFilter">
+                        <input type="text" class="input_filter" placeholder="Filtrer par nom...">
+
+
+                        <p class="title_filter">Choisissez votre filtre</p>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="none" name="filtre">
+                        <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_asc" name="filtre">
+                        <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_desc" name="filtre">
+                        <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix
+                            descendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_asc" name="filtre">
+                        <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_desc" name="filtre">
+                        <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote
+                            descendant</label>
+                        <hr class="hr_filtre">
+
+                    </div>
+
+                    <div class="selectionner">
+                        <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
+                            {{oneAndAll == true ? 'selectionner' : 'Déselectionner' }}
+                            <input type="checkbox" (click)="toggleOneAndAll()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div class="recherche_box">
+                        <input type="text" placeholder="Rechercher utilisateurs.." class="input_search">
+                        <button class="btn_search">
+                            Rechercher
+                        </button>
+                    </div>
+
+
+                    <div class="contenu_element" (scroll)="scrolled()" id="element">
+
+                        <ngx-spinner [name]="spinner_list_utilisateurs" [fullScreen]="false" [type]="spinner_type"
+                            [size]="spinner_size" [bdColor]="spinner_background"></ngx-spinner>
+
+
+
+                        <div *ngIf="oneAndAll">
+                            One User
+                            <!-- <button class="element_un" *ngFor="let p of produits" id="{{p._id}}"
+                                [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
+                                (click)="getOneProduit(p)" title="{{p.description}}">
+                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
+                            </button> -->
+                        </div>
+
+
+
+                        <div *ngIf="!oneAndAll">
+
+                            All selected
+                            <!-- <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
+                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
+                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
+                                    [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
+                                    title="Cocher ici pour selection le produit">
+                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list" title="Etats du produit"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
+                            </div> -->
+                        </div>
+
+                    </div>
+
+                    <div class="loadMore" *ngIf="loadMore">
+                        <!-- <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
+                            [bdColor]="spinner_background">
+                        </ngx-spinner> -->
+                    </div>
+
+                </div>
+            </div>
+            <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
+            <div class="content_stat_image">
+                <div class="stat">
+                    <p class="titlte_statistique">Interactions</p>
+                    <!--anciennement appelé statitstique-->
+
+                    <div class="stat_vote_content">
+
+                        <div class="content_list_statistics" *ngIf="showDetailListStat" id="detailStat"
+                            [ngStyle]="{'margin-top': listDetailToShow==='vote' ? '-367px': listDetailToShow ==='favoris' ? '-336px' : listDetailToShow ==='vu'? '-305px' : '' }">
+
+
+                            <div class="ici_le_contenu">
+                                <div class="title_detail_stat_list">
+                                    {{titleDetailListStat}}
+                                </div>
+                                <div class="la_liste">
+                                    <!-- 
+                                    <ngx-spinner [name]="spinner_list_user" [fullScreen]="false" [type]="spinner_type"
+                                        [size]="spinner_size" [bdColor]="spinner_background">
+                                    </ngx-spinner> -->
+
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            RAZAFINARIVO John Francklin
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Antananarivo Lot A69 Anjanahary 2N
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            RANDY Orton WWE Superstart
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Chicago, Etats Unis 21K KL21000
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            The Undertaker, brother of destruction WWE universe
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Cinetière, Los angeles, great park 2351MD
+                                        </div>
+                                    </div>
+                                    <div class="list_client_stat">
+                                        <div class="nom_client_stat" title="Cliquer pour voir le detail du client">
+                                            Cristiano Ronaldo CR7
+                                        </div>
+                                        <div class="adress_client_stat">
+                                            Espaigne, madrid, santiago bernabeu
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="triangle-left"></div>
+
+
+                        </div>
+
+
+
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    grade
+                                </span>
+                                Votes :
+                            </div>
+                            <div class="info_s" title="Nombre de vote">
+                                <span class="number">
+                                    <!-- {{oneProduit.vote.length}} -->
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('vote','Les produits votés')"
+                                    title="Liste des clients qui a voté ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    favorite
+                                </span>
+                                Favoris :
+                            </div>
+                            <div class="info_s" title="Nombre de favoris">
+                                <span class="number">
+                                    <!-- {{oneProduit.favorie.length}} -->
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('favoris','Les produits favorisés')"
+                                    title="Liste des clients qui a favorisé ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    visibility
+                                </span>
+                                Vus :
+                            </div>
+                            <div class="info_s" title="nombre de vu">
+                                <span class="number">
+                                    <!-- {{oneProduit.vu}} -->
+                                </span>
+                                <span class="material-icons icon_list" title="Liste des clients qui a vu ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list_of_stat">
+                            <div class="label_s">
+                                <span class="material-icons icon_stat">
+                                    shop
+                                </span>
+                                Commandes :
+                            </div>
+                            <div class="info_s" title="nombre de commande">
+                                <span class="number">
+                                    15
+                                </span>
+                                <span class="material-icons icon_list"
+                                    (click)="showDetailstatistic('commande','Les produits commandés')"
+                                    title="Liste des clients qui a commandé ce produit">
+                                    list
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="imageCont">
+                    espace vide
+                </div>
+            </div>
+        </div>
+
+        <div class="detail_droit">
+            <h3 class="lbl_h3_detail">Detail de l'utilisateurs</h3>
+
+            <h3 class="lbl_h3_detail">Nombre: 152
+            </h3>
+
+
+        </div>
+    </div>
+
+
+    <ng-template #imageProduit style="background-color: white;">
+        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+    </ng-template>
+
+
+    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
+    </div>

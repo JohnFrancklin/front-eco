@@ -1,0 +1,265 @@
+<app-boxclient #header></app-boxclient>
+<div class="dashboard-contener">
+    <div class="row">
+        <div class="menu_gauche">
+            <div class="menu_content">
+
+
+                <div class="menu_aller_au_site" title="Revenir au site de commerce" [routerLink]="['/home/']">
+                    <span class="material-icons">
+                        store
+                    </span>
+                    <span class="label_aller_au_site">
+                        Aller au site
+                    </span>
+                </div>
+                <div class="menu_produits" [routerLink]="['/dashboard/produits']">
+                    Produits
+                </div>
+                <div class="menu_produits" [routerLink]="['/dashboard/users']">
+                    Utilisateurs
+                </div>
+                <div class="menu_produits active_menu" [routerLink]="['/dashboard/commandes']">
+                    Commandes
+                </div>
+                <div class="menu_produits">
+                    Reporting
+                </div>
+                <div class="menu_produits">
+                    K.P.I
+                </div>
+                <div class="menu_produits">
+                    Feedbacks
+                </div>
+                <div class="menu_produits">
+                    Historique des recherches
+                </div>
+                <div class="menu_produits">
+                    Logs
+                </div>
+
+            </div>
+        </div>
+        <div class="list_centre">
+            <!-- <div>
+                <input type="text" placeholder="Rechercher">
+            </div> -->
+            <div class="content_dans_list">
+                <div class="menu_dans_list">
+
+                    <p class="titleItem">
+                        Commandes
+                    </p>
+
+                    <button class="btn_creer" title="Créer un nouveau produit" [disabled]="createType">
+                        <span class="material-icons add_produit_icon">
+                            add
+                        </span>
+                        Créer un nouveau
+                    </button>
+
+
+                    <div class="categorieItem">
+                        Les catégories
+                    </div>
+
+                    <p class="menu_item">
+                        Tout
+                        <span class="compte_categorie" title="Nombre de tout les produits dans la base">
+                            15/2630
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        categorie 1
+                        <span class="compte_categorie">
+                            654
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        categorie 2
+                        <span class="compte_categorie">
+                            1520
+                        </span>
+                    </p>
+                    <p class="menu_item">
+                        categorie 3
+                        <span class="compte_categorie">
+                            987
+                        </span>
+                    </p>
+
+                </div>
+
+
+
+                <div class="list_dans_list">
+
+                    <div class="filter" [ngStyle]="{'background-color':showFilter===true ? '#fafafa' : 'lightgrey'}">
+                        <button class="btn_filter" (click)="afficherFiltre()" title="Filtrer les resultats">
+                            <span class="material-icons">
+                                sort
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="filter_content" *ngIf="showFilter">
+                        <input type="text" class="input_filter" placeholder="Filtrer par nom...">
+
+
+                        <p class="title_filter">Choisissez votre filtre</p>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="none" name="filtre">
+                        <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_asc" name="filtre">
+                        <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="prix_desc" name="filtre">
+                        <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix
+                            descendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_asc" name="filtre">
+                        <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote
+                            ascendant</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="vote_desc" name="filtre">
+                        <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote
+                            descendant</label>
+                        <hr class="hr_filtre">
+
+                    </div>
+
+                    <div class="selectionner">
+                        <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
+                            {{oneAndAll == true ? 'selectionner' : 'Déselectionner' }}
+                            <input type="checkbox" (click)="toggleOneAndAll()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div class="recherche_box">
+                        <input type="text" placeholder="Rechercher utilisateurs.." class="input_search">
+                        <button class="btn_search">
+                            Rechercher
+                        </button>
+                    </div>
+
+
+                    <div class="contenu_element" (scroll)="scrolled()" id="element">
+
+                        <ngx-spinner [name]="spinner_list_utilisateurs" [fullScreen]="false" [type]="spinner_type"
+                            [size]="spinner_size" [bdColor]="spinner_background"></ngx-spinner>
+
+
+
+                        <div *ngIf="oneAndAll">
+
+                            <table id="content-table">
+                                <thead>
+                                    <tr>
+                                        <th class="id">
+                                            ID
+                                            <a (click)="sort(true, 'id', 'content-table');"><mat-icon>expand_less</mat-icon></a>
+                                            <a (click)="sort(false, 'id', 'content-table');"><mat-icon>expand_more</mat-icon></a>
+                                        </th>
+                                        <th class="country">
+                                            Country
+                                            <a (click)="sort(true, 'country', 'content-table');"><mat-icon>expand_less</mat-icon></a>
+                                            <a (click)="sort(false, 'country', 'content-table');"><mat-icon>expand_more</mat-icon></a>
+                                        </th>
+                                        <th class="some-fact">
+                                            Some fact
+                                            <a (click)="sort(true, 'some-fact', 'content-table');"><mat-icon>expand_less</mat-icon></a>
+                                            <a (click)="sort(false, 'some-fact', 'content-table');"><mat-icon>expand_more</mat-icon></a>
+                                        </th>
+                                        <th class="some-date">
+                                            Some date
+                                            <a (click)="sort(true, 'some-date', 'content-table');"><mat-icon>expand_less</mat-icon></a>
+                                            <a (click)="sort(false, 'some-date', 'content-table');"><mat-icon>expand_more</mat-icon></a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="id">001</td>
+                                        <td class="country">Germany</td>
+                                        <td class="some-fact">16.405</td>
+                                        <td class="some-date">06/06/2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">002</td>
+                                        <td class="country">France</td>
+                                        <td class="some-fact">10.625</td>
+                                        <td class="some-date">05/06/2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">003</td>
+                                        <td class="country">UK</td>
+                                        <td class="some-fact">15.04</td>
+                                        <td class="some-date">04/06/2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">004</td>
+                                        <td class="country">China</td>
+                                        <td class="some-fact">13.536</td>
+                                        <td class="some-date">05/07/2020</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+
+
+                        <div *ngIf="!oneAndAll">
+
+                            All Commande
+                            <!-- <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
+                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
+                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
+                                    [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
+                                    title="Cocher ici pour selection le produit">
+                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                <span class="title_produit_list">
+                                    {{p.title}}
+                                </span>
+                                <span class="state_produit_on_list" title="Etats du produit"
+                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
+                                    {{p.etat}}
+                                </span>
+                            </div> -->
+                        </div>
+
+                    </div>
+
+                    <div class="loadMore" *ngIf="loadMore">
+                        <!-- <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
+                            [bdColor]="spinner_background">
+                        </ngx-spinner> -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="detail_droit">
+
+            espace vide
+
+
+
+
+        </div>
+    </div>
+
+
+    <ng-template #imageProduit style="background-color: white;">
+        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+    </ng-template>
+
+
+    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
+    </div>

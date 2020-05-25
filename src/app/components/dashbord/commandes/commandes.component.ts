@@ -1,13 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+
+
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-commandes',
+  templateUrl: './commandes.component.html',
+  styleUrls: ['./commandes.component.css']
 })
-export class UsersComponent implements OnInit {
-
+export class CommandesComponent implements OnInit {
   oneAndAll: boolean = true;
   showFilter: boolean = false;
   Transparent_overlay: boolean = false;
@@ -30,18 +42,59 @@ export class UsersComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
 
+  // variable pour datatable//
 
-  constructor(private spinner: NgxSpinnerService) { }
+  //---------------------------------------------------//
+
+  constructor(private spinner: NgxSpinnerService) {
+
+   }
+
 
   ngOnInit(): void {
-
         /**************SPINNER TEST ************* */
         this.spinner.show(this.spinner_list_utilisateurs);//start loader
         setTimeout(() => {
           this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
         }, 500);
         /************************************** */
+
   }
+
+
+   sort(ascending, columnClassName, tableId)
+		{
+			let tbody = document.getElementById(tableId).getElementsByTagName("tbody")[0];
+			let rows = tbody.getElementsByTagName("tr");
+			let unsorted = true;
+			while(unsorted)
+			{
+				unsorted = false
+				for (let r = 0; r < rows.length - 1; r++)
+				{
+					let row = rows[r];
+					let nextRow = rows[r+1];
+					
+					let value: any = row.getElementsByClassName(columnClassName)[0].innerHTML;
+					let nextValue: any = nextRow.getElementsByClassName(columnClassName)[0].innerHTML;
+					
+					value = value.replace(',', ''); // in case a comma is used in float number
+					nextValue = nextValue.replace(',', '');
+					
+					if(!(value))
+					{
+						value = parseFloat(value);
+						nextValue = parseFloat(nextValue);
+					}
+					
+					if (ascending ? value > nextValue : value < nextValue)
+					{
+						tbody.insertBefore(nextRow, row);
+						unsorted = true;
+					}
+				}
+			}
+		};
 
 
   toggleOneAndAll() {
@@ -75,19 +128,6 @@ export class UsersComponent implements OnInit {
     this.Transparent_overlay = false;
     this.showFilter = false;
     this.showDetailListStat = false;
-  }
-
-  showDetailstatistic(stat, title) {
-    this.showDetailListStat = true;
-    this.Transparent_overlay = true;
-    this.listDetailToShow = stat;
-    this.titleDetailListStat = title;
-
-    // this.spinner.show(this.spinner_list_user);//start loader
-    setTimeout(() => {
-      // this.spinner.hide(this.spinner_list_user);//stop loader
-    }, 1000);
-
   }
 
 
@@ -131,21 +171,6 @@ export class UsersComponent implements OnInit {
 
 
 
-
-  // setCheckedProduit() {
-  //   let idChecked = [];
-  //   for (let i = 0; i < this.produits.length; i++) {
-  //     for (let j = 0; j < this.produitSelected.length; j++) {
-  //       if (this.produits[i]._id === this.produitSelected[j]._id) {
-  //         idChecked.push(this.produits[i]._id);
-  //       }
-  //     }
-  //   } //on peut fusionner les boucles, mais ca crée un bug apres
-  //   for (let i = 0; i < idChecked.length; i++) {
-  //     const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
-  //     checkElement.checked = true;
-  //   }
-  // }
 
 
 

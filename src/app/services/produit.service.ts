@@ -414,8 +414,8 @@ export class ProduitService {
         21245454545,
         21245454545
       ]
-    }
-
+    },
+    
 
 
 
