@@ -8,7 +8,7 @@
                 <hr class="horizontal">
                 <div class="row">
                     <div class="col-sm-6 ">
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
                             <div [hidden]="nom.valid || nom.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -18,23 +18,23 @@
                                         <mat-icon>person_outline</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="nom" placeholder="Votre Nom *" required
+                                <input type="text" class="form-control" id="nom" placeholder="Nom *" required
                                     [(ngModel)]="users.nom" name="nom" #nom="ngModel">
                             </div>
 
                         </div>
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <mat-icon>person_outline</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="prenom" placeholder="Votre Prenom " required
+                                <input type="text" class="form-control" id="prenom" placeholder="Prenom " required
                                     [(ngModel)]="users.prenom" name="prenom" #prenom="ngModel">
                             </div>
                         </div>
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
                             <div [hidden]="adresse.valid || adresse.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -44,11 +44,11 @@
                                         <mat-icon>local_shipping</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="adresse" placeholder="Votre Adresse *"
-                                    required [(ngModel)]="users.adresse" name="adresse" #adresse="ngModel">
+                                <input type="text" class="form-control" id="adresse" placeholder="Adresse *" required
+                                    [(ngModel)]="users.adresse" name="adresse" #adresse="ngModel">
                             </div>
                         </div>
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
                             <div [hidden]="tel.valid || tel.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -58,13 +58,13 @@
                                         <mat-icon>call</mat-icon>
                                     </span>
                                 </div>
-                                <input type="number" class="form-control" id="tel" placeholder="Votre Telephone *"
-                                    required [(ngModel)]="users.tel" name="tel" maxlength="10" #tel="ngModel">
+                                <input type="number" class="form-control" id="tel" placeholder="Telephone *" required
+                                    [(ngModel)]="users.tel" name="tel" maxlength="10" #tel="ngModel">
                             </div>
                         </div>
 
                         <!-- Avatar
-                              <div class="form-group mt-3 mb-3 shadow">
+                              <div class="form-group mt-3 mb-3  ">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -79,7 +79,7 @@
                         -->
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
                             <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -89,15 +89,15 @@
                                         <mat-icon>person</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="username" placeholder="Votre Username *"
-                                    required [(ngModel)]="users.username" name="username" #username="ngModel">
+                                <input type="text" class="form-control" id="username" placeholder="Username *" required
+                                    [(ngModel)]="users.username" name="username" #username="ngModel">
                             </div>
                             <div [hidden]="!this.userExist" class="alert alert-danger">
                                 Cet Username existe déjà
                             </div>
 
                         </div>
-                        <div class="form-group mt-3 mb-3 shadow">
+                        <div class="form-group mt-3 mb-3  ">
 
                             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <input type="email" class="form-control" (keyup)="keyEmail($event)" id="email"
-                                    placeholder="Votre Email *" required [(ngModel)]="users.email" name="email"
+                                    placeholder="Email *" required [(ngModel)]="users.email" name="email"
                                     #email="ngModel">
                                 <div *ngIf="invalidMail" style="color:red">Email invalid</div>
 
@@ -121,7 +121,9 @@
                                 Cet email existe déjà
                             </div>
                         </div>
-                        <div class="form-group mt-3 mb-3 shadow">
+
+
+                        <div class="form-group mt-3 mb-5 ">
                             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -131,13 +133,16 @@
                                         <mat-icon>lock_open</mat-icon>
                                     </span>
                                 </div>
-                                <input type="password" class="form-control" id="password" placeholder="Votre Password *"
-                                    required [(ngModel)]="users.password" name="password" #password="ngModel">
+                                <input class="form-control" id="password" placeholder="Password *"
+                                    [type]="show ? 'text' : 'password'" required [(ngModel)]="users.password"
+                                    name="password" #password="ngModel">
+                                <button (mousedown)="passwordFunction()" class="btn-eye">
+                                    <mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                </button>
                             </div>
                         </div>
-
                         <!-- Role
-                             <div class="form-group mt-3 mb-3 shadow">
+                             <div class="form-group mt-3 mb-3  ">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -163,13 +168,12 @@
     <div [hidden]="!submitted">
         <div class="inscriptionTerminer">
             <h2 class="titre text-uppercase text-center">
-                Bienvenu {{users.nom}} ,  Votre inscription a été effectué avec succès</h2>
+                Bienvenu {{users.nom}} , Votre inscription a été effectué avec succès</h2>
             <hr class="horizontal">
             <div class="row">
                 <div class="col-sm-6">
                     <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
-                    style="background-color: rgb(1, 64, 107);" [routerLink]="['/login']"
-                    >SE CONNECTER</button>
+                        style="background-color: rgb(1, 64, 107);" [routerLink]="['/login']">SE CONNECTER</button>
                 </div>
 
             </div>

@@ -1,6 +1,6 @@
 .container {    
     width: 100%;
-    min-height: 100vh;
+    height: 85vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -15,8 +15,10 @@
 .container .inscription {    
     width: 900px;    
     padding: 40px 45px 20px 45px;
-    background: #f7f9fa;
-    border-radius: 10px;  
+    border-radius: 3px;  
+    border-radius: 3px;  
+    background-color: #f6f6f6;
+    border: 1px solid #eeeeee;
 }
 
 .container .inscription h2.titre {
@@ -32,9 +34,10 @@
 
 
 .form-group {
-    border-radius: 5px;
+    border-radius: 3px;
     border: 0;
     opacity: 0.6;
+    border-bottom: 1px solid #d5d5d5;
 }
 
 .form-group:focus-within {
@@ -47,7 +50,6 @@ input.form-control:focus {
 
 input.form-control {
     border: 0;
-    height: 44px;
 }
 
 
@@ -68,4 +70,18 @@ textarea.form-control:focus {
 
 .custom-control-label {
     color: rgb(158, 156, 156);
+}
+
+.btn-eye {
+    background: white;
+    border-left: 2px solid #d5d5d5;
+    border: 0;
+    opacity: 0.6;
+    cursor: auto;
+    user-select: none; 
+   -webkit-user-select: none; 
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   outline: 0 !important;
 }

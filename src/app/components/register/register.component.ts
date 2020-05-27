@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   users = new Users();
   submitted = false;
 
+  show: boolean;
+
   emailExist: boolean;
   userExist: boolean;
   
@@ -35,7 +37,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private location: Location
-  ) { }
+  ) { this.show = false;}
 
 
   ngOnInit(): void {
@@ -103,4 +105,11 @@ export class RegisterComponent implements OnInit {
      
     }
   }
+
+  passwordFunction() {
+    this.show = !this.show; 
+  }
+
+
+
 }

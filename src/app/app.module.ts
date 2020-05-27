@@ -35,7 +35,6 @@ import {MatSortModule} from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
     DetailComponent,
     BoxclientComponent,
     CommandesComponent
+
   ],
   imports: [
     BrowserModule,
@@ -72,7 +72,8 @@ import { HttpClientModule } from '@angular/common/http';
     NgxSpinnerModule,
     MatTableModule,
     MatSortModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
