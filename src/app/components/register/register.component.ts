@@ -21,23 +21,26 @@ export class RegisterComponent implements OnInit {
 
   emailExist: boolean;
   userExist: boolean;
-  
+
   allEmail: any = [];
   allListeUser: any = [];
-  allUser: any =[];
+  allUser: any = [];
+  arrayUser: any=[];
+
 
   invalidMail: boolean;
+  invalidConfirmPassword: boolean;
 
   userEmails = new FormGroup({
-    email: new FormControl('',[
+    email: new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-    });  
+  });
 
   constructor(
     private usersService: UsersService,
     private location: Location
-  ) { this.show = false;}
+  ) { this.show = false; }
 
 
   ngOnInit(): void {
@@ -51,8 +54,8 @@ export class RegisterComponent implements OnInit {
 
   addUsers(addUserForm: NgForm) {
 
-    this.detectExiste(addUserForm.value.email, addUserForm.value.username); 
-    if (this.emailExist !== true  &&  this.userExist !== true  && this.invalidMail !== true ) {
+    this.detectExiste(addUserForm.value.email, addUserForm.value.username);
+    if (this.emailExist !== true && this.userExist !== true && this.invalidMail !== true  &&  this.invalidConfirmPassword !== true) {
       this.submitted = true;
       this.save();
     }
@@ -76,14 +79,17 @@ export class RegisterComponent implements OnInit {
         for (let index = 0; index < this.allListeUser.users.length; index++) {
           this.allEmail.push(this.allListeUser.users[index].email);
           this.allUser.push(this.allListeUser.users[index].username)
+          this.arrayUser.push(this.allListeUser.users[index])
         }
       }
+
+      
     )
 
   }
 
 
-  detectExiste(email,username) {
+  detectExiste(email, username) {
     if (this.allEmail.includes(email)) {
       this.emailExist = true;
     } else {
@@ -102,14 +108,20 @@ export class RegisterComponent implements OnInit {
       this.invalidMail = true;
     } else {
       this.invalidMail = false;
-     
+
     }
   }
 
   passwordFunction() {
-    this.show = !this.show; 
+    this.show = !this.show;
   }
 
-
+  ConfirmPassword(password, confirmPassword) {
+    if (password != confirmPassword) {
+      this.invalidConfirmPassword = true
+    } else {
+      this.invalidConfirmPassword = false
+    }
+  }
 
 }

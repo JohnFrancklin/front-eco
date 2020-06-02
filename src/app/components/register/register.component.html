@@ -24,13 +24,16 @@
 
                         </div>
                         <div class="form-group mt-3 mb-3  ">
+                                <div [hidden]="prenom.valid || prenom.pristine" class="alert alert-danger">
+                                        Veuillez renseigner ce champ.
+                                    </div>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <mat-icon>person_outline</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="prenom" placeholder="Prenom " required
+                                <input type="text" class="form-control" id="prenom" placeholder="Prenom *" required
                                     [(ngModel)]="users.prenom" name="prenom" #prenom="ngModel">
                             </div>
                         </div>
@@ -89,7 +92,7 @@
                                         <mat-icon>person</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="username" placeholder="Username *" required
+                                <input type="text" class="form-control" id="username" placeholder="Idetifiant *" required
                                     [(ngModel)]="users.username" name="username" #username="ngModel">
                             </div>
                             <div [hidden]="!this.userExist" class="alert alert-danger">
@@ -123,7 +126,7 @@
                         </div>
 
 
-                        <div class="form-group mt-3 mb-5 ">
+                        <div class="form-group mt-3 mb-3 ">
                             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                                 Veuillez renseigner ce champ.
                             </div>
@@ -133,9 +136,29 @@
                                         <mat-icon>lock_open</mat-icon>
                                     </span>
                                 </div>
-                                <input class="form-control" id="password" placeholder="Password *"
+                                <input class="form-control" id="password" placeholder="Mot de passe *"
                                     [type]="show ? 'text' : 'password'" required [(ngModel)]="users.password"
                                     name="password" #password="ngModel">
+                                <button (mousedown)="passwordFunction()" class="btn-eye">
+                                    <mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3 mb-3 ">
+                            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                                Veuillez renseigner ce champ.
+                            </div>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </span>
+                                </div>
+                                <input class="form-control" id="confirmPassword" placeholder="Confirm Mot de passe *"
+                                    [(ngModel)]="users.confirmPassword" #confirmPassword="ngModel"
+                                    [type]="show ? 'text' : 'password'" name="confirmPassword"
+                                    (keyup)="ConfirmPassword(users.password,users.confirmPassword)" required>
+                                <div *ngIf="invalidConfirmPassword" style="color:red">Confirm Mot de passe Invalid</div>
                                 <button (mousedown)="passwordFunction()" class="btn-eye">
                                     <mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon>
                                 </button>
@@ -153,8 +176,7 @@
                                     [(ngModel)]="users.role" name="role" #role="ngModel">
                             </div>
                         </div>
-                        -->
-
+                        -->              
                     </div>
                 </div>
                 <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
@@ -163,7 +185,6 @@
             </form>
         </div>
     </div>
-
     <!-- Inscription Valid -->
     <div [hidden]="!submitted">
         <div class="inscriptionTerminer">
@@ -175,7 +196,6 @@
                     <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
                         style="background-color: rgb(1, 64, 107);" [routerLink]="['/login']">SE CONNECTER</button>
                 </div>
-
             </div>
         </div>
     </div>

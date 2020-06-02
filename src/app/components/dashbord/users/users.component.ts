@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UsersService } from 'src/app/services/users.service';
+import { Users } from 'src/app/interfaces/users';
 
 @Component({
   selector: 'app-users',
@@ -30,8 +32,22 @@ export class UsersComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
 
+  allListeUser: any = [];
+  users : Users[];
+  arrayUser: any=[];
+  onUser: any=[];
 
-  constructor(private spinner: NgxSpinnerService) { }
+  // Detail User
+  OneAdresse =""
+  OneAvatar =""
+  OneEmail=""
+  OneNom=""
+  OnePrenom =""
+  Onetel=""
+  OneUsername =""
+  One_id=""
+
+  constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
 
   ngOnInit(): void {
 
@@ -41,6 +57,8 @@ export class UsersComponent implements OnInit {
           this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
         }, 500);
         /************************************** */
+
+        this.getExistAll();
   }
 
 
@@ -128,10 +146,6 @@ export class UsersComponent implements OnInit {
 
   }
 
-
-
-
-
   // setCheckedProduit() {
   //   let idChecked = [];
   //   for (let i = 0; i < this.produits.length; i++) {
@@ -146,6 +160,39 @@ export class UsersComponent implements OnInit {
   //     checkElement.checked = true;
   //   }
   // }
+
+  getExistAll() {
+    return this.usersService.getUsers().subscribe(
+      users => {
+        this.allListeUser = users;
+      
+        for (let index = 0; index < this.allListeUser.users.length; index++) {
+          this.arrayUser.push(this.allListeUser.users[index])
+        }
+        console.log('liste',  this.arrayUser)
+      }
+    )
+  }
+
+  getOneUser(iduser){
+    return this.usersService.getUser(iduser).subscribe(
+      users => {
+        this.onUser = users;
+        /*for (let index = 0; index < this.allListeUser.users.length; index++) {
+          this.arrayUser.push(this.allListeUser.users[index])
+        }*/
+
+        this.OneAdresse = this.onUser.adresse
+        this.OneAvatar = this.onUser.avatar
+        this.OneEmail= this.onUser.email
+        this.OneNom= this.onUser.nom
+        this.OnePrenom = this.onUser.prenom
+        this.Onetel= this.onUser.tel
+        this.OneUsername = this.onUser.username
+        this.One_id= this.onUser._id
+      }
+    )
+  }
 
 
 

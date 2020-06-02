@@ -185,9 +185,6 @@
                                 </span>
                             </button>
                         </div>
-
-
-
                         <div *ngIf="!oneAndAll">
                             <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
                                 [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">

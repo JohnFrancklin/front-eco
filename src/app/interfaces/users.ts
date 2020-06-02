@@ -10,4 +10,5 @@ export class Users {
      tel: string;
      role: string;
      avatar: string;
+     confirmPassword:string
 }
