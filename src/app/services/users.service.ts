@@ -32,8 +32,8 @@ export class UsersService {
     return this.http.post<Users>(this.userUrl, user, httpOptions);
   }
 
-  deleteUser (user: Users | number): Observable<Users> {
-    const id = typeof user === 'number' ? user : user.id;
+  deleteUser (id: number): Observable<Users> {
+   // const id = typeof user === 'number' ? user : user.id;
     const url = `${this.userUrl}/${id}`;
 
     return this.http.delete<Users>(url, httpOptions);

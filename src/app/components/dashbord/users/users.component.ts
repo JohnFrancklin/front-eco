@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { Users } from 'src/app/interfaces/users';
 
+import Swal from 'sweetalert2'
+//declare var Swal: any;
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -37,6 +39,8 @@ export class UsersComponent implements OnInit {
   arrayUser: any=[];
   onUser: any=[];
 
+  user= new Users();
+
   // Detail User
   OneAdresse =""
   OneAvatar =""
@@ -45,7 +49,11 @@ export class UsersComponent implements OnInit {
   OnePrenom =""
   Onetel=""
   OneUsername =""
-  One_id=""
+  One_id: number;
+
+  message: string;
+  submitted = false;
+
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
 
@@ -164,12 +172,14 @@ export class UsersComponent implements OnInit {
   getExistAll() {
     return this.usersService.getUsers().subscribe(
       users => {
+
+        this.arrayUser = []
+
         this.allListeUser = users;
-      
         for (let index = 0; index < this.allListeUser.users.length; index++) {
           this.arrayUser.push(this.allListeUser.users[index])
         }
-        console.log('liste',  this.arrayUser)
+       // console.log('liste',  this.arrayUser)
       }
     )
   }
@@ -194,6 +204,30 @@ export class UsersComponent implements OnInit {
     )
   }
 
+  supprimer(){
+    Swal.fire({
+      title: 'Vous voulez bien supprimer l\'utilisateur '+ this.OneUsername +'?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.value) {
+
+        this.usersService.deleteUser(this.One_id)
+        .subscribe(result =>  this.getExistAll()
+
+        );
+
+        Swal.fire(
+          'L\'utilisateur  '+ this.OneUsername +' a été supprimé avec succès',
+        )
+
+
+      }
+    })
+  }
 
 
 }

@@ -597,3 +597,20 @@
 .infoDate{
     color: rgb(1, 64, 107);
 }
+
+.btn_modifier, .btn_supprimer{
+    display: inline-table;
+    width: calc(46% - 6px);
+    height: 30px;
+    /* background-color: white; */
+    color: rgb(1, 64, 107);
+    /* border: 1px solid rgb(1, 64, 107); */
+    /* border-radius: 2px; */
+    outline: 0 none!important;
+    margin-left: 14px;
+    margin-top: 10px;
+}
+
+.btn_supprimer{
+    color:red;
+}

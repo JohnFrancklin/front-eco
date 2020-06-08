@@ -349,68 +349,70 @@
                             <h3 class="lbl_h3_detail">Nombre: 152
             </h3>
             -->
-            Idetifiant:
+            Identifiant:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <mat-icon>person</mat-icon>
                     </span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Idetifiant" required
+                <input type="text" class="form-control" id="username" placeholder="Identifiant" required
                     [(ngModel)]="OneUsername">
             </div>
             Nom:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
+                        <mat-icon>person_outline</mat-icon>
                     </span>
                 </div>
                 <input type="text" class="form-control" id="username" placeholder="Nom" required [(ngModel)]="OneNom">
             </div>
-            Prenom:
+            Prénom:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
+                        <mat-icon>person_outline</mat-icon>
                     </span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Prenom" required
+                <input type="text" class="form-control" id="username" placeholder="Prénom" required
                     [(ngModel)]="OnePrenom">
             </div>
             Email:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
+                        <mat-icon>email</mat-icon>
                     </span>
                 </div>
                 <input type="text" class="form-control" id="username" placeholder="Email" required
                     [(ngModel)]="OneEmail">
             </div>
-            Telephone:
+            Téléphone:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
+                        <mat-icon>call</mat-icon>
                     </span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Telephone" required [(ngModel)]="Onetel">
+                <input type="text" class="form-control" id="username" placeholder="Téléphone" required [(ngModel)]="Onetel">
             </div>
-            Adress:
+            Adresse:
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
+                        <mat-icon>local_shipping</mat-icon>
                     </span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Adress" required
+                <input type="text" class="form-control" id="username" placeholder="Adresse" required
                     [(ngModel)]="OneAdresse">
             </div>
+
             <div class="detail_to_change_button">
-                <button class="btn_modifier">Modifier</button>
-                <button class="btn_supprimer">Supprimer</button>
+                <button class="btn_modifier" >Modifier</button>
+                <button class="btn_supprimer" (click)="supprimer()">Supprimer</button>
             </div>
+            
         </div>
     </div>
 
