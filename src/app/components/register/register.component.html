@@ -33,7 +33,7 @@
                                         <mat-icon>person_outline</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="prenom" placeholder="Prenom *" required
+                                <input type="text" class="form-control" id="prenom" placeholder="Prénom *" required
                                     [(ngModel)]="users.prenom" name="prenom" #prenom="ngModel">
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                         <mat-icon>call</mat-icon>
                                     </span>
                                 </div>
-                                <input type="number" class="form-control" id="tel" placeholder="Telephone *" required
+                                <input type="number" class="form-control" id="tel" placeholder="Téléphone *" required
                                     [(ngModel)]="users.tel" name="tel" maxlength="10" #tel="ngModel">
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                         <mat-icon>person</mat-icon>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="username" placeholder="Idetifiant *" required
+                                <input type="text" class="form-control" id="username" placeholder="Identifiant *" required
                                     [(ngModel)]="users.username" name="username" #username="ngModel">
                             </div>
                             <div [hidden]="!this.userExist" class="alert alert-danger">
@@ -116,13 +116,14 @@
 
                                 <input type="email" class="form-control" (keyup)="keyEmail($event)" id="email"
                                     placeholder="Email *" required [(ngModel)]="users.email" name="email"
-                                    #email="ngModel">
-                                <div *ngIf="invalidMail" style="color:red">Email invalid</div>
+                                    #email="ngModel"><br>
+                             
 
                             </div>
                             <div [hidden]="!this.emailExist" class="alert alert-danger">
                                 Cet email existe déjà
                             </div>
+                            <div *ngIf="invalidMail" style="color:red">Email invalide</div>
                         </div>
 
 
@@ -154,15 +155,16 @@
                                         <mat-icon>lock_open</mat-icon>
                                     </span>
                                 </div>
-                                <input class="form-control" id="confirmPassword" placeholder="Confirm Mot de passe *"
+                                <input class="form-control" id="confirmPassword" placeholder="Confirmez le mot de passe *"
                                     [(ngModel)]="users.confirmPassword" #confirmPassword="ngModel"
                                     [type]="show ? 'text' : 'password'" name="confirmPassword"
-                                    (keyup)="ConfirmPassword(users.password,users.confirmPassword)" required>
-                                <div *ngIf="invalidConfirmPassword" style="color:red">Confirm Mot de passe Invalid</div>
+                                    (keyup)="ConfirmPassword(users.password,users.confirmPassword)" required><br>
+                               
                                 <button (mousedown)="passwordFunction()" class="btn-eye">
                                     <mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon>
                                 </button>
                             </div>
+                            <div *ngIf="invalidConfirmPassword" style="color:red">Mot de passe Invalide</div>
                         </div>
                         <!-- Role
                              <div class="form-group mt-3 mb-3  ">
