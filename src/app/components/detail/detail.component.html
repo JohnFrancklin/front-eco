@@ -4,6 +4,7 @@
 <div class="detail-contener">
     <div class="row">
         <div class="image_detail_bloc">
+
             <div class="detail_image_content">
                 <div class="detail_image_miniature">
                     <div class="liste_image_miniature">
@@ -12,6 +13,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="detail_image_grand">
                     <img src="../../../assets/images/your-logo-png-8.png" width="100%">
                 </div>
@@ -20,104 +22,105 @@
         <div class="detail_desc_bloc">
             <div class="detail_texte">
 
-                <div class="grid-section">
-                    <div class="grid-left-sectioin">
-                        <div class="titre_produit no-padding">
-                            <h1 class="title_produit">{{produit.title}}</h1>
-                        </div>
-                        <div class="vote-favoris mt-0">
-                            <div class="vote">
-                                <span class="material-icons icon_vote" (click)="home.addOrRemoveVote(produit)"
-                                [ngStyle]="{'color':produit.a_vote=== true ? 'red': ''}">
-                                    grade
-                                </span>
-                                <span>{{produit.vote.length}}</span>vote(s)
-                            </div>
-        
-                            <div class="favoris">
-                                <span class="material-icons icon_heart">
-                                    favorite_outline
-                                    <!-- {{produit.panier === true ? 'favorite' : 'favorite_outline' }} -->
-                                </span>favoris
-                            </div>
-                            <div class="soyez_le_premier_a_voter" *ngIf="produit.vote.length==0">
-                                Soyez la première à voter ce produit!
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="grid-right-section">
-                        
-                        <div class="detail_prix">
-                            <span>{{produit.prix.prix_promotion}} Ariary</span>
-                            <span>{{produit.prix.prix}} Ariary</span>                           
-                        </div>
-                    
-                    </div>
-                    
-                </div>
-                <hr class="horizontal-line">
-
-                <div class="fiche-technique">
-                    <div class="desc_text_title text-center">Fiche technique</div>
-                    <ul>
-                        <li class="detail_li">
-                            Numéro de model: <span class="detRight">{{produit.detail_fabrication.numero_model}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Marque: <span class="detRight">{{produit.marque}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Date de sortie: <span class="detRight">{{produit.detail_fabrication.date_sortie}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Provenance: <span class="detRight">{{produit.provenance}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Garantie: <span class="detRight">{{produit.garantie}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Categorie: <span class="detRight">{{produit.categorie}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Quantité en stock: <span class="detRight">{{produit.quantite}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Taille: <span class="detRight">{{produit.detail_physique.taille}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Poids: <span class="detRight">{{produit.detail_physique.poids}}</span>
-                        </li>
-                        <li class="detail_li">
-                            Couleur: <span class="detRight">{{produit.detail_physique.couleur}}</span>
-                        </li>
-                        <li class="detail_li">
-                            longueur: <span class="detRight">{{produit.detail_physique.longueur}}</span>
-                        </li>
-                        <li class="detail_li">
-                            largeur: <span class="detRight">{{produit.detail_physique.largueur}}</span>
-                        </li>
-
-                    </ul>
+                <div class="favoris">
+                    <span class="material-icons icon_heart">
+                        favorite_outline
+                        <!-- {{produit.panier === true ? 'favorite' : 'favorite_outline' }} -->
+                    </span>
                 </div>
 
-                <div class="description-content pl-3">
-                    
-                    <div class="desc_text_title mb-3">Description</div>
-                    {{produit.description}}
+                <div class="titre_produit">
+                    <h1 class="title_produit">{{produit.title}}</h1>
+                    <span>{{produit.marque}}</span>
+                    <span>{{produit.detail_fabrication.numero_model}}</span>
+                    <span>{{produit.detail_physique.couleur}}</span>
+                </div>
 
+                <div class="vote">
+                    <span class="material-icons icon_vote" (click)="home.addOrRemoveVote(produit)"
+                    [ngStyle]="{'color':produit.a_vote=== true ? 'red': ''}">
+                        grade
+                    </span>
+                </div>
 
-                    <div class="btn_content mt-5">
-                        <!-- <button class="btn_ajouter" *ngIf="produit.panier!='red'"> -->
-                        <button class="btn-dp btn_ajouter" (click) ="addOrRemovePanier();header.getPanier();home.modifierIcon(produit._id)"
-                        [ngStyle]="{'color':produit.panier===true ? 'white' : 'white' , 'background-color':produit.panier===true?'rgb(228,86,3)' : 'rgb(1,64,107)'}">
-                            {{produit.panier === true ? 'Enlever du panier' : 'Ajouter au panier' }}
-                        </button>
-                        <button class="btn-dp btn_acheter">
-                            Acheter maintant
-                        </button>
+                <div class="soyez_le_premier_a_voter" *ngIf="produit.vote.length==0">
+                    Soyez la première à voter ce produit!
+                </div>                
+
+                <div class="top-detail mb-3">                    
+                    <div>
+                        <label>Sortie le: <span> {{produit.detail_fabrication.date_sortie}}</span></label> |
+                        <label>Etat: <span>{{produit.etat}}</span> </label> |
+                        <label class="vote-style">Vote: <span>{{produit.vote.length}}</span></label>
+                    </div>                   
+                </div>
+
+                 <div class="row mb-3">
+                    <div class="description_detail col-sm-8 shadow-sm">
+                        <div class="desc_text_title">
+                            Description
+                        </div>
+                        <hr>
+                        <p class="paragraphe_description">
+                            {{produit.description}}
+                        </p>
+                    </div>
+
+                    <div class="col-sm-4 mt-2">
+                        <div class="warranty mb-5">
+                            <span>Garantie: </span><span>{{produit.garantie}}</span>
+                        </div>
+                        <div class="detail_prix text-center">
+                            Prix : <span class="prix-style"><span class="price">{{produit.prix.prix_promotion}}</span>Ariary</span><br/>
+                            <i> {{produit.prix.prix}} Ariary</i> 
+                        </div>                                          
+                    </div>
+                 </div>
+
+                <div class="detail-fract row">
+                    <div class="first-fract col-sm-4">
+                        <div>
+                            <mat-icon>map</mat-icon><span>Provenance</span>
+                            <p>{{produit.provenance}}</p>
+                        </div>
+                        <div>
+                            <mat-icon>local_offer</mat-icon><span>Taille</span>
+                            <p class="text-uppercase">{{produit.detail_physique.taille}}</p>
+                        </div>
+                    </div>
+                    <div class="second-fract col-sm-4">
+                        <div>
+                            <mat-icon>hourglass_full</mat-icon><span>Quantité en stock</span>
+                            <p>{{produit.quantite}}</p>
+                        </div>
+                        <div>
+                            <mat-icon>straighten</mat-icon><span>Dimension</span>
+                            <p>Long :{{produit.detail_physique.longueur}} | Larg: {{produit.detail_physique.largueur}}</p>
+                        </div>
+                    </div>
+                    <div class="third-fract  col-sm-4">
+                        <div>
+                            <mat-icon>class</mat-icon><span>Catégorie</span>
+                            <p>{{produit.categorie}}</p>
+                        </div>
+                        <div>
+                            <mat-icon>description</mat-icon><span>Poids</span>
+                            <p>{{produit.detail_physique.poids}}</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="btn_content row footer-container-page">
+                    <!-- <button class="btn_ajouter" *ngIf="produit.panier!='red'"> -->
+                    <button class="btn_ajouter" (click) ="addOrRemovePanier();header.getPanier();home.modifierIcon(produit._id)"
+                    [ngStyle]="{'color':produit.panier===true ? 'red' : 'green' , 'border':produit.panier===true?'1.5px solid red' : '1.5px solid green'}">
+                        {{produit.panier === true ? 'Enlever du panier' : 'Ajouter au panier' }}
+                    </button>
+                    <button class="btn_acheter">
+                        Acheter maintant
+                    </button>
+                </div>
+
 
             </div>
         </div>
