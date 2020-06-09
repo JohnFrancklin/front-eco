@@ -598,6 +598,8 @@
     color: rgb(1, 64, 107);
 }
 
+/* Detail User */
+
 .btn_modifier, .btn_supprimer{
     display: inline-table;
     width: calc(46% - 6px);
@@ -613,4 +615,26 @@
 
 .btn_supprimer{
     color:red;
+}
+
+.label_change{
+    float: right;
+    margin-right: 4px;
+    margin-bottom: -3px;
+    font-size: small;
+    color: grey;
+}
+
+.detail_to_change{
+    width: 100%;
+    background-color: white;
+    height: 52px;
+    padding: 5px;
+}
+
+.detail_to_change_button{
+    width: 100%;
+    background-color: white;
+    height: 58px;
+    padding: 5px;
 }

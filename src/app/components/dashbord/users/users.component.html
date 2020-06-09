@@ -349,78 +349,60 @@
                             <h3 class="lbl_h3_detail">Nombre: 152
             </h3>
             -->
-            Identifiant:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.username" disabled>
+                <div class="label_change">
+                    Identifiant
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Identifiant" required
-                    [(ngModel)]="OneUsername">
             </div>
-            Nom:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person_outline</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.nom">
+                <div class="label_change">
+                    Nom
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Nom" required [(ngModel)]="OneNom">
             </div>
-            Prénom:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person_outline</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.prenom">
+                <div class="label_change">
+                    Prénom
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Prénom" required
-                    [(ngModel)]="OnePrenom">
             </div>
-            Email:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>email</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.email" disabled>
+                <div class="label_change">
+                    Email
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Email" required
-                    [(ngModel)]="OneEmail">
             </div>
-            Téléphone:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>call</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.tel">
+                <div class="label_change">
+                    Téléphone
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Téléphone" required [(ngModel)]="Onetel">
             </div>
-            Adresse:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>local_shipping</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.adresse">
+                <div class="label_change">
+                    Adresse
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Adresse" required
-                    [(ngModel)]="OneAdresse">
             </div>
 
             <div class="detail_to_change_button">
-                <button class="btn_modifier" >Modifier</button>
+                <button class="btn_modifier" (click)="modifier()">Modifier</button>
                 <button class="btn_supprimer" (click)="supprimer()">Supprimer</button>
             </div>
-            
+
         </div>
     </div>
-
-
     <ng-template #imageProduit style="background-color: white;">
         <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
     </ng-template>
-
 
     <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
     </div>

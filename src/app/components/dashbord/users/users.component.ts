@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
   arrayUser: any=[];
   onUser: any=[];
 
-  user= new Users();
+  usersDetail= new Users();
 
   // Detail User
   OneAdresse =""
@@ -172,14 +172,12 @@ export class UsersComponent implements OnInit {
   getExistAll() {
     return this.usersService.getUsers().subscribe(
       users => {
-
         this.arrayUser = []
-
         this.allListeUser = users;
         for (let index = 0; index < this.allListeUser.users.length; index++) {
           this.arrayUser.push(this.allListeUser.users[index])
         }
-       // console.log('liste',  this.arrayUser)
+      // console.log('liste',  this.arrayUser)
       }
     )
   }
@@ -187,26 +185,14 @@ export class UsersComponent implements OnInit {
   getOneUser(iduser){
     return this.usersService.getUser(iduser).subscribe(
       users => {
-        this.onUser = users;
-        /*for (let index = 0; index < this.allListeUser.users.length; index++) {
-          this.arrayUser.push(this.allListeUser.users[index])
-        }*/
-
-        this.OneAdresse = this.onUser.adresse
-        this.OneAvatar = this.onUser.avatar
-        this.OneEmail= this.onUser.email
-        this.OneNom= this.onUser.nom
-        this.OnePrenom = this.onUser.prenom
-        this.Onetel= this.onUser.tel
-        this.OneUsername = this.onUser.username
-        this.One_id= this.onUser._id
+        this.usersDetail = users
       }
     )
   }
 
   supprimer(){
     Swal.fire({
-      title: 'Vous voulez bien supprimer l\'utilisateur '+ this.OneUsername +'?',
+      title: 'Vous voulez bien supprimer l\'utilisateur '+ this.usersDetail.username +'?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -215,19 +201,38 @@ export class UsersComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.usersService.deleteUser(this.One_id)
+        this.usersService.deleteUser(this.usersDetail._id)
         .subscribe(result =>  this.getExistAll()
 
         );
-
         Swal.fire(
-          'L\'utilisateur  '+ this.OneUsername +' a été supprimé avec succès',
+          'L\'utilisateur  '+ this.usersDetail.username +' a été supprimé avec succès',
         )
-
-
       }
     })
   }
 
+  modifier(): void {
+    Swal.fire({
+      title: 'Vous voulez bien modifier l\'utilisateur '+ this.usersDetail.username +'?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.value) {
+
+        this.usersService.updateUser(this.usersDetail)
+        .subscribe(result =>  this.getExistAll()
+
+        );
+        Swal.fire(
+          'L\'utilisateur  '+ this.usersDetail.username +' a été modifié avec succès',
+        )
+      }
+    })
+     
+  }
 
 }

@@ -35,11 +35,11 @@ export class UsersService {
   deleteUser (id: number): Observable<Users> {
    // const id = typeof user === 'number' ? user : user.id;
     const url = `${this.userUrl}/${id}`;
-
     return this.http.delete<Users>(url, httpOptions);
   }
 
   updateUser (user: Users): Observable<any> {
-    return this.http.put(this.userUrl, user, httpOptions);
+    const url = `${this.userUrl}/${user._id}`;
+    return this.http.put(url,user, httpOptions);
   }
 }
