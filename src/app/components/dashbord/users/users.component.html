@@ -171,13 +171,14 @@
                                 [ngStyle]="{'opacity': '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
                                     [disabled]="false" (click)="selectUser(user);"
-                                    title="Cocher ici pour selection le produit">
+                                    title="Cocher ici pour selection l'utilisateur">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{user.nom}}
                                 </span>
-                                <span class="state_produit_on_list">
-                                    {{user.email}}
+                                <span class="state_produit_on_list"
+                                        [ngStyle]="{'color': 'green'}">
+                                    {{user.role}}
                                 </span>
 
                             </div>
