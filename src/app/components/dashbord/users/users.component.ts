@@ -41,18 +41,11 @@ export class UsersComponent implements OnInit {
 
   usersDetail= new Users();
 
-  // Detail User
-  OneAdresse =""
-  OneAvatar =""
-  OneEmail=""
-  OneNom=""
-  OnePrenom =""
-  Onetel=""
-  OneUsername =""
-  One_id: number;
-
-  message: string;
   submitted = false;
+
+  listeUsers: any;
+  onelisteUsers: any;
+  usersSelected = [];
 
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
@@ -67,6 +60,8 @@ export class UsersComponent implements OnInit {
         /************************************** */
 
         this.getExistAll();
+
+        this.getListeUser()
   }
 
 
@@ -154,21 +149,6 @@ export class UsersComponent implements OnInit {
 
   }
 
-  // setCheckedProduit() {
-  //   let idChecked = [];
-  //   for (let i = 0; i < this.produits.length; i++) {
-  //     for (let j = 0; j < this.produitSelected.length; j++) {
-  //       if (this.produits[i]._id === this.produitSelected[j]._id) {
-  //         idChecked.push(this.produits[i]._id);
-  //       }
-  //     }
-  //   } //on peut fusionner les boucles, mais ca crée un bug apres
-  //   for (let i = 0; i < idChecked.length; i++) {
-  //     const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
-  //     checkElement.checked = true;
-  //   }
-  // }
-
   getExistAll() {
     return this.usersService.getUsers().subscribe(
       users => {
@@ -233,6 +213,62 @@ export class UsersComponent implements OnInit {
       }
     })
      
+  }
+
+
+/* Detail User  */
+
+  getListeUser() {
+    console.log("Le parametre de recuperation", this.paramGetCustomized);
+    this.listeUsers = this.usersService.getListeUser();
+    this.onelisteUsers = this.listeUsers[0];
+  }
+
+  getOnelisteUsers(onelisteUsers) {
+    this.onelisteUsers = onelisteUsers;
+    this.createType = false;
+
+  }
+
+  selectUser(u) {
+    /**check si id_user existe dans le usersSelected */
+    const checkIdProduit = obj => obj._id === u._id;
+    let result: boolean = this.usersSelected.some(checkIdProduit);
+    if (result == true) {
+      /**enlever du usersSelected si l'utilisateur existe deja  */
+      this.usersSelected = this.usersSelected.filter(function (item) {
+        return item._id !== u._id;
+      });
+    } else {
+      /**ajouter dans le usersSelected si le produit n'y est encore pas */
+      this.usersSelected.push(u);
+    }
+  }
+
+  removeFromUsersSelected(u) {
+    //***supprimer du tableau */
+    this.usersSelected = this.usersSelected.filter(function (item) {
+      return item._id !== u._id;
+    });
+    //**** dechecker le users */  
+    const checkElement = document.getElementById(u._id) as HTMLInputElement;
+    checkElement.checked = false;
+
+  }
+
+  setCheckedUser() {
+    let idChecked = [];
+    for (let i = 0; i < this.listeUsers.length; i++) {
+      for (let j = 0; j < this.usersSelected.length; j++) {
+        if (this.listeUsers[i]._id === this.usersSelected[j]._id) {
+          idChecked.push(this.listeUsers[i]._id);
+        }
+      }
+    } //on peut fusionner les boucles, mais ca crée un bug apres
+    for (let i = 0; i < idChecked.length; i++) {
+      const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
+      checkElement.checked = true;
+    }
   }
 
 }

@@ -66,10 +66,8 @@ export class ProduitsComponent implements OnInit {
 
   changeEtat(event){
     
-
     console.log(this.produitSelected);
     
-
     for ( let i = 0; i<this.produitSelected.length; i++ ){
 
     const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
@@ -79,10 +77,6 @@ export class ProduitsComponent implements OnInit {
     this.produitSelected = [];
 
     this.state_to_change = event.target.value;
-
-
-
-    
   }
 
   getProduit() {

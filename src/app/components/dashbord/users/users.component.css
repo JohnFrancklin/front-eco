@@ -638,3 +638,64 @@
     height: 58px;
     padding: 5px;
 }
+
+.textarea_change{
+    float: left;
+    width: 100%;
+    height: 60px;
+    border: 0.5px solid #d5d5d5;
+    /* border-top: 0px; */
+    /* border-right: 0px; */
+    /* border-left: 0px; */
+    padding-left: 10px;
+    color: black;
+    background-color: rgb(250, 250, 250);
+    font-size: small;
+}
+
+.detail_to_change_description{
+    width: 100%;
+    background-color: white;
+    height: 110px;
+    padding: 5px;
+    padding-top: 10px;
+}
+
+.element_un_selected{
+    border: none;
+    text-align: start;
+    padding-top: 1px;
+    padding-left: 0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #d5d5d5;
+    height: 50px;
+    font-size: small;
+}
+.icon_remove_ticket{
+    float: right;
+    margin: 11px 5px;
+    color: darkgrey;
+    cursor: pointer;
+}
+
+
+.etatContent{
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+.title_etatContent{
+    background-color: lightgray;
+    padding: 4px;
+}
+.btn_suppr_selectionne{
+    width: calc(100% - 30px);
+    height: 35px;
+    color: red;
+    margin: 0px 15px 0px 15px;
+}
