@@ -3,8 +3,6 @@
     <div class="row">
         <div class="menu_gauche">
             <div class="menu_content">
-
-
                 <div class="menu_aller_au_site" title="Revenir au site de commerce" [routerLink]="['/home/']">
                     <span class="material-icons">
                         store
@@ -166,25 +164,24 @@
                             </button>
                         </div>
 
-
-
                         <div *ngIf="!oneAndAll">
-
-                            All selected
-                            <!-- <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
-                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
-                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
-                                    [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
-                                    title="Cocher ici pour selection le produit">
+                            <!-- arrayUser  -->
+                            <!-- listeUsers  -->
+                            <div class="element_un_check" *ngFor="let user of listeUsers" title="{{user.nom}}"
+                                [ngStyle]="{'opacity': '1'}">
+                                <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
+                                    [disabled]="false" (click)="selectUser(user);"
+                                    title="Cocher ici pour selection l'utilisateur">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
-                                    {{p.title}}
+                                    {{user.nom}}
                                 </span>
-                                <span class="state_produit_on_list" title="Etats du produit"
-                                    [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
-                                    {{p.etat}}
+                                <span class="state_produit_on_list"
+                                        [ngStyle]="{'color': 'green'}">
+                                    {{user.role}}
                                 </span>
-                            </div> -->
+
+                            </div>
                         </div>
 
                     </div>
@@ -342,83 +339,82 @@
             </div>
         </div>
 
-        <div class="detail_droit">
+        <div class="detail_droit" *ngIf="oneAndAll">
             <h3 class="lbl_h3_detail">Detail de l'utilisateurs</h3><br />
+            <div class="detail_to_change">
+                <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.username" disabled>
+                <div class="label_change">
+                    Identifiant
+                </div>
+            </div>
 
-            <!--
-                            <h3 class="lbl_h3_detail">Nombre: 152
-            </h3>
-            -->
-            Idetifiant:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.nom">
+                <div class="label_change">
+                    Nom
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Idetifiant" required
-                    [(ngModel)]="OneUsername">
             </div>
-            Nom:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.prenom">
+                <div class="label_change">
+                    Prénom
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Nom" required [(ngModel)]="OneNom">
             </div>
-            Prenom:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.email" disabled>
+                <div class="label_change">
+                    Email
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Prenom" required
-                    [(ngModel)]="OnePrenom">
             </div>
-            Email:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.tel">
+                <div class="label_change">
+                    Téléphone
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Email" required
-                    [(ngModel)]="OneEmail">
             </div>
-            Telephone:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
+
+            <div class="detail_to_change_description">
+                <textarea type="text" class="textarea_change" [(ngModel)]="usersDetail.adresse"></textarea>
+                <div class="label_change">
+                    Adresse
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Telephone" required [(ngModel)]="Onetel">
             </div>
-            Adress:
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>person</mat-icon>
-                    </span>
-                </div>
-                <input type="text" class="form-control" id="username" placeholder="Adress" required
-                    [(ngModel)]="OneAdresse">
-            </div>
+
             <div class="detail_to_change_button">
-                <button class="btn_modifier">Modifier</button>
-                <button class="btn_supprimer">Supprimer</button>
+                <button class="btn_modifier" (click)="modifier()">Modifier</button>
+                <button class="btn_supprimer" (click)="supprimer()">Supprimer</button>
             </div>
+
+        </div>
+
+        <div class="detail_droit" *ngIf="!oneAndAll">
+            <div class="etatContent">
+                <p class="title_etatContent">Utilisateur selectionné</p>
+            </div>
+            <h3 class="lbl_h3_detail" *ngIf="usersSelected.length!=0">Nombre: {{usersSelected.length}}
+                </h3>
+            <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
+                <div class="element_un_selected" *ngFor="let user of usersSelected" title="{{user.nom}}">
+                    <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{user.nom}}
+                    <span class="material-icons icon_remove_ticket" (click)="removeFromUsersSelected(user)"
+                        title="Enlever l'utilisateurs">
+                        remove_circle_outline
+                    </span>
+                </div>
+            </div>
+            <button class="btn_suppr_selectionne" *ngIf="usersSelected.length!=0">
+                {{'Supprimer les selectionnés'}}
+            </button>
         </div>
     </div>
-
 
     <ng-template #imageProduit style="background-color: white;">
         <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
     </ng-template>
-
 
     <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
     </div>

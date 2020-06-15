@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { Users } from 'src/app/interfaces/users';
 
+import Swal from 'sweetalert2'
+//declare var Swal: any;
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -37,15 +39,14 @@ export class UsersComponent implements OnInit {
   arrayUser: any=[];
   onUser: any=[];
 
-  // Detail User
-  OneAdresse =""
-  OneAvatar =""
-  OneEmail=""
-  OneNom=""
-  OnePrenom =""
-  Onetel=""
-  OneUsername =""
-  One_id=""
+  usersDetail= new Users();
+
+  submitted = false;
+
+  listeUsers: any;
+  onelisteUsers: any;
+  usersSelected = [];
+
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
 
@@ -59,6 +60,8 @@ export class UsersComponent implements OnInit {
         /************************************** */
 
         this.getExistAll();
+
+        this.getListeUser()
   }
 
 
@@ -146,30 +149,15 @@ export class UsersComponent implements OnInit {
 
   }
 
-  // setCheckedProduit() {
-  //   let idChecked = [];
-  //   for (let i = 0; i < this.produits.length; i++) {
-  //     for (let j = 0; j < this.produitSelected.length; j++) {
-  //       if (this.produits[i]._id === this.produitSelected[j]._id) {
-  //         idChecked.push(this.produits[i]._id);
-  //       }
-  //     }
-  //   } //on peut fusionner les boucles, mais ca crée un bug apres
-  //   for (let i = 0; i < idChecked.length; i++) {
-  //     const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
-  //     checkElement.checked = true;
-  //   }
-  // }
-
   getExistAll() {
     return this.usersService.getUsers().subscribe(
       users => {
+        this.arrayUser = []
         this.allListeUser = users;
-      
         for (let index = 0; index < this.allListeUser.users.length; index++) {
           this.arrayUser.push(this.allListeUser.users[index])
         }
-        console.log('liste',  this.arrayUser)
+      // console.log('liste',  this.arrayUser)
       }
     )
   }
@@ -177,23 +165,110 @@ export class UsersComponent implements OnInit {
   getOneUser(iduser){
     return this.usersService.getUser(iduser).subscribe(
       users => {
-        this.onUser = users;
-        /*for (let index = 0; index < this.allListeUser.users.length; index++) {
-          this.arrayUser.push(this.allListeUser.users[index])
-        }*/
-
-        this.OneAdresse = this.onUser.adresse
-        this.OneAvatar = this.onUser.avatar
-        this.OneEmail= this.onUser.email
-        this.OneNom= this.onUser.nom
-        this.OnePrenom = this.onUser.prenom
-        this.Onetel= this.onUser.tel
-        this.OneUsername = this.onUser.username
-        this.One_id= this.onUser._id
+        this.usersDetail = users
       }
     )
   }
 
+  supprimer(){
+    Swal.fire({
+      title: 'Vous voulez bien supprimer l\'utilisateur '+ this.usersDetail.username +'?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.value) {
 
+        this.usersService.deleteUser(this.usersDetail._id)
+        .subscribe(result =>  this.getExistAll()
+
+        );
+        Swal.fire(
+          'L\'utilisateur  '+ this.usersDetail.username +' a été supprimé avec succès',
+        )
+      }
+    })
+  }
+
+  modifier(): void {
+    Swal.fire({
+      title: 'Vous voulez bien modifier l\'utilisateur '+ this.usersDetail.username +'?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.value) {
+
+        this.usersService.updateUser(this.usersDetail)
+        .subscribe(result =>  this.getExistAll()
+
+        );
+        Swal.fire(
+          'L\'utilisateur  '+ this.usersDetail.username +' a été modifié avec succès',
+        )
+      }
+    })
+     
+  }
+
+
+/* Detail User  */
+
+  getListeUser() {
+    console.log("Le parametre de recuperation", this.paramGetCustomized);
+    this.listeUsers = this.usersService.getListeUser();
+    this.onelisteUsers = this.listeUsers[0];
+  }
+
+  getOnelisteUsers(onelisteUsers) {
+    this.onelisteUsers = onelisteUsers;
+    this.createType = false;
+
+  }
+
+  selectUser(u) {
+    /**check si id_user existe dans le usersSelected */
+    const checkIdProduit = obj => obj._id === u._id;
+    let result: boolean = this.usersSelected.some(checkIdProduit);
+    if (result == true) {
+      /**enlever du usersSelected si l'utilisateur existe deja  */
+      this.usersSelected = this.usersSelected.filter(function (item) {
+        return item._id !== u._id;
+      });
+    } else {
+      /**ajouter dans le usersSelected si le produit n'y est encore pas */
+      this.usersSelected.push(u);
+    }
+  }
+
+  removeFromUsersSelected(u) {
+    //***supprimer du tableau */
+    this.usersSelected = this.usersSelected.filter(function (item) {
+      return item._id !== u._id;
+    });
+    //**** dechecker le users */  
+    const checkElement = document.getElementById(u._id) as HTMLInputElement;
+    checkElement.checked = false;
+
+  }
+
+  setCheckedUser() {
+    let idChecked = [];
+    for (let i = 0; i < this.listeUsers.length; i++) {
+      for (let j = 0; j < this.usersSelected.length; j++) {
+        if (this.listeUsers[i]._id === this.usersSelected[j]._id) {
+          idChecked.push(this.listeUsers[i]._id);
+        }
+      }
+    } //on peut fusionner les boucles, mais ca crée un bug apres
+    for (let i = 0; i < idChecked.length; i++) {
+      const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
+      checkElement.checked = true;
+    }
+  }
 
 }
