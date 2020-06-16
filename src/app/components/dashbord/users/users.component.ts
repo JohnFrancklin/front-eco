@@ -47,6 +47,8 @@ export class UsersComponent implements OnInit {
   onelisteUsers: any;
   usersSelected = [];
 
+  OneUser =[];
+
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
 
@@ -232,8 +234,8 @@ export class UsersComponent implements OnInit {
 
   selectUser(u) {
     /**check si id_user existe dans le usersSelected */
-    const checkIdProduit = obj => obj._id === u._id;
-    let result: boolean = this.usersSelected.some(checkIdProduit);
+    const checkIdUser = obj => obj._id === u._id;
+    let result: boolean = this.usersSelected.some(checkIdUser);
     if (result == true) {
       /**enlever du usersSelected si l'utilisateur existe deja  */
       this.usersSelected = this.usersSelected.filter(function (item) {
@@ -269,6 +271,10 @@ export class UsersComponent implements OnInit {
       const checkElement = document.getElementById(idChecked[i]) as HTMLInputElement;
       checkElement.checked = true;
     }
+  }
+
+  selectOneUser(user) {
+    this.usersDetail = user;
   }
 
 }

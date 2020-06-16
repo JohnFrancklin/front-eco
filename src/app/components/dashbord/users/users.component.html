@@ -152,8 +152,12 @@
 
 
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let user of arrayUser" id="{{user._id}}"
-                                (click)="getOneUser(user._id)">
+                           <!-- <button class="element_un" *ngFor="let user of arrayUser" id="{{user._id}}"
+                                (click)="getOneUser(user._id)">  --> 
+
+                              <button class="element_un" *ngFor="let user of listeUsers" id="{{user._id}}"
+                                (click)="selectOneUser(user)">  
+
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{user.nom}}
