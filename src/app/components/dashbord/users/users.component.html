@@ -152,18 +152,18 @@
 
 
                         <div *ngIf="oneAndAll">
-                           <!-- <button class="element_un" *ngFor="let user of arrayUser" id="{{user._id}}"
-                                (click)="getOneUser(user._id)">  --> 
+                            <!-- <button class="element_un" *ngFor="let user of arrayUser" id="{{user._id}}"
+                                (click)="getOneUser(user._id)">  -->
 
-                              <button class="element_un" *ngFor="let user of listeUsers" id="{{user._id}}"
-                                (click)="selectOneUser(user)">  
+                            <button class="element_un" *ngFor="let user of listeUsers" id="{{user._id}}"
+                                (click)="selectOneUser(user)">
 
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{user.nom}}
                                 </span>
-                                <span class="state_produit_on_list">
-                                    {{user.email}}
+                                <span class="state_produit_on_list" [ngStyle]="{'color': 'green'}">
+                                    {{user.role}}
                                 </span>
                             </button>
                         </div>
@@ -180,8 +180,7 @@
                                 <span class="title_produit_list">
                                     {{user.nom}}
                                 </span>
-                                <span class="state_produit_on_list"
-                                        [ngStyle]="{'color': 'green'}">
+                                <span class="state_produit_on_list" [ngStyle]="{'color': 'green'}">
                                     {{user.role}}
                                 </span>
 
@@ -400,7 +399,7 @@
                 <p class="title_etatContent">Utilisateur selectionné</p>
             </div>
             <h3 class="lbl_h3_detail" *ngIf="usersSelected.length!=0">Nombre: {{usersSelected.length}}
-                </h3>
+            </h3>
             <div style="height: 500px; overflow-y: scroll; padding-right: 10px;">
                 <div class="element_un_selected" *ngFor="let user of usersSelected" title="{{user.nom}}">
                     <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt=""> {{user.nom}}
