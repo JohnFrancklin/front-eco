@@ -55,6 +55,7 @@
 
 .description_detail{
     width: 100%;
+    border: 1px solid rgb(221, 219, 219);
 }
 
 .desc_text_title{
@@ -64,11 +65,7 @@
     letter-spacing: 1px;
     color: rgb(1, 64, 107);
     font-weight: 600;
-}
-
-.paragraphe_description{
-    height: 70px;
-    overflow-y: auto;
+    margin-top: 18px;
 }
 
 .detail_fabrication{
@@ -87,9 +84,9 @@
 }
 
 .vote{
-    float: right;
-    margin-top: -15px;
-    margin-right: 5px;
+    margin-top: -10px;
+    text-align: center;
+    color: gray;
 }
 
 .icon_heart{
@@ -100,11 +97,12 @@
 }
 
 .icon_vote{
-    font-size: xx-larger;
-    border: 1px solid #d5d5d5;
+    font-size: 35px;
+    /* border: 1px solid #d5d5d5; */
     padding: 5px;
     cursor: pointer;
     margin-right: 0;
+    /* justify-content: center; */
 }
 
 .btn_content{
@@ -124,7 +122,7 @@
     border-radius: 1px;
     outline: 0 none!important;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 11px;
     transition: 0.25s;
 }
@@ -220,19 +218,15 @@ app-home {
     opacity: 0.7;
 }
 
-.detail-fract p {
-    text-indent: 35px;
-}
-
 .vote-style {
-    color: rgba(15, 102, 189, 0.918);
+    color: gray;
 }
 
 .detail-fract span {
     font-size: 16px;
     color: rgb(228,86,3);
     opacity: 0.7;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .detail_prix .prix-style {
@@ -247,28 +241,36 @@ app-home {
 }
 
 .top-detail label {
-    font-weight: 600;
+    font-weight: 300;
 }
 
-.warranty span:first-child {
-    background: lightgray;
+.warranty {
+    width: 100%;
     color: rgb(36, 35, 35);
+    text-align : center;
+    margin-bottom: 15px;
+}
+
+.warranty p {
     border: 1px solid lightgrey;
-    padding: 10px 5px;
+    margin: 0;
+
+}
+
+.warranty p:first-child {
+    background: lightgray;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
 }
 
-.warranty span:last-child {
-    border: 1px solid lightgrey;
-    padding: 8px 40px;
+.warranty p:last-child {
     font-weight: 600;
-    color: rgb(36, 35, 35);
+    font-size: 13px;
 }
 
 .detail-fract {
-    margin-top: 45px;
+    margin-top: 28px;
 }
 
 .detail_prix .price {
@@ -278,5 +280,9 @@ app-home {
 .detail_prix i {
     text-decoration: line-through;
     color: red;
-    margin-left: 3px;
+    margin-left: 15px;
+}
+
+.detail-fract .first-fract, .detail-fract .second-fract, .detail-fract .third-fract {
+    text-align: center;
 }

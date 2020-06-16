@@ -36,27 +36,16 @@
                     <span>{{produit.detail_physique.couleur}}</span>
                 </div>
 
-                <div class="vote">
-                    <span class="material-icons icon_vote" (click)="home.addOrRemoveVote(produit)"
-                    [ngStyle]="{'color':produit.a_vote=== true ? 'red': ''}">
-                        grade
-                    </span>
-                </div>
-
                 <div class="soyez_le_premier_a_voter" *ngIf="produit.vote.length==0">
                     Soyez la première à voter ce produit!
                 </div>                
 
-                <div class="top-detail mb-3">                    
-                    <div>
-                        <label>Sortie le: <span> {{produit.detail_fabrication.date_sortie}}</span></label> |
-                        <label>Etat: <span>{{produit.etat}}</span> </label> |
-                        <label class="vote-style">Vote: <span>{{produit.vote.length}}</span></label>
-                    </div>                   
+                <div class="top-detail">
+                    <label>Sortie le: <span> {{produit.detail_fabrication.date_sortie}}</span></label>                 
                 </div>
 
                  <div class="row mb-3">
-                    <div class="description_detail col-sm-8 shadow-sm">
+                    <div class="description_detail col-sm-8">
                         <div class="desc_text_title">
                             Description
                         </div>
@@ -66,45 +55,59 @@
                         </p>
                     </div>
 
-                    <div class="col-sm-4 mt-2">
-                        <div class="warranty mb-5">
-                            <span>Garantie: </span><span>{{produit.garantie}}</span>
+                    <div class="col-sm-4">
+                        <!-- <div class="two-column">                            
+                            <div class="vote-section">                                
+                            </div>
+                        </div> -->
+
+                        <div class="vote">
+                            <span class="material-icons icon_vote" (click)="home.addOrRemoveVote(produit)"
+                            [ngStyle]="{'color':produit.a_vote=== true ? 'red': ''}">
+                                grade
+                            </span>
+                            <p class="vote-style">Vote: <span>{{produit.vote.length}}</span></p>
                         </div>
+
+                        <div class="warranty text-center">
+                            <p>Garantie: </p><p>{{produit.garantie}}</p>
+                        </div>
+                        
                         <div class="detail_prix text-center">
                             Prix : <span class="prix-style"><span class="price">{{produit.prix.prix_promotion}}</span>Ariary</span><br/>
                             <i> {{produit.prix.prix}} Ariary</i> 
                         </div>                                          
                     </div>
-                 </div>
+                 </div>  
 
                 <div class="detail-fract row">
                     <div class="first-fract col-sm-4">
                         <div>
-                            <mat-icon>map</mat-icon><span>Provenance</span>
+                            <span>Provenance</span>
                             <p>{{produit.provenance}}</p>
                         </div>
                         <div>
-                            <mat-icon>local_offer</mat-icon><span>Taille</span>
+                            <span>Taille</span>
                             <p class="text-uppercase">{{produit.detail_physique.taille}}</p>
                         </div>
                     </div>
                     <div class="second-fract col-sm-4">
                         <div>
-                            <mat-icon>hourglass_full</mat-icon><span>Quantité en stock</span>
+                            <span>Quantité en stock</span>
                             <p>{{produit.quantite}}</p>
                         </div>
                         <div>
-                            <mat-icon>straighten</mat-icon><span>Dimension</span>
+                            <span>Dimension</span>
                             <p>Long :{{produit.detail_physique.longueur}} | Larg: {{produit.detail_physique.largueur}}</p>
                         </div>
                     </div>
                     <div class="third-fract  col-sm-4">
                         <div>
-                            <mat-icon>class</mat-icon><span>Catégorie</span>
+                            <span>Catégorie</span>
                             <p>{{produit.categorie}}</p>
                         </div>
                         <div>
-                            <mat-icon>description</mat-icon><span>Poids</span>
+                            <span>Poids</span>
                             <p>{{produit.detail_physique.poids}}</p>
                         </div>
                     </div>
