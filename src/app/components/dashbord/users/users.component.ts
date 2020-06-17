@@ -37,17 +37,11 @@ export class UsersComponent implements OnInit {
   allListeUser: any = [];
   users : Users[];
   arrayUser: any=[];
-  onUser: any=[];
 
   usersDetail= new Users();
 
-  submitted = false;
-
   listeUsers: any;
-  onelisteUsers: any;
   usersSelected = [];
-
-  OneUser =[];
 
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
@@ -159,6 +153,7 @@ export class UsersComponent implements OnInit {
         for (let index = 0; index < this.allListeUser.users.length; index++) {
           this.arrayUser.push(this.allListeUser.users[index])
         }
+        //this.usersDetail = this.arrayUser[0];
       // console.log('liste',  this.arrayUser)
       }
     )
@@ -223,12 +218,7 @@ export class UsersComponent implements OnInit {
   getListeUser() {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
     this.listeUsers = this.usersService.getListeUser();
-    this.onelisteUsers = this.listeUsers[0];
-  }
-
-  getOnelisteUsers(onelisteUsers) {
-    this.onelisteUsers = onelisteUsers;
-    this.createType = false;
+    this.usersDetail = this.listeUsers[0];
 
   }
 
