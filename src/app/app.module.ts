@@ -33,7 +33,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatSortModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
 
   ],
   providers: [],

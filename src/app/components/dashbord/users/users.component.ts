@@ -36,6 +36,8 @@ export class UsersComponent implements OnInit {
 
   allListeUser: any = [];
   users : Users[];
+
+  searchText;
   arrayUser: any=[];
 
   usersDetail= new Users();
@@ -213,12 +215,15 @@ export class UsersComponent implements OnInit {
   }
 
 
+
 /* Detail User  */
 
   getListeUser() {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
     this.listeUsers = this.usersService.getListeUser();
     this.usersDetail = this.listeUsers[0];
+
+
 
   }
 
@@ -265,6 +270,14 @@ export class UsersComponent implements OnInit {
 
   selectOneUser(user) {
     this.usersDetail = user;
+  }
+
+  changefiltre(e) {
+    let status = e.target.value
+    this.listeUsers = this.usersService.getListeUser();
+    if(status != "none"){
+      this.listeUsers = this.listeUsers.filter((value) => value.role == status);
+    }
   }
 
 }
