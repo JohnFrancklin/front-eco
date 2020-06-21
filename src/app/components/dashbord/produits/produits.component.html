@@ -371,7 +371,7 @@
         <div class="detail_droit">
 
 
-            <h3 class="lbl_h3_detail" *ngIf="oneAndAll">Detail du produit</h3>
+            <h3 class="lbl_h3_detail" *ngIf="oneAndAll"> {{createType ? "Nouveau produit" : "Detail du produit"}}</h3>
 
             <!-- Non selection -->
             <button class="button_change_state" *ngIf="oneAndAll && !createType"
