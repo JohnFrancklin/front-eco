@@ -48,3 +48,90 @@ ul {
     background-color: rgb(1, 64, 107);
     height: 75px;
 }
+
+/* tooltip style */
+.tooltip9 {
+    top: 10.4vh;
+    margin-left: 70vw;
+    max-height: 88.6vh;
+    background-color: white;
+    border: 1px solid lightgray;
+    width: 26vw;
+    position: absolute;
+    z-index: 1;
+    padding: 10px 5px;
+}
+
+.detail mat-icon {
+    font-size: 8px;
+    margin-left: 7px;
+}
+
+.detail .title {
+    color: rgb(1, 64, 107);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.panierVide mat-icon{
+    font-size: 50px;
+}
+
+.top-section {
+    font-size: smaller;
+    color: dimgray;
+}
+
+.price {
+    font-size: 18px;
+    color: dimgray;
+    font-weight: 500;
+}
+
+.price span:last-child {
+    color: red;
+}
+
+.panierVide {
+    color: rgb(1, 64, 107);
+}
+
+.desc {
+    width: 243px;
+    word-wrap: break-word;
+    line-height: 18px;
+}
+
+.for-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.btn-section .btn-panier {
+    width: 100%;
+    border-radius: 2px;
+}
+
+.btn-section{
+    padding: 20px;
+}
+.btn-panier:hover, .btn-panier:focus{
+    box-shadow: inset 24em 0 0 0 #097222;
+}
+
+.nap {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.nap span {
+    color: red;
+    font-size: 28px;
+    margin-right: 8px;
+}
+
+.detail-footer mat-icon {
+    color: #28A745;
+    font-size: small;
+    margin-left: 5px;
+}

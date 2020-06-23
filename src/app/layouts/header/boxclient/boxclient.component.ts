@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class BoxclientComponent implements OnInit {
 
   panierTotal = [];
+  prixTotal=0;
+  service = 200;
+  transport = 300;
+  netPayer = 0;
+
+  displayTool = 'none';
 
 
   constructor() {
@@ -16,6 +22,7 @@ export class BoxclientComponent implements OnInit {
 
   ngOnInit(): void {
     this.setPanier();
+    this.getPanier();
   }
 
   setPanier(){
@@ -38,5 +45,23 @@ export class BoxclientComponent implements OnInit {
     // localStorage.clear();
   }
 
+  ShowDetailPanier(e) {
+    this.calculTotal();
+    this.displayTool = "block";
+  }
 
+  HideDetailPanier(e) {
+    this.displayTool = "none";
+  }
+
+  calculTotal() {
+    this.getPanier();
+    this.prixTotal = 0;
+    for(let i=0; i<this.panierTotal.length; i++){
+      this.panierTotal[i].prixProduitPanier = this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
+      this.prixTotal = this.prixTotal + this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
+    }
+    this.netPayer = this.prixTotal + this.service + this.transport;
+  }
+  
 }
