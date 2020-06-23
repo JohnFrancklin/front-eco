@@ -101,20 +101,22 @@
                     </div>
 
                     <div class="filter_content" *ngIf="showFilter">
-                        <input type="text" name="search" [(ngModel)]="searchText" class="input_filter" placeholder="Filtrer par nom...">
+                        <input type="text" name="search" [(ngModel)]="searchText" class="input_filter"
+                            placeholder="Filtrer par nom...">
 
                         <p class="title_filter">Choisissez votre filtre</p>
                         <hr class="hr_filtre">
-                        <input type="radio" id="none" name="filtre"  value="none"  (change)="changefiltre($event)">
+                        <input type="radio" id="none" name="filtre" value="none" (change)="changefiltre($event)">
                         <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="super-admin" name="filtre" value="super-admin" (change)="changefiltre($event)">
+                        <input type="radio" id="super-admin" name="filtre" value="super-admin"
+                            (change)="changefiltre($event)">
                         <label for="super-admin" class="item_filtre" title="Utilisateur Super-admin">Super-admin</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="admin" name="filtre" value="admin"  (change)="changefiltre($event)">
+                        <input type="radio" id="admin" name="filtre" value="admin" (change)="changefiltre($event)">
                         <label for="admin" class="item_filtre" title="Utilisateur Admin">Admin</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="abonne" name="filtre"  value="abonné" (change)="changefiltre($event)">
+                        <input type="radio" id="abonne" name="filtre" value="abonné" (change)="changefiltre($event)">
                         <label for="abonne" class="item_filtre" title="Utilisateur Abonné">Abonné</label>
                         <hr class="hr_filtre">
                     </div>
@@ -146,8 +148,9 @@
                             <!-- arrayUser  //  listeUsers
                                   -->
 
-                            <button class="element_un" *ngFor="let user of listeUsers | filter:searchText" id="{{user._id}}"
-                            [ngStyle]="{'border': user._id == usersDetail._id ? '1px solid cornflowerblue' : ''}"
+                            <button class="element_un" *ngFor="let user of listeUsers | filter:searchText"
+                                id="{{user._id}}"
+                                [ngStyle]="{'border': user._id == usersDetail._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="selectOneUser(user)">
 
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
@@ -163,8 +166,8 @@
                         <div *ngIf="!oneAndAll">
                             <!-- arrayUser  -->
                             <!-- listeUsers  -->
-                            <div class="element_un_check" *ngFor="let user of listeUsers | filter:searchText" title="{{user.nom}}"
-                                [ngStyle]="{'opacity': '1'}">
+                            <div class="element_un_check" *ngFor="let user of listeUsers | filter:searchText"
+                                title="{{user.nom}}" [ngStyle]="{'opacity': '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
                                     [disabled]="false" (click)="selectUser(user);"
                                     title="Cocher ici pour selection l'utilisateur">
@@ -182,9 +185,9 @@
                     </div>
 
                     <div class="loadMore" *ngIf="loadMore">
-                        <!-- <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
+                        <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
                             [bdColor]="spinner_background">
-                        </ngx-spinner> -->
+                        </ngx-spinner>
                     </div>
 
                 </div>
@@ -336,15 +339,19 @@
 
         <div class="detail_droit" *ngIf="oneAndAll">
             <h3 class="lbl_h3_detail">Detail de l'utilisateurs</h3><br />
-            <div class="detail_to_change">
-                <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
+            <img src="../../../../assets/images/ImageUser.PNG" class="image_produit">
+            <!-- <div class="detail_to_change">
+             
                 <input type="text" class="input_change" [(ngModel)]="usersDetail.username" disabled>
                 <div class="label_change">
                     Identifiant
                 </div>
+              
             </div>
+             -->
 
             <div class="detail_to_change">
+                <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
                 <input type="text" class="input_change" [(ngModel)]="usersDetail.nom">
                 <div class="label_change">
                     Nom
@@ -369,6 +376,31 @@
                 <input type="text" class="input_change" [(ngModel)]="usersDetail.tel">
                 <div class="label_change">
                     Téléphone
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.pays">
+                <div class="label_change">
+                    Pays
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.ville">
+                <div class="label_change">
+                    Ville
+                </div>
+            </div>
+            <div class="detail_to_change">
+                <!-- <input type="text" class="input_change" [(ngModel)]="usersDetail.role"> -->
+                <select class="select_role " [(ngModel)]="usersDetail.role">
+                    <option >Super-admin</option>
+                    <option >Admin</option>
+                    <option >Abonné</option>
+                </select>
+
+
+                <div class="label_change">
+                    Role
                 </div>
             </div>
 

@@ -25,7 +25,10 @@ export class UsersService {
       adresse: "Antananarivo",
       tel: "347812369",
       email: "nomena@gmail.com",
-      role: "abonné"
+      role: "Abonné",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
     },
     {
       _id: "5ee22783653cc3195007c497",
@@ -37,7 +40,10 @@ export class UsersService {
       adresse: "Fianarantsoa",
       tel: "324165799",
       email: "rakoto@gmail.com",
-      role: "admin"
+      role: "Admin",
+      pays:"Madagascar",
+      ville: "Fianarantsoa",
+      dateinscription: "",
     },
     {
       _id: "5ee227af653cc3195007c498",
@@ -49,7 +55,10 @@ export class UsersService {
       adresse: "Antananarivo",
       tel: "3465742",
       email: "faniri@gmail.com",
-      role: "admin"
+      role: "Admin",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
     },
     {
       _id: "5ee22837653cc3195007c499",
@@ -61,7 +70,10 @@ export class UsersService {
       adresse: "Antananarivo",
       tel: "321135791",
       email: "tovo@gmail.com",
-      role: "super-admin"
+      role: "Super-admin",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
     },
     {
       _id: "5ee22870653cc3195007c49a",
@@ -73,7 +85,10 @@ export class UsersService {
       adresse: "Antananarivo",
       tel: "3275961",
       email: "manitra@yahoo.com",
-      role: "abonné"
+      role: "Abonné",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
     },
     {
       _id: "5ee228ae653cc3195007c49b",
@@ -85,9 +100,13 @@ export class UsersService {
       adresse: "Antananarivo",
       tel: "347196384",
       email: "tajona@yahoo.fr",
-      role: "abonné"
+      role: "Abonné",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
     },
-
+   
+    
 
   ]
 
