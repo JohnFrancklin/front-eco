@@ -9,12 +9,6 @@ export class BoxclientComponent implements OnInit {
 
   panierTotal = [];
   prixTotal=0;
-  service = 200;
-  transport = 300;
-  netPayer = 0;
-
-  displayTool = 'none';
-
 
   constructor() {
     
@@ -47,11 +41,6 @@ export class BoxclientComponent implements OnInit {
 
   ShowDetailPanier(e) {
     this.calculTotal();
-    this.displayTool = "block";
-  }
-
-  HideDetailPanier(e) {
-    this.displayTool = "none";
   }
 
   calculTotal() {
@@ -61,7 +50,6 @@ export class BoxclientComponent implements OnInit {
       this.panierTotal[i].prixProduitPanier = this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
       this.prixTotal = this.prixTotal + this.panierTotal[i].prix * this.panierTotal[i].quantiteProduitPanier;
     }
-    this.netPayer = this.prixTotal + this.service + this.transport;
   }
   
 }

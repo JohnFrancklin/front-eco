@@ -14,72 +14,61 @@
                     <hr class="separator">
                 </span>
             </li>
-            <li class="li-panier-header view-tooltip" [routerLink]="['/panier']" (mouseover)="ShowDetailPanier($event)">
+            <li class="li-panier-header view-tooltip" (mouseenter)="ShowDetailPanier($event)">
                 <span class="material-icons md-dark" [matBadge]="panierTotal.length"
                     [matBadgeHidden]="panierTotal.length==0" matBadgeColor="warn">
                     shopping_cart
                 </span>
-            </li>
-        </ul>
-    </div>
 
-    <!-- tooltip section -->
+                <!-- tooltip section -->
 
-    <div class="tooltip9 shadow" [ngStyle]="{display: displayTool}" (mouseleave)="HideDetailPanier($event)">
+    <div class="tooltip shadow">
         <!-- Panier vide -->
         <div class="panierVide text-center" *ngIf="panierTotal.length==0">
-            <h1>Votre panier est vide</h1> 
-            <mat-icon>shopping_cart</mat-icon>                      
+            <h1>Votre panier est vide</h1>
+            <mat-icon>shopping_cart</mat-icon>
         </div>
         <!-- Fin panier vide -->
         <div class="top-section text-right mt-2" *ngIf="panierTotal.length!=0">
-            Vous avez  ({{panierTotal.length}}) élément(s) dans votre panier.
+            <div class="btn-section">
+                <button class="btn btn-panier" [routerLink]="['/panier']">Ouvrir le panier
+                    ({{panierTotal.length}})</button>
+            </div>
             <hr>
         </div>
 
         <div class="for-scroll">
-        <div class="listePanier text-center" *ngFor="let p of panierTotal">
-            <div class="detail-panier row">
-                
-                <div class="col-sm-3">
+                <div class="content_panier_produit" *ngFor="let p of panierTotal">
                     <div class="image_box">
                         <div class="img">
-                            <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
+                          <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-9s detail">
-                    <span class="title">{{p.title}}</span>
-                    <div class="desc">{{p.description}}</div>
-                    <div class="price">
-                        <span>{{p.quantiteProduitPanier}}</span>x<span>{{p.prix}}</span>
+                    <div class="desc_box" style="height: 80px;">
+
+                        <p class="title_panier text-center">
+                          {{p.title}}
+                        </p>
+                     
+                        <div class="panier-detail">
+                            <div class="quantity row col-12">
+                                <div class="col-4 nbr-produit">
+                                    {{p.quantiteProduitPanier}}
+                                </div>
+                                <div class="col-8 text-right pt-panier">
+                                    {{p.prixProduitPanier}} ar
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </div>
-            <hr>
+                  </div>
         </div>
-    </div>
-
-        <div class="panier-footer mt-3" *ngIf="panierTotal.length!=0">
-            <div class="row detail-footer">
-                <div class="col-sm-6 ">
-                    <span>Service</span><mat-icon>check_circle</mat-icon><br />
-                    <span>Transport</span><mat-icon>check_circle</mat-icon>
-                </div>
-                <div class="col-sm-6 nap">
-                    Net à Payer:<br/>
-                    <span>{{netPayer}}</span>Ar
-                </div>
-            </div>
-            
-            <div class="btn-section">
-                <button class="btn btn-success btn-panier" [routerLink]="['/panier']">Acceder au panier</button>
-            </div>
-        </div>
-
     </div>
     <!-- end of tooltip section -->
 
-
+            </li>
+        </ul>
+    </div>
 
 </div>
