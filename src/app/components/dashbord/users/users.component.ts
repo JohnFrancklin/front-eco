@@ -50,6 +50,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getListeUser();
         /**************SPINNER TEST ************* */
         this.spinner.show(this.spinner_list_utilisateurs);//start loader
         setTimeout(() => {
@@ -57,9 +58,9 @@ export class UsersComponent implements OnInit {
         }, 500);
         /************************************** */
 
-        this.getExistAll();
+       // this.getExistAll();
 
-        this.getListeUser()
+       
   }
 
 
@@ -114,16 +115,10 @@ export class UsersComponent implements OnInit {
 
     let element = document.getElementById('element');
 
-    // console.log("scrollheight",element.scrollHeight);
-    // console.log("scrolltop", element.scrollTop);
-    // console.log("offsetHeight", element.offsetHeight);
-    // console.log("total ",element.offsetHeight + element.scrollTop);
-
     let total = element.offsetHeight + element.scrollTop - this.scrollSpace;
     total = total + 1; // pour le decalage sur firefox
 
     if (element.scrollHeight <= total) {
-
 
       this.paramGetCustomized = this.paramGetCustomized + 1;
       console.log("Le parametre de recuperation", this.paramGetCustomized);
@@ -136,11 +131,9 @@ export class UsersComponent implements OnInit {
         this.spinner.hide(this.spinner_loadMore);
         // this.loadMore = false;
         this.scrollSpace = 0;
-        // let newProduits = this.produitService.getProduit();
-        //concatenation produit a newProduit
-        // this.produits = this.produits.concat(newProduits);
-        // console.log("aprs concat", this.produits);
-
+         let newUser = this.usersService.getListeUser();
+        //concatenation user a newUser
+        this.listeUsers = this.listeUsers.concat(newUser);
       }, 2000);
 
     }

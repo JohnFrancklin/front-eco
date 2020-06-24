@@ -10,5 +10,8 @@ export class Users {
      tel: string;
      role: string;
      avatar: string;
+     ville:string;
+     pays:string;
+     dateinscription:Date;
      confirmPassword:string
 }
