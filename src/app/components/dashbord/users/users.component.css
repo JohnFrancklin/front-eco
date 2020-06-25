@@ -766,3 +766,16 @@
     height: 50px;
     font-size: small;
 }
+
+.groupe_content{
+    width: 100%;
+    display: flex;
+    /* margin: 3px 0px 3px 0px; */
+}
+.leftSide{
+    width: 50%;
+}
+
+.rightSide{
+    width: 50%;
+}

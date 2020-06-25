@@ -155,9 +155,11 @@ export class UsersComponent implements OnInit {
   }
 
   getOneUser(iduser){
+   
     return this.usersService.getUser(iduser).subscribe(
       users => {
         this.usersDetail = users
+        this.createType = false;
       }
     )
   }
@@ -207,7 +209,30 @@ export class UsersComponent implements OnInit {
      
   }
 
+  createUser(){
+    this.usersDetail ={
+      _id: 0,
+      avatar: "",
+      username: "",
+      password: "",
+      nom: "",
+      prenom: "",
+      adresse: "",
+      tel: "",
+      email: "",
+      role: "",
+      pays:"",
+      ville: "",
+      dateinscription: "",
+      confirmPassword:"",
+    };
+    this.createType = true;
+  }
 
+  cancelCreate(){
+    this.createType = false;
+    this.usersDetail = this.listeUsers[0];
+  }
 
 /* Detail User  */
 
@@ -215,9 +240,6 @@ export class UsersComponent implements OnInit {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
     this.listeUsers = this.usersService.getListeUser();
     this.usersDetail = this.listeUsers[0];
-
-
-
   }
 
   selectUser(u) {
@@ -263,6 +285,7 @@ export class UsersComponent implements OnInit {
 
   selectOneUser(user) {
     this.usersDetail = user;
+    this.createType =false;
   }
 
   changefiltre(e) {
