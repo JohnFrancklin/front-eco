@@ -167,7 +167,7 @@
                             <!-- arrayUser  -->
                             <!-- listeUsers  -->
                             <div class="element_un_check" *ngFor="let user of listeUsers | filter:searchText"
-                                title="{{user.nom}}" [ngStyle]="{'opacity': '1'}">
+                            title="{{user.nom}} {{user.prenom}}" [ngStyle]="{'opacity': '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
                                     [disabled]="false" (click)="selectUser(user);"
                                     title="Cocher ici pour selection l'utilisateur">
@@ -351,7 +351,7 @@
             
             <div class="detail_to_change">
                 <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.nom">
+                <input type="text" class="input_change nomchange" [(ngModel)]="usersDetail.nom">
                 <div class="label_change">
                     Nom
                 </div>

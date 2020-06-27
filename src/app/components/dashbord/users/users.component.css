@@ -668,13 +668,14 @@
     font-weight: 450;
 }
 
-
-
+.nomchange{
+    margin-top: 15px;
+}
 
 .detail_to_change_description{
     width: 100%;
     background-color: white;
-    height: 110px;
+    height: 115px;
     padding: 5px;
     padding-top: 10px;
 }
