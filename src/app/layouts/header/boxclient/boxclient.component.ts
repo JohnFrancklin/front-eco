@@ -10,6 +10,9 @@ export class BoxclientComponent implements OnInit {
   panierTotal = [];
   prixTotal=0;
 
+  showTooltipPanier: boolean = false;
+  Transparent_overlay: boolean = false;
+
   constructor() {
     
    }
@@ -17,6 +20,17 @@ export class BoxclientComponent implements OnInit {
   ngOnInit(): void {
     this.setPanier();
     this.getPanier();
+  }
+
+  hideOverlay() {
+    this.showTooltipPanier = false;
+    this.Transparent_overlay = false;
+  }
+
+  ShowDetailPanier() {
+    this.calculTotal();
+    this.showTooltipPanier = true;
+    this.Transparent_overlay = true;
   }
 
   setPanier(){
@@ -37,10 +51,6 @@ export class BoxclientComponent implements OnInit {
   clearPanier(){
     this.panierTotal = ["fdfd"];
     // localStorage.clear();
-  }
-
-  ShowDetailPanier(e) {
-    this.calculTotal();
   }
 
   calculTotal() {

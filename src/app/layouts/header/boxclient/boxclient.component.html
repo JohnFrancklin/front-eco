@@ -14,7 +14,7 @@
                     <hr class="separator">
                 </span>
             </li>
-            <li class="li-panier-header view-tooltip" (mouseenter)="ShowDetailPanier($event)">
+            <li class="li-panier-header view-tooltip" (click)="ShowDetailPanier()">
                 <span class="material-icons md-dark" [matBadge]="panierTotal.length"
                     [matBadgeHidden]="panierTotal.length==0" matBadgeColor="warn">
                     shopping_cart
@@ -22,53 +22,55 @@
 
                 <!-- tooltip section -->
 
-    <div class="tooltip shadow">
-        <!-- Panier vide -->
-        <div class="panierVide text-center" *ngIf="panierTotal.length==0">
-            <h1>Votre panier est vide</h1>
-            <mat-icon>shopping_cart</mat-icon>
-        </div>
-        <!-- Fin panier vide -->
-        <div class="top-section text-right mt-2" *ngIf="panierTotal.length!=0">
-            <div class="btn-section">
-                <button class="btn btn-panier" [routerLink]="['/panier']">Ouvrir le panier
-                    ({{panierTotal.length}})</button>
-            </div>
-            <hr>
-        </div>
+                <div class="content_list_statistics shadow" *ngIf="showTooltipPanier" >
 
-        <div class="for-scroll">
-                <div class="content_panier_produit" *ngFor="let p of panierTotal">
-                    <div class="image_box">
-                        <div class="img">
-                          <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
-                        </div>
+                    <div class="panierVide text-center" *ngIf="panierTotal.length==0">
+                        <h1>Votre panier est vide</h1>
+                        <mat-icon>shopping_cart</mat-icon>
                     </div>
-                    <div class="desc_box" style="height: 80px;">
 
-                        <p class="title_panier text-center">
-                          {{p.title}}
-                        </p>
-                     
-                        <div class="panier-detail">
-                            <div class="quantity row col-12">
-                                <div class="col-4 nbr-produit">
-                                    {{p.quantiteProduitPanier}}
-                                </div>
-                                <div class="col-8 text-right pt-panier">
-                                    {{p.prixProduitPanier}} ar
+                    <div class="btn-section" *ngIf="panierTotal.length!=0">
+                        <button class="btn btn-outline" [routerLink]="['/panier']">Ouvrir le panier ({{panierTotal.length}})</button>
+                    </div>
+
+                    <div class="content_panier_produit" *ngFor="let p of panierTotal">
+                        <!-- <div class="inner-content-panier"> -->
+                            <div class="image_box">
+                                <div class="img">
+                                  <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
                                 </div>
                             </div>
+                            <div class="desc_box" style="height: 90px;">
+        
+                                <p class="title_panier text-center">
+                                  {{p.title}}
+                                </p>
+                             
+                                <div class="panier-detail">
+                                    <div class="quantity row col-12">
+                                        <div class="col-4 nbr-produit">
+                                            {{p.quantiteProduitPanier}}
+                                        </div>
+                                        <div class="col-8 text-right pt-panier">
+                                            {{p.prixProduitPanier}} ar
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <hr class="horizontal-line">
+                            </div>
+                        <!-- </div> -->
+                        
+                      </div>
 
-                        </div>
-                    </div>
-                  </div>
-        </div>
-    </div>
+                    <div class="triangle-top"></div>
+                </div>
     <!-- end of tooltip section -->
-
             </li>
         </ul>
     </div>
 
+</div>
+
+<div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
 </div>

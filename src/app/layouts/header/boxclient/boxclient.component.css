@@ -54,52 +54,17 @@ ul {
     margin-left: 7px;
 }
 
-.detail .title {
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    margin-top: 0;
-}
-
 .panierVide mat-icon{
     font-size: 50px;
 }
 
-.top-section {
-    font-size: smaller;
-    color: dimgray;
-}
-
-.price {
-    font-size: 18px;
-    color: dimgray;
-    font-weight: 500;
-}
-
-.price span:last-child {
-    color: red;
-}
-
 .panierVide {
     color: #3d3d3d;
+    padding: 10px;
 }
 
-.for-scroll {
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-.btn-section .btn-panier {
-    width: 100%;
-    border-radius: 2px;
-}
-
-.btn-section{
-    padding: 5px;
-}
-.btn-panier:hover, .btn-panier:focus{
-    box-shadow: inset 24em 0 0 0 rgb(1, 64, 107);
-    color: #fff;
+.panierVide h1 {
+    font-size: 20px;
 }
 
 /* correction */
@@ -110,92 +75,32 @@ ul {
     height: 90%;
 }
 
-.btn-panier {
-    border: 1px solid rgb(1, 64, 107);
-    color: rgb(1, 64, 107);
-    font-weight: 500;
-}
-
-.prix-panier {
-    width: 100%;
-    display: inline-flex;
-    border: 1px solid #d5d5d5;
-    border-left: none;
-    text-align: center;
-    background-color: rgb(231, 231, 231);
-}
-
 .nbr-produit {
     color: rgb(1, 64, 107);
-    font-size: 22px;
-    font-weight: 600;
-    padding: 0;
+    font-size: 37px;
+    font-weight: 500;
+    padding-top: 6px;
+    /* padding: 0; */
 }
 
-/*  new css  for tooltip */
 .view-tooltip {
 position: relative;
 }
 
-.view-tooltip .tooltip {
-    background: #fff;
-    top: 220%;
-    display: block;
-    left: -220px;
-    margin-bottom: 15px;
-    opacity: 0;
-    padding: 20px;
-    pointer-events: none;
-    position: absolute;
-    width: 20vw;
-    transition: all .25s ease-out; 
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-    right: 0;
-}
-
-.view-tooltip .tooltip:before {
-    bottom: 20px;
-    content: " ";
-    display: block;
-    height: 20px;
-    left: 0;
-    position: absolute;
-    width: 20vw;
-    }
-    
-    .view-tooltip .tooltip:after {
-    border-left: solid transparent 10px;
-    border-right: solid transparent 10px;
-    border-top: solid #fff 15px;
-    /* top: -10px; */
-    bottom: 100%;
-    content: " ";
-    height: 5px;
-    left: 80%;
-    margin-left: -13px;
-    position: absolute;
-    width: 0;
-    transform: rotate(180deg);
-}
-    
-.view-tooltip:hover .tooltip {
-    opacity: 1;
-    pointer-events: auto;
-}
-
 .content_panier_produit{
     width: 100%;
+    margin: 10px;
 }
 
 .image_box{
-    width: 30%;
+    width: 28%;
     float: left;
 }
 
-.desc_box{
-    width: 70%;
+.desc_box {
+    width: 64%;
     float: left;
-    margin-bottom: 10px;
+    /* margin-bottom: 5px; */
 }
 
 .panier-detail {
@@ -205,6 +110,7 @@ position: relative;
     border-left: none;
     text-align: center;
     background-color: rgb(231, 231, 231);
+    padding: 4px;
 }
 
 .quantity {
@@ -213,11 +119,72 @@ position: relative;
 }
 
 .title_panier{
-    margin: 0 0 3px 0;
+    margin: 0 0 5px 0;
     font-size: 15px;
     padding: 0;
 }
 
 .pt-panier {
-    padding: 3px;
+    /* padding: 3px; */
+    padding: 5px;
+    font-size: 15px;
+}
+
+/* ===  NEW CSS FOR TOOLTIP == */
+/* ------------------------------------ */
+.content_list_statistics{
+    width: 280px;
+    position: absolute;
+    /* right: calc(61% - 270px); */
+    right: calc(61% - 50px);
+    /* z-index: 3; */
+    margin-top: 18px;
+
+    background-color: #fff;
+    z-index: 1000;
+    border: 1px solid #d5d5d5;
+}
+
+.triangle-top{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid white;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    /* bottom: 10px; */
+    top: -15px;
+    left: 225px;
+    transform: rotate(90deg);
+}
+
+.btn-outline {
+    border: 1px solid #d5d5d5;
+    width: 94%;
+    border-radius: 1px;
+    margin: 8px 0 0 8px;
+    font-size: 15px;
+    padding: 4px;
+}
+
+.btn-outline:hover {
+    background-color: #d5d5d5;
+}
+
+.horizontal-line {
+    width: 93%;
+    position: absolute;
+    left: 9px;
+    margin-bottom: 19px;
+}
+
+.transparant_overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    opacity: 0.1;
+    background-color: white;
+    z-index: 2;
 }
