@@ -49,7 +49,7 @@
                         Utilisateurs
                     </p>
 
-                    <button class="btn_creer" title="Créer un nouveau produit" [disabled]="createType">
+                    <button class="btn_creer" (click)="createUser()" title="Créer un nouveau Utilisateur" [disabled]="createType">
                         <span class="material-icons add_produit_icon">
                             add
                         </span>
@@ -151,7 +151,7 @@
                             <button class="element_un" *ngFor="let user of listeUsers | filter:searchText"
                                 id="{{user._id}}"
                                 [ngStyle]="{'border': user._id == usersDetail._id ? '1px solid cornflowerblue' : ''}"
-                                (click)="selectOneUser(user)">
+                                (click)="selectOneUser(user)" title="{{user.nom}} {{user.prenom}}">
 
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
@@ -167,7 +167,7 @@
                             <!-- arrayUser  -->
                             <!-- listeUsers  -->
                             <div class="element_un_check" *ngFor="let user of listeUsers | filter:searchText"
-                                title="{{user.nom}}" [ngStyle]="{'opacity': '1'}">
+                            title="{{user.nom}} {{user.prenom}}" [ngStyle]="{'opacity': '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
                                     [disabled]="false" (click)="selectUser(user);"
                                     title="Cocher ici pour selection l'utilisateur">
@@ -338,21 +338,20 @@
         </div>
 
         <div class="detail_droit" *ngIf="oneAndAll">
-            <h3 class="lbl_h3_detail">Detail de l'utilisateurs</h3><br />
-            <img src="../../../../assets/images/ImageUser.PNG" class="image_produit">
-            <!-- <div class="detail_to_change">
-             
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.username" disabled>
-                <div class="label_change">
-                    Identifiant
-                </div>
-              
+            <h3 class="lbl_h3_detail" *ngIf="oneAndAll"> {{createType ? "Nouveau utilisateur" : "Detail de l'utilisateur"}}</h3>
+           
+            <div class="ImageUser" *ngIf="!createType">
+                <img src="../../../../assets/images/ImageUser.PNG" class="image_produit">
             </div>
-             -->
+            <div class="ImageUser" *ngIf="createType">
+                <img src="../../../../assets/images/AddImageUser.PNG" class="image_produit" (click)="file.click()">
+                <input type="file" name="" id="" hidden #file>
+            </div>
 
+            
             <div class="detail_to_change">
                 <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.nom">
+                <input type="text" class="input_change nomchange" [(ngModel)]="usersDetail.nom">
                 <div class="label_change">
                     Nom
                 </div>
@@ -366,7 +365,7 @@
             </div>
 
             <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.email" disabled>
+                <input type="text" class="input_change" [(ngModel)]="usersDetail.email">
                 <div class="label_change">
                     Email
                 </div>
@@ -379,31 +378,34 @@
                 </div>
             </div>
             <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.pays">
-                <div class="label_change">
-                    Pays
-                </div>
-            </div>
-            <div class="detail_to_change">
-                <input type="text" class="input_change" [(ngModel)]="usersDetail.ville">
-                <div class="label_change">
-                    Ville
-                </div>
-            </div>
-            <div class="detail_to_change">
-                <!-- <input type="text" class="input_change" [(ngModel)]="usersDetail.role"> -->
                 <select class="select_role " [(ngModel)]="usersDetail.role">
                     <option >Super-admin</option>
                     <option >Admin</option>
                     <option >Abonné</option>
                 </select>
-
-
                 <div class="label_change">
                     Role
                 </div>
             </div>
 
+            <div class="groupe_content">
+                <div class="leftSide sideToside">
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change" [(ngModel)]="usersDetail.pays" >
+                        <div class="label_change">
+                            Pays
+                        </div>
+                    </div>
+                </div>
+                <div class="rightSide sideToside">
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change rightNumber" [(ngModel)]="usersDetail.ville">
+                        <div class="label_change">
+                            Ville
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="detail_to_change_description">
                 <textarea type="text" class="textarea_change" [(ngModel)]="usersDetail.adresse"></textarea>
                 <div class="label_change">
@@ -412,8 +414,14 @@
             </div>
 
             <div class="detail_to_change_button">
-                <button class="btn_modifier" (click)="modifier()">Modifier</button>
-                <button class="btn_supprimer" (click)="supprimer()">Supprimer</button>
+                <button class="btn_modifier" *ngIf="!createType" (click)="modifier()">Modifier</button>
+                <button class="btn_supprimer" *ngIf="!createType" (click)="supprimer()">Supprimer</button>
+                <button class="btn_modifier" *ngIf="createType">
+                    Créer
+                </button>
+                <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
+                    Annuler
+                </button>
             </div>
 
         </div>

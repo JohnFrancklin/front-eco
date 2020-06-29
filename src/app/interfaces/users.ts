@@ -12,6 +12,6 @@ export class Users {
      avatar: string;
      ville:string;
      pays:string;
-     dateinscription:Date;
+     dateinscription:string;
      confirmPassword:string
 }

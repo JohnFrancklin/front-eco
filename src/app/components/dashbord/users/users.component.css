@@ -584,6 +584,10 @@
     margin-left: 5px;
 }
 
+.rightNumber{
+    text-align: end;
+}
+
 
 
 .compte_categorie{
@@ -668,13 +672,14 @@
     font-weight: 450;
 }
 
-
-
+.nomchange{
+    margin-top: 15px;
+}
 
 .detail_to_change_description{
     width: 100%;
     background-color: white;
-    height: 110px;
+    height: 115px;
     padding: 5px;
     padding-top: 10px;
 }
@@ -765,4 +770,17 @@
     border: 1px solid #d5d5d5;
     height: 50px;
     font-size: small;
+}
+
+.groupe_content{
+    width: 100%;
+    display: flex;
+    /* margin: 3px 0px 3px 0px; */
+}
+.leftSide{
+    width: 50%;
+}
+
+.rightSide{
+    width: 50%;
 }
