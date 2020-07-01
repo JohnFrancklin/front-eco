@@ -49,11 +49,6 @@ ul {
     height: 75px;
 }
 
-.detail mat-icon {
-    font-size: 8px;
-    margin-left: 7px;
-}
-
 .panierVide mat-icon{
     font-size: 50px;
 }
@@ -110,7 +105,8 @@ position: relative;
     border-left: none;
     text-align: center;
     background-color: rgb(231, 231, 231);
-    padding: 4px;
+    padding: 3px;
+    margin-bottom: 5px;
 }
 
 .quantity {
@@ -119,7 +115,7 @@ position: relative;
 }
 
 .title_panier{
-    margin: 0 0 5px 0;
+    margin: 0 0 1px 23px;
     font-size: 15px;
     padding: 0;
 }
@@ -143,6 +139,8 @@ position: relative;
     background-color: #fff;
     z-index: 1000;
     border: 1px solid #d5d5d5;
+
+    max-height: 550px;
 }
 
 .triangle-top{
@@ -175,7 +173,7 @@ position: relative;
     width: 93%;
     position: absolute;
     left: 9px;
-    margin-bottom: 19px;
+    margin-bottom: 7px;
 }
 
 .transparant_overlay {
@@ -187,4 +185,12 @@ position: relative;
     opacity: 0.1;
     background-color: white;
     z-index: 2;
+}
+
+.scroll {
+    max-height: 496px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    margin: 2px 0 4px 0;
 }

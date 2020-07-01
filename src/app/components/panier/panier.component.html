@@ -94,7 +94,87 @@
                       votre adresse pour la livraison
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-                  <p>votre adresse pour la livraison</p>
+                  <div class="adress-container">
+                    <div class="top-section row cadre" 
+                    [ngStyle]="{'background-color':bgStyle==='1' ? '#e7e7e7' : 'white' , 'opacity':bgStyle==='1' ? '1' : '0.5'}">
+                      <div class="col-sm-1 custom-radio-wrap">
+                        <div class="form-group">
+                          <input type="radio" id="top" name="custom-radio-btn" [value]="1" [checked]="bgStyle==='1'" (click)="displayBgStyle($event)">
+                          <label class="custom-radio" for="top"></label>
+                          <p class="actuel">Actuelle</p>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-row">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Pays</label>
+                          <div class="col-sm-8 libelle">
+                              Madagascar
+                          </div>
+                      </div>
+                      <div class="form-row mt-2">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Ville</label>
+                          <div class="col-sm-8 libelle">
+                              Antananarivo
+                          </div>
+                      </div>
+                      <div class="form-row mt-2">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Code postal</label>
+                          <div class="col-sm-8 libelle">
+                              101
+                          </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <div class="form-input">
+                          <label class=" col-form-label col-form-label-sm">Adresse</label>
+                          <div class="libelle-adresse">
+                              B225 Cité Tsaramandroso 
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="bottom-section row cadre"
+                     [ngStyle]="{'background-color':bgStyle==='0' ? '#e7e7e7' : 'white' , 'opacity':bgStyle==='0' ? '1' : '0.5'}">
+                      <div class="col-sm-1 custom-radio-wrap">
+                        <div class="form-group">
+                          <input type="radio" id="bottom" name="custom-radio-btn" [value]="0" [checked]="bgStyle==='0'" (click)="displayBgStyle($event)">
+                          <label class="custom-radio" for="bottom"></label>
+                          <p class="autre">Autre</p>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-row">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Pays <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input_change">
+                          </div>
+                      </div>
+                      <div class="form-row mt-2">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Ville <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input_change">
+                          </div>
+                      </div>
+                      <div class="form-row mt-2">
+                          <label class="col-sm-4 col-form-label col-form-label-sm">Code postal <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                            <select class="custom-select input_change">
+                              <option value="conges payes">101</option>
+                              <option value="absence">102</option>
+                          </select>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <div class="form-group">
+                          <label class="col-form-label">
+                              Adresse <span class="text-danger">*</span>
+                          </label>
+                          <textarea class="form-control input_change"></textarea>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>

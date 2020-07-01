@@ -16,13 +16,24 @@ export class PanierComponent implements OnInit {
   transport = 300;
   netPayer = 0;
 
+  // bgStyle: boolean = true;
+  bgStyle = "";
+
   // home : HomeComponent = new HomeComponent (ProduitService:ProduitService);
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.getPanier();
     this.calculTotal();
+
+    this.bgStyle = '0';
+  }
+
+  displayBgStyle (event) {
+    this.bgStyle = event.target.value;
+    console.log(this.bgStyle);
   }
 
 

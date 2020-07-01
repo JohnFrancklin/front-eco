@@ -24,44 +24,48 @@
 
                 <div class="content_list_statistics shadow" *ngIf="showTooltipPanier" >
 
-                    <div class="panierVide text-center" *ngIf="panierTotal.length==0">
-                        <h1>Votre panier est vide</h1>
-                        <mat-icon>shopping_cart</mat-icon>
+                    <div class="panierVide" *ngIf="panierTotal.length==0">
+                        <h1 class="text-center">Votre panier est vide</h1>
+                        <div class="row justify-content-center mr-3 mb-3">
+                            <mat-icon>shopping_cart</mat-icon>
+                        </div>
+                        
                     </div>
 
                     <div class="btn-section" *ngIf="panierTotal.length!=0">
-                        <button class="btn btn-outline" [routerLink]="['/panier']">Ouvrir le panier ({{panierTotal.length}})</button>
+                        <button class="btn-outline" [routerLink]="['/panier']">Ouvrir le panier ({{panierTotal.length}})</button>
                     </div>
 
-                    <div class="content_panier_produit" *ngFor="let p of panierTotal">
-                        <!-- <div class="inner-content-panier"> -->
-                            <div class="image_box">
-                                <div class="img">
-                                  <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
-                                </div>
-                            </div>
-                            <div class="desc_box" style="height: 90px;">
-        
-                                <p class="title_panier text-center">
-                                  {{p.title}}
-                                </p>
-                             
-                                <div class="panier-detail">
-                                    <div class="quantity row col-12">
-                                        <div class="col-4 nbr-produit">
-                                            {{p.quantiteProduitPanier}}
-                                        </div>
-                                        <div class="col-8 text-right pt-panier">
-                                            {{p.prixProduitPanier}} ar
-                                        </div>
+                    <div class="scroll">
+                        <div class="content_panier_produit" *ngFor="let p of panierTotal">
+                            <div class="inner-content-panier">
+                                <div class="image_box">
+                                    <div class="img">
+                                      <img src="../../../assets/images/your-logo-png-8.png" alt="" width="100%">
                                     </div>
-        
                                 </div>
-                                <hr class="horizontal-line">
+                                <div class="desc_box" style="height: 90px;">
+            
+                                    <p class="title_panier">
+                                      {{p.title}}
+                                    </p>
+                                 
+                                    <div class="panier-detail">
+                                        <div class="quantity row col-12">
+                                            <div class="col-4 nbr-produit">
+                                                {{p.quantiteProduitPanier}}
+                                            </div>
+                                            <div class="col-8 text-right pt-panier">
+                                                {{p.prixProduitPanier}} ar
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                    <hr class="horizontal-line">
+                                </div>
                             </div>
-                        <!-- </div> -->
-                        
-                      </div>
+                          </div>                          
+                    </div>
 
                     <div class="triangle-top"></div>
                 </div>
