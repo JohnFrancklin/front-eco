@@ -28,7 +28,7 @@ export class PanierComponent implements OnInit {
     this.getPanier();
     this.calculTotal();
 
-    this.bgStyle = '0';
+    this.bgStyle = '1';
   }
 
   displayBgStyle (event) {
