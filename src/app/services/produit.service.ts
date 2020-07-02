@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProduitService {
+  
 
 
   produits= [
@@ -426,7 +427,7 @@ export class ProduitService {
 
 
   ]
-  constructor() { }
+  constructor () { }
 
   getProduit(){
     return this.produits;

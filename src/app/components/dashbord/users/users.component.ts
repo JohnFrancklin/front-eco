@@ -154,7 +154,7 @@ export class UsersComponent implements OnInit {
     )
   }
 
-  getOneUser(iduser){
+  /*getOneUser(iduser){
    
     return this.usersService.getUser(iduser).subscribe(
       users => {
@@ -162,7 +162,7 @@ export class UsersComponent implements OnInit {
         this.createType = false;
       }
     )
-  }
+  }*/
 
   supprimer(){
     Swal.fire({

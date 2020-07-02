@@ -122,31 +122,39 @@
                     </div>
 
                     <div class="filter_content" *ngIf="showFilter">
-                        <input type="text" class="input_filter" placeholder="Filtrer par nom...">
-
+                        <input type="text" name="search" [(ngModel)]="searchText" class="input_filter" 
+                        placeholder="Filtrer par nom...">
 
                         <p class="title_filter">Choisissez votre filtre</p>
                         <hr class="hr_filtre">
-                        <input type="radio" id="none" name="filtre">
+                        <input type="radio" id="none" name="filtre"value="none" (change)="changefiltre($event)">
                         <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="prix_asc" name="filtre">
+                        <input type="radio" id="prix_asc" name="filtre" value="prix_asc" (change)="changefiltre($event)">
                         <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix
                             ascendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="prix_desc" name="filtre">
+                        <input type="radio" id="prix_desc" name="filtre" value="prix_desc" (change)="changefiltre($event)">
                         <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix
                             descendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="vote_asc" name="filtre">
+                        <input type="radio" id="vote_asc" name="filtre" value="vote_asc" (change)="changefiltre($event)">
                         <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote
                             ascendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="vote_desc" name="filtre">
+                        <input type="radio" id="vote_desc" name="filtre" value="prix_desc" (change)="changefiltre($event)">
                         <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote
                             descendant</label>
                         <hr class="hr_filtre">
-
+                        <input type="radio" id="sandbox" name="filtre" value="sandbox" (change)="changefiltre($event)">
+                        <label for="sandbox" class="item_filtre" title= "">sandbox</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="live" name="filtre" value="live" (change)="changefiltre($event)">
+                        <label for="live" class="item_filtre" title= "">live</label>
+                        <hr class="hr_filtre">
+                        <input type="radio" id="archived" name="filtre" value="archived" (change)="changefiltre($event)">
+                        <label for="archived" class="item_filtre" title= "">archived</label>
+                        <hr class="hr_filtre">
                     </div>
 
                     <div class="selectionner">
@@ -172,7 +180,8 @@
 
 
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let p of produits" id="{{p._id}}"
+                            <button class="element_un" *ngFor="let p of produits | filter:searchText"
+                            id="{{p._id}}"
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="getOneProduit(p)" title="{{p.description}}">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">

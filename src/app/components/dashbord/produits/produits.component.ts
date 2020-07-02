@@ -15,7 +15,7 @@ export class ProduitsComponent implements OnInit {
   produits: any;
   oneProduit: any;
   produitSelected = [];
-
+  searchText:any;
   oneAndAll: boolean = true;
 
   showFilter: boolean = false;
@@ -46,7 +46,8 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
-
+  
+  
   constructor(
     private produitService: ProduitService,
     public dialog: MatDialog,
@@ -152,8 +153,8 @@ export class ProduitsComponent implements OnInit {
 
   selectProduit(p) {
     /**check si id_produit existe dans le produitSelected */
-    const checkIdProduit = obj => obj._id === p._id;
-    let result: boolean = this.produitSelected.some(checkIdProduit);
+    const checkIdP = obj => obj._id === p._id;
+    let result: boolean = this.produitSelected.some(checkIdP);
     if (result == true) {
       /**enlever du produitSelected si le produit existe deja dedans */
       this.produitSelected = this.produitSelected.filter(function (item) {
@@ -190,6 +191,32 @@ export class ProduitsComponent implements OnInit {
       checkElement.checked = true;
     }
   }
+  selectUser(u) {
+    /**check si id_user existe dans le produitSelected */
+    const checkIdProduit = obj => obj._id === u._id;
+    let result: boolean = this.produitSelected.some(checkIdProduit);
+    if (result == true) {
+      /**enlever du usersSelected si l'utilisateur existe deja  */
+      this.produitSelected = this.produitSelected.filter(function (item) {
+        return item._id !== u._id;
+      });
+    } else {
+      /**ajouter dans le produitSelected si le produit n'y est encore pas */
+      this.produitSelected.push(u);
+    }
+  }
+
+  removeFromproduitSelected(u) {
+    //***supprimer du tableau */
+    this.produitSelected = this.produitSelected.filter(function (item) {
+      return item._id !== u._id;
+    });
+    //**** dechecker le users */  
+    const checkElement = document.getElementById(u._id) as HTMLInputElement;
+    checkElement.checked = false;
+
+  }
+
 
   afficherFiltre() {
     if (this.showFilter == false) {
@@ -270,6 +297,14 @@ export class ProduitsComponent implements OnInit {
     }
 
   }
+  changefiltre(e) {
+    let status = e.target.value
+    this.produits = this.produitService.getProduit();
+    if(status != "none"){
+      this.produits= this.produits.filter((value) => value.etat == status);
+    }
+  }
+ 
 
 
 

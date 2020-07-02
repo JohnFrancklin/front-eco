@@ -435,7 +435,7 @@
 
 .filter{
     position: relative;
-    padding: 12px 0px 11px 0px;
+    padding: 16px 0px 11px 0px;
     float: right;
     width: calc(10% - 4px);
     background-color: lightgray;
@@ -447,7 +447,7 @@
 
 .filter_content{
     width: 200px;
-    height: 280px;
+    height: 320px;
     background-color: #fafafa;
     z-index: 1000;
     position: absolute;
