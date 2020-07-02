@@ -105,8 +105,8 @@ position: relative;
     border-left: none;
     text-align: center;
     background-color: rgb(231, 231, 231);
-    padding: 5px;
-    margin-bottom: -2px;
+    padding: 4px;
+    /* margin-bottom: -2px; */
 }
 
 .quantity {
