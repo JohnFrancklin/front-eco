@@ -99,7 +99,8 @@
                     [ngStyle]="{'background-color':bgStyle==='1' ? '#e7e7e7' : 'white' , 'opacity':bgStyle==='1' ? '1' : '0.5'}">
                       <div class="col-sm-1 custom-radio-wrap">
                         <div class="form-group">
-                          <input type="radio" id="top" name="custom-radio-btn" [value]="1" [checked]="bgStyle==='1'" (click)="displayBgStyle($event)">
+                          <input type="radio" id="top" name="custom-radio-btn" [value]="1" [checked]="bgStyle==='1'" 
+                          (click)="displayBgStyle($event)">
                           <label class="custom-radio" for="top"></label>
                           <p class="actuel">Actuelle</p>
                         </div>
@@ -126,7 +127,7 @@
                       </div>
                       <div class="col-sm-5">
                         <div class="form-input">
-                          <label class=" col-form-label col-form-label-sm">Adresse</label>
+                          <label class=" col-form-label col-form-label-sm top-adresse">Adresse</label>
                           <div class="libelle-adresse">
                               B225 Cité Tsaramandroso 
                           </div>
@@ -137,7 +138,9 @@
                      [ngStyle]="{'background-color':bgStyle==='0' ? '#e7e7e7' : 'white' , 'opacity':bgStyle==='0' ? '1' : '0.5'}">
                       <div class="col-sm-1 custom-radio-wrap">
                         <div class="form-group">
-                          <input type="radio" id="bottom" name="custom-radio-btn" [value]="0" [checked]="bgStyle==='0'" (click)="displayBgStyle($event)">
+                          <input type="radio" id="bottom" name="custom-radio-btn" [value]="0"
+                           [checked]="bgStyle==='0'" 
+                          (click)="displayBgStyle($event)">
                           <label class="custom-radio" for="bottom"></label>
                           <p class="autre">Autre</p>
                         </div>
@@ -146,31 +149,32 @@
                         <div class="form-row">
                           <label class="col-sm-4 col-form-label col-form-label-sm">Pays <span class="text-danger">*</span></label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control input_change">
+                            <input type="text" class="form-control input_change" [attr.disabled]="disabled ? '' : null"
+                            [ngStyle]="{'background-color':disabled===true ? 'white' : 'white'}">
                           </div>
                       </div>
                       <div class="form-row mt-2">
                           <label class="col-sm-4 col-form-label col-form-label-sm">Ville <span class="text-danger">*</span></label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control input_change">
+                            <input type="text" class="form-control input_change" [attr.disabled]="disabled ? '' : null"
+                            [ngStyle]="{'background-color':disabled===true ? 'white' : 'white'}">
                           </div>
                       </div>
                       <div class="form-row mt-2">
                           <label class="col-sm-4 col-form-label col-form-label-sm">Code postal <span class="text-danger">*</span></label>
                           <div class="col-sm-8">
-                            <select class="custom-select input_change">
-                              <option value="conges payes">101</option>
-                              <option value="absence">102</option>
-                          </select>
+                            <input type="number" class="form-control input_change" [attr.disabled]="disabled ? '' : null"
+                            [ngStyle]="{'background-color':disabled===true ? 'white' : 'white'}">
                           </div>
                       </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
-                          <label class="col-form-label">
+                          <label class="col-form-label adress">
                               Adresse <span class="text-danger">*</span>
                           </label>
-                          <textarea class="form-control input_change"></textarea>
+                          <textarea class="form-control input_change" [attr.disabled]="disabled ? '' : null" 
+                          [ngStyle]="{'background-color':disabled===true ? 'white' : 'white'}"></textarea>
                       </div>
                       </div>
                     </div>

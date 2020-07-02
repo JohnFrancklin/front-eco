@@ -226,7 +226,7 @@ app-home {
     font-weight: 430;
     border: 0.5px solid #d5d5d5;
     border-radius: 0;
-    height: 29px;
+    height: 25px;
 }
 
 input.form-control:focus, select.custom-select:focus, textarea.form-control:focus {
@@ -234,7 +234,8 @@ input.form-control:focus, select.custom-select:focus, textarea.form-control:focu
 }
 
 textarea.form-control {
-    height: 87px;
+    height: 67px;
+    margin-top: 5px;
 }
 
 .text-danger {
@@ -258,10 +259,12 @@ input[type=radio] {
 
 .libelle-adresse {
     color: rgb(132, 132, 132);
-    /* border: 1px solid #d3cdcd; */
-    height: 88px;
+    border: 1px solid #f1ebeb;
+    height: 83px;
     padding: 10px;
     background-color: #fff;
+    margin-top: 4px;
+    margin-bottom: 5px;
 }
 
 label p {
@@ -335,4 +338,16 @@ label p {
 
 .bottom-section .form-row {
     margin: 6px 20px 0 0;
+}
+
+.bottom-section .col-form-label {
+    padding-top: 8px;
+}
+
+.adress {
+    margin-top: 4px;
+}
+
+.top-adresse {
+    margin-top: 4px;
 }

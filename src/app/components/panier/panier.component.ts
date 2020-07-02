@@ -18,6 +18,7 @@ export class PanierComponent implements OnInit {
 
   // bgStyle: boolean = true;
   bgStyle = "";
+  disabled : boolean = true;
 
   // home : HomeComponent = new HomeComponent (ProduitService:ProduitService);
 
@@ -33,6 +34,7 @@ export class PanierComponent implements OnInit {
 
   displayBgStyle (event) {
     this.bgStyle = event.target.value;
+    this.disabled = !this.disabled;
     console.log(this.bgStyle);
   }
 

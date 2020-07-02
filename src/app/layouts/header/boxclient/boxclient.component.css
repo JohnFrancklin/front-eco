@@ -93,7 +93,7 @@ position: relative;
 }
 
 .desc_box {
-    width: 64%;
+    width: 65%;
     float: left;
     /* margin-bottom: 5px; */
 }
@@ -105,8 +105,8 @@ position: relative;
     border-left: none;
     text-align: center;
     background-color: rgb(231, 231, 231);
-    padding: 3px;
-    margin-bottom: 5px;
+    padding: 5px;
+    margin-bottom: -2px;
 }
 
 .quantity {
@@ -114,7 +114,7 @@ position: relative;
     padding: 0;
 }
 
-.title_panier{
+.title_panier {
     margin: 0 0 1px 23px;
     font-size: 15px;
     padding: 0;
@@ -160,7 +160,7 @@ position: relative;
     border: 1px solid #d5d5d5;
     width: 94%;
     border-radius: 1px;
-    margin: 8px 0 0 8px;
+    margin: 8px 0 0 9px;
     font-size: 15px;
     padding: 4px;
 }
