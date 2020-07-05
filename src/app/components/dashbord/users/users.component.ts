@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { Users } from 'src/app/interfaces/users';
-
 import Swal from 'sweetalert2'
 //declare var Swal: any;
+
+// rxjs
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -35,32 +39,35 @@ export class UsersComponent implements OnInit {
   //------------------------------------//
 
   allListeUser: any = [];
-  users : Users[];
+  users: Users[];
 
   searchText;
-  arrayUser: any=[];
 
-  usersDetail= new Users();
+  //api
+  arrayUser: any = [];
 
+  // service
   listeUsers: any;
+  usersDetail = new Users();
   usersSelected = [];
 
+  // all nom user
+  nomUsers: any = [];
+  // filtre user nom
+  userliste: any;
 
-  constructor(private spinner: NgxSpinnerService, private usersService: UsersService,) { }
+
+  constructor(private spinner: NgxSpinnerService, private usersService: UsersService, ) { }
 
   ngOnInit(): void {
 
     this.getListeUser();
-        /**************SPINNER TEST ************* */
-        this.spinner.show(this.spinner_list_utilisateurs);//start loader
-        setTimeout(() => {
-          this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
-        }, 500);
-        /************************************** */
-
-       // this.getExistAll();
-
-       
+    /**************SPINNER TEST ************* */
+    this.spinner.show(this.spinner_list_utilisateurs);//start loader
+    setTimeout(() => {
+      this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
+    }, 500);
+    /************************************** */
   }
 
 
@@ -131,7 +138,7 @@ export class UsersComponent implements OnInit {
         this.spinner.hide(this.spinner_loadMore);
         // this.loadMore = false;
         this.scrollSpace = 0;
-         let newUser = this.usersService.getListeUser();
+        let newUser = this.usersService.getListeUser();
         //concatenation user a newUser
         this.listeUsers = this.listeUsers.concat(newUser);
       }, 2000);
@@ -149,10 +156,12 @@ export class UsersComponent implements OnInit {
           this.arrayUser.push(this.allListeUser.users[index])
         }
         //this.usersDetail = this.arrayUser[0];
-      // console.log('liste',  this.arrayUser)
+        // console.log('liste',  this.arrayUser)
       }
     )
   }
+
+
 
   /*getOneUser(iduser){
    
@@ -164,9 +173,9 @@ export class UsersComponent implements OnInit {
     )
   }*/
 
-  supprimer(){
+  supprimer() {
     Swal.fire({
-      title: 'Vous voulez bien supprimer l\'utilisateur '+ this.usersDetail.username +'?',
+      title: 'Vous voulez bien supprimer l\'utilisateur ' + this.usersDetail.username + '?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -176,11 +185,11 @@ export class UsersComponent implements OnInit {
       if (result.value) {
 
         this.usersService.deleteUser(this.usersDetail._id)
-        .subscribe(result =>  this.getExistAll()
+          .subscribe(result => this.getExistAll()
 
-        );
+          );
         Swal.fire(
-          'L\'utilisateur  '+ this.usersDetail.username +' a été supprimé avec succès',
+          'L\'utilisateur  ' + this.usersDetail.username + ' a été supprimé avec succès',
         )
       }
     })
@@ -188,7 +197,7 @@ export class UsersComponent implements OnInit {
 
   modifier(): void {
     Swal.fire({
-      title: 'Vous voulez bien modifier l\'utilisateur '+ this.usersDetail.username +'?',
+      title: 'Vous voulez bien modifier l\'utilisateur ' + this.usersDetail.username + '?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -198,19 +207,19 @@ export class UsersComponent implements OnInit {
       if (result.value) {
 
         this.usersService.updateUser(this.usersDetail)
-        .subscribe(result =>  this.getExistAll()
+          .subscribe(result => this.getExistAll()
 
-        );
+          );
         Swal.fire(
-          'L\'utilisateur  '+ this.usersDetail.username +' a été modifié avec succès',
+          'L\'utilisateur  ' + this.usersDetail.username + ' a été modifié avec succès',
         )
       }
     })
-     
+
   }
 
-  createUser(){
-    this.usersDetail ={
+  createUser() {
+    this.usersDetail = {
       _id: 0,
       avatar: "",
       username: "",
@@ -221,24 +230,30 @@ export class UsersComponent implements OnInit {
       tel: "",
       email: "",
       role: "",
-      pays:"",
+      pays: "",
       ville: "",
       dateinscription: "",
-      confirmPassword:"",
+      confirmPassword: "",
     };
     this.createType = true;
   }
 
-  cancelCreate(){
+  cancelCreate() {
     this.createType = false;
     this.usersDetail = this.listeUsers[0];
   }
 
-/* Detail User  */
+  /* Detail User  */
 
   getListeUser() {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
+
     this.listeUsers = this.usersService.getListeUser();
+
+    // store all nom user
+    for (let index = 0; index < this.listeUsers.length; index++) {
+      this.nomUsers.push(this.listeUsers[index].nom)
+    }
     this.usersDetail = this.listeUsers[0];
   }
 
@@ -285,15 +300,41 @@ export class UsersComponent implements OnInit {
 
   selectOneUser(user) {
     this.usersDetail = user;
-    this.createType =false;
+    this.createType = false;
   }
 
   changefiltre(e) {
     let status = e.target.value
     this.listeUsers = this.usersService.getListeUser();
-    if(status != "none"){
+    if (status != "none") {
       this.listeUsers = this.listeUsers.filter((value) => value.role == status);
     }
   }
 
+
+  filterByValue(array, value) {
+    return array.filter((data) => JSON.stringify(data).toLowerCase().indexOf(value.toLowerCase()) !== -1);
+  }
+
+  getUserFiltre(term: string) {
+
+    if (term === '') {
+      return of([]);
+    }
+    this.userliste = this.filterByValue(this.nomUsers, term)
+
+    return Array.of(this.userliste)
+  }
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(term =>
+        this.getUserFiltre(term)
+      ),
+    )
+
 }
+
+

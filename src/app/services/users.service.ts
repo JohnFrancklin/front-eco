@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { Observable,of } from 'rxjs';
 import { Users } from '../interfaces/users';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,6 +14,7 @@ const httpOptions = {
 export class UsersService {
 
   private userUrl = 'http://localhost:3000/users';  // URL to web api
+
 
   listeUsers = [
     {
@@ -105,11 +107,10 @@ export class UsersService {
       ville: "Antananarivo",
       dateinscription: "",
     },
-   
+
     
 
   ]
-
 
 
   constructor(
@@ -141,7 +142,9 @@ export class UsersService {
   }
 
 
+
   getListeUser() {
     return this.listeUsers;
   }
+
 }
