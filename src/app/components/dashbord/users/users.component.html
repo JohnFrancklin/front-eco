@@ -130,24 +130,20 @@
                     </div>
 
                     <div class="recherche_box">
-                        <input type="text" placeholder="Rechercher utilisateurs.." class="input_search">
+                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchInput" [ngbTypeahead]="search" class="input_search">
+                       
                         <button class="btn_search">
                             Rechercher
                         </button>
                     </div>
 
-
                     <div class="contenu_element" (scroll)="scrolled()" id="element">
 
                         <ngx-spinner [name]="spinner_list_utilisateurs" [fullScreen]="false" [type]="spinner_type"
                             [size]="spinner_size" [bdColor]="spinner_background"></ngx-spinner>
-
-
-
                         <div *ngIf="oneAndAll">
                             <!-- arrayUser  //  listeUsers
                                   -->
-
                             <button class="element_un" *ngFor="let user of listeUsers | filter:searchText"
                                 id="{{user._id}}"
                                 [ngStyle]="{'border': user._id == usersDetail._id ? '1px solid cornflowerblue' : ''}"

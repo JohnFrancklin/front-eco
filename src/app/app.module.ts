@@ -24,7 +24,7 @@ import { UsersComponent } from './components/dashbord/users/users.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BoxclientComponent } from './layouts/header/boxclient/boxclient.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
@@ -33,8 +33,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatTableModule,
     MatSortModule,
     HttpClientModule,
+    NgbModule,
     Ng2SearchPipeModule,
+    ReactiveFormsModule,
+
+
 
   ],
   providers: [],
