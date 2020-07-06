@@ -788,3 +788,5 @@
 .rightSide{
     width: 50%;
 }
+
+::ng-deep .dropdown-menu {  width: 325px }

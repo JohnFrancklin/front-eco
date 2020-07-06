@@ -252,7 +252,7 @@ export class UsersComponent implements OnInit {
 
     // store all nom user
     for (let index = 0; index < this.listeUsers.length; index++) {
-      this.nomUsers.push(this.listeUsers[index].nom)
+      this.nomUsers.push(this.listeUsers[index].nom +" "+ this.listeUsers[index].prenom )
     }
     this.usersDetail = this.listeUsers[0];
   }
