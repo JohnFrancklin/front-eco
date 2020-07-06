@@ -217,6 +217,11 @@ app-home {
     border: 1px solid #d5d5d5;
     padding: 10px;
     margin-top: 20px;
+    height:140px;
+}
+
+.top-section {
+    padding-top: 20px;
 }
 
 .input_change {
@@ -260,7 +265,7 @@ input[type=radio] {
 .libelle-adresse {
     color: rgb(132, 132, 132);
     border: 1px solid #f1ebeb;
-    height: 83px;
+    height: 67px;
     padding: 10px;
     background-color: #fff;
     margin-top: 4px;
