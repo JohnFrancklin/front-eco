@@ -322,7 +322,7 @@ label p {
   .custom-radio-wrap .form-group input:checked + label {
       background-color: #e9ecee;
     color: #99a1a7;
-    border: 7px solid #0079bf;  
+    border: 7px solid #0079bf;      
   }
 
   .custom-radio-wrap p {
