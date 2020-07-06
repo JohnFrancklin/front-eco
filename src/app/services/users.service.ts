@@ -141,8 +141,6 @@ export class UsersService {
     return this.http.put(url, user, httpOptions);
   }
 
-
-
   getListeUser() {
     return this.listeUsers;
   }

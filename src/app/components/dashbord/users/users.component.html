@@ -130,7 +130,8 @@
                     </div>
 
                     <div class="recherche_box">
-                        <input type="text" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchText" [ngbTypeahead]="search" class="input_search">
+                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchInput" [ngbTypeahead]="search" class="input_search">
+                       
                         <button class="btn_search">
                             Rechercher
                         </button>
