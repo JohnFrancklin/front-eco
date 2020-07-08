@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { Users } from 'src/app/interfaces/users';
@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
 
@@ -56,6 +56,7 @@ export class UsersComponent implements OnInit {
   nomUsers: any = [];
   // filtre user nom
   userliste: any;
+  clickedItem: string;
 
 
   constructor(private spinner: NgxSpinnerService, private usersService: UsersService, ) { }
@@ -69,6 +70,7 @@ export class UsersComponent implements OnInit {
       this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
     }, 500);
     /************************************** */
+    this.searchInput="";
   }
 
 
@@ -336,6 +338,37 @@ export class UsersComponent implements OnInit {
       ),
     )
 
+    
+    searchUtilisateur(){
+      this.listeUsers = this.usersService.getListeUser();
+      const words = this.searchInput.split(' ');
+      const Key1 = words[0]
+      const Key2 = words[1]
+
+      if(this.searchInput === ""){
+        this.listeUsers = this.usersService.getListeUser();
+      }
+      else if (Key2 == undefined){
+        this.listeUsers = this.listeUsers.filter((value) => value.nom.toLowerCase() == Key1.toLowerCase() || value.prenom.toLowerCase() == Key1.toLowerCase()  );
+      }else{
+        this.listeUsers = this.listeUsers.filter((value) => value.nom.toLowerCase() == Key1.toLowerCase() && value.prenom.toLowerCase() == Key2.toLowerCase() 
+        
+        // prenom et nom
+        || value.nom.toLowerCase() == Key2.toLowerCase() && value.prenom.toLowerCase() == Key1.toLowerCase() 
+        );
+      }
+    }
+    
+    selectedItem(item){
+      this.clickedItem = item.item;
+      this.listeUsers = this.usersService.getListeUser();
+
+      const words = this.clickedItem.split(' ');
+      const userNom = words[0]
+      const userPrenom = words[1]
+      
+      this.listeUsers = this.listeUsers.filter((value) => value.nom.toLowerCase() == userNom.toLowerCase() && value.prenom.toLowerCase() == userPrenom.toLowerCase()  );
+    }
 }
 
 

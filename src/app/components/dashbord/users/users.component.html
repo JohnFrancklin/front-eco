@@ -130,11 +130,14 @@
                     </div>
 
                     <div class="recherche_box">
-                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchInput" [ngbTypeahead]="search" class="input_search">
-                       
-                        <button class="btn_search">
+                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchInput" (selectItem)="selectedItem($event)" [ngbTypeahead]="search"   class="input_search">
+
+                        <button class="btn_search" (click)=searchUtilisateur()>
                             Rechercher
                         </button>
+
+
+
                     </div>
 
                     <div class="contenu_element" (scroll)="scrolled()" id="element">
@@ -151,7 +154,7 @@
 
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
-                                    {{user.nom}}
+                                    {{user.nom}}  {{user.prenom}}
                                 </span>
                                 <span class="state_produit_on_list" [ngStyle]="{'color': 'green'}">
                                     {{user.role}}
