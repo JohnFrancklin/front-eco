@@ -215,9 +215,12 @@
                                 </span>
                             </div> -->
                         </div>
-
+                       
                     </div>
-
+           
+            
+                    
+                
                     <div class="loadMore" *ngIf="loadMore">
                         <!-- <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
                             [bdColor]="spinner_background">
@@ -226,9 +229,72 @@
 
                 </div>
             </div>
-
-        </div>
-
+    <!--detail client et mode de paiement-->      
+            <div class="all_inf_client">
+                <div class="title-cli">
+                    <h3 class="text_style">Information client</h3>
+                </div>
+                <div class="box_image" >
+                    <img src="../../../../assets/images/your-logo-png-8.png" class="img_cli">
+                </div>
+                <div class="value_date">
+                    <span class="text_value">
+                        Abonned
+                    </span><br>
+                    <span class="date_com">
+                        10/03/2012
+                    </span>
+                    <div class="inf_cli">
+                        <div class="information">
+                            <span class="cli_name">RAZAFINARIVO John Francklin</span><br>
+                            <a class="email">johnfrancklin@yahoo.com</a><br>
+                            <span class="tel">034 61 67851</span>
+                        </div>
+                        <div class="style_inf">
+                            <span class="style_type">Pays:</span><br>
+                            <span class="style_type">Ville:</span><br> 
+                            <span class="style_type">Adresse:</span>
+                            <div class="type-right">
+                                    <span class="style_text">Madagascar</span><br>
+                                    <span class="style_text">Antananarivo - 101</span><br>
+                                    <span class="style_text">Mahamasina, 2536KF en face de Stade Municipale</span>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="paiement">
+                <div class="title-p">
+                    <h3 class="text_style">Paiement</h3>
+                </div>
+                <div class="style_paiement">
+                            <span class="style_type">Méthode:</span><br>
+                            <span class="style_type">Transaction:</span><br>
+                            <span class="style_type">Somme:</span>
+                        <div class="type_paiement">
+                            <span class="style_text">VISA</span><br>
+                            <span class="style_text">23154512124545421</span><br>
+                            <span class="style_text">52000 ariary</span>
+                        </div>
+                </div>
+                <div class="title-p">
+                        <h3 class="text_style">Délivrence</h3>
+                </div>
+                <div class="style_paiement">
+                        <span class="style_type">Date d'estimation</span><br>
+                        <span class="style_type">Note de delivrance:</span>
+                    <div class="type_deli">
+                            <span class="style_text">24/10/2019</span><br>
+                            <button class="btn_save">Enregistrer</button>
+                    </div>
+                </div>
+                <div>
+                    <textarea class="text_holder" placeholder=" Ecrire votre note ici ..."></textarea>
+                </div>
+            </div>
+         </div>
+        
+    <!--fin detail client et paiement--> 
         <div class="detail_droit">
 
             espace vide
@@ -237,7 +303,9 @@
 
 
         </div>
+        
     </div>
+   
 
 
     <ng-template #imageProduit style="background-color: white;">

@@ -488,3 +488,148 @@ tr:hover {
 .numero_commande{
     padding-left: 10px;
 }
+/*detail client et mode de paiement*/
+.all_inf_client{
+    width: calc(55% - 5px);
+    height: 34%;
+    background-color: white;
+    border: 1px solid #d5d5d5;
+    float: left;
+    padding: 10px;
+    margin-top:-25px;
+ 
+}
+.title-cli{
+    margin-top: -5px;
+    margin-left:-5px;
+    width: calc(103% - 5px);
+    height: 13%;
+    background-color: #f5f5f5;
+    border: 1px solid #d5d5d5;
+    float:left;  
+}
+.box_image{
+    width: 25%;
+    background-color: white;
+    overflow-y: hidden;
+    margin: 13px 5px 5px -5px;
+    border: 1px solid #d5d5d5;
+    display: inline-block;
+    padding: 5px;
+   
+}
+.value_date{
+    margin-top: 10px;
+}
+.text_value{
+    color:#42a66a;
+    margin-left:20px;
+    font-weight: bold;
+}
+.date_com{
+    margin-left:15px;
+    font-weight: bold;
+}
+.inf_cli{
+    width:75%;
+    background-color: white;
+    padding: 10px;
+    margin-left: 120px;
+    margin-top: -167px;
+}
+.img_cli{
+    width: 100%;
+}
+.information{
+    line-height: 24px;
+    margin-top:-10px;
+}
+.cli_name{
+    font-weight: bold;
+    color:#000d4e;
+    margin-bottom: -5px;
+}
+.email{
+    font-weight: bold;
+    font-style:italic;
+    color:#42a7ff;
+}
+.tel{
+    font-weight: bold;
+    color:#000d4e;
+}
+.style_inf{
+    margin-top:2px;
+    margin-left:0px;
+}
+.style_type{
+    color: #b0b0b0;
+    line-height: 22px;
+    font-weight: normal;
+}
+.type-right{
+    width:80%;
+    float:right;
+    margin-top:-42px;
+}
+.style_text{
+    font-weight: bold;
+    color:#000d4e;
+    line-height: 22px;
+}
+.paiement{
+    margin-left: 5px;
+    width: calc(45% - 5px);
+    height: 34%;
+    background-color: white;
+    border: 1px solid #d5d5d5;
+    float: right;
+    overflow: hidden;   
+    margin-top:-25px;
+}
+.title-p{
+    margin-top: 5px;
+    margin-left:5px;
+    width: calc(98% - 5px);
+    height: 13%;
+    background-color:#f5f5f5;
+    border: 1px solid #d5d5d5;
+    float:left;  
+}
+.text_style{
+    text-align: start;
+    margin-left:0px;
+    color: #000359;
+    padding-left: 12px;
+    display: initial;
+    font-weight:bold;   
+}
+.style_paiement{
+    margin-top:10px;
+    margin-left:5px;
+    line-height: 22px;
+}
+.type_paiement{
+    width:60%;
+    float:right;
+    margin-top:-42px;
+}
+.type_deli{
+    width:60%;
+    float:right;
+    margin-top:-21px;
+}
+.btn_save{
+    border:0px #ffffff;
+    color:#42a7ff;
+    float:right;
+    margin-right: 5px;
+}
+.text_holder{
+    margin-left:10px;
+    width: calc(98% - 5px);
+    height: 30px;
+    background-color:#f5f5f5;
+    border: 1px solid #d5d5d5;
+    float:left;  
+}
