@@ -33,6 +33,24 @@ export class UsersService {
       dateinscription: "",
     },
     {
+      _id: "5ee22752653cc3195007c496",
+      avatar: "defaultpic.png",
+      username: "nomena",
+      password: "$2b$10$.dCplvBIKAhf/5OE9gFqFeLwY1jWG2rlcfVPMKtnBSnGeKsSlPWMu",
+      nom: "Nomenjanahary",
+      prenom: "Sarobidy",
+      adresse: "Antananarivo",
+      tel: "347812369",
+      email: "nomena@gmail.com",
+      role: "Abonné",
+      pays:"Madagascar",
+      ville: "Antananarivo",
+      dateinscription: "",
+    },
+
+
+
+    {
       _id: "5ee22783653cc3195007c497",
       avatar: "defaultpic.png",
       username: "rakoto",

@@ -180,10 +180,10 @@
 
 
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let p of produits | filter:searchText"
-                            id="{{p._id}}"
+                            <button class="element_un" *ngFor="let p of produits | filter:searchText "
+                            title="{{p.title}} "
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
-                                (click)="getOneProduit(p)" title="{{p.description}}">
+                                (click)="getOneProduit(p)" >
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.title}}
@@ -195,9 +195,9 @@
                             </button>
                         </div>
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits" title="{{p.description}}"
+                            <div class="element_un_check" *ngFor="let p of produits | filter:searchText" title="{{p.title}"
                                 [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
-                                <input type="checkbox" class="checkCase" name="" id="{{p._id}}" check="true"
+                                <input type="checkbox" class="checkCase" name="" title="{{p.title}}" check="true"
                                     [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
                                     title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
