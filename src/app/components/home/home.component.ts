@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { SidebarComponent } from 'src/app/layouts/sidebar/sidebar.component';
 import { ProduitService } from 'src/app/services/produit.service';
 
+// rxjs
+import { Observable} from 'rxjs';
+import { debounceTime, switchMap, startWith, map, filter, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**** nouveau vote */
   voteNew;
 
+
   constructor(private produitService: ProduitService) { }
 
   ngOnInit(): void {
@@ -31,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getProduit();
 
   }
+
 
   getProduit() {
     this.produits = this.produitService.getProduit();
@@ -72,8 +78,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   rechercheProduit(key) {
-    document.cookie = "keySearch = " + this.keySearch + "";
+
+    document.cookie = "keySearch = " + this.keySearch + "";    
   }
+
 
   getKeySearch() {
     let a = `; ${document.cookie}`.match(`;\\s*${'keySearch'}=([^;]+)`);
