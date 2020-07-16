@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 
 @Component({
@@ -192,11 +193,11 @@ export class ProduitsComponent implements OnInit {
     }
   }
   selectUser(u) {
-    /**check si id_user existe dans le produitSelected */
+    /**check si produit existe dans le produitSelected */
     const checkIdProduit = obj => obj._id === u._id;
     let result: boolean = this.produitSelected.some(checkIdProduit);
     if (result == true) {
-      /**enlever du usersSelected si l'utilisateur existe deja  */
+      /**enlever du produit Selected si l'utilisateur existe deja  */
       this.produitSelected = this.produitSelected.filter(function (item) {
         return item._id !== u._id;
       });
@@ -301,15 +302,8 @@ export class ProduitsComponent implements OnInit {
     let status = e.target.value
     this.produits = this.produitService.getProduit();
     if(status != "none"){
-      this.produits= this.produits.filter((value) => value.etat == status);
+      this.produits= this.produits.filter((value) => value.etat== status);
+      
     }
   }
- 
-
-
-
-
-
-
-
 }
