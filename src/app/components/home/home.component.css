@@ -152,3 +152,32 @@
   opacity: 1!important;
   outline: 0 none!important;
 }
+
+/* Autocompletion */
+.div-content {
+  width: calc(100% - 50px);
+  left: 0;
+  position: absolute;
+  background: white; 
+  z-index: 2; 
+  top: 45px; 
+  border: 1px solid rgb(213, 213, 213); 
+  padding:0;
+}
+
+ul li:hover {
+  background: rgb(246, 246, 246);
+}
+
+li {
+  cursor: default;
+  height: 27px;
+  padding: 4px;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 7px;
+}
+
+ul {
+  padding-left: 0;
+}
