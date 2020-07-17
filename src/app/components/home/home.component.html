@@ -9,16 +9,16 @@
         
             <div class="input-group search-group">
                 <input type="text" class="form-control search-input" id="inputSearch" [(ngModel)]="keySearch"
-                    placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)">
+                    placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)" autocoplete='off' />
 
                 <div class="div-content" *ngIf="keySearch!=''">
-                    <ul>
-                        <li>Téléphone</li>
-                        <li>Téléphone NOKIA</li>
-                        <li>Téléphone portable samsung</li>
-                        <li>Téléphone</li>
-                        <li>Téléphone NOKIA</li>
-                        <li>Téléphone portable samsung</li>
+                    <ul class="content-list">
+                        <li class="list">Téléphone</li>
+                        <li class="list">Téléphone NOKIA</li>
+                        <li class="list">Téléphone portable samsung</li>
+                        <li class="list">Téléphone</li>
+                        <li class="list">Téléphone NOKIA</li>
+                        <li class="list">Téléphone portable samsung</li>
                     </ul>
                 </div>
 

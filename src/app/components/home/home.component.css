@@ -165,11 +165,11 @@
   padding:0;
 }
 
-ul li:hover {
+.content-list .list:hover {
   background: rgb(246, 246, 246);
 }
 
-li {
+.list {
   cursor: default;
   height: 27px;
   padding: 4px;
@@ -178,6 +178,6 @@ li {
   padding-left: 7px;
 }
 
-ul {
+.content-list {
   padding-left: 0;
 }
