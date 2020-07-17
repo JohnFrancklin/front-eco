@@ -5,25 +5,44 @@
     <div class="col-3">
     </div>
     <div class="col-5 search-content">
-        <div class="input-group search-group">
-            <input type="text" class="form-control search-input" id="inputSearch" [(ngModel)]="keySearch"
-                placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)">
 
-            <button type="button" class="close clear_search" *ngIf="keySearch!=''" aria-label="Close"
-                (click)="clearInputSearch()">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        
+            <div class="input-group search-group">
+                <input type="text" class="form-control search-input" id="inputSearch" [(ngModel)]="keySearch"
+                    placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)" autocomplete="off" />
 
-            <div class="input-group-append">
-                <button class="btn btn-secondary btn-search" type="button" id="btnSearch"
-                    (click)="rechercheProduit(keySearch)">
-                    <span class="material-icons search-icon">
-                        search
-                    </span>
+                <div class="div-content" *ngIf="keySearch!=''">
+                    <ul class="content-list">
+                        <li class="list">Téléphone</li>
+                        <li class="list">Téléphone NOKIA</li>
+                        <li class="list">Téléphone portable samsung</li>
+                        <li class="list">Téléphone</li>
+                        <li class="list">Téléphone NOKIA</li>
+                        <li class="list">Téléphone portable samsung</li>
+                    </ul>
+                </div>
+
+
+                <button type="button" class="close clear_search" *ngIf="keySearch!=''" aria-label="Close"
+                    (click)="clearInputSearch()">
+                    <span aria-hidden="true">&times;</span>
                 </button>
+
+                <div class="input-group-append">
+                    <button class="btn btn-secondary btn-search" type="button" id="btnSearch"
+                        (click)="rechercheProduit(keySearch)">
+                        <span class="material-icons search-icon">
+                            search
+                        </span>
+                    </button>
+                </div>
             </div>
-        </div>
+
+        
+
+
     </div>
+
 </div>
 
 
