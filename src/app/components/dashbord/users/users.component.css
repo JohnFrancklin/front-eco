@@ -236,6 +236,7 @@
     height: 35px;
     margin: 0px 0px 0px 4px;
     padding: 0px 0px 0px 10px;
+    border: none;
 }
 
 .btn_search{
@@ -859,7 +860,10 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   ::ng-deep .dropdown-item show ng-star-inserted {
-    position: absolute;top: 0px;left: 0px;/* will-change: transform; */transform: translate(235px, 131px);
+    position: absolute;
+    top: 0px;
+    left: 0px;/* will-change: transform; */
+    /* transform: translate(235px, 131px); */
 }
 
 .dropdown-menu .show .ng-star-inserted{
@@ -867,5 +871,18 @@ input[type="search"]::-webkit-search-cancel-button {
     top: 0px;
     left: 0px;
     will-change: auto !important;
-    transform: translate(235px, 131px);
+    /* transform: translate(235px, 131px); */
+    /* font-size: small!important; */
+}
+
+
+
+::ng-deep .dropdown-menu { 
+    /* width: calc(25% - 10px); */
+    /* border: 1px solid grey; */
+    border-top: none;
+    font-size: small!important;
+    width: calc(24%);
+    transform : perspective(1px) translate3d(-10px,-20px,0) scale3d(0.7,0.7, 1);
+    will-change: auto !important;
 }
