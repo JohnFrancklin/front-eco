@@ -9,7 +9,7 @@
         
             <div class="input-group search-group">
                 <input type="text" class="form-control search-input" id="inputSearch" [(ngModel)]="keySearch"
-                    placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)" autocoplete='off' />
+                    placeholder="Rechercher un produit" (keyup.enter)="rechercheProduit(keySearch)" autocomplete="off" />
 
                 <div class="div-content" *ngIf="keySearch!=''">
                     <ul class="content-list">
