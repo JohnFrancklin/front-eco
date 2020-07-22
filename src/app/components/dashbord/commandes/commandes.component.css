@@ -34,15 +34,246 @@
     border: 1px solid #d5d5d5;
     height: 650px;
 }
-
+/*detail commande */
 .detail_droit{
     height: 100%;
-    padding: 5px;
     width: 25%;
     background-color: rgb(231, 231, 231); 
     border: 1px solid #d5d5d5;
     min-height: 650px;
+    padding:8px 8px 8px 0px;
 }
+.lbl_h3_detail{
+    color: rgb(1, 64, 107);
+    margin-bottom:1px;
+    margin-left:8px;
+}
+
+.text_inf{
+    color: rgb(1, 64, 107);
+    float:left;
+    font-size: small;
+    font-weight: 450;
+    margin-left:8px;
+   
+}
+.box_inf_com{
+    width:97%;
+    height:97px;
+    background-color: white;
+    border: 0px solid #d5d5d5;
+    overflow: hidden;
+    padding:8px;
+    margin-bottom: 8px; 
+    margin-left:8px;
+    float:right;
+    
+}
+
+.pos_left{
+    width:100%;
+    height: 50px;
+    float: left;
+}
+.top_val{
+    border-bottom: 1px solid #d5d5d5;
+    width:48%;
+    height:20px;
+    float:left;
+    margin-bottom:0px;
+
+}
+.lbl_left{
+    width:30px;
+    font-weight: 450;
+    color: rgb(1, 64, 107);
+    font-size: small;
+}
+.bott_val{
+    border-bottom: 1px solid #d5d5d5;
+    width:48%;
+    height:20px;
+    float:left;
+    margin-top: 22px;
+
+}
+.text_bottom{
+    float:right;
+    color: #b0b0b0;
+    font-weight: normal;
+    font-size: small;  
+}
+.pos_right{
+    width:100%;
+    height: 50px;
+    float: right;
+    margin-top:-50px;
+}
+.lbl_right_etat{
+    width:56px;
+    font-weight: 450;
+    color: rgb(1, 64, 107);
+    font-size: small;
+    float:right;
+}
+.lbl_right_date{
+    float:right;
+     font-weight: 450;
+    color: rgb(1, 64, 107);
+    font-size: small;
+}
+.bott_right_val{
+    border-bottom: 1px solid #d5d5d5;
+    width:45%;
+    height:20px;
+    float:right;
+    margin-top: 22px;
+
+}
+.top_right_val{
+    border-bottom: 1px solid #d5d5d5;
+    width:45%;
+    height:20px;
+    float:right;
+    margin-bottom:0px;
+
+}
+.box_prod_com{
+    width:100%;
+    height:293px;
+    overflow-y:scroll;
+    border: 1px solid #d5d5d5;
+    margin-bottom:8px;
+    padding:0px 7px 5px 2px;
+    margin-left: 4px;
+
+}
+.type_produit{
+    width:100%;
+    height:90px;
+    background-color: white;
+    border: 0px solid #d5d5d5;
+    padding:5px;
+    margin-bottom:8px;
+    margin-left:5px;
+}
+
+
+
+
+.box_inf_adrs{
+    width:97%;
+    height:140px;
+    background-color: white;
+    border: 1px solid #d5d5d5;
+    overflow: hidden;
+    padding:8px;
+    margin-bottom: 8px;
+    
+    float:right;
+}
+.lbl_pays{
+    border-bottom: 1px solid #d5d5d5;
+    width:45%;
+    height:20px;
+    float:left;
+    margin-bottom:0px;
+}
+.lbl_country{
+    border-bottom: 1px solid #d5d5d5;
+    width:45%;
+    height:20px;
+    float:right;
+ 
+}
+.lbl_right_country{
+    float:right;
+    font-weight: 450;
+    color: rgb(1, 64, 107);
+    font-size: small;
+}
+.box_Adresse{
+    width:100%;
+    height:55px;
+    background-color:#f5f5f5;
+    border: 0px solid #d5d5d5;
+    padding:5px 0px 5px 5px;
+    margin-bottom:2px;
+    margin-top:30px;
+    color: #b0b0b0;
+    font-weight: normal;
+    font-size: small;  
+}
+.box_image_prod{
+    width:28%;
+    float: left;
+    border: 1px solid #d5d5d5;
+    padding: 5px;
+    margin-right:5px;
+    height:80px;
+
+}
+.img_prod{
+    width: 100%;
+    border: 1px solid #d5d5d5;
+    height:70px;
+}
+.detail_prod{
+    width:100%;
+    height: 80px;
+}
+.lbl_nbr{
+    float:left;
+    font-weight: 450;
+    font-size: small;
+    color:black;
+}
+.lbl_nbr_prod{
+    float:right;
+    font-weight: 450;
+    font-size: small;
+    color:black;
+}
+.lbl_index{
+    float:left;
+    color:black;
+     font-weight: normal;
+    font-size: small;  
+}
+.lbl_price{
+    width:100%;
+}
+.name_prod{
+    width:100%;
+    height:26px;    
+}
+
+.nbr_prod{
+    width:100%;
+    height: 30px;  
+}
+
+.prix_prod{
+    width:100%;
+    height: 28px;
+   
+}
+.lbl_text{
+    float:right;
+    font-weight:100;
+    font-size:8px;
+}
+.over_detail{
+    color:#42a7ff;
+    float:right;
+    font-size:11px;
+    font-weight:450;
+}
+
+
+
+
+
 
 .menu_content{
     width: 100%;;
@@ -489,51 +720,77 @@ tr:hover {
     padding-left: 10px;
 }
 /*detail client et mode de paiement*/
+
 .all_inf_client{
     width: calc(55% - 5px);
     height: 34%;
     background-color: white;
     border: 1px solid #d5d5d5;
     float: left;
-    padding: 10px;
     margin-top:-25px;
+    padding:5px ;
+  
  
 }
 .title-cli{
-    margin: -5px;
-    width: calc(102% - 0px);
-    height: 10%;
+    
+    width: 100%;
+    height: 9%;
     background-color: #f5f5f5;
-    border: 1px solid #d5d5d5;
-    display:inline-block; 
+    border: 0px solid #d5d5d5;
+    padding-bottom:1px;
+  
+}
+.text_style_cli{
+    padding-top: -5px;
+    text-align: start;
+    color:rgb(1, 64, 107);
+    padding-left: 12px;
+    display: inline-block;
+    font-weight:450;
+    margin-left:-8px;
+}
+.cli{
+    width:100%;
+    height: 86%;
+    display: block;
+}
+.left_col{
+    width:80px;
+    margin-left:15px;
 }
 .box_image{
-    width: 25%;
+    width:125%;
     background-color: white;
     overflow-y: hidden;
-    margin: 13px 5px 5px -5px;
+    margin: 10px 5px 5px -10px;
     border: 1px solid #d5d5d5;
     display: inline-block;
     padding: 5px;
-   
 }
 .value_date{
-    margin-top: 10px;
+    margin-top: 27px;
 }
 .text_value{
     color:#42a66a;
-    margin-left:12px;
+    margin-left:10px;
     font-weight:450;
+    font-size: small;
 }
 .date_com{
     margin-left:4px;
     font-weight:450;
+    font-size: small;
 }
 .inf_cli{
-    width:68%;
+    width:71%;
     background-color: white;
-    margin-left: 113px;
-    margin-top: -168px;
+    display: block;
+    height: 102%;
+    float: right;
+    margin-top:-176px;
+    padding:1px;
+   
 }
 .img_cli{
     width: 100%;
@@ -543,6 +800,7 @@ tr:hover {
     margin-top:10px;
     width:77%;
     margin-left:5px;
+    float:left;
 }
 .cli_name{
     font-weight:450;
@@ -553,30 +811,44 @@ tr:hover {
 .email{
     font-weight:450;
     font-style:italic;
+    font-size:small;
     color:#42a7ff;
-}
+} 
 .tel{
     font-weight:450;
     color:rgb(1, 64, 107);
+    font-size:small;
 }
 .style_inf{
     margin-top:2px;
     margin-left:4px;
-    width: 102%;
-    height:30%;
+    width: 99%;
+    border: 0px solid ;
+    float:left;
+    background-color:#fafafa ;
+    padding-left: 7px;
+    height:54%;
+    margin-bottom: 0px;
 }
+
 .style_type{
     color: #b0b0b0;
     line-height: 22px;
     font-weight:normal;
     font-size:small;
 }
-.type-right{
-    width:71%;
-    margin-left:-65px;
-    margin-top:-47px;
-    float:right;
+
+.type_attri{
+    width:20%;
+    margin-top:2px;
+    height:98%;
    
+}
+.type-right{
+    width:73%;
+    margin-top:-94px;
+    float:left;
+    margin-left:63px;
 }
 .style_text{
     font-weight:450;
@@ -593,23 +865,14 @@ tr:hover {
     float: right;
     overflow: hidden;   
     margin-top:-25px;
-}
-.border_font{
-    border: 0px solid ;
-    min-height:95%;
-    width:102%;
-    display:inline-block;
-    margin-left:5px;
-    background-color:#fafafa ;
+    padding: 5px;
 }
 .title-p{
-    margin-top: 5px;
-    margin-left:5px;
-    margin-right:5px;
-    width: calc(98.5% - 5px);
+    
+    width:100%;
     height: 9%;
     background-color:#f5f5f5;
-    border: 1px solid #d5d5d5;
+    border: 0px solid #d5d5d5;
     float:left;  
 }
 .text_style{
@@ -622,34 +885,46 @@ tr:hover {
     margin-left:-8px;
 }
 .style_paiement{
-    margin-top:10px;
-    margin-left:14px;
-    line-height: 22px;
+    line-height:21px;
+    width: 102%;
+    height:0%;
+    padding:5px;
 }
-.type_paiement{
-    width:60%;
-    float:right;
-    margin-top:-42px;
+
+.type_p{
+    width:50%;
+    height:0%;
+    margin-top:50px;
 }
 .type_deli{
     width:60%;
     float:right;
-    margin-top:-21px;
+}
+.style_esti{
+    line-height:21px;
+    width: 102%;
+    height:0%;
+    padding:5px;
+}
+.type_paiement{
+    width:60%;
+    float:right;
+   
 }
 .if_save{
     color:#42a7ff;
     float:right;
-    margin-right: 5px;
     font-size: small;
     font-weight:450;
 }
 .text_holder{
-    margin-left:10px;
-    width: calc(98% - 8px);
-    height: 45px;
+    margin-left:7px;
+    width: calc(100% - 8px);
+    height:60px;
     background-color:#f5f5f5;
-    border: 1px solid #d5d5d5;
+    border: 0px solid #d5d5d5;
     float:left; 
     font-size: small;
     font-weight:450;
+    padding: 5px;
 }

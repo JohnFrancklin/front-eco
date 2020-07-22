@@ -160,25 +160,41 @@
                                     <thead>
                                         <tr>
                                             <th class="numero_commande">
-                                                <a (click)="sort(true, 'numero_commande', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                <a (click)="sort(true, 'numero_commande', 'table_commande');">
+                                                    <mat-icon>arrow_upward</mat-icon>
+                                                </a>
                                                 Numero
-                                                <a (click)="sort(false, 'numero_commande', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                                <a (click)="sort(false, 'numero_commande', 'table_commande');">
+                                                    <mat-icon>arrow_downward</mat-icon>
+                                                </a>
                                             </th>
                                             <th class="client">
-                                                
-                                                <a (click)="sort(true, 'client', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+
+                                                <a (click)="sort(true, 'client', 'table_commande');">
+                                                    <mat-icon>arrow_upward</mat-icon>
+                                                </a>
                                                 Client
-                                                <a (click)="sort(false, 'client', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                                <a (click)="sort(false, 'client', 'table_commande');">
+                                                    <mat-icon>arrow_downward</mat-icon>
+                                                </a>
                                             </th>
                                             <th class="etat">
-                                                <a (click)="sort(true, 'etat', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                                <a (click)="sort(true, 'etat', 'table_commande');">
+                                                    <mat-icon>arrow_upward</mat-icon>
+                                                </a>
                                                 Etat
-                                                <a (click)="sort(false, 'etat', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                                <a (click)="sort(false, 'etat', 'table_commande');">
+                                                    <mat-icon>arrow_downward</mat-icon>
+                                                </a>
                                             </th>
-                                            <th class="date_creation">  
-                                                <a (click)="sort(true, 'date_creation', 'table_commande');"><mat-icon>arrow_upward</mat-icon></a>
+                                            <th class="date_creation">
+                                                <a (click)="sort(true, 'date_creation', 'table_commande');">
+                                                    <mat-icon>arrow_upward</mat-icon>
+                                                </a>
                                                 Date
-                                                <a (click)="sort(false, 'date_creation', 'table_commande');"><mat-icon>arrow_downward</mat-icon></a>
+                                                <a (click)="sort(false, 'date_creation', 'table_commande');">
+                                                    <mat-icon>arrow_downward</mat-icon>
+                                                </a>
                                             </th>
                                         </tr>
                                     </thead>
@@ -215,12 +231,12 @@
                                 </span>
                             </div> -->
                         </div>
-                       
+
                     </div>
-           
-            
-                    
-                
+
+
+
+
                     <div class="loadMore" *ngIf="loadMore">
                         <!-- <ngx-spinner [name]="spinner_loadMore" [fullScreen]="false" type="line-scale" size="5px"
                             [bdColor]="spinner_background">
@@ -229,91 +245,273 @@
 
                 </div>
             </div>
-    <!--detail client et mode de paiement-->      
+            <!--detail client et mode de paiement-->
+
             <div class="all_inf_client">
                 <div class="title-cli">
-                    <span class="text_style">Information du client</span>
+                    <span class="text_style_cli">Information du client</span>
                 </div>
-                <div class="box_image" >
-                    <img src="../../../../assets/images/your-logo-png-8.png" class="img_cli">
-                </div>
-                <div class="value_date">
-                    <span class="text_value">
-                        Abonned
-                    </span><br>
-                    <span class="date_com">
-                        10/03/2012
-                    </span>
-                    <div class="inf_cli">
+                <div class="cli">
+                    <div class="left_col">
+                        <div class="box_image">
+                            <img src="../../../../assets/images/your-logo-png-8.png" class="img_cli">
+                        </div>
+                        <div class="value_date">
+                            <span class="text_value">
+                                Abonned
+                            </span><br>
+                            <span class="date_com">
+                                10/03/2012
+                            </span>
+                        </div>
+                    </div>
+                    <div class='inf_cli'>
                         <div class="information">
                             <span class="cli_name">RAZAFINARIVO John Francklin</span><br>
                             <span class="email">johnfrancklin@yahoo.com</span><br>
                             <span class="tel">034 61 678 51</span>
                         </div>
-                            <div class="border_font">
-                                <div class="style_inf">
-                                    <span class="style_type">Pays:</span><br>
-                                    <span class="style_type">Ville:</span><br> 
-                                    <span class="style_type">Adresse:</span>
-                                    <div class="type-right">
-                                        <span class="style_text">Madagascar</span><br>
-                                        <span class="style_text">Antananarivo - 101</span><br>
-                                        <span class="style_text">Mahamasina, 2536KF en face de Stade Municipale</span><br>
-                                    </div>
-                                </div>
+
+                        <div class="style_inf">
+                            <div class="type_attri">
+                                <span class="style_type">Pays:</span><br>
+                                <span class="style_type">Ville:</span><br>
+                                <span class="style_type">Adresse:</span>
                             </div>
-                        </div>  
+
+                            <div class="type-right">
+                                <span class="style_text">Madagascar</span><br>
+                                <span class="style_text">Antananarivo - 101</span><br>
+                                <span class="style_text">Mahamasina, 2536KF en face de Stade Municipale</span><br>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
             <div class="paiement">
                 <div class="title-p">
                     <span class="text_style">Paiement</span>
                 </div>
                 <div class="style_paiement">
-                            <span class="style_type">Méthode:</span><br>
-                            <span class="style_type">Transaction:</span><br>
-                            <span class="style_type">Somme:</span>
-                        <div class="type_paiement">
-                            <span class="style_text">VISA</span><br>
-                            <span class="style_text">23154512124545421</span><br>
-                            <span class="style_text">52000 ariary</span>
-                        </div>
+                    <div class="type_attri">
+                        <span class="style_type">Méthode:</span><br>
+                        <span class="style_type">Transaction:</span><br>
+                        <span class="style_type">Somme:</span>
+                    </div>
+
+                    <div class="type_paiement">
+                        <span class="style_text">VISA</span><br>
+                        <span class="style_text">23154512124545421</span><br>
+                        <span class="style_text">52000 ariary</span>
+                    </div>
                 </div>
                 <div class="title-p">
-                        <span class="text_style">Délivrance</span>
+                    <span class="text_style">Délivrance</span>
                 </div>
-                <div class="style_paiement">
+                <div class="style_esti">
+                    <div class="type_p">
                         <span class="style_type">Date d'estimation</span><br>
                         <span class="style_type">Note de delivrance:</span>
+                    </div>
+
                     <div class="type_deli">
-                            <span class="style_text">24/10/2019</span><br>
-                            <span class="if_save">Enregistrer</span>
+                        <span class="style_text">24/10/2019</span><br>
+                        <span class="if_save">Enregistrer</span>
                     </div>
                 </div>
                 <div>
                     <textarea class="text_holder" placeholder=" Ecrire votre note ici ..."></textarea>
                 </div>
             </div>
-         </div>
-        
-    <!--fin detail client et paiement--> 
-        <div class="detail_droit">
-
-            espace vide
-
-
-
-
         </div>
-        
+        <!--fin detail client et paiement-->
+        <div class="detail_droit">
+            <h3 class="lbl_h3_detail">Detail du commande</h3>
+            <span class="text_inf"> Information du commande</span>
+            <div class="box_inf_com">
+                <div class="pos_left">
+                    <div class="top_val">
+                        <span class="lbl_left">25104</span><br>
+                        <div class="text_bottom">
+                            Numero
+                        </div>
+                    </div><br>
+                    <div class="bott_val">
+                        <span class="lbl_left">Rakoto Jean Paul</span><br>
+                        <div class="text_bottom">
+                            Nom client
+                        </div>
+                    </div>
+                </div>
+                <div class="pos_right">
+                    <div class="top_right_val">
+                        <span class="lbl_right_etat">Accepted</span><br>
+                        <div class="text_bottom">
+                            Etat
+                        </div>
+                    </div><br>
+                    <div class="bott_right_val">
+                        <span class="lbl_right_date">25-06-20 a 14:06</span><br>
+                        <div class="text_bottom">
+                            Date
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="text_inf">
+                Produits commandés (3)
+            </span>
+            <div class="box_prod_com">
+                <div class=type_produit>
+                    <div class="box_image_prod">
+                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
+                    </div>
+                    <div class="detail_prod">
+                        <div class="name_prod">
+                            <span class="lbl_left">
+                                Télèphone Samsung
+                            </span>
+                            <span class="lbl_text">
+                                #Mobile
+                            </span>
+                        </div>
+                        <div class="nbr_prod">
+                            <span class="lbl_nbr">
+                                23&nbsp;
+                            </span>
+                            <span class="lbl_index"> pièces</span>
+                            <div class="lbl_price">
+                                <span class="text_bottom">ariary/pièces</span>
+                                <span class="lbl_nbr_prod">
+                                    1000&nbsp;
+                                </span>
+                                
+                            </div>
+                        </div>
+                        <div class="prix_prod">
+                            <span class="lbl_nbr">
+                                230000&nbsp;
+                            </span>
+                            <span class="lbl_index">ariary</span>
+                            <div class="over_detail">
+                                Plus de détails
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=type_produit>
+                    <div class="box_image_prod">
+                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
+                    </div>
+                    <div class="detail_prod">
+                        <div class="name_prod">
+                            <span class="lbl_left">
+                                Ventilateur Haut gamme
+                            </span>
+                            <span class="lbl_text">
+                                #Mobile
+                            </span>
+                        </div>
+                        <div class="nbr_prod">
+                            <span class="lbl_nbr">
+                                02&nbsp;
+                            </span>
+                            <span class="lbl_index"> pièces</span>
+                            <div class="lbl_price">
+                                <span class="text_bottom">ariary/pièces</span>
+                                <span class="lbl_nbr_prod">
+                                    1700&nbsp;
+                                </span>
+                                
+                            </div>
+                        </div>
+                        <div class="prix_prod">
+                            <span class="lbl_nbr">
+                                230000&nbsp;
+                            </span>
+                            <span class="lbl_index">ariary</span>
+                            <div class="over_detail">
+                                Plus de détails
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=type_produit>
+                    <div class="box_image_prod">
+                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
+                    </div>
+                    <div class="detail_prod">
+                        <div class="name_prod">
+                            <span class="lbl_left">
+                                Télè Plasma 42"
+                            </span>
+                            <span class="lbl_text">
+                                #Mobile
+                            </span>
+                        </div>
+                        <div class="nbr_prod">
+                            <span class="lbl_nbr">
+                                01&nbsp;
+                            </span>
+                            <span class="lbl_index"> pièces</span>
+                            <div class="lbl_price">
+                                <span class="text_bottom">ariary/pièces</span>
+                                <span class="lbl_nbr_prod">
+                                    5210&nbsp;
+                                </span>
+                                
+                            </div>
+                        </div>
+                        <div class="prix_prod">
+                            <span class="lbl_nbr">
+                                521000&nbsp;
+                            </span>
+                            <span class="lbl_index">ariary</span>
+                            <div class="over_detail">
+                                Plus de détails
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <span class="text_inf">
+                Adresse du destinataire
+            </span>
+            <div class="box_inf_adrs">
+                <div class="lbl_pays">
+                    <span class="lbl_left">Madagascar</span><br>
+                    <div class="text_bottom">
+                        Pays
+                    </div>
+                </div>
+                <div class="lbl_country">
+                    <span class="lbl_right_country">Antananarivo-101</span><br>
+                    <div class="text_bottom">
+                        Ville
+                    </div>
+                </div><br>
+                <div class="box_Adresse">
+                    Mahamasina, Lot 5623 en face Stade municipale
+                </div>
+                <span class="text_bottom">
+                    Adresse
+                </span>
+            </div>
+        </div>
     </div>
-   
+
+</div>
 
 
-    <ng-template #imageProduit style="background-color: white;">
-        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
-    </ng-template>
 
 
-    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
-    </div>
+<ng-template #imageProduit style="background-color: white;">
+    <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+</ng-template>
+
+
+<div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
+</div>
