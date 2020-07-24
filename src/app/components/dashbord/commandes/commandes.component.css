@@ -63,7 +63,7 @@
     background-color: white;
     border: 0px solid #d5d5d5;
     overflow: hidden;
-    padding:8px;
+    padding:2px;
     margin-bottom: 8px; 
     margin-left:10px;
     float:right;   
@@ -94,10 +94,56 @@
     float:left;
     margin-top: 22px;
 }
+.groupe_content{
+    width: 100%;
+    display: flex;
+    height: 45%;
+}
+.detail_to_change{
+    width: 100%;
+    background-color: white;
+    height: 52px;
+    padding: 5px;
+}
+.label_change{
+    float: right;
+    margin-right: 4px;
+    margin-bottom: -3px;
+    font-size: small;
+    color: grey;
+}
+.sideToside{
+    display: inline;
+}
+
+.leftSide{
+    width: 50%;
+}
+
+.rightSide{
+    width: 50%;
+}
+.rightNumber{
+    text-align: end;
+}
+
+.input_tochange{
+    float: left;
+    width: 100%;
+    border: 0.5px solid #d5d5d5;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    padding-left:0px;
+    color:rgb(1, 64, 107);
+    font-size: small;
+    font-weight: 450;
+}
+
 .text_bottom{
     float:right;
-    color: #b0b0b0;
-    font-weight: normal;
+    color: grey;
+   
     font-size: small;  
 }
 .pos_right{
@@ -187,12 +233,11 @@
 }
 .box_Adresse{
     width:100%;
-    height:55px;
+    height:50px;
     background-color:#f5f5f5;
     border: 0px solid #d5d5d5;
     padding:5px 0px 5px 5px;
     margin-bottom:2px;
-    margin-top:30px;
     color: #b0b0b0;
     font-weight: normal;
     font-size: small;  
@@ -203,7 +248,7 @@
     border: 1px solid #d5d5d5;
     padding: 5px;
     margin-right:5px;
-    height:80px;
+    height:60px;
 
 }
 .img_prod{
