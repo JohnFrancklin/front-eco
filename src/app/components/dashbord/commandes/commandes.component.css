@@ -41,42 +41,40 @@
     background-color: rgb(231, 231, 231); 
     border: 1px solid #d5d5d5;
     min-height: 650px;
-    padding:8px 8px 8px 0px;
+    padding:10px;
 }
 .lbl_h3_detail{
     color: rgb(1, 64, 107);
     margin-bottom:1px;
-    margin-left:8px;
-}
-
+} 
 .text_inf{
     color: rgb(1, 64, 107);
     float:left;
     font-size: small;
     font-weight: 450;
-    margin-left:8px;
-   
+}
+.lbl_total{
+    float:right;
+    font-size:15px;
 }
 .box_inf_com{
-    width:97%;
+    width:100%;
     height:97px;
     background-color: white;
     border: 0px solid #d5d5d5;
     overflow: hidden;
     padding:8px;
     margin-bottom: 8px; 
-    margin-left:8px;
-    float:right;
-    
+    margin-left:10px;
+    float:right;   
 }
-
 .pos_left{
     width:100%;
     height: 50px;
     float: left;
 }
 .top_val{
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 0.5px solid #d5d5d5;
     width:48%;
     height:20px;
     float:left;
@@ -90,12 +88,11 @@
     font-size: small;
 }
 .bott_val{
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 0.5px solid #d5d5d5;
     width:48%;
     height:20px;
     float:left;
     margin-top: 22px;
-
 }
 .text_bottom{
     float:right;
@@ -123,29 +120,29 @@
     font-size: small;
 }
 .bott_right_val{
-    border-bottom: 1px solid #d5d5d5;
-    width:45%;
+    border-bottom: 0.5px solid #d5d5d5;
+    width:47%;
     height:20px;
     float:right;
     margin-top: 22px;
 
 }
 .top_right_val{
-    border-bottom: 1px solid #d5d5d5;
-    width:45%;
+    border-bottom: 0.5px solid #d5d5d5;
+    width:47%;
     height:20px;
     float:right;
     margin-bottom:0px;
 
 }
 .box_prod_com{
-    width:100%;
+    width:103%;
     height:293px;
     overflow-y:scroll;
     border: 1px solid #d5d5d5;
     margin-bottom:8px;
     padding:0px 7px 5px 2px;
-    margin-left: 4px;
+    margin-left: -6px;
 
 }
 .type_produit{
@@ -155,14 +152,10 @@
     border: 0px solid #d5d5d5;
     padding:5px;
     margin-bottom:8px;
-    margin-left:5px;
+    margin-left:3px;
 }
-
-
-
-
 .box_inf_adrs{
-    width:97%;
+    width:100%;
     height:140px;
     background-color: white;
     border: 1px solid #d5d5d5;
@@ -174,7 +167,7 @@
 }
 .lbl_pays{
     border-bottom: 1px solid #d5d5d5;
-    width:45%;
+    width:49%;
     height:20px;
     float:left;
     margin-bottom:0px;
@@ -260,8 +253,8 @@
 }
 .lbl_text{
     float:right;
-    font-weight:100;
-    font-size:8px;
+    font-weight:450;
+    font-size:10px;
 }
 .over_detail{
     color:#42a7ff;
