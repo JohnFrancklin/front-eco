@@ -18,6 +18,57 @@ export class FavoriteComponent implements OnInit {
   // sla;
 
 
+fiche = {
+    dateIncident: null,
+    trigrammeTSM: "ABC",
+    infoClient : {
+      num_client : 12121212,
+      email_client : "orange@test.com",
+      num_concerne : 32321245,
+      anciennete: true,
+      localisation: " text", // string
+      coordonneeGPS: "text",
+      emplacementDeplace: null,
+      indoor: null // boolean
+    },
+    equipementOuOffre : {
+      internet: "medium", // ou medium ou plus  *String
+      flybox: "ie", // ou homenet ou orangenet  *String
+      modem: "domino", // ou cle_usb ou wifi_dock  *String
+      equipementClient: "pc", // ou smartphone ou tablelle  *string
+      autreEquipement: "tpe", // ou geolocalisation ou autres  *string
+    },
+    reclamationClient : {
+      typeReseau: "2g", // ou 3g ou 4g ou 4gttd  *string
+      problemReclame: "lenteur", // ou coupure ou microcoupure  *string
+      descriptionReclame: "text"  // text  pas string
+    },
+    investigation: {
+      profil: "sim_active", // ou string
+      niveauSignal: "1", // 
+      testCroise: false, // boolean
+      resultatTest: "text" // text pas string
+    },
+    intervention: {
+      trigrammeTic : "ABC",
+      outdoor: {
+        verificationReseau: "text",
+        vitesse: "text",
+        unisonMobile: "text",
+        resultatPing: "text",
+        autres: "text"
+      },
+      indoor: {
+        verificationReseau: "text",
+        vitesse: "text",
+        unisonMobile: "text",
+        resultatPing: "text",
+        autres: "text"
+      },
+      conclusionTic: "concl",
+      observationTic: "obs"
+    }
+ }
 
 
   constructor() { }
@@ -29,6 +80,119 @@ export class FavoriteComponent implements OnInit {
     this.calcluleDate();
 
   }
+  getValue(){
+
+    let dateIncident = (document.querySelector('input[name="dateIncident"]') as HTMLInputElement).value;
+    let trigrammeTSM = (document.querySelector('input[name="trigrammeTSM"]') as HTMLInputElement).value;
+    let num_client = (document.querySelector('input[name="num_client"]') as HTMLInputElement).value;
+    let num_concerne = (document.querySelector('input[name="num_concerne"]') as HTMLInputElement).value;
+    let email_client = (document.querySelector('input[name="email_client"]') as HTMLInputElement).value;
+    let anciennete = (document.querySelector('input[name="anciennete"]:checked') as HTMLInputElement).value;
+    let localisation = (document.querySelector('textarea[name="localisation"]') as HTMLInputElement).value;
+    let coordonneeGPS = (document.querySelector('textarea[name="coordonneeGPS"]') as HTMLInputElement).value;
+    let emplacementDeplace = (document.querySelector('input[name="emplacementDeplace"]:checked') as HTMLInputElement).value;
+    let indoor = (document.querySelector('input[name="indoor"]:checked') as HTMLInputElement).value;
+    let internet = (document.querySelector('input[name="internet"]:checked') as HTMLInputElement).value;
+    let flybox = (document.querySelector('input[name="flybox"]:checked') as HTMLInputElement).value;
+    let modem = (document.querySelector('input[name="modem"]:checked') as HTMLInputElement).value;
+    let equipementClient = (document.querySelector('input[name="equipementClient"]:checked') as HTMLInputElement).value;
+    let autreEquipement = (document.querySelector('input[name="autreEquipement"]:checked') as HTMLInputElement).value;
+    let typeReseau = (document.querySelector('input[name="typeReseau"]:checked') as HTMLInputElement).value;
+    let problemReclame = (document.querySelector('input[name="problemReclame"]:checked') as HTMLInputElement).value;
+    let descriptionReclame = (document.querySelector('textarea[name="descriptionReclame"]') as HTMLInputElement).value;
+    let profil = (document.querySelector('input[name="profil"]:checked') as HTMLInputElement).value;
+    let niveauSignal = (document.querySelector('input[name="niveauSignal"]:checked') as HTMLInputElement).value;
+    let testCroise = (document.querySelector('input[name="testCroise"]:checked') as HTMLInputElement).value;
+    let resultatTest = (document.querySelector('textarea[name="resultatTest"]') as HTMLInputElement).value;
+    let trigrammeTic = (document.querySelector('input[name="trigrammeTic"]') as HTMLInputElement).value;
+    let o_verificationReseau = (document.querySelector('textarea[name="o_verificationReseau"]') as HTMLInputElement).value;
+    let o_vitesse = (document.querySelector('textarea[name="o_vitesse"]') as HTMLInputElement).value;
+    let o_unisonMobile = (document.querySelector('textarea[name="o_unisonMobile"]') as HTMLInputElement).value;
+    let o_resultatPing = (document.querySelector('textarea[name="o_resultatPing"]') as HTMLInputElement).value;
+    let o_autres = (document.querySelector('textarea[name="o_autres"]') as HTMLInputElement).value;
+    
+    let i_verificationReseau = (document.querySelector('textarea[name="i_verificationReseau"]') as HTMLInputElement).value;
+    let i_vitesse = (document.querySelector('textarea[name="i_vitesse"]') as HTMLInputElement).value;
+    let i_unisonMobile = (document.querySelector('textarea[name="i_unisonMobile"]') as HTMLInputElement).value;
+    let i_resultatPing = (document.querySelector('textarea[name="i_resultatPing"]') as HTMLInputElement).value;
+    let i_autres = (document.querySelector('textarea[name="i_autres"]') as HTMLInputElement).value;
+    let conclusionTic = (document.querySelector('textarea[name="conclusionTic"]') as HTMLInputElement).value;
+    let observationTic = (document.querySelector('textarea[name="observationTic"]') as HTMLInputElement).value;
+
+
+      console.log("Valeur", indoor);
+
+
+
+      let data = {
+        dateIncident: dateIncident,
+        trigrammeTSM: trigrammeTSM,
+        infoClient : {
+          num_client : num_client,
+          email_client : email_client,
+          num_concerne : num_concerne,
+          anciennete: anciennete,
+          localisation: localisation,
+          coordonneeGPS: coordonneeGPS,
+          emplacementDeplace: emplacementDeplace,
+          indoor: indoor
+        },
+        equipementOuOffre : {
+          internet: internet, 
+          flybox: flybox,
+          modem: modem, 
+          equipementClient: equipementClient, 
+          autreEquipement: autreEquipement,
+        },
+        reclamationClient : {
+          typeReseau: typeReseau,
+          problemReclame: problemReclame,
+          descriptionReclame: descriptionReclame
+        },
+        investigation: {
+          profil: profil,
+          niveauSignal: niveauSignal,
+          testCroise: testCroise,
+          resultatTest: resultatTest
+        },
+        intervention: {
+          trigrammeTic : trigrammeTic,
+          outdoor: {
+            verificationReseau: o_verificationReseau,
+            vitesse: o_vitesse,
+            unisonMobile: o_unisonMobile,
+            resultatPing: o_resultatPing,
+            autres: o_autres
+          },
+          indoor: {
+            verificationReseau: i_verificationReseau,
+            vitesse: i_vitesse,
+            unisonMobile: i_unisonMobile,
+            resultatPing: i_resultatPing,
+            autres: i_autres
+          },
+          conclusionTic: conclusionTic,
+          observationTic: observationTic
+        }
+     }
+    
+
+     console.log("data", data);
+     
+
+      // {
+      //   "title": "Titre de la fiche",
+      // "data": "Données de la fiche"
+      // }
+
+
+    
+  }
+
+
+
+
+
 
   objet: any;
 
@@ -65,7 +229,7 @@ export class FavoriteComponent implements OnInit {
 
 
 
-    console.log("START DATE", dateDebut);
+    // console.log("START DATE", dateDebut);
 
     for (let i = 0; i < nombreDateVoulu; i++) {
 
@@ -76,15 +240,15 @@ export class FavoriteComponent implements OnInit {
       } else {
         dateDebut = new Date(dateDebut.getTime() + inc);
       }
-      console.log("---------------------------------------------------");
-      console.log("les date debut", dateDebut);
+      // console.log("---------------------------------------------------");
+      // console.log("les date debut", dateDebut);
 
 
       actuelTime = this.getMilisecondGood(dateDebut);
 
       // si dans la matiné
       if (actuelTime >= h_08_00 && actuelTime <= h_12_00) {
-        console.log("Matiné");
+        // console.log("Matiné");
         // lesDates.push(dateDebut);
         // console.log("dateDebut", dateDebut);
         // console.log("actualtime",actuelTime);
@@ -98,13 +262,13 @@ export class FavoriteComponent implements OnInit {
         //***calcluer heure restant depuis la notif à la pause 12:00 */
         heurePasseeMili = h_12_00 - this.getMilisecondGood(dateDebut);
         heurePassee = this.millisecondeToTime(heurePasseeMili);
-        console.log("heurePassee", heurePassee);
+        // console.log("heurePassee", heurePassee);
         // console.log("dateDebut", dateDebut);
 
         //recuperer les temps restant avant prochaine notification
         heureRestantMili = this.getMilisecond(sla, 0, 0) - (heurePasseeMili);
         heureRestant = this.millisecondeToTime(heureRestantMili);
-        console.log("heureRestant", heureRestant);
+        // console.log("heureRestant", heureRestant);
 
         //creer la date de prochaine notification
         let yyyy = dateDebut.getFullYear();
@@ -114,13 +278,13 @@ export class FavoriteComponent implements OnInit {
         dateDebut = this.convertStringToDate(dateProchaineNotification);
         lesDates.push(dateDebut);
 
-        console.log("La date prochaine notification apres midi", dateDebut);
+        // console.log("La date prochaine notification apres midi", dateDebut);
 
 
       }
       // si au midi
       else if (actuelTime > h_12_00 && actuelTime < h_13_30) {
-        console.log("Midi");
+        // console.log("Midi");
 
         let dernierNotif: Date;
         let heurePassee;
@@ -136,13 +300,13 @@ export class FavoriteComponent implements OnInit {
         //***calcluer heure restant depuis la notif à la pause 12:00 */
         heurePasseeMili = h_12_00 - this.getMilisecondGood(dernierNotif);
         heurePassee = this.millisecondeToTime(heurePasseeMili);
-        console.log("heurePassee", heurePassee);
+        // console.log("heurePassee", heurePassee);
         // console.log("dateDebut", dateDebut);
 
         //recuperer les temps restant avant prochaine notification
         heureRestantMili = this.getMilisecond(sla, 0, 0) - (heurePasseeMili);
         heureRestant = this.millisecondeToTime(heureRestantMili);
-        console.log("heureRestant", heureRestant);
+        // console.log("heureRestant", heureRestant);
 
         //creer la date de prochaine notification
         let yyyy = dateDebut.getFullYear();
@@ -152,7 +316,7 @@ export class FavoriteComponent implements OnInit {
         dateDebut = this.convertStringToDate(dateProchaineNotification);
         lesDates.push(dateDebut);
 
-        console.log("La date prochaine notification apres midi", dateDebut);
+        // console.log("La date prochaine notification apres midi", dateDebut);
 
 
 
@@ -161,7 +325,7 @@ export class FavoriteComponent implements OnInit {
       }
       // si dans l'apres midi
       else if (actuelTime >= h_13_30 && actuelTime <= h_17_30) {
-        console.log("***********************apres midi");
+        // console.log("***********************apres midi");
         // lesDates.push(dateDebut);
         // console.log("actualtime",actuelTime);
 
@@ -178,12 +342,12 @@ export class FavoriteComponent implements OnInit {
           // recuperer les temps passees apres la derniere notification
           heurePasseeMili = h_12_00 - this.getMilisecondGood(dernierNotif);
           heurePassee = this.millisecondeToTime(heurePasseeMili);
-          console.log("heurePassee", heurePassee);
+          // console.log("heurePassee", heurePassee);
 
           //recuperer les temps restant avant prochaine notification
           heureRestantMili = this.getMilisecond(sla, 0, 0) - (heurePasseeMili);
           heureRestant = this.millisecondeToTime(heureRestantMili);
-          console.log("heure restant", heureRestant);
+          // console.log("heure restant", heureRestant);
 
           //creer la date de prochaine notification
           let yyyy = dateDebut.getFullYear();
@@ -194,7 +358,7 @@ export class FavoriteComponent implements OnInit {
           dateDebut = this.convertStringToDate(dateProchaineNotification);
           lesDates.push(dateDebut);
 
-          console.log("La date prochaine notification", dateDebut);
+          // console.log("La date prochaine notification", dateDebut);
 
 
         }
@@ -203,7 +367,7 @@ export class FavoriteComponent implements OnInit {
       }
       // si apres la rentrée avant minuit
       else if (actuelTime >= h_17_30 && actuelTime <= h_23_59) {
-        console.log("soiré avant minuit");
+        // console.log("soiré avant minuit");
         // console.log("la taille des dates", lesDates.length);
         //************************************** */
         let dernierNotif: Date;
@@ -221,13 +385,13 @@ export class FavoriteComponent implements OnInit {
           // recuperer les temps passees apres la derniere notification
           heurePasseeMili = h_17_30 - this.getMilisecondGood(dernierNotif);
           heurePassee = this.millisecondeToTime(heurePasseeMili);
-          console.log("heurePassee", heurePassee);
+          // console.log("heurePassee", heurePassee);
           // console.log("dateDebut", dateDebut.toUTCString());
 
           //recuperer les temps restant avant prochaine notification
           heureRestantMili = this.getMilisecond(sla, 0, 0) - (heurePasseeMili);
           heureRestant = this.millisecondeToTime(heureRestantMili);
-          console.log("heure restant", heureRestant);
+          // console.log("heure restant", heureRestant);
 
           //creer la date de prochaine notification
           let yyyy = dateDebut.getFullYear();
@@ -238,7 +402,7 @@ export class FavoriteComponent implements OnInit {
           dateDebut = this.convertStringToDate(dateProchaineNotification);
           lesDates.push(dateDebut);
 
-          console.log("La date prochaine notification", dateDebut);
+          // console.log("La date prochaine notification", dateDebut);
 
 
         }
@@ -247,7 +411,7 @@ export class FavoriteComponent implements OnInit {
       }
       //si minuit avant 8h00
       else {
-        console.log("a l'aube");
+        // console.log("a l'aube");
 
         let dernierNotif: Date;
         let heurePassee;
@@ -264,13 +428,13 @@ export class FavoriteComponent implements OnInit {
           // recuperer les temps passees apres la derniere notification
           heurePasseeMili = h_17_30 - this.getMilisecondGood(dernierNotif);
           heurePassee = this.millisecondeToTime(heurePasseeMili);
-          console.log("heurePassee", heurePassee);
+          // console.log("heurePassee", heurePassee);
           // console.log("dateDebut", dateDebut.toUTCString());
 
           //recuperer les temps restant avant prochaine notification
           heureRestantMili = this.getMilisecond(sla, 0, 0) - (heurePasseeMili);
           heureRestant = this.millisecondeToTime(heureRestantMili);
-          console.log("heure restant", heureRestant);
+          // console.log("heure restant", heureRestant);
 
           //creer la date de prochaine notification
           let yyyy = dateDebut.getFullYear();
@@ -281,7 +445,7 @@ export class FavoriteComponent implements OnInit {
           dateDebut = this.convertStringToDate(dateProchaineNotification);
           lesDates.push(dateDebut);
 
-          console.log("La date prochaine notification", dateDebut);
+          // console.log("La date prochaine notification", dateDebut);
 
 
         }
@@ -431,7 +595,7 @@ export class FavoriteComponent implements OnInit {
     // console.log("liste date", listeDate);
 
 
-    console.log("Les dates", lesDates);
+    // console.log("Les dates", lesDates);
 
 
 
@@ -456,11 +620,11 @@ export class FavoriteComponent implements OnInit {
 
     // console.log("actuelTime", actuelTime);
 
-    console.log("h_00_00", h_00_00);
-    console.log("h_08_00", h_08_00);
-    console.log("h_12_00", h_12_00);
-    console.log("h_13_30", h_13_30);
-    console.log("h_17_30", h_17_30);
+    // console.log("h_00_00", h_00_00);
+    // console.log("h_08_00", h_08_00);
+    // console.log("h_12_00", h_12_00);
+    // console.log("h_13_30", h_13_30);
+    // console.log("h_17_30", h_17_30);
 
 
 
@@ -562,7 +726,7 @@ export class FavoriteComponent implements OnInit {
       nombreJour++;
     }
 
-    console.log("le reste", this.millisecondeToTime(reste));
+    // console.log("le reste", this.millisecondeToTime(reste));
     
     //******Si reste est superieur au demi journee****// */
     if (reste >= demiJournee) {
@@ -574,18 +738,18 @@ export class FavoriteComponent implements OnInit {
           depart = "S";
 
 
-          console.log("date deb", dateDebut);
+          // console.log("date deb", dateDebut);
           
           
 
           let isWeekend = this.checkDateIfWeekend(dateDebut);
           if(isWeekend){
-            console.log("weekend");
+            // console.log("weekend");
             reste = reste + journee;
             nombreJourWeekendAndJourFerie++;
           }
           else{
-            console.log("tsy weekend!");
+            // console.log("tsy weekend!");
           }
 
 
@@ -597,10 +761,10 @@ export class FavoriteComponent implements OnInit {
           depart = "M";
           nombreJour++;
 
-          console.log("Nombre de jour", nombreJour);
+          // console.log("Nombre de jour", nombreJour);
           
           dateDebut = new Date(dateDebut.setDate(dateDebut.getDate() +1));
-          console.log("date deb", dateDebut);
+          // console.log("date deb", dateDebut);
           
           //*****on check le jour si c'est le weekend */
           // dateLeLendemain = new Date(dateDebut.setDate(dateDebut.getDate() +1)); //plus un le lendemain
@@ -610,12 +774,12 @@ export class FavoriteComponent implements OnInit {
               
           let isWeekend = this.checkDateIfWeekend(dateDebut);
           if(isWeekend){
-            console.log("weekend");
+            // console.log("weekend");
             reste = reste + journee;
             nombreJourWeekendAndJourFerie++;
           }
           else{
-            console.log("tsy weekend!");
+            // console.log("tsy weekend!");
           }
           //***************************************** */
         }
@@ -623,11 +787,11 @@ export class FavoriteComponent implements OnInit {
       while (reste >= demiJournee);
 
     }else{
-      console.log("MANDALO ATO AM ELSE ATO E");
+      // console.log("MANDALO ATO AM ELSE ATO E");
     }
 
-    console.log("weekend", nombreJourWeekendAndJourFerie);
-    console.log("NOMBRE JOUR", nombreJour);
+    // console.log("weekend", nombreJourWeekendAndJourFerie);
+    // console.log("NOMBRE JOUR", nombreJour);
     
     // nombreJour = nombreJour + nombreJourWeekendAndJourFerie;
     // console.log("NOMBRE JOUR", nombreJour);
@@ -635,15 +799,15 @@ export class FavoriteComponent implements OnInit {
     //*******reuperer l'heure du prochaine notification********* */ 
     if (tabJour.length > 0) {
       if (tabJour[tabJour.length - 1] == "M") {
-        console.log(" oui Matinée");
+        // console.log(" oui Matinée");
         heureProchaine = h_13_30 + reste;
         if(hour >= 8 && hour <= 12){
           dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() ));
-          console.log("avant 12");
+          // console.log("avant 12");
           
         }else{
           dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() +1));
-          console.log("apres 12");
+          // console.log("apres 12");
         }
         
         
@@ -673,15 +837,25 @@ export class FavoriteComponent implements OnInit {
     dateEtHeureComplet = this.convertStringToDate(datecompletMilli);
 
     // console.log(this.millisecondeToTime(reste));
-    console.log("Nombre de jour passée", nombreJour);
-    // console.log("heure prochaine", this.millisecondeToTime(heureProchaine));
-    console.log("----------------------------------------------------------------");
+    // console.log("Nombre de jour passée", nombreJour);
+    // // console.log("heure prochaine", this.millisecondeToTime(heureProchaine));
+    // console.log("----------------------------------------------------------------");
     
-    console.log("date et heure complete", dateEtHeureComplet);
+    // console.log("date et heure complete", dateEtHeureComplet);
 
-    console.log("----------------------------------------------------------------");
+    // console.log("----------------------------------------------------------------");
 
-    console.log(tabJour);
+    // console.log(tabJour);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -690,6 +864,8 @@ export class FavoriteComponent implements OnInit {
 
   }
 
+
+  
 
 
 

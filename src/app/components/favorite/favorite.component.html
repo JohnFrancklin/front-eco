@@ -1,1 +1,477 @@
 <app-boxclient #header></app-boxclient>
+
+<div style="background-color: rgb(209, 209, 209);">
+
+
+
+    <h4 class="grandTitre">
+        <span style="border: 1px solid black; padding: 5px; background-color: #fff;">
+            ASSISTANCE TECHNICIEN SOLUTION MOBILE <button (click)="getValue()">enregistrer</button>
+        </span>
+    </h4>
+
+    <table style="border-collapse: collapse; border: 1px solid grey; width: 100%;">
+        <tr>
+            <td class="colo tabTitle">DATE ET HEURE (début incident)</td>
+            <td class="colo tabTitle">
+                <input type="text" name="dateIncident" id="" style="width: 75%; border: none;" [value]="fiche.dateIncident" placeholder="Ex: 05-12-2020 15:30">
+                <!-- <input [owlDateTime]="dt1" #datepicker [owlDateTimeTrigger]="dt1" name="dateIncident" id="" style="width: 50%; border: none;" >
+                <owl-date-time #dt1></owl-date-time>
+                <button (click)="datepicker.click()">date</button> -->
+            </td>
+            <td class="colo tabTitle">CLIENT</td>
+            <td class="colo tabTitle">Num Téléphone</td>
+            <td class="colo tabTitle">Adresse mail</td>
+            <td class="colo tabTitle">Num concerné</td>
+        </tr>
+        <tr>
+            <td class="tabTitle">TRIGRAMME TSM</td>
+            <td>
+                <input type="text" name="trigrammeTSM" id="" style="width: 100%; border: none;">
+            </td>
+            <td class="tabTitle">CONTACT</td>
+            <td>
+                <input type="number" name="num_client" id="" style="width: 100%; border: none;">
+            </td>
+            <td>
+                <input type="email" name="email_client" id="" style="width: 100%; border: none;">
+            </td>
+            <td>
+                <input type="number" name="num_concerne" id="" style="width: 100%; border: none;">
+            </td>
+        </tr>
+        <br>
+        <!--********************************************-->
+        <tr>
+            <td class="tabTitle tabHead" colspan="2">INFORMATION CLIENT</td>
+            <td class="tabTitle tabHead">LOCALISATION <br> (Endroit ou se trouve le client)</td>
+            <td class="tabTitle tabHead">COORDONNEES GPS</td>
+            <td class="tabTitle tabHead">EMPLACEMENT DE L'EQUIPEMENT</td>
+            <td class="tabTitle tabHead">ENDROIT AYANT LE PROBLEME</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="tabTitle">
+                CLIENT
+            </td>
+            <td class="check">
+                <input type="radio" name="anciennete" id="" [checked]="fiche.infoClient.anciennete == false"
+                    value=false> ANCIEN
+                <input type="radio" hidden name="anciennete" id="" [checked]="fiche.infoClient.anciennete == null"
+                    value=null>
+            </td>
+            <td rowspan="2">
+                <textarea name="localisation" id=""
+                    style="width: 100%; border: none; height: 100%;">{{fiche.infoClient.localisation}}</textarea>
+            </td>
+            <td rowspan="2">
+                <textarea name="coordonneeGPS" id=""
+                    style="width: 100%; border: none; height: 100%;">{{fiche.infoClient.coordonneeGPS}}</textarea>
+            </td>
+            <td class="check">
+                <input type="radio" name="emplacementDeplace" id=""
+                    [checked]="fiche.infoClient.emplacementDeplace == false" value=false> Même emplacement
+                <input type="radio" hidden name="emplacementDeplace" id=""
+                    [checked]="fiche.infoClient.emplacementDeplace == null" value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="indoor" id="" [checked]="fiche.infoClient.indoor == true" value=true> INDOOR
+                <input type="radio" hidden name="indoor" id="" [checked]="fiche.infoClient.indoor == null" value=null>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="check">
+                <input type="radio" name="anciennete" id="" [checked]="fiche.infoClient.anciennete == true" value=true>
+                NOUVEAU (-1 mois)
+            </td>
+            <td class="check">
+                <input type="radio" name="emplacementDeplace" id=""
+                    [checked]="fiche.infoClient.emplacementDeplace == true" value=true> Déplacé
+            </td>
+
+            <td class="check">
+                <input type="radio" name="indoor" id="" [checked]="fiche.infoClient.indoor == false" value=false>
+                OUTDOOR
+            </td>
+        </tr>
+
+        <br>
+        <!--********************************************-->
+
+        <tr>
+            <td rowspan="4" class="tabTitle">
+                OFFRE/EQUIPEMENT
+            </td>
+            <td class="tabTitle tabHead">
+                INTERNET PRO (4GTTD)
+            </td>
+            <td class="tabTitle tabHead">
+                FLYBOX
+            </td>
+            <td class="tabTitle tabHead">
+                MODEM
+            </td>
+            <td class="tabTitle tabHead">
+                EQUIPEMENT CLIENT
+            </td>
+            <td class="tabTitle tabHead">
+                AUTRES EQUIPEMENTS CLIENT
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="internet" id="" [checked]="fiche.equipementOuOffre.internet == 'start'"
+                    value="start"> START
+                <input type="radio" hidden name="internet" id="" [checked]="fiche.equipementOuOffre.internet == null"
+                    value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="flybox" id="" [checked]="fiche.equipementOuOffre.flybox == 'ie'" value="ie">
+                IE
+                <input type="radio" hidden name="flybox" id="" [checked]="fiche.equipementOuOffre.flybox == null"
+                    value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="modem" id="" [checked]="fiche.equipementOuOffre.modem == 'domino'"
+                    value="domino"> DOMINO
+                <input type="radio" hidden name="modem" id="" [checked]="fiche.equipementOuOffre.modem == null"
+                    value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="equipementClient" id=""
+                    [checked]="fiche.equipementOuOffre.equipementClient == 'pc'" value="pc"> PC
+                <input type="radio" hidden name="equipementClient" id=""
+                    [checked]="fiche.equipementOuOffre.equipementClient == null" value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="autreEquipement" id=""
+                    [checked]="fiche.equipementOuOffre.autreEquipement == 'tpe'" value="tpe"> TPE
+                <input type="radio" hidden name="autreEquipement" id=""
+                    [checked]="fiche.equipementOuOffre.autreEquipement == null" value=null>
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="internet" id="" [checked]="fiche.equipementOuOffre.internet == 'medium'"
+                    value="medium"> MEDIUM
+            </td>
+            <td class="check">
+                <input type="radio" name="flybox" id="" [checked]="fiche.equipementOuOffre.flybox == 'homenet'"
+                    value="homenet"> HOMENET
+            </td>
+            <td class="check">
+                <input type="radio" name="modem" id="" [checked]="fiche.equipementOuOffre.modem == 'cle_usb'"
+                    value="cle_usb"> CLE USB
+            </td>
+            <td class="check">
+                <input type="radio" name="equipementClient" id=""
+                    [checked]="fiche.equipementOuOffre.equipementClient == 'smartphone'" value="smartphone"> SMARTPHONE
+            </td>
+            <td class="check">
+                <input type="radio" name="autreEquipement" id=""
+                    [checked]="fiche.equipementOuOffre.autreEquipement == 'geolocalisation'" value="geolocalisation">
+                GEOLOCALISATION
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="internet" id="" [checked]="fiche.equipementOuOffre.internet == 'plus'"
+                    value="plus"> PLUS
+            </td>
+            <td class="check">
+                <input type="radio" name="flybox" id="" [checked]="fiche.equipementOuOffre.flybox == 'orangenet'"
+                    value="orangenet"> ORANGENET
+            </td>
+            <td class="check">
+                <input type="radio" name="modem" id="" [checked]="fiche.equipementOuOffre.modem == 'wifi_dock'"
+                    value="wifi_dock"> WIFI DOCK
+            </td>
+            <td class="check">
+                <input type="radio" name="equipementClient" id=""
+                    [checked]="fiche.equipementOuOffre.equipementClient == 'tablette'" value="tablette"> TABLETTE
+            </td>
+            <td class="check">
+                <input type="radio" name="autreEquipement" id=""
+                    [checked]="fiche.equipementOuOffre.autreEquipement == 'autres'" value="autres">AUTRES
+            </td>
+        </tr>
+
+        <br>
+        <!--********************************************-->
+
+        <tr>
+            <td colspan="6" class="tabTitle tabHead">
+                RECLAMATION DU CLIENT
+            </td>
+        </tr>
+
+        <tr>
+            <td class="check">
+                <input type="radio" name="typeReseau" id="" [checked]="fiche.reclamationClient.typeReseau == '2g'"
+                    value="2g"> 2G
+                <input type="radio" hidden name="typeReseau" id=""
+                    [checked]="fiche.reclamationClient.typeReseau == null" value=null>
+            </td>
+            <td rowspan="4" class="check">
+                <input type="radio" name="problemReclame" id=""
+                    [checked]="fiche.reclamationClient.problemReclame == 'lenteur'" value="lenteur"> LENTEUR <br>
+                <input type="radio" name="problemReclame" id=""
+                    [checked]="fiche.reclamationClient.problemReclame == 'microcoupure'" value="microcoupure">
+                MICROCOUPURE <br>
+                <input type="radio" name="problemReclame" id=""
+                    [checked]="fiche.reclamationClient.problemReclame == 'coupure'" value="coupure"> COUPURE <br>
+                <input type="radio" hidden name="problemReclame" id=""
+                    [checked]="fiche.reclamationClient.problemReclame == null" value=null>
+            </td>
+            <td rowspan="4" colspan="4">
+                <textarea name="descriptionReclame" id=""
+                    style="width: 100%; border: none; height:80px;">{{fiche.reclamationClient.descriptionReclame}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="typeReseau" id="" [checked]="fiche.reclamationClient.typeReseau == '3g'"
+                    value="3g"> 3G
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="typeReseau" id="" [checked]="fiche.reclamationClient.typeReseau == '4g'"
+                    value="4g"> 4G
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="typeReseau" id="" [checked]="fiche.reclamationClient.typeReseau == '4gttd'"
+                    value="4gttd"> 4GTTD
+            </td>
+        </tr>
+
+        <br>
+        <!--********************************************-->
+
+        
+        <tr>
+            <td colspan="6" class="tabTitle tabHead">INVESTIGATION/ASSISTANCE</td>
+        </tr>
+        <tr class="tabTitle tabHead">
+            <td>
+                PROFIL (sim consomation, etc)
+            </td>
+            <td>
+                NIVEAU DE SIGNAL
+            </td>
+            <td>
+                TEST CROISE
+            </td>
+            <td colspan="3">
+                RESULTATS DES TESTS/VERIFICATION
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="profil" id="" [checked]="fiche.investigation.profil == 'sim_active'"
+                    value="sim_active"> SIM ACTIVE
+                <input type="radio" hidden name="profil" id="" [checked]="fiche.investigation.profil == null"
+                    value=null>
+            </td>
+            <td class="check">
+                <input type="radio" name="niveauSignal" id="" [checked]="fiche.investigation.niveauSignal == '1'"
+                    value="1"> 1 BARRE
+                <input type="radio" hidden name="niveauSignal" id=""
+                    [checked]="fiche.investigation.niveauSignal == null" value=null>
+            </td>
+            <td rowspan="4" class="check">
+                <input type="radio" name="testCroise" id="" [checked]="fiche.investigation.testCroise == true"
+                    value=true> OUI <br>
+                <input type="radio" name="testCroise" id="" [checked]="fiche.investigation.testCroise == false"
+                    value=false> NON <br>
+                <input type="radio" name="testCroise" hidden id="" [checked]="fiche.investigation.testCroise == null"
+                    value=null>
+            </td>
+            <td colspan="3" rowspan="4">
+                <textarea name="resultatTest" id=""
+                    style="width: 100%; border: none; height:80px;">{{fiche.investigation.resultatTest}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="profil" id="" [checked]="fiche.investigation.profil == 'apn'" value="apn"> APN
+            </td>
+            <td class="check">
+                <input type="radio" name="niveauSignal" id="" [checked]="fiche.investigation.niveauSignal == '2'"
+                    value="2"> 2 BARRES
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="profil" id="" [checked]="fiche.investigation.profil == 'bundle_injecte'"
+                    value="bundle_injecte"> BUNDLE INJECTE
+            </td>
+            <td class="check">
+                <input type="radio" name="niveauSignal" id="" [checked]="fiche.investigation.niveauSignal == '3'"
+                    value="3"> 3 BARRES
+            </td>
+        </tr>
+        <tr>
+            <td class="check">
+                <input type="radio" name="profil" id="" [checked]="fiche.investigation.profil == 'volume_data'"
+                    value="volume_data"> VOLUME DATA
+            </td>
+            <td class="check">
+                <input type="radio" name="niveauSignal" id="" [checked]="fiche.investigation.niveauSignal == '4'"
+                    value="4"> 4 BARRES
+            </td>
+        </tr>
+
+
+        <br>
+        <!--********************************************-->
+
+        <tr>
+            <td colspan="6" class="tabTitle">
+                INTERVENTION DU TECHNICIEN <br>
+                TRIGRAMME TIC <input type="text" name="trigrammeTic" id="" [value]="fiche.intervention.trigrammeTic">
+            </td>
+        </tr>
+
+
+
+
+        <tr>
+            <td colspan="6" class="tabTitle tabEx_In">
+                <!-- RESULTATS CAPTURE D'ECRAN OUTDOOR AU NIVEAU DU CLIENT -->
+                A L'EXTERIEUR DE L'ENDROIT (OUTDOOR)
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" class="tabTitle tabHead">
+                VERIFICATION RESEAU (GNETTRACK)
+            </td>
+            <td colspan="3" class="tabTitle tabHead">
+                EST DE VITESSE (NPERF -> DOWNLOAD ET UPLOAD Orange mg)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" rowspan="3">
+                <textarea name="o_verificationReseau" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.outdoor.verificationReseau}}</textarea>
+            </td>
+            <td colspan="3">
+                <textarea name="o_vitesse" id=""
+                    style="width: 100%; border: none; height:150px;">{{fiche.intervention.outdoor.vitesse}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tabTitle">
+                UNISON MOBILE
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea name="o_unisonMobile" id=""
+                    style="width: 100%; border: none; height:150px;">{{fiche.intervention.outdoor.unisonMobile}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tabTitle tabHead">
+                RESULTATS PING (8.8.8.8 >= 100 packets)
+            </td>
+            <td colspan="3" class="tabTitle tabHead">
+                AUTRES
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea name="o_resultatPing" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.outdoor.resultatPing}}</textarea>
+            </td>
+            <td colspan="3">
+                <textarea name="o_autres" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.outdoor.autres}}</textarea>
+            </td>
+        </tr>
+
+        <!--*******************************-->
+        <tr>
+            <td colspan="6" class="tabTitle tabEx_In">
+                A L'INTERIEUR DE L'ENDROIT (INDOOR)
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" class="tabTitle tabHead">
+                VERIFICATION RESEAU (GNETTRACK)
+            </td>
+            <td colspan="3" class="tabTitle tabHead">
+                EST DE VITESSE (NPERF -> DOWNLOAD ET UPLOAD Orange mg)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" rowspan="3">
+                <textarea name="i_verificationReseau" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.indoor.verificationReseau}}</textarea>
+            </td>
+            <td colspan="3">
+                <textarea name="i_vitesse" id=""
+                    style="width: 100%; border: none; height:150px;">{{fiche.intervention.indoor.vitesse}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tabTitle">
+                UNISON MOBILE
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea name="i_unisonMobile" id=""
+                    style="width: 100%; border: none; height:150px;">{{fiche.intervention.indoor.unisonMobile}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tabTitle tabHead">
+                RESULTATS PING (8.8.8.8 >= 100 packets)
+            </td>
+            <td colspan="3" class="tabTitle tabHead">
+                AUTRES
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea name="i_resultatPing" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.indoor.resultatPing}}</textarea>
+            </td>
+            <td colspan="3">
+                <textarea name="i_autres" id=""
+                    style="width: 100%; border: none; height:330px;">{{fiche.intervention.indoor.autres}}</textarea>
+            </td>
+        </tr>
+
+        <br>
+        <!--*******************************-->
+
+        <tr>
+            <td class="tabTitle tabHead">
+                CONCLUSION DU TIC
+            </td>
+            <td colspan="5">
+                <textarea name="conclusionTic" id=""
+                    style="width: 100%; border: none; height:50px;">{{fiche.intervention.conclusionTic}}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="tabTitle tabHead">
+                OBSERVATION DU TIC
+            </td>
+            <td colspan="5">
+                <textarea name="observationTic" id=""
+                    style="width: 100%; border: none; height:50px;">{{fiche.intervention.observationTic}}</textarea>
+            </td>
+        </tr>
+
+
+
+    </table>
+
+</div>
