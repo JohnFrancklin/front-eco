@@ -101,7 +101,7 @@
                         <div class="col-4">
                             <button mat-button class="button_card" (click)="addOrRemoveVote(p)"
                                 [ngStyle]="{'color':p.a_vote=== true ? 'red': ''}">
-                                <span class="material-icons icon_card" ngbTooltip="Vote" placement="top" closeDelay="150" 
+                                <span class="material-icons icon_card" ngbTooltip="Vote" placement="bottom" closeDelay="150" 
                                 tooltipClass="custom-tooltip"> 
                                     <!-- matTooltip="test tooltip grade" matTooltipShowDelay="50"
                                     matTooltipHideDelay="250" matTooltipClass="custom-tooltip" -->
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-4">
                             <button mat-button class="button_card">
-                                <span class="material-icons icon_card" ngbTooltip="J'aime" placement="top" closeDelay="150" 
+                                <span class="material-icons icon_card" ngbTooltip="J'aime" placement="bottom" closeDelay="150" 
                                 tooltipClass="custom-tooltip">
                                     favorite
                                 </span>
@@ -120,8 +120,8 @@
                         <div class="col-4">
                             <button mat-button class="button_card" (click)="addOrRemovePanier(p);header.getPanier()"
                                 [ngStyle]="{'color':p.panier=== true ? 'red': ''}">
-                                <span class="material-icons icon_card" ngbTooltip="Ajouter au panier" placement="top" closeDelay="150" 
-                                tooltipClass="custom-tooltip shop">
+                                <span class="material-icons icon_card" ngbTooltip="Ajouter au panier" placement="bottom" closeDelay="150" 
+                                tooltipClass="custom-tooltip larger">
                                     shopping_cart
                                 </span>
                             </button>
