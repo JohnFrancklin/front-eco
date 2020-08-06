@@ -2,21 +2,24 @@
     <div class="col-2 boxclient">
         <ul>
             <li class="li-panier-header" [routerLink]="['/home']">
-                <span class="material-icons md-dark">
+                <span class="material-icons md-dark" ngbTooltip="Liste des produits" placement="bottom" closeDelay="150" 
+                tooltipClass="custom-tooltip">
                     home
                     <hr class="separator">
                 </span>
 
             </li>
             <li class="li-panier-header" [routerLink]="['/favorite']">
-                <span class="material-icons md-dark">
+                <span class="material-icons md-dark" ngbTooltip="Mention j'aime" placement="bottom" closeDelay="150" 
+                tooltipClass="custom-tooltip">
                     favorite
                     <hr class="separator">
                 </span>
             </li>
             <li class="li-panier-header view-tooltip" (click)="ShowDetailPanier()">
                 <span class="material-icons md-dark" [matBadge]="panierTotal.length"
-                    [matBadgeHidden]="panierTotal.length==0" matBadgeColor="warn">
+                    [matBadgeHidden]="panierTotal.length==0" matBadgeColor="warn" ngbTooltip="Mon panier" placement="bottom" closeDelay="150" 
+                    tooltipClass="custom-tooltip larger">
                     shopping_cart
                 </span>
 

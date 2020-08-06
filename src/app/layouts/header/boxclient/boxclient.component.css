@@ -194,3 +194,25 @@ position: relative;
     position: relative;
     margin: 2px 0 4px 0;
 }
+
+/* CUSTOM TOOLTIP */
+
+/* ::ng-deep */
+::ng-deep .custom-tooltip .tooltip-inner {
+    background: #2e2e2e;
+    /* border: 1px solid lightgray; */
+    border-radius: 2px;
+    color: white !important;
+    padding: 3px 12px;
+  }
+  
+  ::ng-deep .custom-tooltip .arrow::before {
+    border-top: 7px solid transparent;
+    border-right: 7px solid #2e2e2e;
+    border-bottom: 7px solid transparent;
+    transform: rotate(90deg);
+  }
+  
+  ::ng-deep .custom-tooltip.larger .tooltip-inner {
+    width: 135px;
+  }

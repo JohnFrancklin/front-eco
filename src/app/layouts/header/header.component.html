@@ -3,7 +3,8 @@
         <div class="col-3 logo">
 
             <div class="logo_dash_contener" [routerLink]="['/dashboard/produits']">
-                <span class="material-icons md-dark icon_dash">
+                <span class="material-icons md-dark icon_dash" ngbTooltip="Dashboard" placement="bottom" closeDelay="150" 
+                tooltipClass="custom-tooltip">
                     dashboard
                 </span>
             </div>
@@ -43,8 +44,10 @@
         </div>
         <div class="col-2 login-register">
             <div class="login-register-group">
-                <span><a class="txt_login_register" [routerLink]="['/register']"> S'inscrire </a><span
-                        class="textseparator">|</span> <a class="txt_login_register" [routerLink]="['/login']">Se
+                <span><a class="txt_login_register" [routerLink]="['/register']" ngbTooltip="Besoin d'un compte?" placement="bottom" closeDelay="150" 
+                    tooltipClass="custom-tooltip larger"> S'inscrire </a><span
+                        class="textseparator">|</span> <a class="txt_login_register" [routerLink]="['/login']" ngbTooltip="Acceder à votre compte" placement="bottom" closeDelay="150" 
+                        tooltipClass="custom-tooltip larger">Se
                         connecter</a> </span>
             </div>
         </div>
