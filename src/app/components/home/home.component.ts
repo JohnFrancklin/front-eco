@@ -9,7 +9,18 @@ import { debounceTime, switchMap, startWith, map, filter, tap } from 'rxjs/opera
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  // styles: [`
+  //   .custom-tooltip .tooltip-inner {
+  //     background-color : white;
+  //     color: black;
+  //     border: 1px solid lightgray;
+  //   }
+
+  //   .custom-tooltip .arrow::before {
+  //     border-top-color: white;
+  //   }
+  // `]
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
