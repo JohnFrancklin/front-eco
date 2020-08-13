@@ -592,7 +592,7 @@
                     <button class="btn_supprimer" *ngIf="!createType">
                         {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
                     </button>
-                    <button class="btn_modifier" *ngIf="createType">
+                    <button class="btn_modifier" *ngIf="createType" (click)="createProduct()">
                         Créer
                     </button>
                     <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">

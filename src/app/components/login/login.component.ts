@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { UsersService } from 'src/app/services/users.service';
+import { Users } from 'src/app/interfaces/users';
 
 @Component({
   selector: 'app-login',
@@ -7,15 +11,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  // public username: String;
+  // public pwd: String;
+
   displayPopup = 'none';
   show: boolean;
+  msgError = 'none';
 
-  constructor() { 
+  users = new Users();
+
+  constructor(private usersService: UsersService) { 
     this.show = false;
   }
 
   ngOnInit(): void {
   }
+
+  // ********
+  // Connexion
+  // ********
+  connect(login: NgForm) {
+    const username = login.value['username'];
+    const password = login.value['password'];
+    if ((username !=='' && password !=='' ) && (username !==undefined && password !==undefined)) {
+      console.log(this.users);
+    this.usersService.addLogin(username, password);
+    this.msgError = 'none';
+    }else {
+      this.msgError = 'block';
+    }
+
+  }
+
+  // login() {
+  //   console.log(this.username, this.pwd);
+  // }
+
 
   showPopup() {
     this.displayPopup = 'block';
@@ -25,7 +56,7 @@ export class LoginComponent implements OnInit {
     this.displayPopup = 'none';
   }
 
-  password() {
+  checkValue() {
     this.show = !this.show; 
   }
 
