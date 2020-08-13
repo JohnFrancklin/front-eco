@@ -1,9 +1,13 @@
 <app-boxclient #header></app-boxclient>
 <div class="container">
     <div class="login-wrap">
-        <form>
+        <form #login="ngForm">
+        <!-- <form> -->
             <h2 class="form-login-heading text-uppercase text-center">connexion</h2>
             <hr class="horizontal">
+            <div class="text-center alert alert-danger" [ngStyle]="{display: msgError}">
+                Tous les champs doivent être rempli
+            </div>
             <div class="form-group mt-3 mb-3">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
@@ -11,19 +15,28 @@
                             <mat-icon>person</mat-icon>
                         </span>
                     </div>
-                    <input class="form-control" placeholder="Identifiant" type="username">
+                    <input id="username" class="form-control" type="text" placeholder="Identifiant" name="username" [(ngModel)]="users.username" required #username="ngModel">
+                </div>
+
+                <div [hidden]="username.valid || username.pristine" class="text-danger" id="showUsernameError">
+                    Champ username vide
                 </div>
             </div>
 
             <div class="form-group mb-5">
+                
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <mat-icon>lock_open</mat-icon>
                         </span>
                     </div>
-                    <input class="form-control" placeholder="Mot de passe" [type]="show ? 'text' : 'password'">
-                    <button (click)="password()" class="btn-eye"><mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon></button>
+                    <input class="form-control" placeholder="Mot de passe" [type]="show ? 'text' : 'password'" id="password" name="password"
+                     [(ngModel)]="users.password" required #password="ngModel">
+                    <button (click)="checkValue()" class="btn-eye"><mat-icon>{{show != true ? 'visibility' : 'visibility_off'}}</mat-icon></button>
+                </div>
+                <div [hidden]="password.valid || password.pristine" class="text-danger">
+                    Champ mot de passe vide
                 </div>
             </div>
             <div class="custom-control custom-checkbox mt-3 text-center">
@@ -36,7 +49,8 @@
             </div>
             
             <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
-                style="background-color: rgb(1, 64, 107);"><i class=""></i>se connecter</button>
+                style="background-color: rgb(1, 64, 107);" (click)="connect(login)"><i class=""></i>se connecter</button>
+                <!-- (click)="login()" -->
 
             <div class="registration text-center mt-3">
                 Besoin d'un compte?<br />

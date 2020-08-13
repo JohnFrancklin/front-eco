@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable,of } from 'rxjs';
 import { Users } from '../interfaces/users';
+import { LoginComponent } from '../components/login/login.component';
 
 
 const httpOptions = {
@@ -146,6 +147,10 @@ export class UsersService {
 
   addUsers(user: Users): Observable<Users> {
     return this.http.post<Users>(this.userUrl, user, httpOptions);
+  }
+
+  addLogin(username:string, password: string) {
+
   }
 
   deleteUser(id: number): Observable<Users> {

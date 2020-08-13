@@ -65,6 +65,10 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
+  createProduct () {
+    
+  }
+
 
   changeEtat(event){
     
@@ -306,4 +310,5 @@ export class ProduitsComponent implements OnInit {
       
     }
   }
+
 }
