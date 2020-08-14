@@ -11,13 +11,8 @@ import { Users } from 'src/app/interfaces/users';
 })
 export class LoginComponent implements OnInit {
 
-  // public username: String;
-  // public pwd: String;
-
   displayPopup = 'none';
   show: boolean;
-  msgError = 'none';
-
   users = new Users();
 
   constructor(private usersService: UsersService) { 
@@ -30,22 +25,10 @@ export class LoginComponent implements OnInit {
   // ********
   // Connexion
   // ********
-  connect(login: NgForm) {
-    const username = login.value['username'];
-    const password = login.value['password'];
-    if ((username !=='' && password !=='' ) && (username !==undefined && password !==undefined)) {
-      console.log(this.users);
-    this.usersService.addLogin(username, password);
-    this.msgError = 'none';
-    }else {
-      this.msgError = 'block';
-    }
+  login(loginForm: NgForm) {
+    this.usersService.login(loginForm.value);
 
   }
-
-  // login() {
-  //   console.log(this.username, this.pwd);
-  // }
 
 
   showPopup() {

@@ -149,7 +149,7 @@ export class UsersService {
     return this.http.post<Users>(this.userUrl, user, httpOptions);
   }
 
-  addLogin(username:string, password: string) {
+  login(login) {
 
   }
 
