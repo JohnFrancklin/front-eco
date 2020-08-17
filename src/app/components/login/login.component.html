@@ -49,7 +49,7 @@
             </div>
             
             <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
-                style="background-color: rgb(1, 64, 107);" (click)="connect(login)"><i class=""></i>se connecter</button>
+                style="background-color: rgb(1, 64, 107);" (click)="connect(login)" [disabled]="!login.valid"><i class=""></i>se connecter</button>
                 <!-- (click)="login()" -->
 
             <div class="registration text-center mt-3">

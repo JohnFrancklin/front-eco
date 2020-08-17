@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit {
   // ********
   // Connexion
   // ********
-  connect(login: NgForm) {
+  connect(login: NgForm) {  //login
+    console.log("Login", login.value);
     const username = login.value['username'];
     const password = login.value['password'];
     if ((username !=='' && password !=='' ) && (username !==undefined && password !==undefined)) {
       console.log(this.users);
-    this.usersService.addLogin(username, password);
+    this.usersService.addLogin(username, password); // objet send   connect
     this.msgError = 'none';
     }else {
       this.msgError = 'block';
