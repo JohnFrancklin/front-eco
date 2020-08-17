@@ -433,5 +433,7 @@ export class ProduitService {
     return this.produits;
   }
 
+  createProduct(oneProduit) { }
+
   
 }

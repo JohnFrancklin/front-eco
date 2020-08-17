@@ -4,6 +4,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogCo
 import { NgxSpinnerService } from "ngx-spinner";
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-produits',
@@ -11,7 +13,6 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
   styleUrls: ['./produits.component.css']
 })
 export class ProduitsComponent implements OnInit {
-
 
   produits: any;
   oneProduit: any;
@@ -65,8 +66,8 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  createProduct () {
-    
+  createProduct() {
+    this.produitService.createProduct(this.oneProduit);
   }
 
 

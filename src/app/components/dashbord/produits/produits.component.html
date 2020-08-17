@@ -1,5 +1,7 @@
 <app-boxclient #header></app-boxclient>
+
 <div class="dashboard-contener">
+
     <div class="row">
         <div class="menu_gauche">
             <div class="menu_content">
@@ -13,10 +15,10 @@
                         Aller au site
                     </span>
                 </div>
-                <div class="menu_produits active_menu"  [routerLink]="['/dashboard/produits']">
+                <div class="menu_produits active_menu" [routerLink]="['/dashboard/produits']">
                     Produits
                 </div>
-                <div class="menu_produits" [routerLink]="['/dashboard/users']" >
+                <div class="menu_produits" [routerLink]="['/dashboard/users']">
                     Utilisateurs
                 </div>
                 <div class="menu_produits" [routerLink]="['/dashboard/commandes']">
@@ -40,6 +42,7 @@
 
             </div>
         </div>
+
         <div class="list_centre">
             <!-- <div>
                 <input type="text" placeholder="Rechercher">
@@ -122,38 +125,43 @@
                     </div>
 
                     <div class="filter_content" *ngIf="showFilter">
-                        <input type="text" name="search" [(ngModel)]="searchText" class="input_filter" 
-                        placeholder="Filtrer par nom...">
+                        <input type="text" name="search" [(ngModel)]="searchText" class="input_filter"
+                            placeholder="Filtrer par nom...">
 
                         <p class="title_filter">Choisissez votre filtre</p>
                         <hr class="hr_filtre">
-                        <input type="radio" id="none" name="filtre"value="none" (change)="changefiltre($event)">
+                        <input type="radio" id="none" name="filtre" value="none" (change)="changefiltre($event)">
                         <label for="none" class="item_filtre" title="Pas de filtre">Aucun</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="prix_asc" name="filtre" value="prix_asc" (change)="changefiltre($event)">
+                        <input type="radio" id="prix_asc" name="filtre" value="prix_asc"
+                            (change)="changefiltre($event)">
                         <label for="prix_asc" class="item_filtre" title="De moins chèr au plus chèr">Prix
                             ascendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="prix_desc" name="filtre" value="prix_desc" (change)="changefiltre($event)">
+                        <input type="radio" id="prix_desc" name="filtre" value="prix_desc"
+                            (change)="changefiltre($event)">
                         <label for="prix_desc" class="item_filtre" title="De plus chèr au moins chèr">Prix
                             descendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="vote_asc" name="filtre" value="vote_asc" (change)="changefiltre($event)">
+                        <input type="radio" id="vote_asc" name="filtre" value="vote_asc"
+                            (change)="changefiltre($event)">
                         <label for="vote_asc" class="item_filtre" title="De plus de vote au moins de vote">Vote
                             ascendant</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="vote_desc" name="filtre" value="prix_desc" (change)="changefiltre($event)">
+                        <input type="radio" id="vote_desc" name="filtre" value="prix_desc"
+                            (change)="changefiltre($event)">
                         <label for="vote_desc" class="item_filtre" title="De moins de vote au plus de vote">Vote
                             descendant</label>
                         <hr class="hr_filtre">
                         <input type="radio" id="sandbox" name="filtre" value="sandbox" (change)="changefiltre($event)">
-                        <label for="sandbox" class="item_filtre" title= "">sandbox</label>
+                        <label for="sandbox" class="item_filtre" title="">sandbox</label>
                         <hr class="hr_filtre">
                         <input type="radio" id="live" name="filtre" value="live" (change)="changefiltre($event)">
-                        <label for="live" class="item_filtre" title= "">live</label>
+                        <label for="live" class="item_filtre" title="">live</label>
                         <hr class="hr_filtre">
-                        <input type="radio" id="archived" name="filtre" value="archived" (change)="changefiltre($event)">
-                        <label for="archived" class="item_filtre" title= "">archived</label>
+                        <input type="radio" id="archived" name="filtre" value="archived"
+                            (change)="changefiltre($event)">
+                        <label for="archived" class="item_filtre" title="">archived</label>
                         <hr class="hr_filtre">
                     </div>
 
@@ -181,9 +189,9 @@
 
                         <div *ngIf="oneAndAll">
                             <button class="element_un" *ngFor="let p of produits | filter:searchText "
-                            title="{{p.title}}"
+                                title="{{p.title}}"
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
-                                (click)="getOneProduit(p)" >
+                                (click)="getOneProduit(p)">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.title}}
@@ -195,9 +203,8 @@
                             </button>
                         </div>
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits | filter:searchText" 
-                            title="{{p.title}}" 
-                                [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
+                            <div class="element_un_check" *ngFor="let p of produits | filter:searchText"
+                                title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
                                 <input type="checkbox" class="checkCase" name="" check="true" id="{{p._id}}"
                                     [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
                                     title="Cocher ici pour selection le produit">
@@ -426,7 +433,8 @@
 
             <div *ngIf="oneAndAll">
 
-                <p class="dateCreationContent"> Crée le <span class="infoDate">12 Septembre 2013</span>  par <span class="infoDate">Rakoto</span> </p>
+                <p class="dateCreationContent"> Crée le <span class="infoDate">12 Septembre 2013</span> par <span
+                        class="infoDate">Rakoto</span> </p>
 
                 <div class="detail_to_change">
                     <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer">
@@ -446,7 +454,8 @@
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
                         <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled style="background-color: white;">
+                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" disabled
+                                style="background-color: white;">
                             <div class="label_change">
                                 Etat
                             </div>
@@ -461,8 +470,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
@@ -521,7 +528,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
@@ -585,21 +591,23 @@
 
 
                 <div class="detail_to_change_button">
-                    <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'"
-                        [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
-                        Modifier
-                    </button>
-                    <button class="btn_supprimer" *ngIf="!createType">
-                        {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
-                    </button>
-                    <button class="btn_modifier" *ngIf="createType" (click)="createProduct()">
-                        Créer
-                    </button>
-                    <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
-                        Annuler
-                    </button>
-                </div>
 
+                    <form>
+                        <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'"
+                            [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
+                            Modifier
+                        </button>
+                        <button class="btn_supprimer" *ngIf="!createType">
+                            {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+                        </button>
+                        <button class="btn_modifier" *ngIf="createType" (click)="createProduct()">
+                            Créer
+                        </button>
+                        <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
+                            Annuler
+                        </button>
+                    </form>
+                </div>
 
             </div>
 
@@ -622,13 +630,15 @@
 
 
         </div>
+
     </div>
+</div>
 
 
-    <ng-template #imageProduit style="background-color: white;">
-        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
-    </ng-template>
+<ng-template #imageProduit style="background-color: white;">
+    <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+</ng-template>
 
 
-    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
-    </div>
+<div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
+</div>

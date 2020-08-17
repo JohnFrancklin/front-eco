@@ -1,13 +1,10 @@
 <app-boxclient #header></app-boxclient>
 <div class="container">
     <div class="login-wrap">
-        <form #login="ngForm">
+        <form #loginForm="ngForm">
         <!-- <form> -->
             <h2 class="form-login-heading text-uppercase text-center">connexion</h2>
             <hr class="horizontal">
-            <div class="text-center alert alert-danger" [ngStyle]="{display: msgError}">
-                Tous les champs doivent être rempli
-            </div>
             <div class="form-group mt-3 mb-3">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
@@ -49,7 +46,7 @@
             </div>
             
             <button class="btn btn-block mt-3 mb-2 text-uppercase text-light"
-                style="background-color: rgb(1, 64, 107);" (click)="connect(login)" [disabled]="!login.valid"><i class=""></i>se connecter</button>
+                style="background-color: rgb(1, 64, 107);" (click)="login(loginForm)" [disabled]="!loginForm.valid"><i class=""></i>se connecter</button>
                 <!-- (click)="login()" -->
 
             <div class="registration text-center mt-3">
