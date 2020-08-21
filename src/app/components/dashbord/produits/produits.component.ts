@@ -67,7 +67,29 @@ export class ProduitsComponent implements OnInit {
   }
 
   createProduct() {
-    this.produitService.createProduct(this.oneProduit);
+
+    const productObject = {
+      title: this.oneProduit.title,
+      description: this.oneProduit.description,
+      date_sortie: this.oneProduit.detail_fabrication.date_sortie,
+      num_model: this.oneProduit.detail_fabrication.numero_model,
+      largeur: this.oneProduit.detail_physique.largueur,
+      longueur: this.oneProduit.detail_physique.longueur,
+      poids: this.oneProduit.detail_physique.poids,
+      taille: this.oneProduit.detail_physique.taille,
+      garantie: this.oneProduit.garantie,
+      prix: this.oneProduit.prix.prix,
+      prix_promo: this.oneProduit.prix.prix_promotion,
+      provenance:this.oneProduit.provenance,
+      quantite: this.oneProduit.quantite,
+      marque: this.oneProduit.marque,
+      categorie: this.oneProduit.categorie,
+      couleur: this.oneProduit.detail_physique.couleur,
+      etat: 'sandbox',
+      createur: 'RASOA',
+    }
+    this.produitService.createProduct(productObject);
+    console.log(productObject);
   }
 
 
