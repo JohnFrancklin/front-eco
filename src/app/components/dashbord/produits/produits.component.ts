@@ -68,6 +68,8 @@ export class ProduitsComponent implements OnInit {
 
   createProduct() {
     this.produitService.createProduct(this.oneProduit);
+    console.log(this.oneProduit);
+    
   }
 
 
