@@ -437,13 +437,13 @@
                         class="infoDate">Rakoto</span> </p>
 
                 <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer" id="title" [ngStyle]="{'border-color': oneProduit.title == '' ? '#d5d5d4' : '#d5d5d5'}">
                     <div class="label_change">
                         Title
                     </div>
                 </div>
                 <div class="detail_to_change_description">
-                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description"
+                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description" id="description" [ngStyle]="{'border-color': oneProduit.description == '' ? '#d5d5d4' : '#d5d5d5'}"
                         placeholder="Description du produit..."></textarea>
                     <div class="label_change">
                         Description
