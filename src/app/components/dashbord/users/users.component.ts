@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { Users } from 'src/app/interfaces/users';
+import {FormsModule, NgForm} from "@angular/forms";
 import Swal from 'sweetalert2'
 //declare var Swal: any;
 
@@ -369,6 +370,13 @@ export class UsersComponent implements OnInit {
       
       this.listeUsers = this.listeUsers.filter((value) => value.nom.toLowerCase() == userNom.toLowerCase() && value.prenom.toLowerCase() == userPrenom.toLowerCase()  );
     }
+
+
+    createUserMethode(form: NgForm) {
+      console.log(form.value);
+  }
+
+
 }
 
 

@@ -49,7 +49,8 @@
                         Utilisateurs
                     </p>
 
-                    <button class="btn_creer" (click)="createUser()" title="Créer un nouveau Utilisateur" [disabled]="createType">
+                    <button class="btn_creer" (click)="createUser()" title="Créer un nouveau Utilisateur"
+                        [disabled]="createType">
                         <span class="material-icons add_produit_icon">
                             add
                         </span>
@@ -130,7 +131,9 @@
                     </div>
 
                     <div class="recherche_box">
-                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.." [(ngModel)]="searchInput" (selectItem)="selectedItem($event)" [ngbTypeahead]="search"   class="input_search">
+                        <input type="search" class="input_search" placeholder="Rechercher utilisateurs.."
+                            [(ngModel)]="searchInput" (selectItem)="selectedItem($event)" [ngbTypeahead]="search"
+                            class="input_search">
 
                         <button class="btn_search" (click)=searchUtilisateur()>
                             Rechercher
@@ -154,7 +157,7 @@
 
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
-                                    {{user.nom}}  {{user.prenom}}
+                                    {{user.nom}} {{user.prenom}}
                                 </span>
                                 <span class="state_produit_on_list" [ngStyle]="{'color': 'green'}">
                                     {{user.role}}
@@ -166,7 +169,7 @@
                             <!-- arrayUser  -->
                             <!-- listeUsers  -->
                             <div class="element_un_check" *ngFor="let user of listeUsers | filter:searchText"
-                            title="{{user.nom}} {{user.prenom}}" [ngStyle]="{'opacity': '1'}">
+                                title="{{user.nom}} {{user.prenom}}" [ngStyle]="{'opacity': '1'}">
                                 <input type="checkbox" class="checkCase" name="" id="{{user._id}}" check="true"
                                     [disabled]="false" (click)="selectUser(user);"
                                     title="Cocher ici pour selection l'utilisateur">
@@ -337,95 +340,99 @@
         </div>
 
         <div class="detail_droit">
-            <div  *ngIf="oneAndAll">
-                <h3 class="lbl_h3_detail" *ngIf="oneAndAll"> {{createType ? "Nouveau utilisateur" : "Detail de l'utilisateur"}}</h3>
-               
+            <div *ngIf="oneAndAll">
+                <form (ngSubmit)="createUserMethode(f)" #f="ngForm">
+                <h3 class="lbl_h3_detail" *ngIf="oneAndAll">
+                    {{createType ? "Nouveau utilisateur" : "Detail de l'utilisateur"}}</h3>
+
                 <div class="detail_to_change">
                     <div class="ImageUser" *ngIf="!createType">
                         <img src="../../../../assets/images/ImageUser.PNG" class="image_produit">
                     </div>
                     <div class="ImageUser" *ngIf="createType">
-                        <img src="../../../../assets/images/AddImageUser.PNG" class="image_produit" (click)="file.click()">
+                        <img src="../../../../assets/images/AddImageUser.PNG" class="image_produit"
+                            (click)="file.click()">
                         <input type="file" name="" id="" hidden #file>
                     </div>
-                </div>  
-                <div class="detail_to_change">
-                    <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id">
-                    <input type="text" class="input_change nomchange" [(ngModel)]="usersDetail.nom">
-                    <div class="label_change">
-                        Nom
-                    </div>
                 </div>
-    
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="usersDetail.prenom">
-                    <div class="label_change">
-                        Prénom
+
+                    <div class="detail_to_change">
+                        <input type="hidden" class="input_change" [(ngModel)]="usersDetail._id" [ngModelOptions]="{standalone: true}"> 
+                        <input type="text" class="input_change nomchange" name="nom" required [(ngModel)]="usersDetail.nom">
+                        <div class="label_change">
+                            Nom
+                        </div>
                     </div>
-                </div>
-    
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="usersDetail.email">
-                    <div class="label_change">
-                        Email
+
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change" [(ngModel)]="usersDetail.prenom" name="prenom">
+                        <div class="label_change">
+                            Prénom
+                        </div>
                     </div>
-                </div>
-    
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="usersDetail.tel">
-                    <div class="label_change">
-                        Téléphone
+
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change" [(ngModel)]="usersDetail.email" name="email">
+                        <div class="label_change">
+                            Email
+                        </div>
                     </div>
-                </div>
-                <div class="detail_to_change">
-                    <select class="select_role " [(ngModel)]="usersDetail.role">
-                        <option >Super-admin</option>
-                        <option >Admin</option>
-                        <option >Abonné</option>
-                    </select>
-                    <div class="label_change">
-                        Role
+
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change" [(ngModel)]="usersDetail.tel" name="tel">
+                        <div class="label_change">
+                            Téléphone
+                        </div>
                     </div>
-                </div>
-    
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="usersDetail.pays" >
-                            <div class="label_change">
-                                Pays
+                    <div class="detail_to_change">
+                        <select class="select_role " [(ngModel)]="usersDetail.role" name="role">
+                            <option>Super-admin</option>
+                            <option>Admin</option>
+                            <option>Abonné</option>
+                        </select>
+                        <div class="label_change">
+                            Role
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change" [(ngModel)]="usersDetail.pays" name="pays">
+                                <div class="label_change">
+                                    Pays
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change rightNumber" [(ngModel)]="usersDetail.ville" name="pays">
+                                <div class="label_change">
+                                    Ville
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change rightNumber" [(ngModel)]="usersDetail.ville">
-                            <div class="label_change">
-                                Ville
-                            </div>
+                    <div class="detail_to_change_description">
+                        <textarea type="text" class="textarea_change" [(ngModel)]="usersDetail.adresse" name="adresse"></textarea>
+                        <div class="label_change">
+                            Adresse
                         </div>
                     </div>
-                </div>
-                <div class="detail_to_change_description">
-                    <textarea type="text" class="textarea_change" [(ngModel)]="usersDetail.adresse"></textarea>
-                    <div class="label_change">
-                        Adresse
+                    <div class="detail_to_change_button">
+                        <button class="btn_modifier" *ngIf="!createType" (click)="modifier()">Modifier</button>
+                        <button class="btn_supprimer" *ngIf="!createType" (click)="supprimer()">Supprimer</button>
+                        <button type="submit" class="btn_modifier" *ngIf="createType" >
+                            Créer
+                        </button>
+                        <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
+                            Annuler
+                        </button>
                     </div>
-                </div>
-                <div class="detail_to_change_button">
-                    <button class="btn_modifier" *ngIf="!createType" (click)="modifier()">Modifier</button>
-                    <button class="btn_supprimer" *ngIf="!createType" (click)="supprimer()">Supprimer</button>
-                    <button class="btn_modifier" *ngIf="createType">
-                        Créer
-                    </button>
-                    <button class="btn_modifier" *ngIf="createType" (click)="cancelCreate()">
-                        Annuler
-                    </button>
-                </div>
-    
+                </form>
             </div>
-    
-            <div  *ngIf="!oneAndAll">
+
+            <div *ngIf="!oneAndAll">
                 <div class="etatContent">
                     <p class="title_etatContent">Utilisateur selectionné</p>
                 </div>
@@ -445,7 +452,22 @@
                 </button>
             </div>
         </div>
-       
+
+        <!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <label for="name">
+                  Nom de l'appareil
+                </label>
+                <input type="text" id="name" required class="form-control" name="name" ngModel>
+                <label for="status">
+                  État de l'appareil
+                </label>
+                <select id="status" class="form-control" name="status" ngModel>
+                  <option value="allumé">Allumé</option>
+                  <option value="éteint">Éteint</option>
+                </select>
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Enregistrer</button>
+        </form> -->
+
 
 
 
