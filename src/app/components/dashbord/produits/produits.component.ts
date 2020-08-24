@@ -43,7 +43,6 @@ export class ProduitsComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
 
-
   title = "Smartphone G10 2e";
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
