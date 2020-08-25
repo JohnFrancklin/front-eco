@@ -86,23 +86,29 @@ export class ProduitsComponent implements OnInit {
       etat: this.oneProduit.etat,
       // categorie: this.oneProduit.categorie,
       // createur: 'RASOA',
-    }
+    }   
+    
+    let isValid = true;
 
-    let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau
-
+    let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau    
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
         element.style.borderColor = "red";
+        isValid = false;
       }else{
         element.style.borderColor = "#d5d5d5";
       }
     }
 
-    this.produitService.createProduct(productObject);
-    console.log(productObject);
+    if(isValid){
+      this.produitService.createProduct(productObject);
+      console.log(productObject);
+    }else{
+      console.log("champ encore vide");
+    }
 
-
+    
   }
 
 
@@ -136,6 +142,7 @@ export class ProduitsComponent implements OnInit {
       vu: 0,
       garantie: 0,
       provenance: "",
+      marque: "",
       detail_fabrication: {
         date_sortie: "",
         numero_model: "",
@@ -144,6 +151,7 @@ export class ProduitsComponent implements OnInit {
         largueur: 0,
         longueur: 0,
         poids: 0,
+        couleur: "",
         taille: ""
       },
       favorie: [],
