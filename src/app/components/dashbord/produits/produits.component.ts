@@ -133,6 +133,11 @@ export class ProduitsComponent implements OnInit {
 
   }
 
+  deleteProduct() {
+    this.produitService.deleteProduct(this.oneProduit._id);
+    console.log(this.oneProduit._id);
+  }
+
 
   changeEtat(event){
     

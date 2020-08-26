@@ -435,7 +435,9 @@ export class ProduitService {
 
   createProduct(createProduct) { }
 
-  updatePoduct(setProduct) {}
+  updatePoduct(setProduct) { }
+
+  deleteProduct(deleteProduct) { }
 
   
 }
