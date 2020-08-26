@@ -65,8 +65,7 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  createProduct() {
-
+  productObject() {
     const productObject = {
       title: this.oneProduit.title,
       description: this.oneProduit.description,
@@ -86,11 +85,13 @@ export class ProduitsComponent implements OnInit {
       etat: this.oneProduit.etat,
       // categorie: this.oneProduit.categorie,
       // createur: 'RASOA',
-    }   
+    }
+  }
+
+  createProduct() {       
     
     let isValid = true;
-
-    let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau    
+    let listInputAndTextearea = Object.keys(this.productObject); // retour les listes des clés objet productObject dans un tableau    
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
@@ -102,13 +103,34 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.createProduct(productObject);
-      console.log(productObject);
+      this.produitService.createProduct(this.productObject);
+      console.log(this.productObject);
+    }else{
+      console.log("champ encore vide");
+    }    
+  }
+
+  updateProduct() {
+
+    let isValid = true;
+    let listInputAndTextearea = Object.keys(this.productObject);   
+    for (let i=0; i<listInputAndTextearea.length; i++){
+      let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+      if(element.value == ""){
+        element.style.borderColor = "red";
+        isValid = false;
+      }else{
+        element.style.borderColor = "#d5d5d5";
+      }
+    }
+
+    if(isValid){
+      this.produitService.updatePoduct(this.productObject);
+      console.log(this.productObject);
     }else{
       console.log("champ encore vide");
     }
 
-    
   }
 
 
