@@ -159,6 +159,15 @@ export class ProduitsComponent implements OnInit {
     this.produits = this.produitService.getProduit();
     this.oneProduit = this.produits[0];
     // console.log(this.oneProduit);
+
+
+  this.produitService.getAllProduits().subscribe( resultat => {
+    console.log("resultat", resultat);
+  });
+
+    
+
+
   }
 
   createProduit() {

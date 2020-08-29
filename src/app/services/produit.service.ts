@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   
-
+  private endPoint = 'http://localhost:3000/produits';
 
   produits= [
     {
@@ -427,11 +431,16 @@ export class ProduitService {
 
 
   ]
-  constructor () { }
+  constructor (private http: HttpClient) {  }
 
   getProduit(){
     return this.produits;
   }
+
+  getAllProduits(){
+    return this.http.get<any[]>(this.endPoint,httpOptions);
+  }
+
 
   createProduct(createProduct) { }
 
