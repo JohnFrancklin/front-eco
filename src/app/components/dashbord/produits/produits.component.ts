@@ -65,7 +65,8 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  productObject() {
+  createProduct() {   
+    
     const productObject = {
       title: this.oneProduit.title,
       description: this.oneProduit.description,
@@ -86,12 +87,9 @@ export class ProduitsComponent implements OnInit {
       // categorie: this.oneProduit.categorie,
       // createur: 'RASOA',
     }
-  }
-
-  createProduct() {       
     
     let isValid = true;
-    let listInputAndTextearea = Object.keys(this.productObject); // retour les listes des clés objet productObject dans un tableau    
+    let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau    
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
@@ -103,17 +101,37 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.createProduct(this.productObject);
-      console.log(this.productObject);
+      this.produitService.createProduct(productObject);
+      console.log(productObject);
     }else{
       console.log("champ encore vide");
     }    
   }
 
   updateProduct() {
+    const productObject = {
+      title: this.oneProduit.title,
+      description: this.oneProduit.description,
+      date_sortie: this.oneProduit.detail_fabrication.date_sortie,
+      numero_model: this.oneProduit.detail_fabrication.numero_model,
+      largeur: this.oneProduit.detail_physique.largueur,
+      longueur: this.oneProduit.detail_physique.longueur,
+      poids: this.oneProduit.detail_physique.poids,
+      taille: this.oneProduit.detail_physique.taille,
+      garantie: this.oneProduit.garantie,
+      prix: this.oneProduit.prix.prix,
+      prix_promotion: this.oneProduit.prix.prix_promotion,
+      provenance:this.oneProduit.provenance,
+      quantite: this.oneProduit.quantite,
+      marque: this.oneProduit.marque,
+      couleur: this.oneProduit.detail_physique.couleur,
+      etat: this.oneProduit.etat,
+      // categorie: this.oneProduit.categorie,
+      // createur: 'RASOA',
+    }
 
     let isValid = true;
-    let listInputAndTextearea = Object.keys(this.productObject);   
+    let listInputAndTextearea = Object.keys(productObject);   
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
@@ -125,8 +143,8 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.updatePoduct(this.productObject);
-      console.log(this.productObject);
+      this.produitService.updatePoduct(productObject);
+      console.log(productObject);
     }else{
       console.log("champ encore vide");
     }
