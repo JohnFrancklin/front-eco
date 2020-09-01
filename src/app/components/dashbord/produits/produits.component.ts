@@ -15,10 +15,42 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 export class ProduitsComponent implements OnInit {
 
   produits: any;
-  oneProduit: any;
+  // oneProduit: any;
   produitSelected = [];
   searchText:any;
   oneAndAll: boolean = true;
+
+  oneProduit = {
+    _id: "",
+    categorie: 45,
+    etat: "sandbox",
+    description: "",
+    vu: 0,
+    garantie: "0",
+    provenance: "",
+    marque: "",
+    detail_fabrication: {
+      date_sortie: "",
+      numero_model: "",
+    },
+    detail_physique: {
+      largueur: "",
+      longueur: "",
+      poids: "",
+      couleur: "",
+      taille: ""
+    },
+    favoris: [],
+    images: [],
+    prix: {
+      prix: "",
+      prix_promotion: ""
+    },
+    quantite: "",
+    titre: "",
+    vote: [],
+  };
+
 
   showFilter: boolean = false;
   showDetailListStat: boolean = false;
@@ -65,9 +97,10 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  productObject() {
+  createProduct() {   
+    
     const productObject = {
-      title: this.oneProduit.title,
+      titre: this.oneProduit.titre,
       description: this.oneProduit.description,
       date_sortie: this.oneProduit.detail_fabrication.date_sortie,
       numero_model: this.oneProduit.detail_fabrication.numero_model,
@@ -83,15 +116,12 @@ export class ProduitsComponent implements OnInit {
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
       etat: this.oneProduit.etat,
-      // categorie: this.oneProduit.categorie,
+      // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
-  }
-
-  createProduct() {       
     
     let isValid = true;
-    let listInputAndTextearea = Object.keys(this.productObject); // retour les listes des clés objet productObject dans un tableau    
+    let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau    
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
@@ -103,17 +133,42 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.createProduct(this.productObject);
-      console.log(this.productObject);
+      productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
+      this.produitService.createProduct(productObject).subscribe(result =>{
+        console.log("create success", result);
+        this.produits.push(result);
+        
+      });
+      console.log(productObject);
     }else{
       console.log("champ encore vide");
     }    
   }
 
   updateProduct() {
+    const productObject = {
+      titre: this.oneProduit.titre,
+      description: this.oneProduit.description,
+      date_sortie: this.oneProduit.detail_fabrication.date_sortie,
+      numero_model: this.oneProduit.detail_fabrication.numero_model,
+      largeur: this.oneProduit.detail_physique.largueur,
+      longueur: this.oneProduit.detail_physique.longueur,
+      poids: this.oneProduit.detail_physique.poids,
+      taille: this.oneProduit.detail_physique.taille,
+      garantie: this.oneProduit.garantie,
+      prix: this.oneProduit.prix.prix,
+      prix_promotion: this.oneProduit.prix.prix_promotion,
+      provenance:this.oneProduit.provenance,
+      quantite: this.oneProduit.quantite,
+      marque: this.oneProduit.marque,
+      couleur: this.oneProduit.detail_physique.couleur,
+      etat: this.oneProduit.etat,
+      // categorie: "5f0ff8cee892a5408c1aae39",
+      // createur: 'RASOA',
+    }
 
     let isValid = true;
-    let listInputAndTextearea = Object.keys(this.productObject);   
+    let listInputAndTextearea = Object.keys(productObject);   
     for (let i=0; i<listInputAndTextearea.length; i++){
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
       if(element.value == ""){
@@ -125,8 +180,9 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.updatePoduct(this.productObject);
-      console.log(this.productObject);
+      productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
+      this.produitService.updatePoduct(productObject);
+      console.log(productObject);
     }else{
       console.log("champ encore vide");
     }
@@ -156,13 +212,14 @@ export class ProduitsComponent implements OnInit {
 
   getProduit() {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
-    this.produits = this.produitService.getProduit();
-    this.oneProduit = this.produits[0];
+    // this.produits = this.produitService.getProduit();
+    // this.oneProduit = this.produits[0];
     // console.log(this.oneProduit);
-
 
   this.produitService.getAllProduits().subscribe( resultat => {
     console.log("resultat", resultat);
+    this.produits = resultat['produits'];
+    this.oneProduit = this.produits[0];
   });
 
     
@@ -172,11 +229,12 @@ export class ProduitsComponent implements OnInit {
 
   createProduit() {
     this.oneProduit = {
+      _id: "",
       categorie: 21212124545,
       etat: "sandbox",
       description: "",
       vu: 0,
-      garantie: 0,
+      garantie: "0",
       provenance: "",
       marque: "",
       detail_fabrication: {
@@ -184,20 +242,20 @@ export class ProduitsComponent implements OnInit {
         numero_model: "",
       },
       detail_physique: {
-        largueur: 0,
-        longueur: 0,
-        poids: 0,
+        largueur: "",
+        longueur: "",
+        poids: "",
         couleur: "",
         taille: ""
       },
-      favorie: [],
+      favoris: [],
       images: [],
       prix: {
-        prix: 0,
-        prix_promotion: 0
+        prix: "",
+        prix_promotion: ""
       },
-      quantite: 0,
-      title: "",
+      quantite: "",
+      titre: "",
       vote: [],
     };
 

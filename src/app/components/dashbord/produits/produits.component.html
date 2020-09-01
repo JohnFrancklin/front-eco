@@ -194,7 +194,7 @@
                                 (click)="getOneProduit(p)">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
-                                    {{p.title}}
+                                    {{p.titre}}
                                 </span>
                                 <span class="state_produit_on_list"
                                     [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
@@ -210,7 +210,7 @@
                                     title="Cocher ici pour selection le produit">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
-                                    {{p.title}}
+                                    {{p.titre}}
                                 </span>
                                 <span class="state_produit_on_list" title="Etats du produit"
                                     [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
@@ -321,7 +321,7 @@
                             </div>
                             <div class="info_s" title="Nombre de favoris">
                                 <span class="number">
-                                    {{oneProduit.favorie.length}}
+                                    {{oneProduit.favoris.length}}
                                 </span>
                                 <span class="material-icons icon_list"
                                     (click)="showDetailstatistic('favoris','Liste client qui a favorisé ce produit')"
@@ -437,9 +437,9 @@
                         class="infoDate">Rakoto</span> </p>
 
                 <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.title" title="Editer" id="title" [ngStyle]="{'border-color': oneProduit.title == '' ? '#d5d5d4' : '#d5d5d5'}">
+                    <input type="text" class="input_change" [(ngModel)]="oneProduit.titre" title="Editer" id="titre" [ngStyle]="{'border-color': oneProduit.titre == '' ? '#d5d5d4' : '#d5d5d5'}">
                     <div class="label_change">
-                        Title
+                        Titre
                     </div>
                 </div>
                 <div class="detail_to_change_description">
@@ -594,7 +594,7 @@
                         <div class="detail_to_change">
                             <input type="number" class="input_change rightNumber"
                                 [(ngModel)]="oneProduit.detail_physique.largueur" id="largeur"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.largeur == '' ? '#d5d5d4' : '#d5d5d5'}">
+                                [ngStyle]="{'border-color': oneProduit.detail_physique.largueur == '' ? '#d5d5d4' : '#d5d5d5'}">
                             <div class="label_change">
                                 Largeur
                             </div>
