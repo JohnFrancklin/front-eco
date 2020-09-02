@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   
-
+  private endPoint = 'http://localhost:3000/produits';
 
   produits= [
     {
       _id: "1",
-      title: "Simsong One mobile",
+      titre: "Simsong One mobile",
       description: "la plus grande marque de telephone actuellement",
       categorie: 21212124545, //objectID
       quantite: 10,
@@ -44,234 +48,9 @@ export class ProduitService {
         prix: 1000,
         prix_promotion: 500
       },
-      favorie:[
+      favoris:[
         2154545454,
         2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "2",
-      title: "Tele plasma",
-      description: "Regarder votre television sous un autre angle :p",
-      categorie: 21212124545, //objectID
-      quantite: 20,
-      garantie: 150,
-      etat: "live",
-      marque : "JVC",
-      provenance : "France",
-      vu: 12,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png", "image2.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "noir",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1000,
-        prix_promotion: 500
-      },
-      favorie:[
-        2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "3",
-      title: "Ventilateur rapide",
-      description: "Le vent souffle ",
-      categorie: 21212124545, //objectID
-      quantite: 10,
-      garantie: 15,
-      etat: "archived",
-      marque : "Vista France",
-      provenance : "Paris",
-      vu: 150,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "blanc",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1200,
-        prix_promotion: 600
-      },
-      favorie:[
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-    {
-      _id: "4",
-      title: "Simsong One mobile",
-      description: "la plus grande marque de telephone actuellement",
-      categorie: 21212124545, //objectID
-      quantite: 10,
-      garantie: 15,
-      etat: "sandbox",
-      marque : "samsung",
-      provenance : "Madagascar",
-      vu: 150,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-          21245454545
-      ],
-      
-      images: [
-        "image1.png", "image2.png", "image3.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "rouge",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1000,
-        prix_promotion: 500
-      },
-      favorie:[
-        2154545454,
-        2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "5",
-      title: "Tele plasma",
-      description: "Regarder votre television sous un autre angle :p",
-      categorie: 21212124545, //objectID
-      quantite: 20,
-      garantie: 150,
-      etat: "live",
-      marque : "JVC",
-      provenance : "France",
-      vu: 12,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png", "image2.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "noir",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1000,
-        prix_promotion: 500
-      },
-      favorie:[
-        2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "6",
-      title: "Ventilateur rapide",
-      description: "Le vent souffle ",
-      categorie: 21212124545, //objectID
-      quantite: 10,
-      garantie: 15,
-      etat: "archived",
-      marque : "Vista France",
-      provenance : "Paris",
-      vu: 150,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "blanc",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1200,
-        prix_promotion: 600
-      },
-      favorie:[
         21245454545,
         21245454545,
         21245454545,
@@ -280,145 +59,6 @@ export class ProduitService {
         21245454545
       ]
     }
-    ,{
-      _id: "7",
-      title: "Simsong One mobile",
-      description: "la plus grande marque de telephone actuellement",
-      categorie: 21212124545, //objectID
-      quantite: 10,
-      garantie: 15,
-      etat: "sandbox",
-      marque : "samsung",
-      provenance : "Madagascar",
-      vu: 150,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-          21245454545
-      ],
-      
-      images: [
-        "image1.png", "image2.png", "image3.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "rouge",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1000,
-        prix_promotion: 500
-      },
-      favorie:[
-        2154545454,
-        2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "8",
-      title: "Tele plasma",
-      description: "Regarder votre television sous un autre angle :p",
-      categorie: 21212124545, //objectID
-      quantite: 20,
-      garantie: 150,
-      etat: "live",
-      marque : "JVC",
-      provenance : "France",
-      vu: 12,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png", "image2.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "noir",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1000,
-        prix_promotion: 500
-      },
-      favorie:[
-        2154545454,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-
-    {
-      _id: "9",
-      title: "Ventilateur rapide",
-      description: "Le vent souffle ",
-      categorie: 21212124545, //objectID
-      quantite: 10,
-      garantie: 15,
-      etat: "archived",
-      marque : "Vista France",
-      provenance : "Paris",
-      vu: 150,
-      vote: [
-          13121345612,
-          21245454545,
-          21245454545,
-      ],
-      
-      images: [
-        "image1.png"
-      ],
-      detail_fabrication: {
-        numero_model: "A123X",
-        date_sortie: "2 jan 2020"
-      },
-      detail_physique: {
-        poids: 350,
-        longueur: 10,
-        largueur: 10,
-        couleur: "blanc",
-        taille: "m" // m,x,
-      },
-      prix: {
-        prix: 1200,
-        prix_promotion: 600
-      },
-      favorie:[
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545,
-        21245454545
-      ]
-    },
-    
-
-
 
 
     
@@ -427,13 +67,20 @@ export class ProduitService {
 
 
   ]
-  constructor () { }
+  constructor (private http: HttpClient) {  }
 
   getProduit(){
     return this.produits;
   }
 
-  createProduct(createProduct) { }
+  getAllProduits(){
+    return this.http.get<any[]>(this.endPoint,httpOptions);
+  }
+
+
+  createProduct(createProduct) {
+    return this.http.post<any[]>(this.endPoint,createProduct,httpOptions);
+   }
 
   updatePoduct(setProduct) { }
 

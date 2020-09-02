@@ -15,10 +15,42 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 export class ProduitsComponent implements OnInit {
 
   produits: any;
-  oneProduit: any;
+  // oneProduit: any;
   produitSelected = [];
   searchText:any;
   oneAndAll: boolean = true;
+
+  oneProduit = {
+    _id: "",
+    categorie: 45,
+    etat: "sandbox",
+    description: "",
+    vu: 0,
+    garantie: "0",
+    provenance: "",
+    marque: "",
+    detail_fabrication: {
+      date_sortie: "",
+      numero_model: "",
+    },
+    detail_physique: {
+      largueur: "",
+      longueur: "",
+      poids: "",
+      couleur: "",
+      taille: ""
+    },
+    favoris: [],
+    images: [],
+    prix: {
+      prix: "",
+      prix_promotion: ""
+    },
+    quantite: "",
+    titre: "",
+    vote: [],
+  };
+
 
   showFilter: boolean = false;
   showDetailListStat: boolean = false;
@@ -68,7 +100,7 @@ export class ProduitsComponent implements OnInit {
   createProduct() {   
     
     const productObject = {
-      title: this.oneProduit.title,
+      titre: this.oneProduit.titre,
       description: this.oneProduit.description,
       date_sortie: this.oneProduit.detail_fabrication.date_sortie,
       numero_model: this.oneProduit.detail_fabrication.numero_model,
@@ -84,7 +116,7 @@ export class ProduitsComponent implements OnInit {
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
       etat: this.oneProduit.etat,
-      // categorie: this.oneProduit.categorie,
+      // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
     
@@ -101,7 +133,12 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
-      this.produitService.createProduct(productObject);
+      productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
+      this.produitService.createProduct(productObject).subscribe(result =>{
+        console.log("create success", result);
+        this.produits.push(result);
+        
+      });
       console.log(productObject);
     }else{
       console.log("champ encore vide");
@@ -110,7 +147,7 @@ export class ProduitsComponent implements OnInit {
 
   updateProduct() {
     const productObject = {
-      title: this.oneProduit.title,
+      titre: this.oneProduit.titre,
       description: this.oneProduit.description,
       date_sortie: this.oneProduit.detail_fabrication.date_sortie,
       numero_model: this.oneProduit.detail_fabrication.numero_model,
@@ -126,7 +163,7 @@ export class ProduitsComponent implements OnInit {
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
       etat: this.oneProduit.etat,
-      // categorie: this.oneProduit.categorie,
+      // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
 
@@ -143,6 +180,7 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(isValid){
+      productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
       this.produitService.updatePoduct(productObject);
       console.log(productObject);
     }else{
@@ -174,18 +212,29 @@ export class ProduitsComponent implements OnInit {
 
   getProduit() {
     console.log("Le parametre de recuperation", this.paramGetCustomized);
-    this.produits = this.produitService.getProduit();
-    this.oneProduit = this.produits[0];
+    // this.produits = this.produitService.getProduit();
+    // this.oneProduit = this.produits[0];
     // console.log(this.oneProduit);
+
+  this.produitService.getAllProduits().subscribe( resultat => {
+    console.log("resultat", resultat);
+    this.produits = resultat['produits'];
+    this.oneProduit = this.produits[0];
+  });
+
+    
+
+
   }
 
   createProduit() {
     this.oneProduit = {
+      _id: "",
       categorie: 21212124545,
       etat: "sandbox",
       description: "",
       vu: 0,
-      garantie: 0,
+      garantie: "0",
       provenance: "",
       marque: "",
       detail_fabrication: {
@@ -193,20 +242,20 @@ export class ProduitsComponent implements OnInit {
         numero_model: "",
       },
       detail_physique: {
-        largueur: 0,
-        longueur: 0,
-        poids: 0,
+        largueur: "",
+        longueur: "",
+        poids: "",
         couleur: "",
         taille: ""
       },
-      favorie: [],
+      favoris: [],
       images: [],
       prix: {
-        prix: 0,
-        prix_promotion: 0
+        prix: "",
+        prix_promotion: ""
       },
-      quantite: 0,
-      title: "",
+      quantite: "",
+      titre: "",
       vote: [],
     };
 

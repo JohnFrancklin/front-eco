@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteComponent implements OnInit {
 
+
+
+  tab:any = [1]
+
+
+
+
+
+
+
+
+
+
+
+
   //   00h à 08h, 12h à 13h30, 17h30 à 00h sy ny weekend et jour férie
 
   // 8h a 12h
@@ -18,27 +33,27 @@ export class FavoriteComponent implements OnInit {
   // sla;
 
 
-fiche = {
+  fiche = {
     dateIncident: null,
     trigrammeTSM: "ABC",
-    infoClient : {
-      num_client : 12121212,
-      email_client : "orange@test.com",
-      num_concerne : 32321245,
+    infoClient: {
+      num_client: 12121212,
+      email_client: "orange@test.com",
+      num_concerne: 32321245,
       anciennete: true,
       localisation: " text", // string
       coordonneeGPS: "text",
       emplacementDeplace: null,
       indoor: null // boolean
     },
-    equipementOuOffre : {
+    equipementOuOffre: {
       internet: "medium", // ou medium ou plus  *String
       flybox: "ie", // ou homenet ou orangenet  *String
       modem: "domino", // ou cle_usb ou wifi_dock  *String
       equipementClient: "pc", // ou smartphone ou tablelle  *string
       autreEquipement: "tpe", // ou geolocalisation ou autres  *string
     },
-    reclamationClient : {
+    reclamationClient: {
       typeReseau: "2g", // ou 3g ou 4g ou 4gttd  *string
       problemReclame: "lenteur", // ou coupure ou microcoupure  *string
       descriptionReclame: "text"  // text  pas string
@@ -50,7 +65,7 @@ fiche = {
       resultatTest: "text" // text pas string
     },
     intervention: {
-      trigrammeTic : "ABC",
+      trigrammeTic: "ABC",
       outdoor: {
         verificationReseau: "text",
         vitesse: "text",
@@ -68,10 +83,59 @@ fiche = {
       conclusionTic: "concl",
       observationTic: "obs"
     }
- }
+  }
 
 
   constructor() { }
+
+
+  suppr(i){
+    console.log("index", i);
+    console.log("tab", this.tab);
+    
+    
+    this.tab.splice(i,1);
+    console.log("tab 2", this.tab);
+  }
+  add(){
+    this.tab.push(Math.random());
+  }
+
+  send(){
+    let objet = {};
+    let tabKey = [];
+    let tabValue = [];
+    let isValid:boolean = true;
+
+    var divElem = document.getElementById("rechercheDiv");
+    var inputElements = divElem.querySelectorAll("input, select")
+
+    for (let i = 0; i<inputElements.length; i++){      
+      if(i%2 == 0){
+        tabKey.push(inputElements[i]['value']);
+      }else{
+        tabValue.push(inputElements[i]['value']);
+        if(inputElements[i]['value'] == ''){
+          isValid = false;
+        }
+      }
+    }
+
+    for(let i=0; i<tabKey.length; i++){
+        objet[tabKey[i]] = tabValue[i];
+    }
+    
+    if(isValid){
+      console.log("Myobjet", objet);
+    }
+    else{
+      console.log("il y a une clé vide");
+    }
+
+    
+  
+  }
+
 
   ngOnInit(): void {
 
@@ -80,7 +144,7 @@ fiche = {
     this.calcluleDate();
 
   }
-  getValue(){
+  getValue() {
 
     let dateIncident = (document.querySelector('input[name="dateIncident"]') as HTMLInputElement).value;
     let trigrammeTSM = (document.querySelector('input[name="trigrammeTSM"]') as HTMLInputElement).value;
@@ -110,7 +174,7 @@ fiche = {
     let o_unisonMobile = (document.querySelector('textarea[name="o_unisonMobile"]') as HTMLInputElement).value;
     let o_resultatPing = (document.querySelector('textarea[name="o_resultatPing"]') as HTMLInputElement).value;
     let o_autres = (document.querySelector('textarea[name="o_autres"]') as HTMLInputElement).value;
-    
+
     let i_verificationReseau = (document.querySelector('textarea[name="i_verificationReseau"]') as HTMLInputElement).value;
     let i_vitesse = (document.querySelector('textarea[name="i_vitesse"]') as HTMLInputElement).value;
     let i_unisonMobile = (document.querySelector('textarea[name="i_unisonMobile"]') as HTMLInputElement).value;
@@ -120,73 +184,73 @@ fiche = {
     let observationTic = (document.querySelector('textarea[name="observationTic"]') as HTMLInputElement).value;
 
 
-      console.log("Valeur", indoor);
+    console.log("Valeur", indoor);
 
 
 
-      let data = {
-        dateIncident: dateIncident,
-        trigrammeTSM: trigrammeTSM,
-        infoClient : {
-          num_client : num_client,
-          email_client : email_client,
-          num_concerne : num_concerne,
-          anciennete: anciennete,
-          localisation: localisation,
-          coordonneeGPS: coordonneeGPS,
-          emplacementDeplace: emplacementDeplace,
-          indoor: indoor
+    let data = {
+      dateIncident: dateIncident,
+      trigrammeTSM: trigrammeTSM,
+      infoClient: {
+        num_client: num_client,
+        email_client: email_client,
+        num_concerne: num_concerne,
+        anciennete: anciennete,
+        localisation: localisation,
+        coordonneeGPS: coordonneeGPS,
+        emplacementDeplace: emplacementDeplace,
+        indoor: indoor
+      },
+      equipementOuOffre: {
+        internet: internet,
+        flybox: flybox,
+        modem: modem,
+        equipementClient: equipementClient,
+        autreEquipement: autreEquipement,
+      },
+      reclamationClient: {
+        typeReseau: typeReseau,
+        problemReclame: problemReclame,
+        descriptionReclame: descriptionReclame
+      },
+      investigation: {
+        profil: profil,
+        niveauSignal: niveauSignal,
+        testCroise: testCroise,
+        resultatTest: resultatTest
+      },
+      intervention: {
+        trigrammeTic: trigrammeTic,
+        outdoor: {
+          verificationReseau: o_verificationReseau,
+          vitesse: o_vitesse,
+          unisonMobile: o_unisonMobile,
+          resultatPing: o_resultatPing,
+          autres: o_autres
         },
-        equipementOuOffre : {
-          internet: internet, 
-          flybox: flybox,
-          modem: modem, 
-          equipementClient: equipementClient, 
-          autreEquipement: autreEquipement,
+        indoor: {
+          verificationReseau: i_verificationReseau,
+          vitesse: i_vitesse,
+          unisonMobile: i_unisonMobile,
+          resultatPing: i_resultatPing,
+          autres: i_autres
         },
-        reclamationClient : {
-          typeReseau: typeReseau,
-          problemReclame: problemReclame,
-          descriptionReclame: descriptionReclame
-        },
-        investigation: {
-          profil: profil,
-          niveauSignal: niveauSignal,
-          testCroise: testCroise,
-          resultatTest: resultatTest
-        },
-        intervention: {
-          trigrammeTic : trigrammeTic,
-          outdoor: {
-            verificationReseau: o_verificationReseau,
-            vitesse: o_vitesse,
-            unisonMobile: o_unisonMobile,
-            resultatPing: o_resultatPing,
-            autres: o_autres
-          },
-          indoor: {
-            verificationReseau: i_verificationReseau,
-            vitesse: i_vitesse,
-            unisonMobile: i_unisonMobile,
-            resultatPing: i_resultatPing,
-            autres: i_autres
-          },
-          conclusionTic: conclusionTic,
-          observationTic: observationTic
-        }
-     }
-    
-
-     console.log("data", data);
-     
-
-      // {
-      //   "title": "Titre de la fiche",
-      // "data": "Données de la fiche"
-      // }
+        conclusionTic: conclusionTic,
+        observationTic: observationTic
+      }
+    }
 
 
-    
+    console.log("data", data);
+
+
+    // {
+    //   "title": "Titre de la fiche",
+    // "data": "Données de la fiche"
+    // }
+
+
+
   }
 
 
@@ -679,7 +743,7 @@ fiche = {
     if (day == 0 || day == 6) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
@@ -698,8 +762,8 @@ fiche = {
     let demiJournee = this.getMilisecond(4, 0, 0);
     let journee = this.getMilisecond(8, 0, 0);
 
-    
-    
+
+
     let reste;
     let tabJour = [];
     let depart;
@@ -727,7 +791,7 @@ fiche = {
     }
 
     // console.log("le reste", this.millisecondeToTime(reste));
-    
+
     //******Si reste est superieur au demi journee****// */
     if (reste >= demiJournee) {
 
@@ -739,46 +803,46 @@ fiche = {
 
 
           // console.log("date deb", dateDebut);
-          
-          
+
+
 
           let isWeekend = this.checkDateIfWeekend(dateDebut);
-          if(isWeekend){
+          if (isWeekend) {
             // console.log("weekend");
             reste = reste + journee;
             nombreJourWeekendAndJourFerie++;
           }
-          else{
+          else {
             // console.log("tsy weekend!");
           }
 
 
 
-          
-          
+
+
         } else {
           tabJour.push("S");
           depart = "M";
           nombreJour++;
 
           // console.log("Nombre de jour", nombreJour);
-          
-          dateDebut = new Date(dateDebut.setDate(dateDebut.getDate() +1));
+
+          dateDebut = new Date(dateDebut.setDate(dateDebut.getDate() + 1));
           // console.log("date deb", dateDebut);
-          
+
           //*****on check le jour si c'est le weekend */
           // dateLeLendemain = new Date(dateDebut.setDate(dateDebut.getDate() +1)); //plus un le lendemain
           // console.log("date apres soiré", dateLeLendemain);
           // console.log("date deb", dateDebut);
           // console.log("date lend", dateLeLendemain);
-              
+
           let isWeekend = this.checkDateIfWeekend(dateDebut);
-          if(isWeekend){
+          if (isWeekend) {
             // console.log("weekend");
             reste = reste + journee;
             nombreJourWeekendAndJourFerie++;
           }
-          else{
+          else {
             // console.log("tsy weekend!");
           }
           //***************************************** */
@@ -786,13 +850,13 @@ fiche = {
       }
       while (reste >= demiJournee);
 
-    }else{
+    } else {
       // console.log("MANDALO ATO AM ELSE ATO E");
     }
 
     // console.log("weekend", nombreJourWeekendAndJourFerie);
     // console.log("NOMBRE JOUR", nombreJour);
-    
+
     // nombreJour = nombreJour + nombreJourWeekendAndJourFerie;
     // console.log("NOMBRE JOUR", nombreJour);
 
@@ -801,34 +865,34 @@ fiche = {
       if (tabJour[tabJour.length - 1] == "M") {
         // console.log(" oui Matinée");
         heureProchaine = h_13_30 + reste;
-        if(hour >= 8 && hour <= 12){
-          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() ));
+        if (hour >= 8 && hour <= 12) {
+          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate()));
           // console.log("avant 12");
-          
-        }else{
-          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() +1));
+
+        } else {
+          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() + 1));
           // console.log("apres 12");
         }
-        
-        
+
+
 
       } else {
         heureProchaine = h_08_00 + reste;
         console.log("soiré");
         console.log("Nombre de jour", nombreJour);
-        if(hour >= 8 && hour <= 12){
-          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() ));
+        if (hour >= 8 && hour <= 12) {
+          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate()));
           console.log("avant 12");
-          
-        }else{
-          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() +1));
+
+        } else {
+          dateProchaine = new Date(dateDebut.setDate(dateDebut.getDate() + 1));
           console.log("apres 12");
         }
-        
+
       }
     }
 
-    
+
     //*************************date complet************** */
     let yyyy = dateProchaine.getFullYear();
     let mm = (dateProchaine.getMonth() < 9 ? '0' : '') + (dateProchaine.getMonth() + 1)
@@ -840,7 +904,7 @@ fiche = {
     // console.log("Nombre de jour passée", nombreJour);
     // // console.log("heure prochaine", this.millisecondeToTime(heureProchaine));
     // console.log("----------------------------------------------------------------");
-    
+
     // console.log("date et heure complete", dateEtHeureComplet);
 
     // console.log("----------------------------------------------------------------");
@@ -865,7 +929,7 @@ fiche = {
   }
 
 
-  
+
 
 
 
