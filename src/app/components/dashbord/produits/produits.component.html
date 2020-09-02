@@ -517,8 +517,8 @@
                 <div class="groupe_content">
                     <div class="leftSide sideToside">
                         <div class="detail_to_change">
-                            <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix" id="prix"
-                            [ngStyle]="{'border-color': oneProduit.prix.prix == '' ? '#d5d5d4' : '#d5d5d5'}">
+                            <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_normal" id="prix_normal"
+                            [ngStyle]="{'border-color': oneProduit.prix.prix_normal == '' ? '#d5d5d4' : '#d5d5d5'}">
                             <div class="label_change">
                                 Prix
                             </div>
@@ -593,8 +593,8 @@
                     <div class="rightSide sideToside">
                         <div class="detail_to_change">
                             <input type="number" class="input_change rightNumber"
-                                [(ngModel)]="oneProduit.detail_physique.largueur" id="largeur"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.largueur == '' ? '#d5d5d4' : '#d5d5d5'}">
+                                [(ngModel)]="oneProduit.detail_physique.largeur" id="largeur"
+                                [ngStyle]="{'border-color': oneProduit.detail_physique.largeur == '' ? '#d5d5d4' : '#d5d5d5'}">
                             <div class="label_change">
                                 Largeur
                             </div>
