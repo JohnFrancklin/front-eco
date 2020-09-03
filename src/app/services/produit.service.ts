@@ -61,10 +61,6 @@ export class ProduitService {
     }
 
 
-    
-
-
-
 
   ]
   constructor (private http: HttpClient) {  }
@@ -82,7 +78,9 @@ export class ProduitService {
     return this.http.post<any[]>(this.endPoint,createProduct,httpOptions);
    }
 
-  updatePoduct(setProduct) { }
+  updatePoduct(putProduct:any,  id:string) {
+    return this.http.put<any[]>(this.endPoint+"/"+id,putProduct, httpOptions);
+  }
 
   deleteProduct(deleteProduct) { }
 

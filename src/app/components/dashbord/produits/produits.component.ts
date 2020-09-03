@@ -147,6 +147,7 @@ export class ProduitsComponent implements OnInit {
 
   updateProduct() {
     const productObject = {
+      // id: this.oneProduit._id,
       titre: this.oneProduit.titre,
       description: this.oneProduit.description,
       date_sortie: this.oneProduit.detail_fabrication.date_sortie,
@@ -181,7 +182,8 @@ export class ProduitsComponent implements OnInit {
 
     if(isValid){
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-      this.produitService.updatePoduct(productObject);
+      var idP = this.oneProduit._id;
+      this.produitService.updatePoduct(productObject, idP).subscribe();
       console.log(productObject);
     }else{
       console.log("champ encore vide");
