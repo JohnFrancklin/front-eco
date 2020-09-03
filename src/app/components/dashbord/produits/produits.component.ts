@@ -17,7 +17,7 @@ export class ProduitsComponent implements OnInit {
   produits: any;
   // oneProduit: any;
   produitSelected = [];
-  searchText:any;
+  searchText: any;
   oneAndAll: boolean = true;
 
   oneProduit = {
@@ -49,6 +49,7 @@ export class ProduitsComponent implements OnInit {
     quantite: "",
     titre: "",
     vote: [],
+    index: ""
   };
 
 
@@ -63,7 +64,7 @@ export class ProduitsComponent implements OnInit {
   scrollSpace = 0;  // espace vide scroll
 
   paramGetCustomized = 1;
-  state_to_change="";
+  state_to_change = "";
 
   //--------Variables pour spinner-------//spinner_loadMore
   spinner_list_Produit = "spinner_list_Produit";
@@ -79,8 +80,8 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
-  
-  
+
+
   constructor(
     private produitService: ProduitService,
     public dialog: MatDialog,
@@ -97,8 +98,8 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  createProduct() {   
-    
+  createProduct() {
+
     const productObject = {
       titre: this.oneProduit.titre,
       description: this.oneProduit.description,
@@ -111,7 +112,7 @@ export class ProduitsComponent implements OnInit {
       garantie: this.oneProduit.garantie,
       prix_normal: this.oneProduit.prix.prix_normal,
       prix_promotion: this.oneProduit.prix.prix_promotion,
-      provenance:this.oneProduit.provenance,
+      provenance: this.oneProduit.provenance,
       quantite: this.oneProduit.quantite,
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
@@ -119,30 +120,30 @@ export class ProduitsComponent implements OnInit {
       // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
-    
+
     let isValid = true;
     let listInputAndTextearea = Object.keys(productObject); // retour les listes des clés objet productObject dans un tableau    
-    for (let i=0; i<listInputAndTextearea.length; i++){
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
-      if(element.value == ""){
+      if (element.value == "") {
         element.style.borderColor = "red";
         isValid = false;
-      }else{
+      } else {
         element.style.borderColor = "#d5d5d5";
       }
     }
 
-    if(isValid){
+    if (isValid) {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-      this.produitService.createProduct(productObject).subscribe(result =>{
-        console.log("create success", result);
+      this.produitService.createProduct(productObject).subscribe(result => {
+        // console.log("create success", result);
         this.produits.push(result);
-        
+
       });
       console.log(productObject);
-    }else{
+    } else {
       console.log("champ encore vide");
-    }    
+    }
   }
 
   updateProduct() {
@@ -158,7 +159,7 @@ export class ProduitsComponent implements OnInit {
       garantie: this.oneProduit.garantie,
       prix_normal: this.oneProduit.prix.prix_normal,
       prix_promotion: this.oneProduit.prix.prix_promotion,
-      provenance:this.oneProduit.provenance,
+      provenance: this.oneProduit.provenance,
       quantite: this.oneProduit.quantite,
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
@@ -168,22 +169,29 @@ export class ProduitsComponent implements OnInit {
     }
 
     let isValid = true;
-    let listInputAndTextearea = Object.keys(productObject);   
-    for (let i=0; i<listInputAndTextearea.length; i++){
+    let listInputAndTextearea = Object.keys(productObject);
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
       let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
-      if(element.value == ""){
+      if (element.value == "") {
         element.style.borderColor = "red";
         isValid = false;
-      }else{
+      } else {
         element.style.borderColor = "#d5d5d5";
       }
     }
 
-    if(isValid){
+    if (isValid) {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
+
+      //changer directement la valeur du objet selection, sans recharger la page
+      for (let i = 0; i < listInputAndTextearea.length; i++) {
+        let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+        this.produits[this.oneProduit.index].element = element.value;
+      }
+
       this.produitService.updatePoduct(productObject);
       console.log(productObject);
-    }else{
+    } else {
       console.log("champ encore vide");
     }
 
@@ -195,14 +203,14 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  changeEtat(event){
-    
-    console.log(this.produitSelected);
-    
-    for ( let i = 0; i<this.produitSelected.length; i++ ){
+  changeEtat(event) {
 
-    const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
-    checkElement.checked = false;
+    console.log(this.produitSelected);
+
+    for (let i = 0; i < this.produitSelected.length; i++) {
+
+      const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
+      checkElement.checked = false;
     }
 
     this.produitSelected = [];
@@ -216,13 +224,13 @@ export class ProduitsComponent implements OnInit {
     // this.oneProduit = this.produits[0];
     // console.log(this.oneProduit);
 
-  this.produitService.getAllProduits().subscribe( resultat => {
-    console.log("resultat", resultat);
-    this.produits = resultat['produits'];
-    this.oneProduit = this.produits[0];
-  });
+    this.produitService.getAllProduits(this.paramGetCustomized).subscribe(resultat => {
+      console.log("resultat", resultat);
+      this.produits = resultat['produits'];
+      this.oneProduit = this.produits[0];
+    });
 
-    
+
 
 
   }
@@ -257,6 +265,7 @@ export class ProduitsComponent implements OnInit {
       quantite: "",
       titre: "",
       vote: [],
+      index: ""
     };
 
     //********************************************/
@@ -274,10 +283,10 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  getOneProduit(oneProduit) {
+  getOneProduit(oneProduit, i) {
     this.oneProduit = oneProduit;
+    this.oneProduit['index'] = i;
     this.createType = false;
-
   }
 
 
@@ -431,12 +440,19 @@ export class ProduitsComponent implements OnInit {
         this.spinner.hide(this.spinner_loadMore);
         // this.loadMore = false;
         this.scrollSpace = 0;
-        let newProduits = this.produitService.getProduit();
-        //concatenation produit a newProduit
-        this.produits = this.produits.concat(newProduits);
-        // console.log("aprs concat", this.produits);
-        
-      }, 2000);
+        let newProduits = [];
+
+        this.produitService.getAllProduits(this.paramGetCustomized).subscribe(resultat => {
+          console.log("resultat", resultat);
+          newProduits = resultat['produits'];
+          // this.oneProduit = this.produits[0];
+          //concatenation produit a newProduit
+          this.produits = this.produits.concat(newProduits);
+          console.log("aprs concat", this.produits);
+
+        });
+
+      }, 1000);
 
     }
 
@@ -444,10 +460,28 @@ export class ProduitsComponent implements OnInit {
   changefiltre(e) {
     let status = e.target.value
     this.produits = this.produitService.getProduit();
-    if(status != "none"){
-      this.produits= this.produits.filter((value) => value.etat== status);
-      
+    if (status != "none") {
+      this.produits = this.produits.filter((value) => value.etat == status);
+
     }
   }
+
+  //upload file//
+  uploadFile(files) {
+    let images: File = files.item(0);
+
+    const formData: FormData = new FormData();
+    formData.append('images', images, images.name);
+
+    this.produitService.ajouterImage(formData, this.oneProduit._id).subscribe(data => {
+      console.log("uploaded with succes",data);
+      }, error => {
+        console.log(error);
+      });
+  }
+
+
+
+
 
 }

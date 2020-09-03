@@ -188,10 +188,10 @@
 
 
                         <div *ngIf="oneAndAll">
-                            <button class="element_un" *ngFor="let p of produits | filter:searchText "
+                            <button class="element_un" *ngFor="let p of produits | filter:searchText ; let i=index"
                                 title="{{p.title}}"
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
-                                (click)="getOneProduit(p)">
+                                (click)="getOneProduit(p,i)">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.titre}}
@@ -372,7 +372,8 @@
                 </div>
                 <div class="imageCont">
                     <div class="box_image" *ngFor="let i of oneProduit.images" (click)="popupImageProduits()">
-                        <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit">
+                        <!-- <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit"> -->
+                        <img src="http://localhost:3000/produits/getImage/{{i}}-hd.jpeg" class="image_produit">
                     </div>
                     <div class="box_image" *ngIf="oneProduit.images.length!=3" (click)="file.click()">
                         <span class="material-icons add_image">
@@ -380,7 +381,7 @@
                         </span> <br>
                         Ajouter une image
                     </div>
-                    <input type="file" name="" id="" hidden #file>
+                    <input type="file" name="" id="" hidden #file (change)="uploadFile($event.target.files)">
                 </div>
             </div>
         </div>

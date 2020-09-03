@@ -73,10 +73,13 @@ export class ProduitService {
     return this.produits;
   }
 
-  getAllProduits(){
-    return this.http.get<any[]>(this.endPoint,httpOptions);
-  }
+  // getAllProduits(){
+  //   return this.http.get<any[]>(this.endPoint,httpOptions);
+  // }
 
+  getAllProduits(page){
+    return this.http.get<any[]>(this.endPoint+"/getProduitsCustomised/"+page,httpOptions);
+  }
 
   createProduct(createProduct) {
     return this.http.post<any[]>(this.endPoint,createProduct,httpOptions);
@@ -85,6 +88,14 @@ export class ProduitService {
   updatePoduct(setProduct) { }
 
   deleteProduct(deleteProduct) { }
+
+
+ajouterImage(formData, id) {
+  // const formData: FormData = new FormData();
+  // formData.append('images', fileToUpload, fileToUpload.name);
+  return this.http.put<any[]>(this.endPoint+"/update/imagesAdd/"+id, formData, {responseType:'text' as 'json'}); //pas de httpOptions
+}
+
 
   
 }
