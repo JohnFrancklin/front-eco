@@ -182,13 +182,6 @@ export class ProduitsComponent implements OnInit {
 
     if (isValid) {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-
-      //changer directement la valeur du objet selection, sans recharger la page
-      for (let i = 0; i < listInputAndTextearea.length; i++) {
-        let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
-        this.produits[this.oneProduit.index].element = element.value;
-      }
-
       this.produitService.updatePoduct(productObject);
       console.log(productObject);
     } else {
