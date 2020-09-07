@@ -201,7 +201,11 @@ export class ProduitsComponent implements OnInit {
       this.produitService.launchProduct(this.oneProduit, this.oneProduit._id).subscribe(result =>{
         console.log("success", result); });
     } else {
-      this.produitService.deleteProduct(this.oneProduit._id).subscribe();
+      this.produitService.deleteProduct(this.oneProduit._id).subscribe(result =>{
+        console.log("success", result);
+        this.produits.splice(this.oneProduit, 1); });
+        this.createProduit();
+                
     }
         
   }
@@ -214,6 +218,7 @@ export class ProduitsComponent implements OnInit {
         // console.log(x);
         this.produits.splice(this.oneProduit, 1);
       });
+      this.createProduit();
 
     console.log(this.oneProduit._id);
   }
