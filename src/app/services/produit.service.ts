@@ -81,11 +81,17 @@ export class ProduitService {
     return this.http.post<any[]>(this.endPoint,createProduct,httpOptions);
    }
 
-  updatePoduct(putProduct:any,  id:string) {
+  updatePoduct(putProduct, id) {
     return this.http.put<any[]>(this.endPoint+"/"+id,putProduct, httpOptions);
   }
 
-  deleteProduct(deleteProduct) { }
+  deleteProduct(id) {
+    return this.http.delete<any[]>(this.endPoint+"/"+id, {responseType:'text' as 'json'});
+  }
+
+  launchProduct(etat, id) {
+    return this.http.put<any[]>(this.endPoint+"/"+id, etat, httpOptions);
+  }
 
 
 ajouterImage(formData, id) {
