@@ -182,8 +182,7 @@ export class ProduitsComponent implements OnInit {
 
     if(isValid){
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-      var idP = this.oneProduit._id;
-      this.produitService.updatePoduct(productObject, idP).subscribe();
+      this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
       console.log(productObject);
     }else{
       console.log("champ encore vide");
@@ -191,8 +190,31 @@ export class ProduitsComponent implements OnInit {
 
   }
 
+  lancer() {
+
+    if (this.oneProduit.etat == 'sandbox') {
+      this.oneProduit.etat = "live";
+      this.produitService.launchProduct(this.oneProduit, this.oneProduit._id).subscribe(result =>{
+        console.log("success", result); });
+    } else if (this.oneProduit.etat == 'live') {
+      this.oneProduit.etat = "archived";
+      this.produitService.launchProduct(this.oneProduit, this.oneProduit._id).subscribe(result =>{
+        console.log("success", result); });
+    } else {
+      this.produitService.deleteProduct(this.oneProduit._id).subscribe();
+    }
+        
+  }
+
   deleteProduct() {
-    this.produitService.deleteProduct(this.oneProduit._id);
+    this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
+        result =>{
+        console.log("success", result);
+        // const x = this.produits.filter(e => { return e._id })
+        // console.log(x);
+        this.produits.splice(this.oneProduit, 1);
+      });
+
     console.log(this.oneProduit._id);
   }
 
@@ -279,7 +301,6 @@ export class ProduitsComponent implements OnInit {
   getOneProduit(oneProduit) {
     this.oneProduit = oneProduit;
     this.createType = false;
-
   }
 
 
