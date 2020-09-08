@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+const endPoint = environment.api+"produits";
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   
-  private endPoint = 'http://localhost:3000/produits';
+  
 
   produits= [
     {
@@ -74,34 +76,34 @@ export class ProduitService {
   // }
 
   getAllProduits(page){
-    return this.http.get<any[]>(this.endPoint+"/getProduitsCustomised/"+page,httpOptions);
+    return this.http.get<any[]>(endPoint+"/getProduitsCustomised/"+page,httpOptions);
   }
 
   createProduct(createProduct) {
-    return this.http.post<any[]>(this.endPoint,createProduct,httpOptions);
+    return this.http.post<any[]>(endPoint,createProduct,httpOptions);
    }
 
   updatePoduct(putProduct, id) {
-    return this.http.put<any[]>(this.endPoint+"/"+id,putProduct, httpOptions);
+    return this.http.put<any[]>(endPoint+"/"+id,putProduct, httpOptions);
   }
 
   deleteProduct(id) {
-    return this.http.delete<any[]>(this.endPoint+"/"+id, {responseType:'text' as 'json'});
+    return this.http.delete<any[]>(endPoint+"/"+id, {responseType:'text' as 'json'});
   }
 
   launchProduct(id, lanceur) {
-    return this.http.put<any[]>(this.endPoint+"/update/lancement/"+id, lanceur, httpOptions);
+    return this.http.put<any[]>(endPoint+"/update/lancement/"+id, lanceur, httpOptions);
   }
 
   archivedProduct(id, lanceur) {
-    return this.http.put<any[]>(this.endPoint+"/update/archive/"+id, lanceur, httpOptions);
+    return this.http.put<any[]>(endPoint+"/update/archive/"+id, lanceur, httpOptions);
   }
 
 
 ajouterImage(formData, id) {
   // const formData: FormData = new FormData();
   // formData.append('images', fileToUpload, fileToUpload.name);
-  return this.http.put<any[]>(this.endPoint+"/update/imagesAdd/"+id, formData, {responseType:'text' as 'json'}); //pas de httpOptions
+  return this.http.put<any[]>(endPoint+"/update/imagesAdd/"+id, formData, {responseType:'text' as 'json'}); //pas de httpOptions
 }
 
 

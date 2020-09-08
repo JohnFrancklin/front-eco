@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
 import { NgxSpinnerService } from "ngx-spinner";
-import { environment } from '../../../../environments/environment';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
