@@ -87,7 +87,11 @@ export class ProduitService {
   }
 
   launchProduct(etat, id) {
-    return this.http.put<any[]>(this.endPoint+"/"+id, etat, httpOptions);
+    return this.http.put<any[]>(this.endPoint+"/updated/lancement/"+id, etat, httpOptions);
+  }
+
+  archivedProduct(etat, id) {
+    return this.http.put<any[]>(this.endPoint+"/updated/archive/"+id, etat, httpOptions);
   }
 
   

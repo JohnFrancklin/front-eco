@@ -191,14 +191,21 @@ export class ProduitsComponent implements OnInit {
   }
 
   lancer() {
+    let bodyForLauncheur = {
+      lanceur: "rakoto"
+    };
+
+    let bodyForArchiveur = {
+      archiveur: "rabe"
+    };
 
     if (this.oneProduit.etat == 'sandbox') {
       this.oneProduit.etat = "live";
-      this.produitService.launchProduct(this.oneProduit, this.oneProduit._id).subscribe(result =>{
+      this.produitService.launchProduct(this.oneProduit._id, bodyForLauncheur).subscribe(result =>{
         console.log("success", result); });
     } else if (this.oneProduit.etat == 'live') {
       this.oneProduit.etat = "archived";
-      this.produitService.launchProduct(this.oneProduit, this.oneProduit._id).subscribe(result =>{
+      this.produitService.archivedProduct(this.oneProduit._id, bodyForArchiveur).subscribe(result =>{
         console.log("success", result); });
     } else {
       this.produitService.deleteProduct(this.oneProduit._id).subscribe(result =>{
