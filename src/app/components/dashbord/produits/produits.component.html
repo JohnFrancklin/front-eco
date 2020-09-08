@@ -392,7 +392,7 @@
             <h3 class="lbl_h3_detail" *ngIf="oneAndAll"> {{createType ? "Nouveau produit" : "Detail du produit"}}</h3>
 
             <!-- Non selection -->
-            <button class="button_change_state" *ngIf="oneAndAll && !createType" (click)="lancer()"
+            <button class="button_change_state" *ngIf="oneAndAll && !createType" (click)="launchOrArhiveOrDelete()"
                 [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}"
                 [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}

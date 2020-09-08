@@ -192,7 +192,7 @@ export class ProduitsComponent implements OnInit {
 
   }
 
-  lancer() {
+  launchOrArhiveOrDelete() {
     let bodyForLauncheur = {
       lanceur: "rakoto"
     };
