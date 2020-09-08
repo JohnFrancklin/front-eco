@@ -86,12 +86,12 @@ export class ProduitService {
     return this.http.delete<any[]>(this.endPoint+"/"+id, {responseType:'text' as 'json'});
   }
 
-  launchProduct(etat, id) {
-    return this.http.put<any[]>(this.endPoint+"/updated/lancement/"+id, etat, httpOptions);
+  launchProduct(id, lanceur) {
+    return this.http.put<any[]>(this.endPoint+"/update/lancement/"+id, lanceur, httpOptions);
   }
 
-  archivedProduct(etat, id) {
-    return this.http.put<any[]>(this.endPoint+"/updated/archive/"+id, etat, httpOptions);
+  archivedProduct(id, lanceur) {
+    return this.http.put<any[]>(this.endPoint+"/update/archive/"+id, lanceur, httpOptions);
   }
 
   
