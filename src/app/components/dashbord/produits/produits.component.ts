@@ -213,7 +213,7 @@ export class ProduitsComponent implements OnInit {
         console.log("success", result);
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
         this.snackBar.open("["+result['titre']+"]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-        /**---------end snackbar------------------------------------------- */
+
       });
     } else if (this.oneProduit.etat == 'live') {
       this.oneProduit.etat = "archived";
@@ -221,7 +221,7 @@ export class ProduitsComponent implements OnInit {
         console.log("success", result); 
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
         this.snackBar.open("["+result['titre']+"] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-        /**---------end snackbar------------------------------------------- */
+
       });
     } else {
       if (confirm("Voullez-vous vraiment supprimer " + this.oneProduit.titre + "?")) {
