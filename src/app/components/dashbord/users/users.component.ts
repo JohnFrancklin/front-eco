@@ -254,11 +254,20 @@ export class UsersComponent implements OnInit {
 
     this.listeUsers = this.usersService.getListeUser();
 
+    this.usersService.getUsers().subscribe(resultat => {
+      console.log("resultat", resultat);
+      this.listeUsers = resultat['users'];
+      // this.oneProduit = this.produits[0];
+      this.usersDetail = this.listeUsers[0];
+    });
+
+
+
     // store all nom user
     for (let index = 0; index < this.listeUsers.length; index++) {
       this.nomUsers.push(this.listeUsers[index].nom +" "+this.listeUsers[index].prenom)
     }
-    this.usersDetail = this.listeUsers[0];
+    
   }
 
   selectUser(u) {
