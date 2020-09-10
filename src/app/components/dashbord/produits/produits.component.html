@@ -606,7 +606,7 @@
                 <div class="detail_to_change_button">
 
                     <form>
-                        <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'" (click)="updateProduct()"
+                        <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'" mat-button (click)="updateProduct()"
                             [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
                             Modifier
                         </button>

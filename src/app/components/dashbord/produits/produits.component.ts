@@ -5,6 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -182,7 +183,12 @@ export class ProduitsComponent implements OnInit {
 
     if(isValid){
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-      this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
+      // this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
+      if(confirm("Voullez-vous modifier " +this.oneProduit.titre+ "?")) {
+        this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
+        confirm('Produit modifié avec succès')
+      }else {
+      }
       console.log(productObject);
     }else{
       console.log("champ encore vide");
@@ -208,24 +214,38 @@ export class ProduitsComponent implements OnInit {
       this.produitService.archivedProduct(this.oneProduit._id, bodyForArchiveur).subscribe(result =>{
         console.log("success", result); });
     } else {
-      this.produitService.deleteProduct(this.oneProduit._id).subscribe(result =>{
-        console.log("success", result);
-        this.produits.splice(this.oneProduit, 1); });
+      if (confirm("Voullez-vous vraiment supprimer " +this.oneProduit.titre+ "?")) {
+        this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
+          result =>{
+          console.log("success", result);
+          // const x = this.produits.filter(e => { return e._id })
+          // console.log(x);
+          this.produits.splice(this.oneProduit, 1);
+        });
         this.createProduit();
+        confirm('Produit supprimé');
+      }else {
+      }
                 
     }
         
   }
 
   deleteProduct() {
-    this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
-        result =>{
-        console.log("success", result);
-        // const x = this.produits.filter(e => { return e._id })
-        // console.log(x);
-        this.produits.splice(this.oneProduit, 1);
-      });
-      this.createProduit();
+
+      if (confirm("Voullez-vous vraiment supprimer " +this.oneProduit.titre+ "?")) {
+        this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
+          result =>{
+          console.log("success", result);
+          // const x = this.produits.filter(e => { return e._id })
+          // console.log(x);
+          this.produits.splice(this.oneProduit, 1);
+        });
+        this.createProduit();
+        confirm('Produit supprimé');
+      }else {
+
+      }
 
     console.log(this.oneProduit._id);
   }

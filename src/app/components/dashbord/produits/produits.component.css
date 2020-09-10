@@ -742,3 +742,19 @@
 .infoDate{
     color: rgb(1, 64, 107);
 }
+
+
+/* CUSTOM SWAL */
+.swal2-popup {
+    border-radius: 1px !important;
+}
+
+.swal2-show {
+    animation: none !important;
+}
+
+button.swal2-styled.swal2-confirm {
+    border-radius: 1px !important;
+    color: rgb(1, 64, 107) !important;
+    border: 1px solid rgb(1, 64, 107) !important;
+}
