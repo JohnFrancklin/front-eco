@@ -212,7 +212,7 @@ export class ProduitsComponent implements OnInit {
       this.produitService.launchProduct(this.oneProduit._id, body).subscribe(result => {
         console.log("success", result);
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
-        this.snackBar.open(result['titre'] + " a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        this.snackBar.open("["+result['titre']+"]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         /**---------end snackbar------------------------------------------- */
       });
     } else if (this.oneProduit.etat == 'live') {
@@ -220,7 +220,7 @@ export class ProduitsComponent implements OnInit {
       this.produitService.archivedProduct(this.oneProduit._id, body).subscribe(result => {
         console.log("success", result); 
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
-        this.snackBar.open(result['titre'] + " a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        this.snackBar.open("["+result['titre']+"] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         /**---------end snackbar------------------------------------------- */
       });
     } else {
