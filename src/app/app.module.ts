@@ -39,6 +39,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +86,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     OwlNativeDateTimeModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatSnackBarModule
 
 
 

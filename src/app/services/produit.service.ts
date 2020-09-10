@@ -98,7 +98,7 @@ export class ProduitService {
   }
 
   deleteProduct(id) {
-    return this.http.delete<any[]>(endPoint+"/"+id, {responseType:'text' as 'json'});
+    return this.http.delete<any[]>(endPoint+"/"+id, httpOptions);
   }
 
   launchProduct(id, lanceur) {

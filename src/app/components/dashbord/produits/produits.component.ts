@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
 import { NgxSpinnerService } from "ngx-spinner";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -19,6 +20,7 @@ export class ProduitsComponent implements OnInit {
   produitSelected = [];
   searchText: any;
   oneAndAll: boolean = true;
+  durationSnackBar = 4000;
 
   oneProduit = {
     _id: "",
@@ -80,12 +82,16 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
 
+  @ViewChild('snackBarTemplate') snackBarTemplate: TemplateRef<any>;
+
+
 
 
   constructor(
     private produitService: ProduitService,
     public dialog: MatDialog,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getProduit();
@@ -184,10 +190,10 @@ export class ProduitsComponent implements OnInit {
     if (isValid) {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
       // this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
-      if(confirm("Voullez-vous modifier " +this.oneProduit.titre+ "?")) {
+      if (confirm("Voullez-vous modifier " + this.oneProduit.titre + "?")) {
         this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
         confirm('Produit modifié avec succès')
-      }else {
+      } else {
       }
       console.log(productObject);
     } else {
@@ -203,16 +209,23 @@ export class ProduitsComponent implements OnInit {
 
     if (this.oneProduit.etat == 'sandbox') {
       this.oneProduit.etat = "live";
-      this.produitService.launchProduct(this.oneProduit._id, body).subscribe(result =>{
-        console.log("success", result); });
+      this.produitService.launchProduct(this.oneProduit._id, body).subscribe(result => {
+        console.log("success", result);
+        /**--------------snackbar-------- blue-snackbar dans style.css----- */
+        this.snackBar.open(result['titre'] + " a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        /**---------end snackbar------------------------------------------- */
+      });
     } else if (this.oneProduit.etat == 'live') {
       this.oneProduit.etat = "archived";
-      this.produitService.archivedProduct(this.oneProduit._id, body).subscribe(result =>{
-        console.log("success", result); });
+      this.produitService.archivedProduct(this.oneProduit._id, body).subscribe(result => {
+        console.log("success", result); 
+        /**--------------snackbar-------- blue-snackbar dans style.css----- */
+        this.snackBar.open(result['titre'] + " a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        /**---------end snackbar------------------------------------------- */
+      });
     } else {
-      if (confirm("Voullez-vous vraiment supprimer " +this.oneProduit.titre+ "?")) {
-        this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
-          result =>{
+      if (confirm("Voullez-vous vraiment supprimer " + this.oneProduit.titre + "?")) {
+        this.produitService.deleteProduct(this.oneProduit._id).subscribe(result => {
           console.log("success", result);
           // const x = this.produits.filter(e => { return e._id })
           // console.log(x);
@@ -220,28 +233,28 @@ export class ProduitsComponent implements OnInit {
         });
         this.createProduit();
         confirm('Produit supprimé');
-      }else {
+      } else {
       }
-                
+
     }
-        
+
   }
 
   deleteProduct() {
 
-      if (confirm("Voullez-vous vraiment supprimer " +this.oneProduit.titre+ "?")) {
-        this.produitService.deleteProduct(this.oneProduit._id).subscribe(    
-          result =>{
+    if (confirm("Voullez-vous vraiment supprimer " + this.oneProduit.titre + "?")) {
+      this.produitService.deleteProduct(this.oneProduit._id).subscribe(
+        result => {
           console.log("success", result);
           // const x = this.produits.filter(e => { return e._id })
           // console.log(x);
           this.produits.splice(this.oneProduit, 1);
         });
-        this.createProduit();
-        confirm('Produit supprimé');
-      }else {
+      this.createProduit();
+      confirm('Produit supprimé');
+    } else {
 
-      }
+    }
 
     console.log(this.oneProduit._id);
   }
@@ -518,11 +531,14 @@ export class ProduitsComponent implements OnInit {
     formData.append('images', images, images.name);
 
     this.produitService.ajouterImage(formData, this.oneProduit._id).subscribe(data => {
-      console.log("uploaded with succes",data);
-      }, error => {
-        console.log(error);
-      });
+      console.log("uploaded with succes", data);
+    }, error => {
+      console.log(error);
+    });
   }
+
+
+
 
 
 
