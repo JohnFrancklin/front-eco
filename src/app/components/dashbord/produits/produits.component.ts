@@ -141,12 +141,15 @@ export class ProduitsComponent implements OnInit {
 
     if (isValid) {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
-      this.produitService.createProduct(productObject).subscribe(result => {
-        // console.log("create success", result);
-        this.produits.push(result);
-
-      });
-      console.log(productObject);
+      if(confirm("Voullez-vous ajouter ce produit ?")) {
+        this.produitService.createProduct(productObject).subscribe(result => {
+          // console.log("create success", result);
+          this.snackBar.open("["+result['titre']+"] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          this.produits.push(result);
+        });
+        console.log(productObject);
+      }
+      
     } else {
       console.log("champ encore vide");
     }
@@ -191,8 +194,9 @@ export class ProduitsComponent implements OnInit {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
       // this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
       if (confirm("Voullez-vous modifier " + this.oneProduit.titre + "?")) {
-        this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe();
-        confirm('Produit modifié avec succès')
+        this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe(result => {
+          this.snackBar.open("["+result['titre']+"] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        });
       } else {
       }
       console.log(productObject);
@@ -209,30 +213,31 @@ export class ProduitsComponent implements OnInit {
 
     if (this.oneProduit.etat == 'sandbox') {
       this.oneProduit.etat = "live";
-      this.produitService.launchProduct(this.oneProduit._id, body).subscribe(result => {
-        console.log("success", result);
-        /**--------------snackbar-------- blue-snackbar dans style.css----- */
-        this.snackBar.open("["+result['titre']+"]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-
-      });
+      if(confirm("Voullez-vous lancer le produit "+this.oneProduit.titre+ "?")) {
+        this.produitService.launchProduct(this.oneProduit._id, body).subscribe(result => {
+          console.log("success", result);
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("["+result['titre']+"]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        });
+      }
+      
     } else if (this.oneProduit.etat == 'live') {
       this.oneProduit.etat = "archived";
-      this.produitService.archivedProduct(this.oneProduit._id, body).subscribe(result => {
-        console.log("success", result); 
-        /**--------------snackbar-------- blue-snackbar dans style.css----- */
-        this.snackBar.open("["+result['titre']+"] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-
-      });
+      if(confirm("Voullez-vous archiver le produit "+this.oneProduit.titre+ "?")) {
+        this.produitService.archivedProduct(this.oneProduit._id, body).subscribe(result => {
+          console.log("success", result); 
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("["+result['titre']+"] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        });
+      }
     } else {
-      if (confirm("Voullez-vous vraiment supprimer " + this.oneProduit.titre + "?")) {
+      if (confirm("Etes-vous sur de voulloir supprimer " + this.oneProduit.titre + "?")) {
         this.produitService.deleteProduct(this.oneProduit._id).subscribe(result => {
           console.log("success", result);
-          // const x = this.produits.filter(e => { return e._id })
-          // console.log(x);
           this.produits.splice(this.oneProduit, 1);
+          this.snackBar.open("["+result['titre']+"] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         });
         this.createProduit();
-        confirm('Produit supprimé');
       } else {
       }
 
@@ -242,16 +247,14 @@ export class ProduitsComponent implements OnInit {
 
   deleteProduct() {
 
-    if (confirm("Voullez-vous vraiment supprimer " + this.oneProduit.titre + "?")) {
+    if (confirm("Etes-vous sur de voulloir supprimer " + this.oneProduit.titre + "?")) {
       this.produitService.deleteProduct(this.oneProduit._id).subscribe(
         result => {
           console.log("success", result);
-          // const x = this.produits.filter(e => { return e._id })
-          // console.log(x);
           this.produits.splice(this.oneProduit, 1);
+          this.snackBar.open("["+result['titre']+"] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         });
       this.createProduit();
-      confirm('Produit supprimé');
     } else {
 
     }
