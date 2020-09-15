@@ -719,6 +719,7 @@
     border: none;
     padding: 2px;
     font-weight: 500;
+    outline:0!important;
 }
 
 
