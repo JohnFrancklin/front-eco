@@ -699,6 +699,29 @@
     box-shadow: 1px 1px 2px 0px grey;
 }
 
+.button_dialog_confirm{
+    float: right;
+    margin-right: 2px;
+    min-width: 80px;
+    background-color: #73be00;
+    color: white;
+    border: none;
+    padding: 2px;
+    font-weight: 500;
+}
+
+.button_dialog_cancel{
+    float: right;
+    margin-right: 2px;
+    min-width: 80px;
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 2px;
+    font-weight: 500;
+}
+
+
 .etatContent{
     width: 100%;
     background-color: white;

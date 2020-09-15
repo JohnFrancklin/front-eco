@@ -67,7 +67,7 @@
                         Les catégories
                     </div>
 
-                    <p class="menu_item">
+                    <p class="menu_item" (click)="confirmDialog()">
                         Tout
                         <span class="compte_produit" title="Nombre de tout les produits dans la base">
                             15/2630
@@ -652,6 +652,21 @@
 <ng-template #imageProduit style="background-color: white;">
     <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
 </ng-template>
+
+
+
+<ng-template #dialogBox>
+    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
+    le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ?
+    <div>
+        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        <button [mat-dialog-close]=true class="button_dialog_confirm" [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
+            {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+        </button>
+    </div>
+</ng-template>
+
+
 
 
 <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
