@@ -611,7 +611,7 @@
                             [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
                             Modifier
                         </button>
-                        <button class="btn_supprimer" *ngIf="!createType" (click)="deleteProduct()">
+                        <button class="btn_supprimer" *ngIf="!createType" (click)="deleteOrArchivedProduct()">
                             {{oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
                         </button>
                         <button class="btn_modifier" *ngIf="createType" (click)="createProduct()">
