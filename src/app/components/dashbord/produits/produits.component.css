@@ -304,6 +304,7 @@
     height: 35px;
     margin: 0px 0px 0px 4px;
     padding: 0px 0px 0px 10px;
+    border: none;
 }
 
 .btn_search{
@@ -367,7 +368,7 @@
     -ms-user-select: none;
     user-select: none;
     background-color: white;
-    width: 123px;
+    width: 100px;
     height: 30px;
     font-size: unset;
   }
@@ -435,7 +436,7 @@
 
 .filter{
     position: relative;
-    padding: 16px 0px 11px 0px;
+    padding: 12px 0px 11px 0px;
     float: right;
     width: calc(10% - 4px);
     background-color: lightgray;

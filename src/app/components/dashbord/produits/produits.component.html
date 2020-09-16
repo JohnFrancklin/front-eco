@@ -167,7 +167,7 @@
 
                     <div class="selectionner">
                         <label class="container" style="font-size: small;" title="Basculer selection simple/multiple">
-                            {{oneAndAll == true ? 'selectionner' : 'Déselectionner' }}
+                            {{oneAndAll == true ? 'Cocher' : 'Décocher' }}
                             <input type="checkbox" (click)="toggleOneAndAll()">
                             <span class="checkmark"></span>
                         </label>
@@ -662,7 +662,7 @@
 
 <ng-template #dialogBox *ngIf="!oneAndAll">
     {{state_to_change == 'sandbox' ? ' voulez-vous lancer' : state_to_change == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
-    les produits selectionnés  ?
+    <label style="color:blue">{{produitSelected.length}} produits </label> selectionnés   ?
     <div>
         <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
         <button [mat-dialog-close]=true class="button_dialog_confirm" [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
