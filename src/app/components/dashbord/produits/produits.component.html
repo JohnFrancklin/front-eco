@@ -67,7 +67,7 @@
                         Les catégories
                     </div>
 
-                    <p class="menu_item" (click)="confirmDialog()">
+                    <p class="menu_item">
                         Tout
                         <span class="compte_produit" title="Nombre de tout les produits dans la base">
                             15/2630
@@ -397,13 +397,6 @@
                 [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
             </button>
-            <!-- Selection -->
-            <button class="button_change_state" *ngIf="!oneAndAll && state_to_change!='' && produitSelected.length!=0"
-                [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live' ? 'orange' : 'red'}"
-                [title]="state_to_change == 'sandbox' ? 'Vous pouvez lancer le produit en live' : state_to_change == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
-                {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
-            </button>
-
 
             <div class="" *ngIf="!oneAndAll">
                 <div class="etatContent">
@@ -636,8 +629,8 @@
                     </div>
                 </div>
 
-                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0">
-                    {{state_to_change == 'live' ? 'Archiver les selectionnés' : 'Supprimer les selectionnés'}}
+                <button class="btn_suppr_selectionne" *ngIf="produitSelected.length!=0" (click)="launchOrArhiveOrDelete_Multiple()">
+                    {{state_to_change == 'live' ? 'Archiver les selectionnés' : state_to_change == 'sandbox' ? 'Lancer les selectionnés' : 'Supprimer les selectionnés'}}
                 </button>
 
             </div>
@@ -655,7 +648,7 @@
 
 
 
-<ng-template #dialogBox>
+<ng-template #dialogBox *ngIf="oneAndAll">
     {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
     le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ?
     <div>
@@ -665,6 +658,19 @@
         </button>
     </div>
 </ng-template>
+
+
+<ng-template #dialogBox *ngIf="!oneAndAll">
+    {{state_to_change == 'sandbox' ? ' voulez-vous lancer' : state_to_change == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
+    les produits selectionnés  ?
+    <div>
+        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        <button [mat-dialog-close]=true class="button_dialog_confirm" [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
+            {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
+        </button>
+    </div>
+</ng-template>
+
 
 
 

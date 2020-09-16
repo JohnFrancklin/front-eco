@@ -240,6 +240,15 @@ export class ProduitsComponent implements OnInit {
     });
   }
 
+  launchOrArhiveOrDelete_Multiple(){
+    const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
+    dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
+      if (result) {
+        // le code ici...
+      }
+    });
+  }
+
   deleteProduct() {
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
