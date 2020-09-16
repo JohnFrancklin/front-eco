@@ -665,7 +665,7 @@
     <label style="color:blue">{{produitSelected.length}} produits </label> selectionnés   ?
     <div>
         <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
-        <button [mat-dialog-close]=true class="button_dialog_confirm" [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
+        <button [mat-dialog-close]=true class="button_dialog_confirm" [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live'  ? 'orange' : 'red'}">
             {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
         </button>
     </div>
