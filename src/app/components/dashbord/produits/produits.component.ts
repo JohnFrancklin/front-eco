@@ -103,7 +103,10 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
-  createProduct() {
+
+  createProduct(event) {
+
+    // console.log("You entered: ", event.target.value);
 
     const productObject = {
       titre: this.oneProduit.titre,
@@ -240,7 +243,7 @@ export class ProduitsComponent implements OnInit {
     });
   }
 
-  launchOrArhiveOrDelete_Multiple(){
+  launchOrArhiveOrDelete_Multiple() {
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
