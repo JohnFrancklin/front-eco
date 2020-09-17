@@ -190,7 +190,9 @@
                         <div *ngIf="oneAndAll">
                             <button class="element_un" *ngFor="let p of produits | filter:searchText ; let i=index"
                                 title="Click droite pour l'option" [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
-                                (click)="getOneProduit(p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);">
+                                (click)="getOneProduit(p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);"
+                                (keydown.Delete)="oneProduit.etat == 'archived' ? deleteProduct() : false"
+                                (keyup.shift.a)="launchOrArhiveOrDelete()">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list" [title]="p.titre">
                                     {{p.titre}}
@@ -206,7 +208,8 @@
                                 title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
                                 <input type="checkbox" class="checkCase" name="" check="true" id="{{p._id}}"
                                     [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
-                                    title="Cocher ici pour selection le produit">
+                                    title="Cocher ici pour selection le produit"
+                                    (keydown.control.a)="selectionnerTout($event)">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.titre}}
@@ -405,19 +408,22 @@
                     <p class="title_etatContent">Selectionner l'etat du produit</p>
                     <div class="etatProduitSelect">
                         <input type="radio" id="sandbox" name="etat" value="sandbox" (change)="changeEtat($event)"
-                            [checked]="state_to_change=='sandbox'">
+                            [checked]="state_to_change=='sandbox'"
+                            (keydown.control.a)="selectionnerTout($event)">
                         <label class="labelEtat" for="sandbox">sandbox</label>
                     </div>
 
                     <div class="etatProduitSelect">
                         <input type="radio" id="live" name="etat" value="live" (change)="changeEtat($event)"
-                            [checked]="state_to_change =='live'">
+                            [checked]="state_to_change =='live'"
+                            (keydown.control.a)="selectionnerTout($event)">
                         <label class="labelEtat" for="live">live</label>
                     </div>
 
                     <div class="etatProduitSelect">
                         <input type="radio" id="archived" name="etat" value="archived" (change)="changeEtat($event)"
-                            [checked]="state_to_change =='archived'">
+                            [checked]="state_to_change =='archived'"
+                            (keydown.control.a)="selectionnerTout($event)">
                         <label class="labelEtat" for="archived">archived</label>
                     </div>
                 </div>

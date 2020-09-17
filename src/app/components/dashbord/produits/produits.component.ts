@@ -277,7 +277,6 @@ export class ProduitsComponent implements OnInit {
     console.log(this.produitSelected);
 
     for (let i = 0; i < this.produitSelected.length; i++) {
-
       const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
       checkElement.checked = false;
     }
@@ -567,6 +566,20 @@ export class ProduitsComponent implements OnInit {
 
     content_dans_list.style.height = "100%";
     content_stat_image.style.height = "0%";
+  }
+
+  selectionnerTout(event){
+    event.preventDefault();// evider l'evenement native du navigateur
+    for (let i = 0; i < this.produits.length; i++) {
+      const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
+      if(this.produits[i].etat == this.state_to_change){
+        checkElement.checked = true;
+        this.produitSelected.push(this.produits[i]);
+      }
+      
+      
+    }
+
   }
 
 
