@@ -204,12 +204,15 @@
                             </button>
                         </div>
                         <div *ngIf="!oneAndAll">
-                            <div class="element_un_check" *ngFor="let p of produits | filter:searchText"
-                                title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}">
+                            <button class="element_un_check" *ngFor="let p of produits | filter:searchText"
+                                title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}"
+                                (keydown.control.a)="selectionnerTout($event)"
+                                (keydown.control.d)="deselectionnerTout($event)">
                                 <input type="checkbox" class="checkCase" name="" check="true" id="{{p._id}}"
                                     [disabled]="p.etat!=state_to_change" (click)="selectProduit(p);"
                                     title="Cocher ici pour selection le produit"
-                                    (keydown.control.a)="selectionnerTout($event)">
+                                    (keydown.control.a)="selectionnerTout($event)"
+                                    (keydown.control.d)="deselectionnerTout($event)">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list">
                                     {{p.titre}}
@@ -218,7 +221,7 @@
                                     [ngStyle]="{'color': p.etat === 'live' ? 'green' : p.etat === 'sandbox' ? 'orange' : 'red'}">
                                     {{p.etat}}
                                 </span>
-                            </div>
+                            </button>
                         </div>
 
                     </div>
@@ -409,7 +412,8 @@
                     <div class="etatProduitSelect">
                         <input type="radio" id="sandbox" name="etat" value="sandbox" (change)="changeEtat($event)"
                             [checked]="state_to_change=='sandbox'"
-                            (keydown.control.a)="selectionnerTout($event)">
+                            (keydown.control.a)="selectionnerTout($event)"
+                            (keydown.control.d)="deselectionnerTout($event)">
                         <label class="labelEtat" for="sandbox">sandbox</label>
                     </div>
 
@@ -685,26 +689,26 @@
 
 <ng-template #dialogBox *ngIf="oneAndAll">
     {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
-    le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ?
-    <div>
-        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+    le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
+    <div style="float: right;">
         <button [mat-dialog-close]=true class="button_dialog_confirm"
             [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
             {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
         </button>
+        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
     </div>
 </ng-template>
 
 
 <ng-template #dialogBox *ngIf="!oneAndAll">
     {{state_to_change == 'sandbox' ? ' voulez-vous lancer' : state_to_change == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
-    <label style="color:blue">{{produitSelected.length}} produit(s) </label> selectionnés ?
-    <div>
-        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+    <label style="color:blue">{{produitSelected.length}} produit(s) </label> selectionnés ? <br>
+    <div style="float: right;">
         <button [mat-dialog-close]=true class="button_dialog_confirm"
             [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live'  ? 'orange' : 'red'}">
             {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
         </button>
+        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
     </div>
 </ng-template>
 

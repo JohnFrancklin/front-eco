@@ -570,17 +570,25 @@ export class ProduitsComponent implements OnInit {
 
   selectionnerTout(event){
     event.preventDefault();// evider l'evenement native du navigateur
+    this.produitSelected = [];
     for (let i = 0; i < this.produits.length; i++) {
       const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
       if(this.produits[i].etat == this.state_to_change){
         checkElement.checked = true;
         this.produitSelected.push(this.produits[i]);
       }
-      
-      
     }
-
   }
+
+  deselectionnerTout(event){
+    event.preventDefault();// evider l'evenement native du navigateur
+    for (let i = 0; i < this.produits.length; i++) {
+      const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
+        checkElement.checked = false;      
+    }
+    this.produitSelected = [];
+  }
+
 
 
 

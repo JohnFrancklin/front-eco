@@ -128,7 +128,7 @@
     padding-top: 1px;
     padding-left: 0px;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     margin-left: 10px;
     overflow: hidden;
     background-color: white;
@@ -136,6 +136,7 @@
     height: 50px;
     font-size: small;
     display: inline-block;
+    outline: 0!important;
 }
 
 .checkCase{
@@ -705,7 +706,7 @@
 }
 
 .button_dialog_confirm{
-    float: right;
+    /* float: right; */
     margin-right: 2px;
     min-width: 80px;
     background-color: #73be00;
@@ -717,7 +718,7 @@
 }
 
 .button_dialog_cancel{
-    float: right;
+    /* float: right; */
     margin-right: 2px;
     min-width: 80px;
     background-color: grey;
@@ -795,7 +796,7 @@
     float: right;
     position: relative;
     margin-top: -24px;
-    background-color: #c7c7c7;
+    background-color: #e8e8e8;
     border-radius: 6px 6px 0px 0px;
     padding: 0px 2px 0px 2px;
 
