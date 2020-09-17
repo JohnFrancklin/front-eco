@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 
 @Component({
@@ -83,6 +84,8 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
+  @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
 
 
 
@@ -104,7 +107,7 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  createProduct(event) {
+  createProduct() {
 
     // console.log("You entered: ", event.target.value);
 
@@ -543,6 +546,19 @@ export class ProduitsComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+  onRightClick(event){
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    // this.contextMenu.menuData = { 'item': item };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
+    return false;
+    
+  }
+
 
 
 

@@ -587,6 +587,9 @@
     position: absolute;
     margin-top: 9px;
     margin-left: 5px;
+    width: 22%;
+    height: 19px;
+    overflow-y: hidden;
 }
 
 .rightNumber{
