@@ -47,7 +47,7 @@
             <!-- <div>
                 <input type="text" placeholder="Rechercher">
             </div> -->
-            <div class="content_dans_list">
+            <div class="content_dans_list" id="content_dans_list" [ngStyle]="{'height': isEtireListe == false ? '70%' : '100%'}">
                 <div class="menu_dans_list">
 
                     <p class="titleItem">
@@ -189,7 +189,7 @@
 
                         <div *ngIf="oneAndAll">
                             <button class="element_un" *ngFor="let p of produits | filter:searchText ; let i=index"
-                                title="{{p.title}}" [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
+                                title="Click droite pour l'option" [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="getOneProduit(p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list" [title]="p.titre">
@@ -229,7 +229,10 @@
                 </div>
             </div>
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
-            <div class="content_stat_image">
+            <span (click)="isEtireListe = isEtireListe == false ? true : false" class="material-icons iconEtirer" [title]="isEtireListe == true ? 'Montrer le bloc' : 'Cacher le bloc'">
+                {{isEtireListe == true ? 'expand_less' : 'expand_more' }}
+            </span>
+            <div class="content_stat_image" [ngStyle]="{'height': isEtireListe == false ? '30%' : '0%'}">
                 <div class="stat">
                     <p class="titlte_statistique">Interactions</p>
                     <!--anciennement appelé statitstique-->
@@ -706,6 +709,9 @@
         <ng-template matMenuContent>
             <button mat-menu-item class="itemContextuel" (click)="launchOrArhiveOrDelete()">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+            <button mat-menu-item class="itemContextuel" (click)="file.click()" *ngIf="oneProduit.etat == 'sandbox' || oneProduit.etat == 'live'">
+                Ajouter image
             </button>
             <button mat-menu-item class="itemContextuel" 
             [ngStyle]="{'opacity': oneProduit.etat == 'sandbox' ? 1 : 0.5, 'pointer-events': oneProduit.etat == 'sandbox' ? 'auto' : 'none'}" 

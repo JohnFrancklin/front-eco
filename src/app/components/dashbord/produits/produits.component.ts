@@ -80,6 +80,8 @@ export class ProduitsComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
 
+  isEtireListe: boolean = false;
+
   title = "Smartphone G10 2e";
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
@@ -557,6 +559,14 @@ export class ProduitsComponent implements OnInit {
     this.contextMenu.openMenu();
     return false;
     
+  }
+
+  hideShowStat(){
+    let content_dans_list = document.getElementById('content_dans_list');
+    let content_stat_image = document.getElementById('content_stat_image');
+
+    content_dans_list.style.height = "100%";
+    content_stat_image.style.height = "0%";
   }
 
 
