@@ -65,6 +65,36 @@
                                     [(ngModel)]="users.tel" name="tel" maxlength="10" #tel="ngModel">
                             </div>
                         </div>
+                        <div class="form-group mt-3 mb-3  ">
+                            <div [hidden]="pays.valid || pays.pristine" class="alert alert-danger">
+                                Veuillez renseigner ce champ.
+                            </div>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <mat-icon>place</mat-icon>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="pays" placeholder="pays *" required
+                                    [(ngModel)]="users.pays" name="pays" #pays="ngModel">
+                            </div>
+
+                        </div>
+                        <div class="form-group mt-3 mb-3  ">
+                            <div [hidden]="ville.valid || ville.pristine" class="alert alert-danger">
+                                Veuillez renseigner ce champ.
+                            </div>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <mat-icon>location_city</mat-icon>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="ville" placeholder="Ville *" required
+                                    [(ngModel)]="users.ville" name="ville" #ville="ngModel">
+                            </div>
+
+                        </div>
 
                         <!-- Avatar
                               <div class="form-group mt-3 mb-3  ">
@@ -165,6 +195,37 @@
                                 </button>
                             </div>
                             <div *ngIf="invalidConfirmPassword" style="color:red">Mot de passe non identique ou mdp ne se correpond pas</div>
+                        </div>
+                        <div class="form-group mt-3 mb-3  ">
+                            <div [hidden]="codePostal.valid || codePostal.pristine" class="alert alert-danger">
+                                Veuillez renseigner ce champ.
+                            </div>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <mat-icon>receipt</mat-icon>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="codePostal" placeholder="Code postal *" required
+                                    [(ngModel)]="users.codePostal" name="codePostal" #codePostal="ngModel">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3 mb-3  ">
+                            <div [hidden]="sexe.valid || sexe.pristine" class="alert alert-danger">
+                                Veuillez renseigner ce champ.
+                            </div>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <mat-icon>wc</mat-icon>
+                                    </span>
+                                </div>
+                                    <select class="form-control" id="sexe" required [(ngModel)]="users.sexe" name="sexe" #sexe="ngModel">
+                                        <option>Homme</option>
+                                        <option>Femme</option>
+                                        <option>Autre</option>
+                                    </select>
+                            </div>
                         </div>
                         <!-- Role
                              <div class="form-group mt-3 mb-3  ">

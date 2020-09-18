@@ -236,6 +236,8 @@ export class UsersComponent implements OnInit {
       role: "",
       pays: "",
       ville: "",
+      sexe: "",
+      codePostal: "",
       dateinscription: "",
       confirmPassword: "",
     };

@@ -44,11 +44,11 @@
     opacity: 1;
 }
 
-input.form-control:focus {
+input.form-control:focus, select.form-control:focus {
     box-shadow: none;    
 }
 
-input.form-control {
+input.form-control, select.form-control {
     border: 0;
 }
 

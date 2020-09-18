@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Users } from 'src/app/interfaces/users';
+// import { Users } from 'src/app/interfaces/users';
 
 import { Location } from '@angular/common';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ declare var Swal: any;
 })
 export class RegisterComponent implements OnInit {
 
-  users = new Users();
+  // users = new Users();
   submitted = false;
 
   show: boolean;
@@ -37,6 +37,26 @@ export class RegisterComponent implements OnInit {
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
   });
 
+  users = {
+    _id: "",
+    email: "",
+    username: "",
+    password: "",
+    nom: "",
+    prenom: "",
+    sexe: "",
+    adresse: "",
+    ville: "",
+    pays: "",
+    codePostal: "",
+    tel: "",
+    role: [],
+    avatar: "",
+    verification: "",
+    refreshTookken: "",
+    confirmPassword: ""
+  };
+
   constructor(
     private usersService: UsersService,
     private location: Location
@@ -49,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
   newUsers(): void {
     this.submitted = false;
-    this.users = new Users();
+    // this.users = new Users();
   }
 
   addUsers(addUserForm: NgForm) {
@@ -66,9 +86,22 @@ export class RegisterComponent implements OnInit {
   }
 
   private save(): void {
-    console.log(this.users);
-    this.usersService.addUsers(this.users)
-      .subscribe();
+    const registerObject = {
+      nom: this.users.nom,
+      prenom: this.users.prenom,
+      adresse: this.users.adresse,
+      tel: this.users.tel,
+      pays: this.users.pays,
+      ville: this.users.ville,
+      username: this.users.username,
+      email: this.users.email,
+      passwword: this.users.password,
+      codePostal: this.users.codePostal,
+      sexe: this.users.sexe,
+    }    
+    console.log(registerObject);
+    this.usersService.addUsers(registerObject).subscribe();
+    
   }
 
 

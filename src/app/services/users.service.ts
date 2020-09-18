@@ -66,9 +66,13 @@ export class UsersService {
     return this.http.get<Users>(endPoint+"/"+id);
   }
 
-  addUsers(user: Users): Observable<Users> {
-    return this.http.post<Users>(endPoint, user, httpOptions);
-  }
+  // addUsers(user: Users): Observable<Users> {
+  //   return this.http.post<Users>(endPoint, user, httpOptions);
+  // }
+
+  addUsers(addUsers) {
+    return this.http.post<any[]>(endPoint,addUsers,httpOptions);
+   }
 
   // http://localhost:3000/auth/login
   login(login) {
