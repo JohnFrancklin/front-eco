@@ -47,7 +47,8 @@
             <!-- <div>
                 <input type="text" placeholder="Rechercher">
             </div> -->
-            <div class="content_dans_list" id="content_dans_list" [ngStyle]="{'height': isEtireListe == false ? '70%' : '100%'}">
+            <div class="content_dans_list" id="content_dans_list"
+                [ngStyle]="{'height': isEtireListe == false ? '70%' : '100%'}">
                 <div class="menu_dans_list">
 
                     <p class="titleItem">
@@ -189,10 +190,13 @@
 
                         <div *ngIf="oneAndAll">
                             <button class="element_un" *ngFor="let p of produits | filter:searchText ; let i=index"
-                                title="Click droite pour l'option" [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
+                                title="Click droite pour l'option" id="one_{{p._id}}"
+                                [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="getOneProduit(p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);"
                                 (keydown.Delete)="oneProduit.etat == 'archived' ? deleteProduct() : false"
-                                (keydown.Enter)="launchOrArhiveOrDelete()">
+                                (keydown.Enter)="launchOrArhiveOrDelete()" (keydown.ArrowRight)="deplacerDroite()"
+                                (keydown.ArrowLeft)="deplacerGauche()" (keydown.ArrowUp)="deplacerHaut()"
+                                (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list" [title]="p.titre">
                                     {{p.titre}}
@@ -235,7 +239,8 @@
                 </div>
             </div>
             <!-- Peut etre statistic, nombre de vote, nombre de favorie, nombre de commande fais, sns -->
-            <span (click)="isEtireListe = isEtireListe == false ? true : false" class="material-icons iconEtirer" [title]="isEtireListe == true ? 'Montrer le bloc' : 'Cacher le bloc'">
+            <span (click)="isEtireListe = isEtireListe == false ? true : false" class="material-icons iconEtirer"
+                [title]="isEtireListe == true ? 'Montrer le bloc' : 'Cacher le bloc'">
                 {{isEtireListe == true ? 'expand_less' : 'expand_more' }}
             </span>
             <div class="content_stat_image" [ngStyle]="{'height': isEtireListe == false ? '30%' : '0%'}">
@@ -401,9 +406,9 @@
 
             <!-- Non selection -->
             <button class="button_change_state" *ngIf="oneAndAll && !createType" (click)="launchOrArhiveOrDelete()"
-                [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}"
+                [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat=='updating'  ? 'rgb(1, 64, 107)' : 'red'}"
                 [title]="oneProduit.etat == 'sandbox' ? 'Vous pouvez lancer le produit en live' : oneProduit.etat == 'live' ? 'Archiver le produit' : 'Supprimer le produit'">
-                {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+                {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : oneProduit.etat == 'updating' ? 'en cours de modification' : 'Supprimer'}}
             </button>
 
             <div class="" *ngIf="!oneAndAll">
@@ -411,23 +416,20 @@
                     <p class="title_etatContent">Selectionner l'etat du produit</p>
                     <div class="etatProduitSelect">
                         <input type="radio" id="sandbox" name="etat" value="sandbox" (change)="changeEtat($event)"
-                            [checked]="state_to_change=='sandbox'"
-                            (keydown.control.a)="selectionnerTout($event)"
+                            [checked]="state_to_change=='sandbox'" (keydown.control.a)="selectionnerTout($event)"
                             (keydown.control.d)="deselectionnerTout($event)">
                         <label class="labelEtat" for="sandbox">sandbox</label>
                     </div>
 
                     <div class="etatProduitSelect">
                         <input type="radio" id="live" name="etat" value="live" (change)="changeEtat($event)"
-                            [checked]="state_to_change =='live'"
-                            (keydown.control.a)="selectionnerTout($event)">
+                            [checked]="state_to_change =='live'" (keydown.control.a)="selectionnerTout($event)">
                         <label class="labelEtat" for="live">live</label>
                     </div>
 
                     <div class="etatProduitSelect">
                         <input type="radio" id="archived" name="etat" value="archived" (change)="changeEtat($event)"
-                            [checked]="state_to_change =='archived'"
-                            (keydown.control.a)="selectionnerTout($event)">
+                            [checked]="state_to_change =='archived'" (keydown.control.a)="selectionnerTout($event)">
                         <label class="labelEtat" for="archived">archived</label>
                     </div>
                 </div>
@@ -438,207 +440,210 @@
             </h3>
 
             <div *ngIf="oneAndAll">
+                <div [ngStyle]="{'pointer-events': (oneProduit.etat == 'sandbox' || oneProduit.etat == 'create') ? 'auto' : 'none'}">
 
-                <p class="dateCreationContent"> Crée le <span class="infoDate">12 Septembre 2013</span> par <span
-                        class="infoDate">Rakoto</span> </p>
 
-                <div class="detail_to_change">
-                    <input type="text" class="input_change" [(ngModel)]="oneProduit.titre" title="Editer" id="titre"
-                        [ngStyle]="{'border-color': oneProduit.titre == '' ? '#d5d5d4' : '#d5d5d5'}"
-                        (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                    <div class="label_change">
-                        Titre
+
+                    <p class="dateCreationContent"> Crée le <span class="infoDate">12 Septembre 2013</span> par <span
+                            class="infoDate">Rakoto</span> </p>
+
+                    <div class="detail_to_change">
+                        <input type="text" class="input_change" [(ngModel)]="oneProduit.titre" title="Editer" id="titre"
+                            [ngStyle]="{'border-color': oneProduit.titre == '' ? '#d5d5d4' : '#d5d5d5'}"
+                            (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                        <div class="label_change">
+                            Titre
+                        </div>
+                    </div>
+                    <div class="detail_to_change_description">
+                        <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description"
+                            id="description"
+                            [ngStyle]="{'border-color': oneProduit.description == '' ? '#d5d5d4' : '#d5d5d5'}"
+                            placeholder="Description du produit..."></textarea>
+                        <div class="label_change">
+                            Description
+                        </div>
+                    </div>
+
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" id="etat" disabled
+                                    style="background-color: white;"
+                                    [ngStyle]="{'border-color': oneProduit.etat == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Etat
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.marque"
+                                    id="marque"
+                                    [ngStyle]="{'border-color': oneProduit.marque == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Marque
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change" [(ngModel)]="oneProduit.provenance"
+                                    id="provenance"
+                                    [ngStyle]="{'border-color': oneProduit.provenance == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Provenance
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.quantite"
+                                    id="quantite"
+                                    [ngStyle]="{'border-color': oneProduit.quantite == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Quantité en stock
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.couleur"
+                                    id="couleur"
+                                    [ngStyle]="{'border-color': oneProduit.detail_physique.couleur == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Couleur
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.garantie"
+                                    id="garantie"
+                                    [ngStyle]="{'border-color': oneProduit.garantie == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Garantie
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_normal"
+                                    id="prix_normal"
+                                    [ngStyle]="{'border-color': oneProduit.prix.prix_normal == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Prix
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change rightNumber"
+                                    [(ngModel)]="oneProduit.prix.prix_promotion" id="prix_promotion"
+                                    [ngStyle]="{'border-color': oneProduit.prix.prix_promotion == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Prix de promotion
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change"
+                                    [(ngModel)]="oneProduit.detail_fabrication.numero_model" id="numero_model"
+                                    [ngStyle]="{'border-color': oneProduit.detail_fabrication.numero_model == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Numero de model
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change rightNumber"
+                                    [(ngModel)]="oneProduit.detail_fabrication.date_sortie" id="date_sortie"
+                                    [ngStyle]="{'border-color': oneProduit.detail_fabrication.date_sortie == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Date de sortie
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille"
+                                    id="taille"
+                                    [ngStyle]="{'border-color': oneProduit.detail_physique.taille == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Taille
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change rightNumber"
+                                    [(ngModel)]="oneProduit.detail_physique.poids" id="poids"
+                                    [ngStyle]="{'border-color': oneProduit.detail_physique.poids == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Poids
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change"
+                                    [(ngModel)]="oneProduit.detail_physique.longueur" id="longueur"
+                                    [ngStyle]="{'border-color': oneProduit.detail_physique.longueur == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Longueur
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input type="number" class="input_change rightNumber"
+                                    [(ngModel)]="oneProduit.detail_physique.largeur" id="largeur"
+                                    [ngStyle]="{'border-color': oneProduit.detail_physique.largeur == '' ? '#d5d5d4' : '#d5d5d5'}"
+                                    (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
+                                <div class="label_change">
+                                    Largeur
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detail_to_change_description">
-                    <textarea type="text" class="textarea_change" [(ngModel)]="oneProduit.description" id="description"
-                        [ngStyle]="{'border-color': oneProduit.description == '' ? '#d5d5d4' : '#d5d5d5'}"
-                        placeholder="Description du produit..."></textarea>
-                    <div class="label_change">
-                        Description
-                    </div>
-                </div>
-
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" id="etat" disabled
-                                style="background-color: white;"
-                                [ngStyle]="{'border-color': oneProduit.etat == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Etat
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.marque"
-                                id="marque"
-                                [ngStyle]="{'border-color': oneProduit.marque == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Marque
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.provenance" id="provenance"
-                                [ngStyle]="{'border-color': oneProduit.provenance == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Provenance
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.quantite"
-                                id="quantite"
-                                [ngStyle]="{'border-color': oneProduit.quantite == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Quantité en stock
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.couleur"
-                                id="couleur"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.couleur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Couleur
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.garantie"
-                                id="garantie"
-                                [ngStyle]="{'border-color': oneProduit.garantie == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Garantie
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_normal"
-                                id="prix_normal"
-                                [ngStyle]="{'border-color': oneProduit.prix.prix_normal == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Prix
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber"
-                                [(ngModel)]="oneProduit.prix.prix_promotion" id="prix_promotion"
-                                [ngStyle]="{'border-color': oneProduit.prix.prix_promotion == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Prix de promotion
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change"
-                                [(ngModel)]="oneProduit.detail_fabrication.numero_model" id="numero_model"
-                                [ngStyle]="{'border-color': oneProduit.detail_fabrication.numero_model == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Numero de model
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change rightNumber"
-                                [(ngModel)]="oneProduit.detail_fabrication.date_sortie" id="date_sortie"
-                                [ngStyle]="{'border-color': oneProduit.detail_fabrication.date_sortie == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Date de sortie
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille"
-                                id="taille"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.taille == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Taille
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber"
-                                [(ngModel)]="oneProduit.detail_physique.poids" id="poids"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.poids == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Poids
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur"
-                                id="longueur"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.longueur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Longueur
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <input type="number" class="input_change rightNumber"
-                                [(ngModel)]="oneProduit.detail_physique.largeur" id="largeur"
-                                [ngStyle]="{'border-color': oneProduit.detail_physique.largeur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
-                            <div class="label_change">
-                                Largeur
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="detail_to_change_button">
-
                     <form>
-                        <button class="btn_modifier" *ngIf="!createType"
-                            mat-button (click)="updateProduct()"
+                        <button class="btn_modifier" *ngIf="!createType" mat-button (click)="updateProduct()"
                             [ngStyle]="{'pointer-events': oneProduit.etat != 'sandbox' ? 'none' : 'auto'}">
                             Modifier
                         </button>
@@ -691,11 +696,15 @@
     {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : 'voulez-vous Supprimer'}}
     le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
     <div style="float: right;">
-        <button [mat-dialog-close]=true class="button_dialog_confirm"
-            [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat == 'create' ? 'rgb(1 64 107)' : oneProduit.etat == 'updating' ? 'rgb(1 64 107)' : 'red'}">
+        <button [mat-dialog-close]=true class="button_dialog_confirm" id="button_confirm_one"
+            [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat == 'create' ? 'rgb(1 64 107)' : oneProduit.etat == 'updating' ? 'rgb(1 64 107)' : 'red'}"
+            (keydown.ArrowRight)="deplacerCancel()">
             {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : oneProduit.etat == 'create' ? 'Créer' : oneProduit.etat == 'updating' ? 'Modifier'  : 'Supprimer'}}
         </button>
-        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        <button [mat-dialog-close]=false class="button_dialog_cancel" id="button_cancel_one"
+            (keydown.ArrowLeft)="deplacerConfirme()">
+            Annuler
+        </button>
     </div>
 </ng-template>
 
@@ -720,12 +729,13 @@
             <button mat-menu-item class="itemContextuel" (click)="launchOrArhiveOrDelete()">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
             </button>
-            <button mat-menu-item class="itemContextuel" (click)="file.click()" *ngIf="oneProduit.etat == 'sandbox' || oneProduit.etat == 'live'">
+            <button mat-menu-item class="itemContextuel" (click)="file.click()"
+                *ngIf="oneProduit.etat == 'sandbox' || oneProduit.etat == 'live'">
                 Ajouter image
             </button>
-            <button mat-menu-item class="itemContextuel" 
-            [ngStyle]="{'opacity': oneProduit.etat == 'sandbox' ? 1 : 0.5, 'pointer-events': oneProduit.etat == 'sandbox' ? 'auto' : 'none'}" 
-            (click)="deleteProduct()">
+            <button mat-menu-item class="itemContextuel"
+                [ngStyle]="{'opacity': oneProduit.etat == 'sandbox' ? 1 : 0.5, 'pointer-events': oneProduit.etat == 'sandbox' ? 'auto' : 'none'}"
+                (click)="deleteProduct()">
                 Supprimer
             </button>
         </ng-template>

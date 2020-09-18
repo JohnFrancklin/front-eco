@@ -70,6 +70,8 @@ export class ProduitsComponent implements OnInit {
   paramGetCustomized = 1;
   state_to_change = "";
 
+  indexProduit: any;
+
   //--------Variables pour spinner-------//spinner_loadMore
   spinner_list_Produit = "spinner_list_Produit";
   spinner_list_user = "spinner_list_user";
@@ -150,15 +152,15 @@ export class ProduitsComponent implements OnInit {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
       const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
       dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
-      if (result) {
-        this.produitService.createProduct(productObject).subscribe(result => {
-          // console.log("create success", result);
-          this.snackBar.open("[" + result['titre'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-          this.produits.push(result);
-        });
-        console.log(productObject);
-      }
-    });
+        if (result) {
+          this.produitService.createProduct(productObject).subscribe(result => {
+            // console.log("create success", result);
+            this.snackBar.open("[" + result['titre'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.produits.push(result);
+          });
+          console.log(productObject);
+        }
+      });
 
     } else {
       console.log("champ encore vide");
@@ -207,15 +209,15 @@ export class ProduitsComponent implements OnInit {
       productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
       const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
       dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
-      if (result) {
-        this.oneProduit.etat = 'sandbox';
-        this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe(result => {
-          this.snackBar.open("[" + result['titre'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-        });
-      }else{
-        this.oneProduit.etat = 'sandbox';
-      }
-    });
+        if (result) {
+          this.oneProduit.etat = 'sandbox';
+          this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe(result => {
+            this.snackBar.open("[" + result['titre'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          });
+        } else {
+          this.oneProduit.etat = 'sandbox';
+        }
+      });
     } else {
       console.log("champ encore vide");
     }
@@ -293,7 +295,7 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  deleteProduct(){
+  deleteProduct() {
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
@@ -306,10 +308,10 @@ export class ProduitsComponent implements OnInit {
       }
     });
   }
-  
 
 
-  confirmDialog() {}
+
+  confirmDialog() { }
 
 
   changeEtat(event) {
@@ -395,6 +397,7 @@ export class ProduitsComponent implements OnInit {
     this.oneProduit = oneProduit;
     this.oneProduit['index'] = i;
     this.createType = false;
+    this.indexProduit = i;
   }
 
 
@@ -557,7 +560,6 @@ export class ProduitsComponent implements OnInit {
           //concatenation produit a newProduit
           this.produits = this.produits.concat(newProduits);
           console.log("aprs concat", this.produits);
-
         });
 
       }, 1000);
@@ -570,17 +572,14 @@ export class ProduitsComponent implements OnInit {
     this.produits = this.produitService.getProduit();
     if (status != "none") {
       this.produits = this.produits.filter((value) => value.etat == status);
-
     }
   }
 
   //upload file//
   uploadFile(files) {
     let images: File = files.item(0);
-
     const formData: FormData = new FormData();
     formData.append('images', images, images.name);
-
     this.produitService.ajouterImage(formData, this.oneProduit._id).subscribe(data => {
       console.log("uploaded with succes", data);
     }, error => {
@@ -589,47 +588,74 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  onRightClick(event){
+  onRightClick(event) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    // this.contextMenu.menuData = { 'item': item };
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
     return false;
-    
   }
 
-  hideShowStat(){
-    let content_dans_list = document.getElementById('content_dans_list');
-    let content_stat_image = document.getElementById('content_stat_image');
-
-    content_dans_list.style.height = "100%";
-    content_stat_image.style.height = "0%";
-  }
-
-  selectionnerTout(event){
+  selectionnerTout(event) {
     event.preventDefault();// evider l'evenement native du navigateur
     this.produitSelected = [];
     for (let i = 0; i < this.produits.length; i++) {
       const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
-      if(this.produits[i].etat == this.state_to_change){
+      if (this.produits[i].etat == this.state_to_change) {
         checkElement.checked = true;
         this.produitSelected.push(this.produits[i]);
       }
     }
   }
 
-  deselectionnerTout(event){
+  deselectionnerTout(event) {
     event.preventDefault();// evider l'evenement native du navigateur
     for (let i = 0; i < this.produits.length; i++) {
       const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
-        checkElement.checked = false;      
+      checkElement.checked = false;
     }
     this.produitSelected = [];
   }
 
-
+  deplacerDroite() {
+    if (this.indexProduit != this.produits.length - 1) {
+      this.oneProduit = this.produits[this.indexProduit + 1];
+      this.indexProduit++;
+      document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+    }
+  }
+  deplacerGauche() {
+    if (this.indexProduit != 0) {
+      this.oneProduit = this.produits[this.indexProduit -1];
+      this.indexProduit--;
+      document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+    }
+  }
+  deplacerHaut() {
+    event.preventDefault();// evider l'evenement native du navigateur
+    if (this.indexProduit > 2) {
+      this.indexProduit = this.indexProduit -3;
+      this.oneProduit = this.produits[this.indexProduit];
+      document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+    }
+  }
+  deplacerBas() {
+    event.preventDefault();// evider l'evenement native du navigateur
+    if (this.indexProduit < this.produits.length - 3) {
+      this.indexProduit = this.indexProduit +3;
+      this.oneProduit = this.produits[this.indexProduit];
+      document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+    }
+  }
+  deplacerCancel(){
+    event.preventDefault();// evider l'evenement native du navigateur
+    document.getElementById("button_cancel_one").focus();
+  }
+  deplacerConfirme(){
+    event.preventDefault();// evider l'evenement native du navigateur
+    document.getElementById("button_confirm_one").focus();
+  }
 
 
 
