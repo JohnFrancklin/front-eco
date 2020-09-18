@@ -17,3 +17,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white;
     color: black;
 }
+
+.mat-menu-panel {
+  border-radius: 0!important;
+  outline: 0;
+}
+.mat-menu-content:not(:empty) {
+  padding-top: 0px!important;
+  padding-bottom: 0px!important;
+}

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 
 @Component({
@@ -79,10 +80,14 @@ export class ProduitsComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
 
+  isEtireListe: boolean = false;
+
   title = "Smartphone G10 2e";
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
+  @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
 
 
 
@@ -103,7 +108,10 @@ export class ProduitsComponent implements OnInit {
     /************************************** */
   }
 
+
   createProduct() {
+
+    // console.log("You entered: ", event.target.value);
 
     const productObject = {
       titre: this.oneProduit.titre,
@@ -243,6 +251,15 @@ export class ProduitsComponent implements OnInit {
     });
   }
 
+  launchOrArhiveOrDelete_Multiple() {
+    const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
+    dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
+      if (result) {
+        // le code ici...
+      }
+    });
+  }
+
   deleteOrArchivedProduct() {
     let body = {
       acteur: "rakoto"
@@ -277,7 +294,6 @@ export class ProduitsComponent implements OnInit {
     console.log(this.produitSelected);
 
     for (let i = 0; i < this.produitSelected.length; i++) {
-
       const checkElement = document.getElementById(this.produitSelected[i]._id) as HTMLInputElement;
       checkElement.checked = false;
     }
@@ -548,6 +564,49 @@ export class ProduitsComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+  onRightClick(event){
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    // this.contextMenu.menuData = { 'item': item };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
+    return false;
+    
+  }
+
+  hideShowStat(){
+    let content_dans_list = document.getElementById('content_dans_list');
+    let content_stat_image = document.getElementById('content_stat_image');
+
+    content_dans_list.style.height = "100%";
+    content_stat_image.style.height = "0%";
+  }
+
+  selectionnerTout(event){
+    event.preventDefault();// evider l'evenement native du navigateur
+    this.produitSelected = [];
+    for (let i = 0; i < this.produits.length; i++) {
+      const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
+      if(this.produits[i].etat == this.state_to_change){
+        checkElement.checked = true;
+        this.produitSelected.push(this.produits[i]);
+      }
+    }
+  }
+
+  deselectionnerTout(event){
+    event.preventDefault();// evider l'evenement native du navigateur
+    for (let i = 0; i < this.produits.length; i++) {
+      const checkElement = document.getElementById(this.produits[i]._id) as HTMLInputElement;
+        checkElement.checked = false;      
+    }
+    this.produitSelected = [];
+  }
+
+
 
 
 

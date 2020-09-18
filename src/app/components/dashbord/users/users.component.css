@@ -269,7 +269,7 @@
     -ms-user-select: none;
     user-select: none;
     background-color: white;
-    width: 123px;
+    width: 100px;
     height: 30px;
     font-size: unset;
   }
@@ -587,6 +587,9 @@
     position: absolute;
     margin-top: 9px;
     margin-left: 5px;
+    width: 22%;
+    height: 19px;
+    overflow-y: hidden;
 }
 
 .rightNumber{
