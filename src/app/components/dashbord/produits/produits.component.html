@@ -192,7 +192,7 @@
                                 title="Click droite pour l'option" [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : ''}"
                                 (click)="getOneProduit(p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);"
                                 (keydown.Delete)="oneProduit.etat == 'archived' ? deleteProduct() : false"
-                                (keyup.shift.a)="launchOrArhiveOrDelete()">
+                                (keydown.Enter)="launchOrArhiveOrDelete()">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list" [title]="p.titre">
                                     {{p.titre}}
@@ -445,7 +445,7 @@
                 <div class="detail_to_change">
                     <input type="text" class="input_change" [(ngModel)]="oneProduit.titre" title="Editer" id="titre"
                         [ngStyle]="{'border-color': oneProduit.titre == '' ? '#d5d5d4' : '#d5d5d5'}"
-                        (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                        (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                     <div class="label_change">
                         Titre
                     </div>
@@ -466,7 +466,7 @@
                             <input type="text" class="input_change" [(ngModel)]="oneProduit.etat" id="etat" disabled
                                 style="background-color: white;"
                                 [ngStyle]="{'border-color': oneProduit.etat == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Etat
                             </div>
@@ -477,7 +477,7 @@
                             <input type="text" class="input_change rightNumber" [(ngModel)]="oneProduit.marque"
                                 id="marque"
                                 [ngStyle]="{'border-color': oneProduit.marque == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Marque
                             </div>
@@ -490,7 +490,7 @@
                         <div class="detail_to_change">
                             <input type="text" class="input_change" [(ngModel)]="oneProduit.provenance" id="provenance"
                                 [ngStyle]="{'border-color': oneProduit.provenance == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Provenance
                             </div>
@@ -501,7 +501,7 @@
                             <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.quantite"
                                 id="quantite"
                                 [ngStyle]="{'border-color': oneProduit.quantite == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Quantité en stock
                             </div>
@@ -515,7 +515,7 @@
                             <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.couleur"
                                 id="couleur"
                                 [ngStyle]="{'border-color': oneProduit.detail_physique.couleur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Couleur
                             </div>
@@ -526,7 +526,7 @@
                             <input type="number" class="input_change rightNumber" [(ngModel)]="oneProduit.garantie"
                                 id="garantie"
                                 [ngStyle]="{'border-color': oneProduit.garantie == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Garantie
                             </div>
@@ -540,7 +540,7 @@
                             <input type="number" class="input_change" [(ngModel)]="oneProduit.prix.prix_normal"
                                 id="prix_normal"
                                 [ngStyle]="{'border-color': oneProduit.prix.prix_normal == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Prix
                             </div>
@@ -551,7 +551,7 @@
                             <input type="number" class="input_change rightNumber"
                                 [(ngModel)]="oneProduit.prix.prix_promotion" id="prix_promotion"
                                 [ngStyle]="{'border-color': oneProduit.prix.prix_promotion == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Prix de promotion
                             </div>
@@ -565,7 +565,7 @@
                             <input type="text" class="input_change"
                                 [(ngModel)]="oneProduit.detail_fabrication.numero_model" id="numero_model"
                                 [ngStyle]="{'border-color': oneProduit.detail_fabrication.numero_model == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Numero de model
                             </div>
@@ -576,7 +576,7 @@
                             <input type="text" class="input_change rightNumber"
                                 [(ngModel)]="oneProduit.detail_fabrication.date_sortie" id="date_sortie"
                                 [ngStyle]="{'border-color': oneProduit.detail_fabrication.date_sortie == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Date de sortie
                             </div>
@@ -590,7 +590,7 @@
                             <input type="text" class="input_change" [(ngModel)]="oneProduit.detail_physique.taille"
                                 id="taille"
                                 [ngStyle]="{'border-color': oneProduit.detail_physique.taille == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Taille
                             </div>
@@ -601,7 +601,7 @@
                             <input type="number" class="input_change rightNumber"
                                 [(ngModel)]="oneProduit.detail_physique.poids" id="poids"
                                 [ngStyle]="{'border-color': oneProduit.detail_physique.poids == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Poids
                             </div>
@@ -614,7 +614,7 @@
                             <input type="number" class="input_change" [(ngModel)]="oneProduit.detail_physique.longueur"
                                 id="longueur"
                                 [ngStyle]="{'border-color': oneProduit.detail_physique.longueur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Longueur
                             </div>
@@ -625,7 +625,7 @@
                             <input type="number" class="input_change rightNumber"
                                 [(ngModel)]="oneProduit.detail_physique.largeur" id="largeur"
                                 [ngStyle]="{'border-color': oneProduit.detail_physique.largeur == '' ? '#d5d5d4' : '#d5d5d5'}"
-                                (keydown.enter)="createType == true ? createProduct() : updateProduct()">
+                                (keydown.enter)="oneProduit.etat == 'create' ? createProduct() : oneProduit.etat == 'sandbox' ? updateProduct() : false">
                             <div class="label_change">
                                 Largeur
                             </div>
@@ -637,9 +637,9 @@
                 <div class="detail_to_change_button">
 
                     <form>
-                        <button class="btn_modifier" *ngIf="!createType" [disabled]="oneProduit.etat == 'archived'"
+                        <button class="btn_modifier" *ngIf="!createType"
                             mat-button (click)="updateProduct()"
-                            [ngStyle]="{'background-color': oneProduit.etat == 'archived' ? 'white' : '' , 'border': oneProduit.etat == 'archived' ? 'none' : '' }">
+                            [ngStyle]="{'pointer-events': oneProduit.etat != 'sandbox' ? 'none' : 'auto'}">
                             Modifier
                         </button>
                         <button class="btn_supprimer" *ngIf="!createType" (click)="deleteOrArchivedProduct()">
@@ -688,12 +688,12 @@
 
 
 <ng-template #dialogBox *ngIf="oneAndAll">
-    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
+    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : 'voulez-vous Supprimer'}}
     le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
     <div style="float: right;">
         <button [mat-dialog-close]=true class="button_dialog_confirm"
-            [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : 'red'}">
-            {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
+            [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat == 'create' ? 'rgb(1 64 107)' : oneProduit.etat == 'updating' ? 'rgb(1 64 107)' : 'red'}">
+            {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : oneProduit.etat == 'create' ? 'Créer' : oneProduit.etat == 'updating' ? 'Modifier'  : 'Supprimer'}}
         </button>
         <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
     </div>

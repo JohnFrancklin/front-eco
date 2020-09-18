@@ -129,7 +129,7 @@ export class ProduitsComponent implements OnInit {
       quantite: this.oneProduit.quantite,
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
-      etat: this.oneProduit.etat,
+      etat: 'sandbox',
       // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
@@ -166,6 +166,9 @@ export class ProduitsComponent implements OnInit {
   }
 
   updateProduct() {
+
+    this.oneProduit.etat = 'updating';
+
     const productObject = {
       // id: this.oneProduit._id,
       titre: this.oneProduit.titre,
@@ -183,7 +186,7 @@ export class ProduitsComponent implements OnInit {
       quantite: this.oneProduit.quantite,
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
-      etat: this.oneProduit.etat,
+      etat: 'sandbox',
       // categorie: "5f0ff8cee892a5408c1aae39",
       // createur: 'RASOA',
     }
@@ -205,9 +208,12 @@ export class ProduitsComponent implements OnInit {
       const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
       dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
+        this.oneProduit.etat = 'sandbox';
         this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe(result => {
           this.snackBar.open("[" + result['titre'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         });
+      }else{
+        this.oneProduit.etat = 'sandbox';
       }
     });
     } else {
@@ -286,6 +292,23 @@ export class ProduitsComponent implements OnInit {
     });
   }
 
+
+  deleteProduct(){
+    const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
+    dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
+      if (result) {
+        this.produitService.deleteProduct(this.oneProduit._id).subscribe(result => {
+          this.produits.splice(this.oneProduit, 1);
+        });
+        /**--------------snackbar-------- blue-snackbar dans style.css----- */
+        this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        this.createProduit();
+      }
+    });
+  }
+  
+
+
   confirmDialog() {}
 
 
@@ -324,7 +347,7 @@ export class ProduitsComponent implements OnInit {
     this.oneProduit = {
       _id: "",
       categorie: 21212124545,
-      etat: "sandbox",
+      etat: "create",
       description: "",
       vu: 0,
       garantie: "0",
