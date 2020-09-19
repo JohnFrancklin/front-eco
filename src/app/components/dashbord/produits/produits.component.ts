@@ -158,7 +158,7 @@ export class ProduitsComponent implements OnInit {
             this.snackBar.open("[" + result['titre'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
             this.produits.push(result);
           });
-          console.log(productObject);
+          // console.log(productObject);
         }
       });
 

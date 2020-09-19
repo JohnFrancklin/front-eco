@@ -209,7 +209,7 @@
                         </div>
                         <div *ngIf="!oneAndAll">
                             <button class="element_un_check" *ngFor="let p of produits | filter:searchText"
-                                title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.7' : '1'}"
+                                title="{{p.title}}" [ngStyle]="{'opacity': p.etat!=state_to_change ? '0.5' : '1'}"
                                 (keydown.control.a)="selectionnerTout($event)"
                                 (keydown.control.d)="deselectionnerTout($event)">
                                 <input type="checkbox" class="checkCase" name="" check="true" id="{{p._id}}"
@@ -726,14 +726,14 @@
     [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
     <mat-menu #contextMenu="matMenu">
         <ng-template matMenuContent>
-            <button mat-menu-item class="itemContextuel" (click)="launchOrArhiveOrDelete()">
+            <button class="itemContextuel" (click)="launchOrArhiveOrDelete()">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
-            </button>
-            <button mat-menu-item class="itemContextuel" (click)="file.click()"
+            </button><hr style="margin:'0px'">
+            <button class="itemContextuel" (click)="file.click()"
                 *ngIf="oneProduit.etat == 'sandbox' || oneProduit.etat == 'live'">
                 Ajouter image
-            </button>
-            <button mat-menu-item class="itemContextuel"
+            </button><hr style="margin:'0px'">
+            <button class="itemContextuel"
                 [ngStyle]="{'opacity': oneProduit.etat == 'sandbox' ? 1 : 0.5, 'pointer-events': oneProduit.etat == 'sandbox' ? 'auto' : 'none'}"
                 (click)="deleteProduct()">
                 Supprimer

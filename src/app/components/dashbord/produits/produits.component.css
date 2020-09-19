@@ -782,10 +782,16 @@
 
 
  .itemContextuel{
-     color: black;
-     outline: 0!important;
-     height: 40px;
-     font-size: small;
+    color: black;
+    outline: 0!important;
+    height: 32px;
+    font-size: 12px;
+    display: block;
+    border: none;
+    padding: 3px 0px 0px 10px;
+    background-color: white;
+    width: -webkit-fill-available;
+    text-align: left;
  }
  
  .itemContextuel:hover{
