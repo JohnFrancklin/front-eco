@@ -65,7 +65,24 @@
 
 
                     <div class="categorieItem">
-                        Les catégories
+                        Les catégories 
+                        <span class="buttonAddCategorie" title="Ajouter une categorie" (click)="afficherCategorieCreate()">+</span>
+                    </div>
+
+                    <div class="categorieCreerBox" *ngIf="showCategorieCreate">
+                        <div class="titleAddCategorie">
+                            Ajouter une categorie
+                        </div>
+                        <div>
+                            Nom<br>
+                            <input type="text" class="inputCategorie">
+                            Description<br>
+                            <textarea name="" id="" class="inputCategorie"></textarea>
+                        </div>
+                        <div>
+                            <button class="btnAddCategorie">Ajouter</button>
+                            <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
+                        </div>
                     </div>
 
                     <p class="menu_item">
@@ -196,6 +213,7 @@
                                 (keydown.Delete)="oneProduit.etat == 'archived' ? deleteProduct() : false"
                                 (keydown.Enter)="launchOrArhiveOrDelete()" (keydown.ArrowRight)="deplacerDroite()"
                                 (keydown.ArrowLeft)="deplacerGauche()" (keydown.ArrowUp)="deplacerHaut()"
+                                (keydown.Control.c)="CopierProduit()" (keydown.Control.v)="dupliquerProduit()"
                                 (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()">
                                 <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
                                 <span class="title_produit_list" [title]="p.titre">
@@ -440,7 +458,8 @@
             </h3>
 
             <div *ngIf="oneAndAll">
-                <div [ngStyle]="{'pointer-events': (oneProduit.etat == 'sandbox' || oneProduit.etat == 'create') ? 'auto' : 'none'}">
+                <div
+                    [ngStyle]="{'pointer-events': (oneProduit.etat == 'sandbox' || oneProduit.etat == 'create') ? 'auto' : 'none'}">
 
 
 
@@ -693,7 +712,7 @@
 
 
 <ng-template #dialogBox *ngIf="oneAndAll">
-    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : 'voulez-vous Supprimer'}}
+    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : oneProduit.etat == 'deleting' ? 'voulez-vous supprimer' : 'voulez-vous Supprimer'}}
     le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
     <div style="float: right;">
         <button [mat-dialog-close]=true class="button_dialog_confirm" id="button_confirm_one"
@@ -728,11 +747,13 @@
         <ng-template matMenuContent>
             <button class="itemContextuel" (click)="launchOrArhiveOrDelete()">
                 {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : 'Supprimer'}}
-            </button><hr style="margin:'0px'">
+            </button>
+            <hr style="margin:'0px'">
             <button class="itemContextuel" (click)="file.click()"
                 *ngIf="oneProduit.etat == 'sandbox' || oneProduit.etat == 'live'">
                 Ajouter image
-            </button><hr style="margin:'0px'">
+            </button>
+            <hr style="margin:'0px'">
             <button class="itemContextuel"
                 [ngStyle]="{'opacity': oneProduit.etat == 'sandbox' ? 1 : 0.5, 'pointer-events': oneProduit.etat == 'sandbox' ? 'auto' : 'none'}"
                 (click)="deleteProduct()">
