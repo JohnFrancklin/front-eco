@@ -207,17 +207,22 @@
 
 
                         <div *ngIf="oneAndAll">
-                            <button class="element_un animate__animated animate__fadeIn" *ngFor="let p of produits | filter:searchText ; let i=index"
+                            <button class="element_un animate__animated animate__fadeIn"
+                                *ngFor="let p of produits | filter:searchText ; let i=index"
                                 title="Click droite pour l'option" id="one_{{p._id}}"
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : '', 'background-color': p.select == true ? 'rgb(240 250 255)' : ''}"
-                                (click)="getOneProduit(p,i); onClickWithControllPressed($event,p,i);" (contextmenu)="onRightClick($event);getOneProduit(p,i);"
+                                (click)="getOneProduit(p,i); onClickWithControllPressed($event,p,i);"
+                                (contextmenu)="onRightClick($event);getOneProduit(p,i);"
                                 (keydown.Delete)="oneProduit.etat == 'archived' || oneProduit.etat == 'sandbox' ? deleteProduct() : false"
                                 (keydown.Enter)="launchOrArhiveOrDelete()" (keydown.ArrowRight)="deplacerDroite()"
                                 (keydown.ArrowLeft)="deplacerGauche()" (keydown.ArrowUp)="deplacerHaut()"
                                 (keydown.Control.c)="copierProduit()" (keydown.Control.v)="collerProduit()"
                                 (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()">
-                                <img *ngIf="p.images.length != 0" src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG" class="imageMiniature">
-                                <img *ngIf="p.images.length == 0" src="../../../../assets/images/your-logo-png-8.png" class="imageMiniature">
+                                <img *ngIf="p.images.length != 0"
+                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
+                                    class="imageMiniature">
+                                <img *ngIf="p.images.length == 0" src="../../../../assets/images/your-logo-png-8.png"
+                                    class="imageMiniature">
                                 <span class="title_produit_list" [title]="p.titre">
                                     {{p.titre}}
                                 </span>
@@ -237,7 +242,11 @@
                                     title="Cocher ici pour selection le produit"
                                     (keydown.control.a)="selectionnerTout($event)"
                                     (keydown.control.d)="deselectionnerTout($event)">
-                                <img src="../../../../assets/images/your-logo-png-8.png" width="50px" alt="">
+                                <img *ngIf="p.images.length != 0"
+                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
+                                    class="imageMiniature">
+                                <img *ngIf="p.images.length == 0" src="../../../../assets/images/your-logo-png-8.png"
+                                    class="imageMiniature">
                                 <span class="title_produit_list">
                                     {{p.titre}}
                                 </span>
@@ -404,7 +413,8 @@
 
                 </div>
                 <div class="imageCont">
-                    <div class="box_image" *ngFor="let i of oneProduit.images; let in = index" (click)="popupImageProduits(in)">
+                    <div class="box_image" *ngFor="let i of oneProduit.images; let in = index"
+                        (click)="popupImageProduits(in)">
                         <!-- <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit"> -->
                         <img src="http://localhost:3000/produits/getImage/{{i}}-hd.PNG" class="image_produit">
                     </div>
@@ -707,38 +717,45 @@
 </div>
 
 
-<ng-template #imageProduit style="background-color: white;">
-    <img src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.PNG" width="100%" alt="">
+<ng-template #imageProduit>
+    <img src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.PNG" alt="">
+    <button class="btnSupprimerImage" (click)="supprimerImageProduit(oneProduit.images[indexImage])">
+        Supprimer
+    </button>
 </ng-template>
 
 
 
 <ng-template #dialogBox *ngIf="oneAndAll">
-    {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : oneProduit.etat == 'deleting' ? 'voulez-vous supprimer' : 'voulez-vous Supprimer'}}
-    le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
-    <div style="float: right;">
-        <button [mat-dialog-close]=true class="button_dialog_confirm" id="button_confirm_one"
-            [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat == 'create' ? 'rgb(1 64 107)' : oneProduit.etat == 'updating' ? 'rgb(1 64 107)' : 'red'}"
-            (keydown.ArrowRight)="deplacerCancel()">
-            {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : oneProduit.etat == 'create' ? 'Créer' : oneProduit.etat == 'updating' ? 'Modifier'  : 'Supprimer'}}
-        </button>
-        <button [mat-dialog-close]=false class="button_dialog_cancel" id="button_cancel_one"
-            (keydown.ArrowLeft)="deplacerConfirme()">
-            Annuler
-        </button>
+    <div class="contenuModal">
+        {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : oneProduit.etat == 'deleting' ? 'voulez-vous supprimer' : 'voulez-vous Supprimer'}}
+        le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm" id="button_confirm_one"
+                [ngStyle]="{'background-color': oneProduit.etat=='sandbox' ? '#73be00' : oneProduit.etat=='live'  ? 'orange' : oneProduit.etat == 'create' ? 'rgb(1 64 107)' : oneProduit.etat == 'updating' ? 'rgb(1 64 107)' : 'red'}"
+                (keydown.ArrowRight)="deplacerCancel()">
+                {{oneProduit.etat == 'sandbox' ? 'Lancer' : oneProduit.etat == 'live' ? 'Archiver' : oneProduit.etat == 'create' ? 'Créer' : oneProduit.etat == 'updating' ? 'Modifier'  : 'Supprimer'}}
+            </button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel" id="button_cancel_one"
+                (keydown.ArrowLeft)="deplacerConfirme()">
+                Annuler
+            </button>
+        </div>
     </div>
 </ng-template>
 
 
 <ng-template #dialogBox *ngIf="!oneAndAll">
-    {{state_to_change == 'sandbox' ? ' voulez-vous lancer' : state_to_change == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
-    <label style="color:blue">{{produitSelected.length}} produit(s) </label> selectionnés ? <br>
-    <div style="float: right;">
-        <button [mat-dialog-close]=true class="button_dialog_confirm"
-            [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live'  ? 'orange' : 'red'}">
-            {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
-        </button>
-        <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+    <div class="contenuModal">
+        {{state_to_change == 'sandbox' ? ' voulez-vous lancer' : state_to_change == 'live' ? 'voulez-vous archiver' : 'voulez-vous Supprimer'}}
+        <label style="color:blue">{{produitSelected.length}} produit(s) </label> selectionnés ? <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm"
+                [ngStyle]="{'background-color': state_to_change=='sandbox' ? '#73be00' : state_to_change=='live'  ? 'orange' : 'red'}">
+                {{state_to_change == 'sandbox' ? 'Lancer' : state_to_change == 'live' ? 'Archiver' : 'Supprimer'}}
+            </button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
     </div>
 </ng-template>
 
@@ -760,8 +777,7 @@
                 Dupliquer
             </button>
             <hr style="margin:'0px'">
-            <button class="itemContextuel" *ngIf="oneProduit.etat != 'archived'"
-                (click)="deleteProduct()">
+            <button class="itemContextuel" *ngIf="oneProduit.etat != 'archived'" (click)="deleteProduct()">
                 Supprimer
             </button>
         </ng-template>

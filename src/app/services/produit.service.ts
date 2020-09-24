@@ -114,6 +114,8 @@ ajouterImage(formData, id) {
   return this.http.put<any[]>(endPoint+"/update/imagesAdd/"+id, formData, {responseType:'json'}); //pas de httpOptions
 }
 
+supprimerImage(body, id) {
+  return this.http.put<any[]>(endPoint+"/update/imagesRemove/"+id, body, {responseType:'json'}); //pas de httpOptions
+}
 
-  
 }

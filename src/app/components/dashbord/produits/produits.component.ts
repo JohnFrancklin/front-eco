@@ -681,6 +681,18 @@ export class ProduitsComponent implements OnInit {
     });
   }
 
+  supprimerImageProduit(nomImage) {
+    let body = {
+      images: nomImage
+    }
+    // this.produitService.supprimerImage(body, this.oneProduit._id).subscribe(result => {
+
+    // }, error => {
+    //   console.log(error);
+    // });
+  }
+
+
 
   onRightClick(event) {
     event.preventDefault();

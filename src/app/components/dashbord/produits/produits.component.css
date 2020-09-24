@@ -869,3 +869,16 @@
     height:46px;
     border-radius: 5px;
  }
+
+ .contenuModal{
+    padding: 15px 14px 37px 14px;
+ }
+
+ .btnSupprimerImage{
+    position: absolute;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 4px;
+    margin-left: -72px;
+ }
