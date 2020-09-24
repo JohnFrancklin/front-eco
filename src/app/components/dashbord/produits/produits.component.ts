@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, HostListener } from '@angular/core';
 import { ProduitService } from 'src/app/services/produit.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogContent, MatDialogContainer } from '@angular/material/dialog';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ProduitsComponent implements OnInit {
   produits: any;
   // oneProduit: any;
   produitSelected = [];
+  objetDuplicate = {};
   searchText: any;
   oneAndAll: boolean = true;
   durationSnackBar = 4000;
@@ -84,6 +86,7 @@ export class ProduitsComponent implements OnInit {
   //------------------------------------//
 
   isEtireListe: boolean = false;
+  allProduitsSelected = [];
 
   title = "Smartphone G10 2e";
 
@@ -91,6 +94,8 @@ export class ProduitsComponent implements OnInit {
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
+  indexImage: any;
+
 
 
 
@@ -169,11 +174,11 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  dupliquerProduit(){
-    console.log("controle v");
-    console.log(this.oneProduit);
-    let objetDuplicate = {
-      titre: this.oneProduit.titre+"_copy",
+
+  copierProduit() {
+    this.snackBar.open("Copier", '', { duration: 250, verticalPosition: 'top', horizontalPosition: 'center', panelClass: ['copieSnackBar'] });
+    this.objetDuplicate = {
+      titre: this.oneProduit.titre + "_copy",
       description: this.oneProduit.description,
       date_sortie: this.oneProduit.detail_fabrication.date_sortie,
       numero_model: this.oneProduit.detail_fabrication.numero_model,
@@ -191,22 +196,45 @@ export class ProduitsComponent implements OnInit {
       etat: 'sandbox',
       categorie: "5f0ff8cee892a5408c1aae39"
     }
+  }
+  collerProduit() {
+    if (Object.keys(this.objetDuplicate).length != 0) { //si une clé existe 
+      this.produitService.createProduct(this.objetDuplicate).subscribe(result => {
+        this.produits.splice(this.indexProduit + 1, 0, result);
+        this.snackBar.open("[" + result['titre'] + "] a été copié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+      });
+    }
+  }
+  dupliquerProduit() {
+    let objetDuplicate = {
+      titre: this.oneProduit.titre + "_copy",
+      description: this.oneProduit.description,
+      date_sortie: this.oneProduit.detail_fabrication.date_sortie,
+      numero_model: this.oneProduit.detail_fabrication.numero_model,
+      largeur: this.oneProduit.detail_physique.largeur,
+      longueur: this.oneProduit.detail_physique.longueur,
+      poids: this.oneProduit.detail_physique.poids,
+      taille: this.oneProduit.detail_physique.taille,
+      garantie: this.oneProduit.garantie,
+      prix_normal: this.oneProduit.prix.prix_normal,
+      prix_promotion: this.oneProduit.prix.prix_promotion,
+      provenance: this.oneProduit.provenance,
+      quantite: this.oneProduit.quantite,
+      marque: this.oneProduit.marque,
+      couleur: this.oneProduit.detail_physique.couleur,
+      etat: 'sandbox',
+      categorie: "5f0ff8cee892a5408c1aae39"
+    };
     this.produitService.createProduct(objetDuplicate).subscribe(result => {
-      // console.log("create success", result);
-      this.snackBar.open("[" + result['titre'] + "] a été copié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
       this.produits.splice(this.indexProduit + 1, 0, result);
+      this.snackBar.open("[" + result['titre'] + "] a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
     });
-    
+
   }
 
-  CopierProduit(){
-    console.log("controle c");
-  }
 
   updateProduct() {
-
     this.oneProduit.etat = 'updating';
-
     const productObject = {
       // id: this.oneProduit._id,
       titre: this.oneProduit.titre,
@@ -306,7 +334,7 @@ export class ProduitsComponent implements OnInit {
 
   deleteOrArchivedProduct() {
     const etatTemp = this.oneProduit.etat;
-    if(this.oneProduit.etat == 'sandbox'){
+    if (this.oneProduit.etat == 'sandbox') {
       this.oneProduit.etat = 'deleting';
     }
 
@@ -331,7 +359,7 @@ export class ProduitsComponent implements OnInit {
           this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
           this.createProduit();
         }
-      }else{
+      } else {
         this.oneProduit.etat = etatTemp;
       }
     });
@@ -350,7 +378,7 @@ export class ProduitsComponent implements OnInit {
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
         this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         this.createProduit();
-      }else{
+      } else {
         this.oneProduit.etat = etatTemp;
       }
     });
@@ -541,7 +569,7 @@ export class ProduitsComponent implements OnInit {
     this.showDetailListStat = false;
   }
 
-  afficherCategorieCreate(){
+  afficherCategorieCreate() {
     if (this.showCategorieCreate == false) {
       this.showCategorieCreate = true;
       this.Transparent_overlay = true;
@@ -562,7 +590,8 @@ export class ProduitsComponent implements OnInit {
     this.showCategorieCreate = false;
   }
 
-  popupImageProduits(): void {
+  popupImageProduits(index): void {
+    this.indexImage = index;
     this.dialog.open(this.imageProduit, {
       width: '400px',
     });
@@ -640,8 +669,13 @@ export class ProduitsComponent implements OnInit {
     let images: File = files.item(0);
     const formData: FormData = new FormData();
     formData.append('images', images, images.name);
-    this.produitService.ajouterImage(formData, this.oneProduit._id).subscribe(data => {
-      console.log("uploaded with succes", data);
+    this.produitService.ajouterImage(formData, this.oneProduit._id).subscribe(result => {
+
+      setTimeout(() => {
+        this.oneProduit = result['value'][0];
+        this.produits[this.indexProduit].images = result['value'][0].images;
+      }, 500);
+
     }, error => {
       console.log(error);
     });
@@ -655,6 +689,29 @@ export class ProduitsComponent implements OnInit {
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
     return false;
+  }
+
+  onClickWithControllPressed(evt: MouseEvent, p, i) {
+    if (evt.ctrlKey) { // true si on presse le controlle
+      if (!('select' in this.produits[i]) || this.produits[i].select == false) {
+        this.produits[i].select = true;
+        this.allProduitsSelected.push(this.produits[i]._id);
+      } else {
+        this.produits[i].select = false;
+        const index = this.allProduitsSelected.indexOf(this.produits[i]._id);
+        if (index > -1) {
+          this.allProduitsSelected.splice(index, 1);
+        }
+
+      }
+    } else {
+      this.produits.forEach(p => {
+        p.select = false;
+      });
+      this.allProduitsSelected = [];
+    }
+    console.log("selecteds", this.allProduitsSelected);
+    
   }
 
   selectionnerTout(event) {
@@ -687,7 +744,7 @@ export class ProduitsComponent implements OnInit {
   }
   deplacerGauche() {
     if (this.indexProduit != 0) {
-      this.oneProduit = this.produits[this.indexProduit -1];
+      this.oneProduit = this.produits[this.indexProduit - 1];
       this.indexProduit--;
       document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
     }
@@ -695,7 +752,7 @@ export class ProduitsComponent implements OnInit {
   deplacerHaut() {
     event.preventDefault();// evider l'evenement native du navigateur
     if (this.indexProduit > 2) {
-      this.indexProduit = this.indexProduit -3;
+      this.indexProduit = this.indexProduit - 3;
       this.oneProduit = this.produits[this.indexProduit];
       document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
     }
@@ -703,16 +760,16 @@ export class ProduitsComponent implements OnInit {
   deplacerBas() {
     event.preventDefault();// evider l'evenement native du navigateur
     if (this.indexProduit < this.produits.length - 3) {
-      this.indexProduit = this.indexProduit +3;
+      this.indexProduit = this.indexProduit + 3;
       this.oneProduit = this.produits[this.indexProduit];
       document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
     }
   }
-  deplacerCancel(){
+  deplacerCancel() {
     event.preventDefault();// evider l'evenement native du navigateur
     document.getElementById("button_cancel_one").focus();
   }
-  deplacerConfirme(){
+  deplacerConfirme() {
     event.preventDefault();// evider l'evenement native du navigateur
     document.getElementById("button_confirm_one").focus();
   }

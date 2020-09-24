@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "~animate.css/animate.min";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -10,7 +11,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .blue-snackbar {
     background: rgb(1, 64, 107);
     color: white;
-    
+  }
+  .copieSnackBar{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    background-color: #5e5e5e;
+    color: white;
+  }
+
+  .mat-snack-bar-container {
+    max-width: 100% !important;
+    min-width: 70px!important;
   }
 
 .mat-dialog-container {

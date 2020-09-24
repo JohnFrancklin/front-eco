@@ -111,9 +111,7 @@ export class ProduitService {
 
 
 ajouterImage(formData, id) {
-  // const formData: FormData = new FormData();
-  // formData.append('images', fileToUpload, fileToUpload.name);
-  return this.http.put<any[]>(endPoint+"/update/imagesAdd/"+id, formData, {responseType:'text' as 'json'}); //pas de httpOptions
+  return this.http.put<any[]>(endPoint+"/update/imagesAdd/"+id, formData, {responseType:'json'}); //pas de httpOptions
 }
 
 
