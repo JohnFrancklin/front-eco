@@ -212,12 +212,12 @@
                                 title="Click droite pour l'option" id="one_{{p._id}}"
                                 [ngStyle]="{'border': p._id == oneProduit._id ? '1px solid cornflowerblue' : '', 'background-color': p.select == true ? 'rgb(240 250 255)' : ''}"
                                 (click)="getOneProduit(p,i); onClickWithControllPressed($event,p,i);"
-                                (contextmenu)="onRightClick($event);getOneProduit(p,i);"
+                                (contextmenu)="onRightClick($event,'produit');getOneProduit(p,i);"
                                 (keydown.Delete)="oneProduit.etat == 'archived' || oneProduit.etat == 'sandbox' ? deleteProduct() : false"
                                 (keydown.Enter)="launchOrArhiveOrDelete()" (keydown.ArrowRight)="deplacerDroite()"
                                 (keydown.ArrowLeft)="deplacerGauche()" (keydown.ArrowUp)="deplacerHaut()"
-                                (keydown.Control.c)="copierProduit()" (keydown.Control.v)="collerProduit()"
-                                (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()">
+                                (keydown.Control.c)="copierProduit()" (keydown.Control.v)="collerProduit()" (keydown.e)="editProduit()"
+                                (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()" (keydown.Control.i)="file.click()">
                                 <img *ngIf="p.images.length != 0"
                                     src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
                                     class="imageMiniature">
@@ -413,10 +413,10 @@
 
                 </div>
                 <div class="imageCont">
-                    <div class="box_image" *ngFor="let i of oneProduit.images; let in = index"
-                        (click)="popupImageProduits(in)">
-                        <!-- <img src="../../../../assets/images/your-logo-png-8.png" class="image_produit"> -->
-                        <img src="http://localhost:3000/produits/getImage/{{i}}-hd.PNG" class="image_produit">
+                    <div class="box_image" *ngFor="let i of oneProduit.images; let in = index">
+                        <span class="deleteimage_x" title="Supprimer cette image" (click)="supprimerImageProduit(i)">x</span>
+                        <img src="http://localhost:3000/produits/getImage/{{i}}-hd.PNG" class="image_produit"
+                            (click)="popupImageProduits(in);" title="clicker pour afficher l'image">
                     </div>
                     <div class="box_image" *ngIf="oneProduit.images.length!=3" (click)="file.click()">
                         <span class="material-icons add_image">
@@ -718,16 +718,22 @@
 
 
 <ng-template #imageProduit>
-    <img src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.PNG" alt="">
+    <button *ngIf="indexImage > 0 " (click)="showPreviewImage()" class="previewButtonImage">Précédant</button>
+    <img *ngIf="oneProduit.images.length  > 0"
+        src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.PNG"
+        class="animate__animated animate__fadeIn">
     <button class="btnSupprimerImage" (click)="supprimerImageProduit(oneProduit.images[indexImage])">
         Supprimer
     </button>
+    <button *ngIf="indexImage != oneProduit.images.length-1" (click)="showNextImage()"
+        class="nextButtonImage">Suivant</button>
+
 </ng-template>
 
 
 
 <ng-template #dialogBox *ngIf="oneAndAll">
-    <div class="contenuModal">
+    <div class="contenuModal" *ngIf="isProduitElement == true">
         {{oneProduit.etat == 'sandbox' ? ' voulez-vous lancer' : oneProduit.etat == 'live' ? 'voulez-vous archiver' : oneProduit.etat == 'create' ? 'voulez-vous créer' : oneProduit.etat == 'updating' ? 'voulez-vous modifier' : oneProduit.etat == 'deleting' ? 'voulez-vous supprimer' : 'voulez-vous Supprimer'}}
         le produit <label style="color:blue">"{{oneProduit.titre}}"</label> ? <br>
         <div style="float: right;">
@@ -742,6 +748,18 @@
             </button>
         </div>
     </div>
+
+    <div class="contenuModal" *ngIf="isProduitElement == false">
+       <label>voulez-vous supprimer cette image ?</label> <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm btn_supprimer_dialog">
+                Supprimer
+            </button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
+
+
 </ng-template>
 
 
@@ -783,19 +801,16 @@
         </ng-template>
 
         <ng-template matMenuContent *ngIf="allProduitsSelected.length > 0">
-            <button class="itemContextuel" (click)="launchOrArhiveOrDelete()">
-                dupliquer tous
+            <button class="itemContextuel" (click)="dupliquerMultiple()">
+                Dupliquer tous
             </button>
             <button class="itemContextuel">
-                supprimer tous
+                Supprimer tous
             </button>
         </ng-template>
 
     </mat-menu>
 </div>
-
-
-
 
 <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
 </div>

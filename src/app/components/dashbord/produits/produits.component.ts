@@ -93,8 +93,10 @@ export class ProduitsComponent implements OnInit {
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
+
   contextMenuPosition = { x: '0px', y: '0px' };
   indexImage: any;
+  isProduitElement: boolean = true;
 
 
 
@@ -232,6 +234,15 @@ export class ProduitsComponent implements OnInit {
 
   }
 
+  dupliquerMultiple() {
+
+  }
+
+  editProduit() { // dplacer le focus sur title
+    event.preventDefault();
+    document.getElementById("titre").focus();
+  }
+
 
   updateProduct() {
     this.oneProduit.etat = 'updating';
@@ -275,6 +286,7 @@ export class ProduitsComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
         if (result) {
           this.oneProduit.etat = 'sandbox';
+          document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
           this.produitService.updatePoduct(productObject, this.oneProduit._id).subscribe(result => {
             this.snackBar.open("[" + result['titre'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
           });
@@ -317,7 +329,20 @@ export class ProduitsComponent implements OnInit {
           });
           /**--------------snackbar-------- blue-snackbar dans style.css----- */
           this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-          this.createProduit();
+
+          if (this.indexProduit != 0) {
+            this.oneProduit = this.produits[this.indexProduit - 1];
+            document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+          } else {
+            if (this.produits.length >= 2) {
+              this.oneProduit = this.produits[this.indexProduit + 1];
+              document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+            }else{
+
+            }
+          }
+
+
         }
       }
     });
@@ -357,7 +382,17 @@ export class ProduitsComponent implements OnInit {
           });
           /**--------------snackbar-------- blue-snackbar dans style.css----- */
           this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-          this.createProduit();
+          if (this.indexProduit != 0) {
+            this.oneProduit = this.produits[this.indexProduit - 1];
+            document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+          } else {
+            if (this.produits.length >= 2) {
+              this.oneProduit = this.produits[this.indexProduit + 1];
+              document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+            }else{
+
+            }
+          }
         }
       } else {
         this.oneProduit.etat = etatTemp;
@@ -377,7 +412,19 @@ export class ProduitsComponent implements OnInit {
         });
         /**--------------snackbar-------- blue-snackbar dans style.css----- */
         this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-        this.createProduit();
+    
+        if (this.indexProduit != 0) {
+          this.oneProduit = this.produits[this.indexProduit - 1];
+          document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+        } else {
+          if (this.produits.length >= 2) {
+            this.oneProduit = this.produits[this.indexProduit + 1];
+            document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+          }else{
+            
+          }
+        }
+
       } else {
         this.oneProduit.etat = etatTemp;
       }
@@ -413,6 +460,7 @@ export class ProduitsComponent implements OnInit {
       console.log("resultat", resultat);
       this.produits = resultat['produits'];
       this.oneProduit = this.produits[0];
+      this.indexProduit = 0;
     });
 
 
@@ -473,6 +521,7 @@ export class ProduitsComponent implements OnInit {
     this.oneProduit['index'] = i;
     this.createType = false;
     this.indexProduit = i;
+    this.isProduitElement = true;
   }
 
 
@@ -592,6 +641,7 @@ export class ProduitsComponent implements OnInit {
 
   popupImageProduits(index): void {
     this.indexImage = index;
+    this.isProduitElement = false;
     this.dialog.open(this.imageProduit, {
       width: '400px',
     });
@@ -682,19 +732,45 @@ export class ProduitsComponent implements OnInit {
   }
 
   supprimerImageProduit(nomImage) {
+    this.isProduitElement = false;
     let body = {
-      images: nomImage
+      images: [nomImage]
     }
-    // this.produitService.supprimerImage(body, this.oneProduit._id).subscribe(result => {
+    const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
+    dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
+      if (result) {
+        this.produitService.supprimerImage(body, this.oneProduit._id).subscribe(result => {
+          let indexOfImage = this.oneProduit.images.indexOf(nomImage);
+          this.oneProduit.images.splice(indexOfImage, 1);
+          this.indexImage = 0;
+          this.dialog.closeAll();
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("l'image selectionnée a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        }, error => { console.log(error); });
+      } else {
 
-    // }, error => {
-    //   console.log(error);
-    // });
+      }
+
+      this.isProduitElement = true;
+      document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+
+    });
+
+
+
+
   }
 
 
+  showNextImage() {
+    this.indexImage++;
+  }
+  showPreviewImage() {
+    this.indexImage--;
+  }
 
-  onRightClick(event) {
+
+  onRightClick(event, element) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -707,10 +783,10 @@ export class ProduitsComponent implements OnInit {
     if (evt.ctrlKey) { // true si on presse le controlle
       if (!('select' in this.produits[i]) || this.produits[i].select == false) {
         this.produits[i].select = true;
-        this.allProduitsSelected.push(this.produits[i]._id);
+        this.allProduitsSelected.push(this.produits[i]);
       } else {
         this.produits[i].select = false;
-        const index = this.allProduitsSelected.indexOf(this.produits[i]._id);
+        const index = this.allProduitsSelected.indexOf(this.produits[i]);
         if (index > -1) {
           this.allProduitsSelected.splice(index, 1);
         }
@@ -723,7 +799,7 @@ export class ProduitsComponent implements OnInit {
       this.allProduitsSelected = [];
     }
     console.log("selecteds", this.allProduitsSelected);
-    
+
   }
 
   selectionnerTout(event) {

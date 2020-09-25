@@ -282,7 +282,7 @@
     width: 30%;
     background-color: white;
     overflow-y: hidden;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 5px 5px 8px;
     border: 1px solid #d5d5d5;
     display: inline-block;
@@ -291,6 +291,7 @@
 
 .image_produit{
     width: 100%;
+    cursor: pointer;
 }
 
 .recherche_box{
@@ -690,7 +691,7 @@
     margin-left: 5px;
     width: 22%;
     height: 19px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .button_change_state{
@@ -868,6 +869,7 @@
     width:50px; 
     height:46px;
     border-radius: 5px;
+    opacity: 0.7;
  }
 
  .contenuModal{
@@ -881,4 +883,32 @@
     border: none;
     padding: 4px;
     margin-left: -72px;
+ }
+
+ .nextButtonImage{
+    position: relative;
+    margin-left: -61px;
+    z-index: 5;
+ }
+
+ .previewButtonImage{
+    z-index: 5;
+    position: relative;
+    margin-right: -80px;
+ }
+
+ .deleteimage_x{
+    float: right;
+    background-color: darkgrey;
+    padding: 0px 6px;
+    /* border-radius: 30px; */
+    color: white;
+    cursor: pointer;
+    position: relative;
+    /* margin-top: 0px; */
+    margin-left: -19px;
+ }
+
+ .btn_supprimer_dialog{
+     background-color: red;
  }
