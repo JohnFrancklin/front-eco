@@ -95,7 +95,7 @@ export class RegisterComponent implements OnInit {
       ville: this.users.ville,
       username: this.users.username,
       email: this.users.email,
-      passwword: this.users.password,
+      password: this.users.password,
       codePostal: this.users.codePostal,
       sexe: this.users.sexe,
     }    

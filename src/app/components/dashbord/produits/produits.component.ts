@@ -87,6 +87,7 @@ export class ProduitsComponent implements OnInit {
 
   isEtireListe: boolean = false;
   allProduitsSelected = [];
+  idProduitSelected = [];
 
   title = "Smartphone G10 2e";
 
@@ -157,14 +158,22 @@ export class ProduitsComponent implements OnInit {
     }
 
     if (isValid) {
-      productObject["categorie"] = "5f0ff8cee892a5408c1aae39"; // assigne clé categorie dans l"objet
+      productObject["categorie"] = "5f0ff8cee892a5408c1aae39";
+      productObject["acteur"] = "rakoto";
       const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
       dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
         if (result) {
           this.produitService.createProduct(productObject).subscribe(result => {
-            // console.log("create success", result);
-            this.snackBar.open("[" + result['titre'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-            this.produits.push(result);
+            if (result['code'] == "4000") {
+              let produit = result['value'][0];
+              this.snackBar.open("[" + produit['titre'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+              this.produits.push(produit);
+            } else if (result['code'] == "4002") {
+              console.log("données manquant")
+            } else if (result['code'] == "4003") {
+              console.log("Probleme de connexion, session expiré");
+            }
+
           });
           // console.log(productObject);
         }
@@ -174,8 +183,6 @@ export class ProduitsComponent implements OnInit {
       console.log("champ encore vide");
     }
   }
-
-
 
   copierProduit() {
     this.snackBar.open("Copier", '', { duration: 250, verticalPosition: 'top', horizontalPosition: 'center', panelClass: ['copieSnackBar'] });
@@ -196,51 +203,72 @@ export class ProduitsComponent implements OnInit {
       marque: this.oneProduit.marque,
       couleur: this.oneProduit.detail_physique.couleur,
       etat: 'sandbox',
-      categorie: "5f0ff8cee892a5408c1aae39"
+      categorie: "5f0ff8cee892a5408c1aae39",
+      acteur: "rakoto"
     }
   }
+
   collerProduit() {
     if (Object.keys(this.objetDuplicate).length != 0) { //si une clé existe 
       this.produitService.createProduct(this.objetDuplicate).subscribe(result => {
-        this.produits.splice(this.indexProduit + 1, 0, result);
-        this.snackBar.open("[" + result['titre'] + "] a été copié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        if (result['code'] == "4000") {
+          let produit = result['value'][0];
+          this.snackBar.open("[" + produit['titre'] + "] a été copié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          this.produits.splice(this.indexProduit + 1, 0, produit);
+        } else if (result['code'] == "4002") {
+          console.log("données manquant")
+        } else if (result['code'] == "4003") {
+          console.log("Probleme de connexion, session expiré");
+        }
+
       });
     }
   }
-  dupliquerProduit() {
-    let objetDuplicate = {
-      titre: this.oneProduit.titre + "_copy",
-      description: this.oneProduit.description,
-      date_sortie: this.oneProduit.detail_fabrication.date_sortie,
-      numero_model: this.oneProduit.detail_fabrication.numero_model,
-      largeur: this.oneProduit.detail_physique.largeur,
-      longueur: this.oneProduit.detail_physique.longueur,
-      poids: this.oneProduit.detail_physique.poids,
-      taille: this.oneProduit.detail_physique.taille,
-      garantie: this.oneProduit.garantie,
-      prix_normal: this.oneProduit.prix.prix_normal,
-      prix_promotion: this.oneProduit.prix.prix_promotion,
-      provenance: this.oneProduit.provenance,
-      quantite: this.oneProduit.quantite,
-      marque: this.oneProduit.marque,
-      couleur: this.oneProduit.detail_physique.couleur,
-      etat: 'sandbox',
-      categorie: "5f0ff8cee892a5408c1aae39"
-    };
-    this.produitService.createProduct(objetDuplicate).subscribe(result => {
-      this.produits.splice(this.indexProduit + 1, 0, result);
-      this.snackBar.open("[" + result['titre'] + "] a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-    });
 
+
+  dupliquerProduit() {
+    let body = {
+      id_produits: [this.oneProduit._id],
+      acteur: "rakoto"
+    }
+    this.produitService.dupliquerMultiple(body).subscribe(result => {
+      if (result['code'] == "4000") {
+        let produit = result['value'][0];
+        this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        this.produits.splice(this.indexProduit + 1, 0, produit);
+      } else if (result['code'] == "4002") {
+        console.log("données manquant")
+      } else if (result['code'] == "4003") {
+        console.log("Probleme de connexion, session expiré");
+      }
+    });
   }
 
   dupliquerMultiple() {
+    let body = {
+      id_produits: this.idProduitSelected,
+      acteur: "rakoto"
+    }
+    this.produitService.dupliquerMultiple(body).subscribe(result => {
+      if (result['code'] == "4000") {
+        this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+        for (let i = 0; i < result['value'].length; i++) {
+          this.produits.push(result['value'][i]);
+        }
+      } else if (result['code'] == "4002") {
+        console.log("données manquant")
+      } else if (result['code'] == "4003") {
+        console.log("Probleme de connexion, session expiré");
+      }
 
+    });
   }
 
   editProduit() { // dplacer le focus sur title
     event.preventDefault();
-    document.getElementById("titre").focus();
+    if (this.oneProduit.etat == 'sandbox') {
+      document.getElementById("titre").focus();
+    }
   }
 
 
@@ -337,7 +365,7 @@ export class ProduitsComponent implements OnInit {
             if (this.produits.length >= 2) {
               this.oneProduit = this.produits[this.indexProduit + 1];
               document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-            }else{
+            } else {
 
             }
           }
@@ -389,7 +417,7 @@ export class ProduitsComponent implements OnInit {
             if (this.produits.length >= 2) {
               this.oneProduit = this.produits[this.indexProduit + 1];
               document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-            }else{
+            } else {
 
             }
           }
@@ -409,21 +437,22 @@ export class ProduitsComponent implements OnInit {
       if (result) {
         this.produitService.deleteProduct(this.oneProduit._id).subscribe(result => {
           this.produits.splice(this.indexProduit, 1);
-        });
-        /**--------------snackbar-------- blue-snackbar dans style.css----- */
-        this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-    
-        if (this.indexProduit != 0) {
-          this.oneProduit = this.produits[this.indexProduit - 1];
-          document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
-        } else {
-          if (this.produits.length >= 2) {
-            this.oneProduit = this.produits[this.indexProduit + 1];
-            document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-          }else{
-            
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          if (this.indexProduit != 0) {
+            this.oneProduit = this.produits[this.indexProduit - 1];
+            document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+            this.indexProduit = this.indexProduit - 1;
+          } else {
+            if (this.produits.length >= 2) {
+              this.oneProduit = this.produits[this.indexProduit];
+              document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+            } else {
+              this.oneProduit = this.produits[this.indexProduit];
+              // document.getElementById("one_" + this.produits[this.indexProduit]._id).focus();
+            }
           }
-        }
+        });
 
       } else {
         this.oneProduit.etat = etatTemp;
@@ -784,6 +813,7 @@ export class ProduitsComponent implements OnInit {
       if (!('select' in this.produits[i]) || this.produits[i].select == false) {
         this.produits[i].select = true;
         this.allProduitsSelected.push(this.produits[i]);
+        this.idProduitSelected.push(this.produits[i]._id);
       } else {
         this.produits[i].select = false;
         const index = this.allProduitsSelected.indexOf(this.produits[i]);

@@ -118,4 +118,8 @@ supprimerImage(body, id) {
   return this.http.put<any[]>(endPoint+"/update/imagesRemove/"+id, body, {responseType:'json'}); //pas de httpOptions
 }
 
+dupliquerMultiple(body){
+  return this.http.post<any[]>(endPoint+"/duplicate",body,httpOptions);
+}
+
 }

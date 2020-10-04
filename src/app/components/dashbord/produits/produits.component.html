@@ -217,7 +217,7 @@
                                 (keydown.Enter)="launchOrArhiveOrDelete()" (keydown.ArrowRight)="deplacerDroite()"
                                 (keydown.ArrowLeft)="deplacerGauche()" (keydown.ArrowUp)="deplacerHaut()"
                                 (keydown.Control.c)="copierProduit()" (keydown.Control.v)="collerProduit()" (keydown.e)="editProduit()"
-                                (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()" (keydown.Control.i)="file.click()">
+                                (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()" (keydown.Control.i)="oneProduit.images.length != 3 ? file.click() : false">
                                 <img *ngIf="p.images.length != 0"
                                     src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
                                     class="imageMiniature">
@@ -795,7 +795,7 @@
                 Dupliquer
             </button>
             <hr style="margin:'0px'">
-            <button class="itemContextuel" *ngIf="oneProduit.etat != 'archived'" (click)="deleteProduct()">
+            <button class="itemContextuel" *ngIf="oneProduit.etat == ('sandbox' || 'archived')" (click)="deleteProduct()">
                 Supprimer
             </button>
         </ng-template>
