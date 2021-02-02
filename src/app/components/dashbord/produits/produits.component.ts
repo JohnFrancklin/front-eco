@@ -271,7 +271,6 @@ export class ProduitsComponent implements OnInit {
     }
   }
 
-
   updateProduct() {
     this.oneProduit.etat = 'updating';
     const productObject = {
@@ -377,10 +376,53 @@ export class ProduitsComponent implements OnInit {
   }
 
   launchOrArhiveOrDelete_Multiple() {
+    let body = {
+      id_produits: this.produitSelected,
+      acteur: "rakoto"
+    }
+    console.log(body);
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
-        // le code ici...
+        if (this.state_to_change == 'sandbox') {
+          this.oneProduit.etat = "live";
+          this.produitService.launchMultiple(body).subscribe(result => {
+            console.log("success", result);
+            /**--------------snackbar-------- blue-snackbar dans style.css----- */
+            this.snackBar.open("[" + result['titre'] + "]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          });
+
+        } else if (this.state_to_change == 'live') {
+          this.oneProduit.etat = "archived";
+          this.produitService.archivedMultiple(body).subscribe(result => {
+            console.log("success", result);
+            /**--------------snackbar-------- blue-snackbar dans style.css----- */
+            this.snackBar.open("[" + result['titre'] + "] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          });
+        }
+
+        else {
+          this.produitService.deleteMultiple(this.produitSelected).subscribe(result => {
+            console.log("success", result);
+            this.produits.splice(this.indexProduit, 1);
+          });
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+
+          if (this.indexProduit != 0) {
+            this.oneProduit = this.produits[this.indexProduit - 1];
+            document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+          } else {
+            if (this.produits.length >= 2) {
+              this.oneProduit = this.produits[this.indexProduit + 1];
+              document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+            } else {
+
+            }
+          }
+
+
+        }
       }
     });
   }

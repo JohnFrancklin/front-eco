@@ -122,4 +122,16 @@ dupliquerMultiple(body){
   return this.http.post<any[]>(endPoint+"/duplicate",body,httpOptions);
 }
 
+launchMultiple(body) {
+  return this.http.put<any[]>(endPoint+"/update/multipleLancement/", body, httpOptions);
+}
+
+archivedMultiple(body) {
+  return this.http.put<any[]>(endPoint+"/update/multipleArchive/", body, httpOptions);
+}
+
+deleteMultiple(body) {
+  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits/", body);
+}
+
 }
