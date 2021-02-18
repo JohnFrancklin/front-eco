@@ -14,7 +14,6 @@ const httpOptions = {
   })
 }
 
-
 const endPoint = environment.api+"produits";
 @Injectable({
   providedIn: 'root'
@@ -130,8 +129,8 @@ archivedMultiple(body) {
   return this.http.put<any[]>(endPoint+"/update/multipleArchive/", body, httpOptions);
 }
 
-deleteMultiple(body) {
-  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits/", body);
+deleteMultiple(id) {
+  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits/", id);
 }
 
 }

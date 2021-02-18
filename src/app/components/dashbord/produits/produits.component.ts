@@ -379,7 +379,7 @@ export class ProduitsComponent implements OnInit {
     let body = {
       id_produits: this.produitSelected,
       acteur: "rakoto"
-    }
+    } 
     console.log(body);
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
@@ -401,25 +401,34 @@ export class ProduitsComponent implements OnInit {
           });
         }
 
-        else {
-          this.produitService.deleteMultiple(this.produitSelected).subscribe(result => {
+        else if (this.state_to_change == 'archived') {          
+          let id_produits = [];
+          for (let i = 0; i < this.produitSelected.length; i++) {
+            id_produits.push(this.produitSelected[i]._id);
+            console.log(id_produits, "coucouc");
+          };
+
+          this.produitService.deleteMultiple(id_produits).subscribe(result => {
             console.log("success", result);
             this.produits.splice(this.indexProduit, 1);
           });
+
+
+
           /**--------------snackbar-------- blue-snackbar dans style.css----- */
-          this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          // this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
 
-          if (this.indexProduit != 0) {
-            this.oneProduit = this.produits[this.indexProduit - 1];
-            document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
-          } else {
-            if (this.produits.length >= 2) {
-              this.oneProduit = this.produits[this.indexProduit + 1];
-              document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-            } else {
+          // if (this.indexProduit != 0) {
+          //   this.oneProduit = this.produits[this.indexProduit - 1];
+          //   document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+          // } else {
+          //   if (this.produits.length >= 2) {
+          //     this.oneProduit = this.produits[this.indexProduit + 1];
+          //     document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+          //   } else {
 
-            }
-          }
+          //   }
+          // }
 
 
         }
