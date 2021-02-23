@@ -7,10 +7,10 @@ import { environment } from '../../environments/environment';
 // };
 
 
-const httpOptions = {
+let httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + document.cookie
+    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
   })
 }
 
@@ -120,6 +120,10 @@ supprimerImage(body, id) {
 
 dupliquerMultiple(body){
   return this.http.post<any[]>(endPoint+"/duplicate",body,httpOptions);
+}
+
+dupliquerMultipleWithoutSesssion(body, httpOp){
+  return this.http.post<any[]>(endPoint+"/duplicate",body,httpOp);
 }
 
 }

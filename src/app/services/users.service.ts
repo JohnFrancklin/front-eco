@@ -92,4 +92,8 @@ export class UsersService {
     return this.listeUsers;
   }
 
+  refreshToken(body){
+    return this.http.post<any[]>(environment.api+"auth/refreshAccessToken",body,httpOptions);
+  }
+
 }

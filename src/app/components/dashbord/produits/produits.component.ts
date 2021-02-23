@@ -9,6 +9,8 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { JsonPipe } from '@angular/common';
+import { UsersService } from 'src/app/services/users.service';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -104,6 +106,7 @@ export class ProduitsComponent implements OnInit {
 
   constructor(
     private produitService: ProduitService,
+    private usersService: UsersService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private snackBar: MatSnackBar) { }
@@ -226,12 +229,23 @@ export class ProduitsComponent implements OnInit {
   }
 
 
+  getToken(){
+    return sessionStorage.getItem("token");
+  }
+
+  httpOptions(){
+    let httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Bearer ' + this.getToken()})
+    };
+    return httpOptions;
+  }
+
   dupliquerProduit() {
     let body = {
       id_produits: [this.oneProduit._id],
       acteur: "rakoto"
-    }
-    this.produitService.dupliquerMultiple(body).subscribe(result => {
+    };
+    this.produitService.dupliquerMultipleWithoutSesssion(body, this.httpOptions()).subscribe(result => {
       if (result['code'] == "4000") {
         let produit = result['value'][0];
         this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
@@ -239,6 +253,21 @@ export class ProduitsComponent implements OnInit {
       } else if (result['code'] == "4002") {
         console.log("données manquant")
       } else if (result['code'] == "4003") {
+        let bodyRefresh = { refreshToken: sessionStorage.getItem("refresh") }; //refreshToken
+        this.usersService.refreshToken(bodyRefresh).subscribe(result => {
+          if (result['code'] == "4000") {
+            sessionStorage.setItem("token", result['valeu'][0].accessToken); //nouvelle accessToken
+            sessionStorage.setItem("refresh", result['valeu'][0].refreshToken); // nouveau refreshToken
+            this.produitService.dupliquerMultipleWithoutSesssion(body, this.httpOptions()).subscribe(result => {
+              if (result['code'] == "4000") {
+                let produit = result['value'][0];
+                this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+                this.produits.splice(this.indexProduit + 1, 0, produit);
+              }
+            });
+
+          }
+        });
         console.log("Probleme de connexion, session expiré");
       }
     });
