@@ -7,13 +7,12 @@ import { environment } from '../../environments/environment';
 // };
 
 
-let httpOptions = {
+const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+    'Authorization': 'Bearer ' + document.cookie
   })
 }
-
 
 const endPoint = environment.api+"produits";
 @Injectable({
@@ -122,8 +121,16 @@ dupliquerMultiple(body){
   return this.http.post<any[]>(endPoint+"/duplicate",body,httpOptions);
 }
 
-dupliquerMultipleWithoutSesssion(body, httpOp){
-  return this.http.post<any[]>(endPoint+"/duplicate",body,httpOp);
+launchMultiple(body) {
+  return this.http.put<any[]>(endPoint+"/update/multipleLancement/", body, httpOptions);
+}
+
+archivedMultiple(body) {
+  return this.http.put<any[]>(endPoint+"/update/multipleArchive/", body, httpOptions);
+}
+
+deleteMultiple(id) {
+  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits/", id);
 }
 
 }

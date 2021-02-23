@@ -9,8 +9,6 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { JsonPipe } from '@angular/common';
-import { UsersService } from 'src/app/services/users.service';
-import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -106,7 +104,6 @@ export class ProduitsComponent implements OnInit {
 
   constructor(
     private produitService: ProduitService,
-    private usersService: UsersService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private snackBar: MatSnackBar) { }
@@ -229,23 +226,12 @@ export class ProduitsComponent implements OnInit {
   }
 
 
-  getToken(){
-    return sessionStorage.getItem("token");
-  }
-
-  httpOptions(){
-    let httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Bearer ' + this.getToken()})
-    };
-    return httpOptions;
-  }
-
   dupliquerProduit() {
     let body = {
       id_produits: [this.oneProduit._id],
       acteur: "rakoto"
-    };
-    this.produitService.dupliquerMultipleWithoutSesssion(body, this.httpOptions()).subscribe(result => {
+    }
+    this.produitService.dupliquerMultiple(body).subscribe(result => {
       if (result['code'] == "4000") {
         let produit = result['value'][0];
         this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
@@ -253,21 +239,6 @@ export class ProduitsComponent implements OnInit {
       } else if (result['code'] == "4002") {
         console.log("données manquant")
       } else if (result['code'] == "4003") {
-        let bodyRefresh = { refreshToken: sessionStorage.getItem("refresh") }; //refreshToken
-        this.usersService.refreshToken(bodyRefresh).subscribe(result => {
-          if (result['code'] == "4000") {
-            sessionStorage.setItem("token", result['valeu'][0].accessToken); //nouvelle accessToken
-            sessionStorage.setItem("refresh", result['valeu'][0].refreshToken); // nouveau refreshToken
-            this.produitService.dupliquerMultipleWithoutSesssion(body, this.httpOptions()).subscribe(result => {
-              if (result['code'] == "4000") {
-                let produit = result['value'][0];
-                this.snackBar.open("Produit a été dupliqué avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-                this.produits.splice(this.indexProduit + 1, 0, produit);
-              }
-            });
-
-          }
-        });
         console.log("Probleme de connexion, session expiré");
       }
     });
@@ -299,7 +270,6 @@ export class ProduitsComponent implements OnInit {
       document.getElementById("titre").focus();
     }
   }
-
 
   updateProduct() {
     this.oneProduit.etat = 'updating';
@@ -406,10 +376,62 @@ export class ProduitsComponent implements OnInit {
   }
 
   launchOrArhiveOrDelete_Multiple() {
+    let body = {
+      id_produits: this.produitSelected,
+      acteur: "rakoto"
+    } 
+    console.log(body);
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
-        // le code ici...
+        if (this.state_to_change == 'sandbox') {
+          this.oneProduit.etat = "live";
+          this.produitService.launchMultiple(body).subscribe(result => {
+            console.log("success", result);
+            /**--------------snackbar-------- blue-snackbar dans style.css----- */
+            this.snackBar.open("[" + result['titre'] + "]  a été lancé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          });
+
+        } else if (this.state_to_change == 'live') {
+          this.oneProduit.etat = "archived";
+          this.produitService.archivedMultiple(body).subscribe(result => {
+            console.log("success", result);
+            /**--------------snackbar-------- blue-snackbar dans style.css----- */
+            this.snackBar.open("[" + result['titre'] + "] a été archivé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+          });
+        }
+
+        else if (this.state_to_change == 'archived') {          
+          let id_produits = [];
+          for (let i = 0; i < this.produitSelected.length; i++) {
+            id_produits.push(this.produitSelected[i]._id);
+            console.log(id_produits, "coucouc");
+          };
+
+          this.produitService.deleteMultiple(id_produits).subscribe(result => {
+            console.log("success", result);
+            this.produits.splice(this.indexProduit, 1);
+          });
+
+
+
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          // this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+
+          // if (this.indexProduit != 0) {
+          //   this.oneProduit = this.produits[this.indexProduit - 1];
+          //   document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
+          // } else {
+          //   if (this.produits.length >= 2) {
+          //     this.oneProduit = this.produits[this.indexProduit + 1];
+          //     document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
+          //   } else {
+
+          //   }
+          // }
+
+
+        }
       }
     });
   }
