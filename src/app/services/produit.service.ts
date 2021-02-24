@@ -130,7 +130,7 @@ archivedMultiple(body) {
 }
 
 deleteMultiple(id) {
-  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits/", id);
+  return this.http.delete<any[]>(endPoint+"/delete/deleteMultipleProduits", id);
 }
 
 }

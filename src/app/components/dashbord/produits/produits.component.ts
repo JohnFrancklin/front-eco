@@ -402,13 +402,17 @@ export class ProduitsComponent implements OnInit {
         }
 
         else if (this.state_to_change == 'archived') {          
-          let id_produits = [];
+          let multipleID = [];
           for (let i = 0; i < this.produitSelected.length; i++) {
-            id_produits.push(this.produitSelected[i]._id);
-            console.log(id_produits, "coucouc");
-          };
+            multipleID.push(this.produitSelected[i]._id);
+          }
+          console.log(multipleID, "coucou");
 
-          this.produitService.deleteMultiple(id_produits).subscribe(result => {
+          let data = {
+            id_produits : multipleID
+          }
+          console.log(data);
+          this.produitService.deleteMultiple(data).subscribe(result => {
             console.log("success", result);
             this.produits.splice(this.indexProduit, 1);
           });
