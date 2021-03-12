@@ -385,7 +385,9 @@ export class ProduitsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
         if (this.state_to_change == 'sandbox') {
-          this.oneProduit.etat = "live";
+          for(let i = 0; i< this.produitSelected.length; i++) {
+            this.produitSelected[i].etat = "live";
+          }
           this.produitService.launchMultiple(body).subscribe(result => {
             console.log("success", result);
             /**--------------snackbar-------- blue-snackbar dans style.css----- */
@@ -393,7 +395,10 @@ export class ProduitsComponent implements OnInit {
           });
 
         } else if (this.state_to_change == 'live') {
-          this.oneProduit.etat = "archived";
+          // this.oneProduit.etat = "archived";
+          for(let i = 0; i< this.produitSelected.length; i++) {
+            this.produitSelected[i].etat = "archived";
+          }
           this.produitService.archivedMultiple(body).subscribe(result => {
             console.log("success", result);
             /**--------------snackbar-------- blue-snackbar dans style.css----- */
@@ -412,14 +417,35 @@ export class ProduitsComponent implements OnInit {
             id_produits : multipleID
           }
           console.log(data);
-          this.produitService.deleteMultiple(data).subscribe(result => {
-            console.log("success", result);
-            this.produits.splice(this.indexProduit, 1);
-          });
+          // this.produitService.deleteMultiple(data).subscribe(result => {
+          //   console.log("success", result); 
+
+            // for(let i = this.produitSelected.length -1; i >= 0; i--) {
+            //   this.produits.splice(this.produitSelected[i], this.indexProduit);
+            // }
+
+            // Récupération tableau d'indice
+            let indexProduit_Multiple = [];
+            for(let i = 0; i<this.indexProduit.length; i++) {
+              console.log("hello");
+              // indexProduit_Multiple = this.produits.splice(this.indexProduit[i], 1);
+              // console.log("myIndex", this.produits);
+              indexProduit_Multiple.push(this.indexProduit[i]);
+              console.log("hellooooooooo", indexProduit_Multiple.push(this.indexProduit[i]));
+            }
+
+            // for(let i = 0; i< this.indexProduit.length; i++) {
+            //   this.produits.splice(this.indexProduit[i], 1);
+            //   console.log(this.produits, "baoson");
+            // }
+
+            // this.produits.splice(this.indexProduit, 1);
+            // this.produits = this.produits;
+          // }); END API
 
 
 
-          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          // /**--------------snackbar-------- blue-snackbar dans style.css----- */
           // this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
 
           // if (this.indexProduit != 0) {
