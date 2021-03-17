@@ -59,7 +59,7 @@
 }
 .box_inf_com{
     width:100%;
-    height:97px;
+    height:100px;
     background-color: white;
     border: 0px solid #d5d5d5;
     overflow: hidden;
@@ -128,6 +128,7 @@
 }
 
 .input_tochange{
+    background-color :#ffffff;
     float: left;
     width: 100%;
     border: 0.5px solid #d5d5d5;
@@ -182,8 +183,9 @@
 
 }
 .box_prod_com{
-    width:103%;
-    height:293px;
+    display: inline-block;
+    width:102%;
+    height:288px;
     overflow-y:scroll;
     border: 1px solid #e7e7e7;
     margin-bottom:8px;
@@ -243,7 +245,7 @@
     font-size: small;  
 }
 .box_image_prod{
-    width:28%;
+    width:90px;
     float: left;
     border: 1px solid #d5d5d5;
     padding: 5px;
@@ -841,18 +843,25 @@ tr:hover {
     float:left;
 }
 .cli_name{
+    background-color :#ffffff;
+    border :#ffffff;
     font-weight:450;
     color:rgb(1, 64, 107);
     margin-bottom: -5px;
     font-size:small;
+    
 }
 .email{
+    background-color :#ffffff;
+    border :#ffffff;
     font-weight:450;
     font-style:italic;
     font-size:small;
     color:#42a7ff;
 } 
 .tel{
+    background-color :#ffffff;
+    border :#ffffff;
     font-weight:450;
     color:rgb(1, 64, 107);
     font-size:small;
@@ -865,7 +874,7 @@ tr:hover {
     float:left;
     background-color:#fafafa ;
     padding-left: 7px;
-    height:54%;
+    height:52%;
     margin-bottom: 0px;
 }
 
@@ -878,17 +887,19 @@ tr:hover {
 
 .type_attri{
     width:20%;
-    margin-top:2px;
-    height:98%;
+    margin-top:5px;
+    height:96%;
    
 }
 .type-right{
     width:73%;
-    margin-top:-94px;
+    margin-top:-88px;
     float:left;
     margin-left:63px;
 }
 .style_text{
+    background-color: #ffffff;
+    border: #ffffff;
     font-weight:450;
     color:rgb(1, 64, 107);
     line-height: 22px;
@@ -906,7 +917,6 @@ tr:hover {
     padding: 5px;
 }
 .title-p{
-    
     width:100%;
     height: 9%;
     background-color:#f5f5f5;
@@ -927,12 +937,13 @@ tr:hover {
     width: 102%;
     height:0%;
     padding:5px;
+    margin-bottom: 0%;
 }
 
 .type_p{
     width:50%;
     height:0%;
-    margin-top:50px;
+    margin-top:100px;
 }
 .type_deli{
     width:60%;
@@ -945,6 +956,7 @@ tr:hover {
     padding:5px;
 }
 .type_paiement{
+    /* margin-top: 10px; */
     width:60%;
     float:right;
    
@@ -958,7 +970,7 @@ tr:hover {
 .text_holder{
     margin-left:7px;
     width: calc(100% - 8px);
-    height:60px;
+    height:44px;
     background-color:#f5f5f5;
     border: 0px solid #d5d5d5;
     float:left; 

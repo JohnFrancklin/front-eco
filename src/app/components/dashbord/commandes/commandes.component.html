@@ -199,7 +199,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let c of commandes">
+                                        <tr *ngFor="let c of commandes ; let i = count" (click)="getOneCommande(c)">
                                             <td class="numero_commande">{{c.numero_commande}}</td>
                                             <td class="client">{{c.client}}</td>
                                             <td class="etat">{{c.etat}}</td>
@@ -258,18 +258,18 @@
                         </div>
                         <div class="value_date">
                             <span class="text_value">
-                                Abonned
+                                {{detailCmd.etat}}
                             </span><br>
                             <span class="date_com">
-                                10/03/2012
+                                {{detailCmd.user.dateInscription}}
                             </span>
                         </div>
                     </div>
                     <div class='inf_cli'>
                         <div class="information">
-                            <span class="cli_name">RAZAFINARIVO John Francklin</span><br>
-                            <span class="email">johnfrancklin@yahoo.com</span><br>
-                            <span class="tel">034 61 678 51</span>
+                            <input class="cli_name" disabled [(ngModel)]="detailCmd.client"><br>
+                            <input class="email" disabled [(ngModel)]="detailCmd.tracage.email"><br>
+                            <input class="tel" disabled [(ngModel)]="detailCmd.tracage.tel">
                         </div>
 
                         <div class="style_inf">
@@ -280,9 +280,9 @@
                             </div>
 
                             <div class="type-right">
-                                <span class="style_text">Madagascar</span><br>
-                                <span class="style_text">Antananarivo - 101</span><br>
-                                <span class="style_text">Mahamasina, 2536KF en face de Stade Municipale</span><br>
+                                <span class="style_text">{{detailCmd.user.pays}}</span><br>
+                                <span class="style_text">{{detailCmd.user.ville}}</span><br>
+                                <span class="style_text">{{detailCmd.user.adresse}}</span><br>
                             </div>
                         </div>
                     </div>
@@ -302,9 +302,9 @@
                     </div>
 
                     <div class="type_paiement">
-                        <span class="style_text">VISA</span><br>
-                        <span class="style_text">23154512124545421</span><br>
-                        <span class="style_text">52000 ariary</span>
+                        <input class="style_text" disabled [(ngModel)]="detailCmd.tracage.tel"><br>
+                        <input class="style_text" disabled [(ngModel)]="detailCmd.payment.transaction_id"><br>
+                        <input class="style_text" disabled [(ngModel)]="detailCmd.payment.amount">
                     </div>
                 </div>
                 <div class="title-p">
@@ -317,7 +317,10 @@
                     </div>
 
                     <div class="type_deli">
-                        <span class="style_text">24/10/2019</span><br>
+                        <input class="style_text" disabled [(ngModel)]="detailCmd.tracage.estimation_delivrance"><br>
+                        <!-- <input class="style_text"disabled [(ngModel)]="detailCmd.note_delivrance"> -->
+                        <!-- <span class="style_text">{{detailCmd.tracage.estimation_delivrance}}</span><br>
+                        <span class="style_text">{{detailCmd.note_delivrance}}</span><br> -->
                         <span class="if_save">Enregistrer</span>
                     </div>
                 </div>
@@ -328,221 +331,139 @@
         </div>
         <!--fin detail client et paiement-->
         <div class="detail_droit">
-            <h3 class="lbl_h3_detail">Detail du commande</h3>
-            <span class="text_inf"> Information du commande</span>
-            <div class="box_inf_com">
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange">
-                                25104
-                            </span>
-                            <div class="label_change">
-                                Numero
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange rightNumber">
-                                Accepted
-                            </span>
-                            <div class="label_change">
-                                Etat
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange">
-                                Rakoto Jean Paul
-                            </span>
-                            <div class="label_change">
-                                Nom Client
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange rightNumber">
-                                25-06-20 à 14:06
-                            </span>
-                            <div class="label_change">
-                                Date
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div *ngIf="oneAndAll">
+                <h3 class="lbl_h3_detail">Detail du commande</h3>
+                <span class="text_inf"> Information du commande</span>
+                <div class="box_inf_com">
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange" disabled [(ngModel)]="detailCmd.numero_commande">
 
-            </div>
-            <span class="text_inf">
-                Produits commandés (3)
-            </span>
-            <span class="lbl_total">
-                52000 ariary
-            </span>
-            <div class="box_prod_com">
-                <div class=type_produit>
-                    <div class="box_image_prod">
-                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
-                    </div>
-                    <div class="detail_prod">
-                        <div class="name_prod">
-                            <span class="lbl_left">
-                                Télèphone Samsung
-                            </span>
-                            <span class="lbl_text">
-                                #Mobile
-                            </span>
+                                <div class="label_change">
+                                    Numero
+                                </div>
+                            </div>
                         </div>
-                        <div class="nbr_prod">
-                            <span class="lbl_nbr">
-                                23&nbsp;
-                            </span>
-                            <span class="lbl_index"> pièces</span>
-                            <div class="lbl_price">
-                                <span class="text_bottom">ariary/pièces</span>
-                                <span class="lbl_nbr_prod">
-                                    1000&nbsp;
-                                </span>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange rightNumber" disabled [(ngModel)]="detailCmd.etat">
+                                <div class="label_change">
+                                    Etat
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange" disabled [(ngModel)]="detailCmd.client">
+                                <div class="label_change">
+                                    Nom Client
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange rightNumber" disabled
+                                    [(ngModel)]="detailCmd.date_creation">
+                                <div class="label_change">
+                                    Date
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            </div>
-                        </div>
-                        <div class="prix_prod">
-                            <span class="lbl_nbr">
-                                230000&nbsp;
-                            </span>
-                            <span class="lbl_index">ariary</span>
-                            <div class="over_detail">
-                                Plus de détails
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class=type_produit>
-                    <div class="box_image_prod">
-                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
-                    </div>
-                    <div class="detail_prod">
-                        <div class="name_prod">
-                            <span class="lbl_left">
-                                Ventilateur Haut gamme
-                            </span>
-                            <span class="lbl_text">
-                                #Mobile
-                            </span>
-                        </div>
-                        <div class="nbr_prod">
-                            <span class="lbl_nbr">
-                                02&nbsp;
-                            </span>
-                            <span class="lbl_index"> pièces</span>
-                            <div class="lbl_price">
-                                <span class="text_bottom">ariary/pièces</span>
-                                <span class="lbl_nbr_prod">
-                                    1700&nbsp;
-                                </span>
+                
+                    <span class="text_inf">
+                        Produits commandés (2)
+                    </span>
+                    <span class="lbl_total">
+                        52000 ariary
+                    </span>
+                    <div class="box_prod_com">
+                        <div class=type_produit *ngFor=" let com of detailCmd.commandes; let i = count">
+                            <div class="box_image_prod">
+                                <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
+                            </div>
+                            <div class="detail_prod">
+                                <div class="name_prod">
+                                    <span class="lbl_left">
+                                        {{com.id_produit.categorie.nom}}
+                                    </span>
+                                    <span class="lbl_text">
+                                        #Mobile
+                                    </span>
+                                </div>
+                                <div class="nbr_prod">
+                                    <span class="lbl_nbr">
+                                        {{com.quantite}}&nbsp;
+                                    </span>
+                                    <span class="lbl_index"> pièces</span>
+                                    <div class="lbl_price">
+                                        <span class="text_bottom">{{com.currency}}/pièces</span>
+                                        <span class="lbl_nbr_prod">
+                                            {{com.prix_unitaire}}&nbsp;
+                                        </span>
 
-                            </div>
-                        </div>
-                        <div class="prix_prod">
-                            <span class="lbl_nbr">
-                                230000&nbsp;
-                            </span>
-                            <span class="lbl_index">ariary</span>
-                            <div class="over_detail">
-                                Plus de détails
+                                    </div>
+                                </div>
+                                <div class="prix_prod">
+                                    <span class="lbl_nbr">
+                                        {{com.quantite*com.prix_unitaire}}&nbsp;
+                                    </span>
+                                    <span class="lbl_index">ariary</span>
+                                    <div class="over_detail">
+                                        Plus de détails
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class=type_produit>
-                    <div class="box_image_prod">
-                        <img src="../../../../assets/images/your-logo-png-8.png" class="img_prod">
-                    </div>
-                    <div class="detail_prod">
-                        <div class="name_prod">
-                            <span class="lbl_left">
-                                Télè Plasma 42"
-                            </span>
-                            <span class="lbl_text">
-                                #Mobile
-                            </span>
-                        </div>
-                        <div class="nbr_prod">
-                            <span class="lbl_nbr">
-                                01&nbsp;
-                            </span>
-                            <span class="lbl_index"> pièces</span>
-                            <div class="lbl_price">
-                                <span class="text_bottom">ariary/pièces</span>
-                                <span class="lbl_nbr_prod">
-                                    5210&nbsp;
-                                </span>
 
-                            </div>
-                        </div>
-                        <div class="prix_prod">
-                            <span class="lbl_nbr">
-                                521000&nbsp;
-                            </span>
-                            <span class="lbl_index">ariary</span>
-                            <div class="over_detail">
-                                Plus de détails
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <span class="text_inf">
-                Adresse du destinataire
-            </span>
-            <div class="box_inf_adrs">
-                <div class="groupe_content">
-                    <div class="leftSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange">
-                                Madagascar
-                            </span>
-                            <div class="label_change">
-                                Pays
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rightSide sideToside">
-                        <div class="detail_to_change">
-                            <span class="input_tochange rightNumber">
-                               Antananarivo-101
-                            </span>
-                            <div class="label_change">
-                               Ville
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box_Adresse">
-                    Mahamasina, Lot 5623 en face Stade municipale
-                </div>
-                <span class="text_bottom">
-                    Adresse
+                <span class="text_inf">
+                    Adresse du destinataire
                 </span>
+                <div class="box_inf_adrs">
+                    <div class="groupe_content">
+                        <div class="leftSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange" disabled [(ngModel)]="detailCmd.user.pays">
+                                <div class="label_change">
+                                    Pays
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide sideToside">
+                            <div class="detail_to_change">
+                                <input class="input_tochange rightNumber" disabled [(ngModel)]="detailCmd.user.ville">
+                                <div class="label_change">
+                                    Ville
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box_Adresse">
+                        Mahamasina, Lot 5623 en face Stade municipale
+                    </div>
+                    <span class="text_bottom">
+                        Adresse
+                    </span>
+                </div>
             </div>
         </div>
+
     </div>
 
-</div>
 
 
 
+    <ng-template #imageProduit style="background-color: white;">
+        <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
+    </ng-template>
 
-<ng-template #imageProduit style="background-color: white;">
-    <img src="../../../../assets/images/your-logo-png-8.png" width="100%" alt="">
-</ng-template>
 
-
-<div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
-</div>
+    <div class="transparant_overlay" *ngIf="Transparent_overlay" (click)="hideOverlay()">
+    </div>
