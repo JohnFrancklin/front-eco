@@ -18,9 +18,8 @@ export class CommandesComponent implements OnInit {
   listDetailToShow: string;  // vote ou favoris ou vu ou commande
   titleDetailListStat: string;
   loadMore: boolean = false;
-
+  
   commandes: any;
-
   scrollSpace = 0;  // espace vide scroll
   createType: boolean = false;
 
@@ -34,10 +33,59 @@ export class CommandesComponent implements OnInit {
   spinner_size = "10px";
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
-
+  selectClient = [];
   // variable pour datatable//
 
   //---------------------------------------------------//
+
+  // Commandes
+ detailCmd : any = 
+    {
+      _id: "",
+      numero_commande: "",
+      user: {
+        nom: "",
+        prenom: "",
+        tel: "",
+        email: "",
+        pays: "",
+        ville: "",
+        codePostal: "",
+        adresse: "",
+        dateInscription: ""
+      },
+      client: "",
+      adresse: "",
+      codePostal: "",
+      note_delivrance: "",
+      date_creation: "",
+      etat: "",
+      tracage: {
+        email: "",
+        tel: "",
+        estimation_delivrance: ""
+      },
+      payment: {
+        method: "",
+        transaction_id: "",
+        amount: "",
+        codePromo: ""
+      },
+      commandes: 
+        {
+          id_produit: {
+            categorie: {
+              nom: ""
+            },
+            images: [],
+          },
+          title: "",
+          quantite: "",
+          prix_unitaire: "",
+          currency: ""
+        }    
+    }
+  
 
   constructor(
               private spinner: NgxSpinnerService,
@@ -56,6 +104,7 @@ export class CommandesComponent implements OnInit {
 
         this.getCommandes();
   }
+
 
 
   getCommandes(){     
@@ -172,10 +221,11 @@ export class CommandesComponent implements OnInit {
 
   }
 
-
-
-
-
-
-
+  // OAKOKAOAKOAKO****
+  getOneCommande(c) {
+  
+      this.detailCmd = c;
+      this.createType = false;
+      console.log("ETO EG", this.detailCmd);
+  }
 }
