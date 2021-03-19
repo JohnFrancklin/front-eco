@@ -203,7 +203,7 @@
                                             <td class="numero_commande">{{c.numero_commande}}</td>
                                             <td class="client">{{c.client}}</td>
                                             <td class="etat">{{c.etat}}</td>
-                                            <td class="date_creation">{{c.date_creation}}</td>
+                                            <td class="date_creation">{{c.date_creation| date : "fullDate" }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
