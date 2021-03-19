@@ -31,14 +31,22 @@ export class LoginComponent implements OnInit {
   login(loginForm: NgForm) {
     console.log(loginForm.value);
     this.usersService.login(loginForm.value).subscribe(result => {
-      console.log("le retour login", result);
-      // localStorage.setItem("accessToken",result.accessToken);
-      document.cookie = result.accessToken;
+      if (result['code'] == "4000") {
+        console.log("le retour login", result);
+        // localStorage.setItem("accessToken",result.accessToken);
+        // document.cookie = result['value'][0].accessToken;
+        sessionStorage.setItem("token",result['value'][0].accessToken);
+        sessionStorage.setItem("refresh",result['value'][0].refreshToken);
+        this.router.navigate(['/dashboard/produits'])
+          .then(() => {
+            window.location.reload();
+          });
+      } else if (result['code'] == "4002") {
+        console.log("données manquant")
+      } else if (result['code'] == "4003") {
+        console.log("Probleme de connexion, session expiré");
+      }
 
-      this.router.navigate(['/dashboard/produits'])
-        .then(() => {
-          window.location.reload();
-        });
 
     })
   }
