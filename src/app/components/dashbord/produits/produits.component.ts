@@ -58,6 +58,8 @@ export class ProduitsComponent implements OnInit {
     index: ""
   };
 
+  totalProduits: any;
+
 
   showFilter: boolean = false;
   showDetailListStat: boolean = false;
@@ -379,13 +381,13 @@ export class ProduitsComponent implements OnInit {
     let body = {
       id_produits: this.produitSelected,
       acteur: "rakoto"
-    } 
+    }
     console.log(body);
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
         if (this.state_to_change == 'sandbox') {
-          for(let i = 0; i< this.produitSelected.length; i++) {
+          for (let i = 0; i < this.produitSelected.length; i++) {
             this.produitSelected[i].etat = "live";
           }
           this.produitService.launchMultiple(body).subscribe(result => {
@@ -396,7 +398,7 @@ export class ProduitsComponent implements OnInit {
 
         } else if (this.state_to_change == 'live') {
           // this.oneProduit.etat = "archived";
-          for(let i = 0; i< this.produitSelected.length; i++) {
+          for (let i = 0; i < this.produitSelected.length; i++) {
             this.produitSelected[i].etat = "archived";
           }
           this.produitService.archivedMultiple(body).subscribe(result => {
@@ -406,7 +408,7 @@ export class ProduitsComponent implements OnInit {
           });
         }
 
-        else if (this.state_to_change == 'archived') {          
+        else if (this.state_to_change == 'archived') {
           let multipleID = [];
           for (let i = 0; i < this.produitSelected.length; i++) {
             multipleID.push(this.produitSelected[i]._id);
@@ -414,53 +416,22 @@ export class ProduitsComponent implements OnInit {
           console.log(multipleID, "coucou");
 
           let data = {
-            id_produits : multipleID
+            id_produits: multipleID
           }
           console.log(data);
-          // this.produitService.deleteMultiple(data).subscribe(result => {
-          //   console.log("success", result); 
+          this.produitService.deleteMultiple(data).subscribe(result => {
+            console.log("success", result); 
 
-            // for(let i = this.produitSelected.length -1; i >= 0; i--) {
-            //   this.produits.splice(this.produitSelected[i], this.indexProduit);
-            // }
-
-            // Récupération tableau d'indice
-            let indexProduit_Multiple = [];
-            for(let i = 0; i<this.indexProduit.length; i++) {
-              console.log("hello");
-              // indexProduit_Multiple = this.produits.splice(this.indexProduit[i], 1);
-              // console.log("myIndex", this.produits);
-              indexProduit_Multiple.push(this.indexProduit[i]);
-              console.log("hellooooooooo", indexProduit_Multiple.push(this.indexProduit[i]));
-            }
-
-            // for(let i = 0; i< this.indexProduit.length; i++) {
-            //   this.produits.splice(this.indexProduit[i], 1);
-            //   console.log(this.produits, "baoson");
-            // }
-
-            // this.produits.splice(this.indexProduit, 1);
-            // this.produits = this.produits;
-          // }); END API
-
-
-
-          // /**--------------snackbar-------- blue-snackbar dans style.css----- */
-          // this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-
-          // if (this.indexProduit != 0) {
-          //   this.oneProduit = this.produits[this.indexProduit - 1];
-          //   document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
-          // } else {
-          //   if (this.produits.length >= 2) {
-          //     this.oneProduit = this.produits[this.indexProduit + 1];
-          //     document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-          //   } else {
-
-          //   }
-          // }
-
-
+          for(let i = 0; i < this.produitSelected.length; i++) {
+            let index = this.produits.findIndex(p => { return p._id == this.produitSelected[i]._id });
+            console.log("index = ", index);
+            this.produits.splice(index, 1);
+          }
+          this.totalProduits = multipleID.length;
+          console.log("total produits = ", this.totalProduits);
+          });
+          /**--------------snackbar-------- blue-snackbar dans style.css----- */
+          this.snackBar.open("[" + this.totalProduits + "] produits ont été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         }
       }
     });
