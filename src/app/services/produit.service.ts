@@ -15,6 +15,7 @@ const httpOptions = {
 }
 
 const endPoint = environment.api+"produits";
+const endPointCategorie = environment.api+"categorie";
 @Injectable({
   providedIn: 'root'
 })
@@ -131,6 +132,14 @@ archivedMultiple(body) {
 
 deleteMultiple(body) {
   return this.http.post<any[]>(endPoint+"/delete/deleteMultipleProduits", body, httpOptions);
+}
+
+addCategorie(body) {
+  return this.http.post<any[]>(endPointCategorie, body, httpOptions);
+}
+
+getCategorie() {
+  return this.http.get<any[]>(endPointCategorie);
 }
 
 }

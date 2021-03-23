@@ -76,12 +76,12 @@
                         </div>
                         <div>
                             Nom<br>
-                            <input type="text" class="inputCategorie">
+                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="categorie.nom" >
                             Description<br>
-                            <textarea name="" id="" class="inputCategorie"></textarea>
+                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="categorie.description"></textarea>
                         </div>
                         <div>
-                            <button class="btnAddCategorie">Ajouter</button>
+                            <button class="btnAddCategorie" (click)="addCategorie()">Ajouter</button>
                             <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
                         </div>
                     </div>
@@ -89,16 +89,16 @@
                     <p class="menu_item">
                         Tout
                         <span class="compte_produit" title="Nombre de tout les produits dans la base">
-                            15/2630
+                            15/2541
                         </span>
                     </p>
-                    <p class="menu_item">
-                        Ordinateur
+                    <p class="menu_item" *ngFor="let c of allCategorie">
+                        {{c.nom}} 
                         <span class="compte_produit">
                             654
                         </span>
                     </p>
-                    <p class="menu_item">
+                    <!-- <p class="menu_item">
                         Vêtements
                         <span class="compte_produit">
                             1520
@@ -127,7 +127,7 @@
                         <span class="compte_produit">
                             1263
                         </span>
-                    </p>
+                    </p> -->
 
                 </div>
 
@@ -760,6 +760,18 @@
     </div>
 
 
+</ng-template>
+
+<ng-template #categorieBox>
+    <div class="contenuModal">
+        Voullez-vous ajouter la catégorie 
+        <label style="color:blue">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm">OK</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
 </ng-template>
 
 

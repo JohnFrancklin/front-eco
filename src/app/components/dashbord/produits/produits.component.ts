@@ -58,6 +58,11 @@ export class ProduitsComponent implements OnInit {
     index: ""
   };
 
+  categorie = {
+    nom: "",
+    description: ""
+  };
+
   totalProduits: any;
 
 
@@ -95,13 +100,14 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
+  @ViewChild('categorieBox') categorieBox: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 
   contextMenuPosition = { x: '0px', y: '0px' };
   indexImage: any;
   isProduitElement: boolean = true;
 
-
+  allCategorie: any;
 
 
   constructor(
@@ -119,6 +125,8 @@ export class ProduitsComponent implements OnInit {
       this.spinner.hide(this.spinner_list_Produit);//stop loader
     }, 500);
     /************************************** */
+
+    this.getCategorie();
   }
 
 
@@ -708,6 +716,9 @@ export class ProduitsComponent implements OnInit {
       this.showCategorieCreate = false;
       this.Transparent_overlay = false;
     }
+
+    this.categorie.nom = "";
+    this.categorie.description = "";
   }
 
 
@@ -942,6 +953,32 @@ export class ProduitsComponent implements OnInit {
   deplacerConfirme() {
     event.preventDefault();// evider l'evenement native du navigateur
     document.getElementById("button_confirm_one").focus();
+  }
+
+  addCategorie() {
+    const cat_object = {
+      nom: this.categorie.nom,
+      description: this.categorie.description
+    }
+    const dialogRef = this.dialog.open(this.categorieBox);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.addCategorie(cat_object).subscribe(result => {
+            console.log("success", result);
+            this.showCategorieCreate = false;
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.allCategorie.push(this.categorie);
+          });
+        }
+      });
+      
+  }
+
+  getCategorie() {
+    return this.produitService.getCategorie().subscribe(data => {
+      this.allCategorie = data["value"][0]; 
+      console.log("Liste catégorie", this.allCategorie);
+    });
   }
 
 
