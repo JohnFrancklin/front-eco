@@ -142,4 +142,12 @@ getCategorie() {
   return this.http.get<any[]>(endPointCategorie);
 }
 
+updateCategorie(body, id) {
+  return this.http.put<any[]>(endPointCategorie+"/"+id, body, httpOptions);
+}
+
+deleteCategorie(id) {
+  return this.http.delete<any[]>(endPointCategorie+"/"+id, httpOptions);
+}
+
 }

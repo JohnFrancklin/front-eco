@@ -59,9 +59,11 @@ export class ProduitsComponent implements OnInit {
   };
 
   categorie = {
+    _id: "",
     nom: "",
     description: ""
   };
+  oneCategorie: any;
 
   totalProduits: any;
 
@@ -69,6 +71,7 @@ export class ProduitsComponent implements OnInit {
   showFilter: boolean = false;
   showDetailListStat: boolean = false;
   showCategorieCreate: boolean = false;
+  showCategorieEdit: boolean  = false;
   listDetailToShow: string;  // vote ou favoris ou vu ou commande
   titleDetailListStat: string;
   Transparent_overlay: boolean = false;
@@ -108,13 +111,15 @@ export class ProduitsComponent implements OnInit {
   isProduitElement: boolean = true;
 
   allCategorie: any;
+  hoveredIndex;
+  index:any;
 
 
   constructor(
     private produitService: ProduitService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getProduit();
@@ -717,8 +722,11 @@ export class ProduitsComponent implements OnInit {
       this.Transparent_overlay = false;
     }
 
-    this.categorie.nom = "";
-    this.categorie.description = "";
+    this.categorie = {
+      _id: "",
+      nom: "",
+      description: ""
+    }
   }
 
 
@@ -960,7 +968,21 @@ export class ProduitsComponent implements OnInit {
       nom: this.categorie.nom,
       description: this.categorie.description
     }
-    const dialogRef = this.dialog.open(this.categorieBox);
+
+    let isValid = false;
+    let listInputAndTextearea = Object.keys(cat_object);    
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
+      let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+      if (element.value == "") {
+        element.style.borderColor = "red";
+        isValid = true;
+      } else {
+        element.style.borderColor = "#d5d5d5";
+      }
+    }
+
+    if(!isValid) {
+      const dialogRef = this.dialog.open(this.categorieBox);
       dialogRef.afterClosed().subscribe(data => {  
         if(data) {
           this.produitService.addCategorie(cat_object).subscribe(result => {
@@ -971,6 +993,7 @@ export class ProduitsComponent implements OnInit {
           });
         }
       });
+    }
       
   }
 
@@ -978,6 +1001,62 @@ export class ProduitsComponent implements OnInit {
     return this.produitService.getCategorie().subscribe(data => {
       this.allCategorie = data["value"][0]; 
       console.log("Liste catégorie", this.allCategorie);
+    });
+  }
+  
+  editCategorie(c,i) {
+    if (this.showCategorieEdit == false) {
+      this.showCategorieEdit = true;
+      this.Transparent_overlay = true;
+    }
+    else {
+      this.showCategorieEdit = false;
+      this.Transparent_overlay = false;
+    }
+    this.produitService.getCategorie().subscribe(data => {
+      this.oneCategorie = data["value"][0][i];
+      console.log(this.oneCategorie, "ok");
+    });
+  }
+
+  updateCategorie() {
+    const body = {
+      nom: this.oneCategorie.nom,
+      description: this.oneCategorie.description
+    }
+
+    let isValid = false;
+    let listInputAndTextearea = Object.keys(body);    
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
+      let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+      if (element.value == "") {
+        element.style.borderColor = "red";
+        isValid = true;
+      } else {
+        element.style.borderColor = "#d5d5d5";
+      }
+    }
+
+    if(!isValid) {
+      const dialogRef = this.dialog.open(this.categorieBox);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.updateCategorie(body, this.oneCategorie._id).subscribe(result => {
+            console.log("Categorie updated ", result);
+            this.showCategorieEdit = false;
+            this.snackBar.open("[" + this.oneCategorie['nom'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.allCategorie.push(this.oneCategorie);
+          });
+        }
+      });
+    }
+  }
+
+  deleteCategorie() {
+    this.produitService.deleteCategorie(this.oneCategorie._id).subscribe(result => {
+      console.log("Categorie deleted ", result);
+      this.showCategorieEdit = false;
+      this.Transparent_overlay = false;
     });
   }
 

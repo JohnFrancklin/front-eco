@@ -85,6 +85,21 @@
                             <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
                         </div>
                     </div>
+                    <div class="categorieCreerBox" *ngIf="showCategorieEdit">
+                        <div class="titleAddCategorie">
+                            Catégorie
+                        </div>
+                        <div>
+                            Nom<br>
+                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="oneCategorie.nom" >
+                            Description<br>
+                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="oneCategorie.description"></textarea>
+                        </div>
+                        <div>
+                            <button class="btnAddCategorie" (click)="updateCategorie()">Modifier</button>
+                            <button class="btnAnnulerCategorie" (click)="deleteCategorie()">Supprimer</button>
+                        </div>
+                    </div>
 
                     <p class="menu_item">
                         Tout
@@ -92,11 +107,16 @@
                             15/2541
                         </span>
                     </p>
-                    <p class="menu_item" *ngFor="let c of allCategorie">
+                    <p class="menu_item" *ngFor="let c of allCategorie; let i=index" >
+                        <!-- on-mouseover="hoveredIndex=i" -->
                         {{c.nom}} 
                         <span class="compte_produit">
                             654
                         </span>
+                        <span  class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span>
+                        <!-- <i class="categorieCreerBox" *ngIf="i==hoveredIndex">
+                            <span>Edit Categorie</span>
+                        </i> -->
                     </p>
                     <!-- <p class="menu_item">
                         Vêtements
