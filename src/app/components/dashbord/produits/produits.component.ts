@@ -63,6 +63,7 @@ export class ProduitsComponent implements OnInit {
     nom: "",
     description: ""
   };
+
   oneCategorie: any;
 
   totalProduits: any;
@@ -104,6 +105,7 @@ export class ProduitsComponent implements OnInit {
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
   @ViewChild('categorieBox') categorieBox: TemplateRef<any>;
+  @ViewChild('categorieBoxEdit') categorieBoxEdit: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 
   contextMenuPosition = { x: '0px', y: '0px' };
@@ -111,7 +113,7 @@ export class ProduitsComponent implements OnInit {
   isProduitElement: boolean = true;
 
   allCategorie: any;
-  hoveredIndex;
+  isEdited: boolean = false;
   index:any;
 
 
@@ -737,6 +739,7 @@ export class ProduitsComponent implements OnInit {
     this.showFilter = false;
     this.showDetailListStat = false;
     this.showCategorieCreate = false;
+    this.showCategorieEdit = false;
   }
 
   popupImageProduits(index): void {
@@ -1013,16 +1016,14 @@ export class ProduitsComponent implements OnInit {
       this.showCategorieEdit = false;
       this.Transparent_overlay = false;
     }
-    this.produitService.getCategorie().subscribe(data => {
-      this.oneCategorie = data["value"][0][i];
-      console.log(this.oneCategorie, "ok");
-    });
+    this.categorie = c;
+    console.log(this.categorie, "categ");
   }
 
   updateCategorie() {
     const body = {
-      nom: this.oneCategorie.nom,
-      description: this.oneCategorie.description
+      nom: this.categorie.nom,
+      description: this.categorie.description
     }
 
     let isValid = false;
@@ -1038,26 +1039,38 @@ export class ProduitsComponent implements OnInit {
     }
 
     if(!isValid) {
-      const dialogRef = this.dialog.open(this.categorieBox);
+      const dialogRef = this.dialog.open(this.categorieBoxEdit);
       dialogRef.afterClosed().subscribe(data => {  
         if(data) {
-          this.produitService.updateCategorie(body, this.oneCategorie._id).subscribe(result => {
+          this.produitService.updateCategorie(body, this.categorie._id).subscribe(result => {
             console.log("Categorie updated ", result);
             this.showCategorieEdit = false;
-            this.snackBar.open("[" + this.oneCategorie['nom'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-            this.allCategorie.push(this.oneCategorie);
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            // this.allCategorie;
+            this.getCategorie();
           });
         }
       });
     }
   }
 
-  deleteCategorie() {
-    this.produitService.deleteCategorie(this.oneCategorie._id).subscribe(result => {
-      console.log("Categorie deleted ", result);
-      this.showCategorieEdit = false;
-      this.Transparent_overlay = false;
-    });
+  deleteCategorie(categorie, i) {
+
+    const dialogRef = this.dialog.open(this.categorieBoxEdit);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.deleteCategorie(categorie).subscribe(result => {
+            console.log("Categorie deleted ", result);
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.allCategorie.splice(i, 1);
+          });
+        }
+      });
+  }
+
+  isEditedBtn() {
+    console.log("hello");
+    this.isEdited = !this.isEdited;
   }
 
 

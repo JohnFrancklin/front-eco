@@ -66,6 +66,7 @@
 
                     <div class="categorieItem">
                         Les catégories
+                        <mat-icon matTooltip="Modifier/supprimer une catégorie" (click)="isEditedBtn()">edit</mat-icon>
                         <span class="buttonAddCategorie" title="Ajouter une categorie"
                             (click)="afficherCategorieCreate()">+</span>
                     </div>
@@ -91,13 +92,13 @@
                         </div>
                         <div>
                             Nom<br>
-                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="oneCategorie.nom" >
+                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="categorie.nom" >
                             Description<br>
-                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="oneCategorie.description"></textarea>
+                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="categorie.description"></textarea>
                         </div>
                         <div>
                             <button class="btnAddCategorie" (click)="updateCategorie()">Modifier</button>
-                            <button class="btnAnnulerCategorie" (click)="deleteCategorie()">Supprimer</button>
+                            <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
                         </div>
                     </div>
 
@@ -107,16 +108,13 @@
                             15/2541
                         </span>
                     </p>
-                    <p class="menu_item" *ngFor="let c of allCategorie; let i=index" >
+                    <p class="menu_item" *ngFor="let c of allCategorie; let i=index">
                         <!-- on-mouseover="hoveredIndex=i" -->
-                        {{c.nom}} 
+                        <span *ngIf="!isEdited">{{c.nom}}</span> <span *ngIf="isEdited" (click)="editCategorie(c,i)">{{c.nom}}</span>
                         <span class="compte_produit">
-                            654
+                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon>delete</mat-icon></span>
                         </span>
-                        <span  class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span>
-                        <!-- <i class="categorieCreerBox" *ngIf="i==hoveredIndex">
-                            <span>Edit Categorie</span>
-                        </i> -->
+                        <!-- <span class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span> -->
                     </p>
                     <!-- <p class="menu_item">
                         Vêtements
@@ -150,7 +148,6 @@
                     </p> -->
 
                 </div>
-
 
 
                 <div class="list_dans_list">
@@ -786,6 +783,18 @@
     <div class="contenuModal">
         Voullez-vous ajouter la catégorie 
         <label style="color:blue">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm">OK</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #categorieBoxEdit>
+    <div class="contenuModal">
+        Voullez-vous modifier la catégorie 
+        <label style="color:green">{{categorie.nom}}</label>
         <br>
         <div style="float: right;">
             <button [mat-dialog-close]=true class="button_dialog_confirm">OK</button>
