@@ -66,9 +66,10 @@
 
                     <div class="categorieItem">
                         Les catégories
-                        <mat-icon matTooltip="Modifier/supprimer une catégorie" (click)="isEditedBtn()">edit</mat-icon>
+                        <mat-icon matTooltip="Modifier/supprimer une catégorie" (click)="isEditedBtn()"
+                        style="font-size: 15px; float:right; margin-top:5px;">edit</mat-icon>
                         <span class="buttonAddCategorie" title="Ajouter une categorie"
-                            (click)="afficherCategorieCreate()">+</span>
+                            (click)="afficherCategorieCreate()" style="font-size: 15px;">+</span>
                     </div>
 
                     <div class="categorieCreerBox" *ngIf="showCategorieCreate">
@@ -77,9 +78,10 @@
                         </div>
                         <div>
                             Nom<br>
-                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="categorie.nom" >
+                            <input type="text" class="inputCategorie" id="nom" (mouseenter)="enterNom()" (mouseleave)="leaveNom()" [(ngModel)]="categorie.nom">
                             Description<br>
-                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="categorie.description"></textarea>
+                            <textarea name="" id="description" class="inputCategorie"  (mouseenter)="enterDescri()" (mouseleave)="leaveDescri()"
+                             [(ngModel)]="categorie.description"></textarea>
                         </div>
                         <div>
                             <button class="btnAddCategorie" (click)="addCategorie()">Ajouter</button>
@@ -92,9 +94,10 @@
                         </div>
                         <div>
                             Nom<br>
-                            <input type="text" class="inputCategorie" id="nom" [(ngModel)]="categorie.nom" >
+                            <input type="text" class="inputCategorie" id="nom" (mouseenter)="enterNomEdit()" (mouseleave)="leaveNomEdit()" [(ngModel)]="categorie.nom" >
                             Description<br>
-                            <textarea name="" id="description" class="inputCategorie" [(ngModel)]="categorie.description"></textarea>
+                            <textarea name="" id="description" class="inputCategorie" (mouseenter)="enterDescriEdit()" (mouseleave)="leaveDescriEdit()"
+                            [(ngModel)]="categorie.description"></textarea>
                         </div>
                         <div>
                             <button class="btnAddCategorie" (click)="updateCategorie()">Modifier</button>
@@ -112,40 +115,12 @@
                         <!-- on-mouseover="hoveredIndex=i" -->
                         <span *ngIf="!isEdited">{{c.nom}}</span> <span *ngIf="isEdited" (click)="editCategorie(c,i)">{{c.nom}}</span>
                         <span class="compte_produit">
-                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon>delete</mat-icon></span>
+                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon style="color: red; font-size:20px;"
+                            matTooltip="Delete categorie">delete</mat-icon></span>
                         </span>
                         <!-- <span class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span> -->
                     </p>
-                    <!-- <p class="menu_item">
-                        Vêtements
-                        <span class="compte_produit">
-                            1520
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Téléphone
-                        <span class="compte_produit">
-                            987
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Voiture
-                        <span class="compte_produit">
-                            45
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Imprimente
-                        <span class="compte_produit">
-                            63
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Accessoires
-                        <span class="compte_produit">
-                            1263
-                        </span>
-                    </p> -->
+                    
 
                 </div>
 
@@ -797,7 +772,19 @@
         <label style="color:green">{{categorie.nom}}</label>
         <br>
         <div style="float: right;">
-            <button [mat-dialog-close]=true class="button_dialog_confirm">OK</button>
+            <button [mat-dialog-close]=true class="button_dialog_confirm" style="background-color:blue;">Modifier</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #categorieBoxDelete>
+    <div class="contenuModal">
+        Voullez-vous supprimer la catégorie 
+        <label style="color:red">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm" style="background-color:red;">Supprimer</button>
             <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
         </div>
     </div>

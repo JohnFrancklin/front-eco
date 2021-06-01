@@ -106,6 +106,7 @@ export class ProduitsComponent implements OnInit {
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
   @ViewChild('categorieBox') categorieBox: TemplateRef<any>;
   @ViewChild('categorieBoxEdit') categorieBoxEdit: TemplateRef<any>;
+  @ViewChild('categorieBoxDelete') categorieBoxDelete: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 
   contextMenuPosition = { x: '0px', y: '0px' };
@@ -995,6 +996,7 @@ export class ProduitsComponent implements OnInit {
             this.allCategorie.push(this.categorie);
           });
         }
+        this.getCategorie();
       });
     }
       
@@ -1056,7 +1058,7 @@ export class ProduitsComponent implements OnInit {
 
   deleteCategorie(categorie, i) {
 
-    const dialogRef = this.dialog.open(this.categorieBoxEdit);
+    const dialogRef = this.dialog.open(this.categorieBoxDelete);
       dialogRef.afterClosed().subscribe(data => {  
         if(data) {
           this.produitService.deleteCategorie(categorie).subscribe(result => {
@@ -1071,6 +1073,57 @@ export class ProduitsComponent implements OnInit {
   isEditedBtn() {
     console.log("hello");
     this.isEdited = !this.isEdited;
+  }
+
+  // Create catégorie
+  leaveNom() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    if (nom_categorie.value == "") { nom_categorie.style.borderColor = "red";
+    } else { nom_categorie.style.borderColor = "lightgray";
+    }
+  }
+
+  enterNom() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    nom_categorie.style.borderColor = "lightgray";
+  }
+
+  enterDescri() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    if (description.value == "") { description.style.borderColor = "red";
+    } else { description.style.borderColor = "lightgray";
+    }
+  }
+
+  leaveDescri() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    description.style.borderColor = "lightgray";
+  }
+
+
+  // Update catégorie
+  leaveNomEdit() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    if (nom_categorie.value == "") { nom_categorie.style.borderColor = "red";
+    } else { nom_categorie.style.borderColor = "lightgray";
+    }
+  }
+
+  enterNomEdit() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    nom_categorie.style.borderColor = "lightgray";
+  }
+
+  enterDescriEdit() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    if (description.value == "") { description.style.borderColor = "red";
+    } else { description.style.borderColor = "lightgray";
+    }
+  }
+
+  leaveDescriEdit() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    description.style.borderColor = "lightgray";
   }
 
 
