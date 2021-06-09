@@ -97,6 +97,17 @@
     margin: 0px 5px 5px 5px;
     /* border: 1px solid #d5d5d5; */
     cursor: pointer;
+    width: 97%;
+    display: flex;
+    margin-right: 2px;
+}
+
+.menu_item .clickable {
+    width: 80%;
+}
+
+.menu-item .compte_produit {
+    width: 17%;
 }
 
 .menu_item:hover{

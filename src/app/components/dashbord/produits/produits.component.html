@@ -113,14 +113,16 @@
                     </p>
                     <p class="menu_item" *ngFor="let c of allCategorie; let i=index">
                         <!-- on-mouseover="hoveredIndex=i" -->
-                        <span *ngIf="!isEdited">{{c.nom}}</span> <span *ngIf="isEdited" (click)="editCategorie(c,i)">{{c.nom}}</span>
+                        <span class="clickable" (click)="editCategorie(c,i)">
+                            <span *ngIf="!isEdited">{{c.nom}}</span> 
+                            <span *ngIf="isEdited">{{c.nom}}</span>
+                        </span>                        
                         <span class="compte_produit">
-                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon style="color: red; font-size:20px;"
+                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon style="color: red; font-size:18px;"
                             matTooltip="Delete categorie">delete</mat-icon></span>
                         </span>
                         <!-- <span class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span> -->
-                    </p>
-                    
+                    </p>                   
 
                 </div>
 
