@@ -66,8 +66,10 @@
 
                     <div class="categorieItem">
                         Les catégories
+                        <mat-icon matTooltip="Modifier/supprimer une catégorie" (click)="isEditedBtn()"
+                        style="font-size: 15px; float:right; margin-top:5px;">edit</mat-icon>
                         <span class="buttonAddCategorie" title="Ajouter une categorie"
-                            (click)="afficherCategorieCreate()">+</span>
+                            (click)="afficherCategorieCreate()" style="font-size: 15px;">+</span>
                     </div>
 
                     <div class="categorieCreerBox" *ngIf="showCategorieCreate">
@@ -76,12 +78,29 @@
                         </div>
                         <div>
                             Nom<br>
-                            <input type="text" class="inputCategorie">
+                            <input type="text" class="inputCategorie" id="nom" (mouseenter)="enterNom()" (mouseleave)="leaveNom()" [(ngModel)]="categorie.nom">
                             Description<br>
-                            <textarea name="" id="" class="inputCategorie"></textarea>
+                            <textarea name="" id="description" class="inputCategorie"  (mouseenter)="enterDescri()" (mouseleave)="leaveDescri()"
+                             [(ngModel)]="categorie.description"></textarea>
                         </div>
                         <div>
-                            <button class="btnAddCategorie">Ajouter</button>
+                            <button class="btnAddCategorie" (click)="addCategorie()">Ajouter</button>
+                            <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
+                        </div>
+                    </div>
+                    <div class="categorieCreerBox" *ngIf="showCategorieEdit">
+                        <div class="titleAddCategorie">
+                            Catégorie
+                        </div>
+                        <div>
+                            Nom<br>
+                            <input type="text" class="inputCategorie" id="nom" (mouseenter)="enterNomEdit()" (mouseleave)="leaveNomEdit()" [(ngModel)]="categorie.nom" >
+                            Description<br>
+                            <textarea name="" id="description" class="inputCategorie" (mouseenter)="enterDescriEdit()" (mouseleave)="leaveDescriEdit()"
+                            [(ngModel)]="categorie.description"></textarea>
+                        </div>
+                        <div>
+                            <button class="btnAddCategorie" (click)="updateCategorie()">Modifier</button>
                             <button class="btnAnnulerCategorie" (click)="hideOverlay()">Annuler</button>
                         </div>
                     </div>
@@ -89,48 +108,23 @@
                     <p class="menu_item">
                         Tout
                         <span class="compte_produit" title="Nombre de tout les produits dans la base">
-                            15/2630
+                            15/2541
                         </span>
                     </p>
-                    <p class="menu_item">
-                        Ordinateur
+                    <p class="menu_item" *ngFor="let c of allCategorie; let i=index">
+                        <!-- on-mouseover="hoveredIndex=i" -->
+                        <span class="clickable" (click)="editCategorie(c,i)">
+                            <span *ngIf="!isEdited">{{c.nom}}</span> 
+                            <span *ngIf="isEdited">{{c.nom}}</span>
+                        </span>                        
                         <span class="compte_produit">
-                            654
+                           <span *ngIf="!isEdited">654</span> <span *ngIf="isEdited" (click)="deleteCategorie(c._id, i)"><mat-icon style="color: red; font-size:18px;"
+                            matTooltip="Delete categorie">delete</mat-icon></span>
                         </span>
-                    </p>
-                    <p class="menu_item">
-                        Vêtements
-                        <span class="compte_produit">
-                            1520
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Téléphone
-                        <span class="compte_produit">
-                            987
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Voiture
-                        <span class="compte_produit">
-                            45
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Imprimente
-                        <span class="compte_produit">
-                            63
-                        </span>
-                    </p>
-                    <p class="menu_item">
-                        Accessoires
-                        <span class="compte_produit">
-                            1263
-                        </span>
-                    </p>
+                        <!-- <span class="menu_icon"><mat-icon (click)="editCategorie(c._id,i)">edit</mat-icon></span> -->
+                    </p>                   
 
                 </div>
-
 
 
                 <div class="list_dans_list">
@@ -219,7 +213,7 @@
                                 (keydown.Control.c)="copierProduit()" (keydown.Control.v)="collerProduit()" (keydown.e)="editProduit()"
                                 (keydown.ArrowDown)="deplacerBas()" (dblclick)="launchOrArhiveOrDelete()" (keydown.Control.i)="oneProduit.images.length != 3 ? file.click() : false">
                                 <img *ngIf="p.images.length != 0"
-                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
+                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.png"
                                     class="imageMiniature">
                                 <img *ngIf="p.images.length == 0" src="../../../../assets/images/your-logo-png-8.png"
                                     class="imageMiniature">
@@ -243,7 +237,7 @@
                                     (keydown.control.a)="selectionnerTout($event)"
                                     (keydown.control.d)="deselectionnerTout($event)">
                                 <img *ngIf="p.images.length != 0"
-                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.PNG"
+                                    src="http://localhost:3000/produits/getImage/{{p.images[0]}}-miniature.png"
                                     class="imageMiniature">
                                 <img *ngIf="p.images.length == 0" src="../../../../assets/images/your-logo-png-8.png"
                                     class="imageMiniature">
@@ -415,7 +409,7 @@
                 <div class="imageCont">
                     <div class="box_image" *ngFor="let i of oneProduit.images; let in = index">
                         <span class="deleteimage_x" title="Supprimer cette image" (click)="supprimerImageProduit(i)">x</span>
-                        <img src="http://localhost:3000/produits/getImage/{{i}}-hd.PNG" class="image_produit"
+                        <img src="http://localhost:3000/produits/getImage/{{i}}-hd.png" class="image_produit"
                             (click)="popupImageProduits(in);" title="clicker pour afficher l'image">
                     </div>
                     <div class="box_image" *ngIf="oneProduit.images.length!=3" (click)="file.click()">
@@ -720,7 +714,7 @@
 <ng-template #imageProduit>
     <button *ngIf="indexImage > 0 " (click)="showPreviewImage()" class="previewButtonImage">Précédant</button>
     <img *ngIf="oneProduit.images.length  > 0"
-        src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.PNG"
+        src="http://localhost:3000/produits/getImage/{{oneProduit.images[indexImage]}}-hd.png"
         class="animate__animated animate__fadeIn">
     <button class="btnSupprimerImage" (click)="supprimerImageProduit(oneProduit.images[indexImage])">
         Supprimer
@@ -760,6 +754,42 @@
     </div>
 
 
+</ng-template>
+
+<ng-template #categorieBox>
+    <div class="contenuModal">
+        Voullez-vous ajouter la catégorie 
+        <label style="color:blue">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm">OK</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #categorieBoxEdit>
+    <div class="contenuModal">
+        Voullez-vous modifier la catégorie 
+        <label style="color:green">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm" style="background-color:blue;">Modifier</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #categorieBoxDelete>
+    <div class="contenuModal">
+        Voullez-vous supprimer la catégorie 
+        <label style="color:red">{{categorie.nom}}</label>
+        <br>
+        <div style="float: right;">
+            <button [mat-dialog-close]=true class="button_dialog_confirm" style="background-color:red;">Supprimer</button>
+            <button [mat-dialog-close]=false class="button_dialog_cancel">Annuler</button>
+        </div>
+    </div>
 </ng-template>
 
 

@@ -34,13 +34,11 @@ export class CommandesComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
   selectClient = [];
-
   // variable pour datatable//
 
   //---------------------------------------------------//
 
   // Commandes
-  indexCommamdes:any;
  detailCmd : any = 
     {
       _id: "",

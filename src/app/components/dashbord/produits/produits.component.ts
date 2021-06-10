@@ -58,10 +58,21 @@ export class ProduitsComponent implements OnInit {
     index: ""
   };
 
+  categorie = {
+    _id: "",
+    nom: "",
+    description: ""
+  };
+
+  oneCategorie: any;
+
+  totalProduits: any;
+
 
   showFilter: boolean = false;
   showDetailListStat: boolean = false;
   showCategorieCreate: boolean = false;
+  showCategorieEdit: boolean  = false;
   listDetailToShow: string;  // vote ou favoris ou vu ou commande
   titleDetailListStat: string;
   Transparent_overlay: boolean = false;
@@ -93,20 +104,25 @@ export class ProduitsComponent implements OnInit {
 
   @ViewChild('imageProduit') imageProduit: TemplateRef<any>;
   @ViewChild('dialogBox') dialogBox: TemplateRef<any>;
+  @ViewChild('categorieBox') categorieBox: TemplateRef<any>;
+  @ViewChild('categorieBoxEdit') categorieBoxEdit: TemplateRef<any>;
+  @ViewChild('categorieBoxDelete') categorieBoxDelete: TemplateRef<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 
   contextMenuPosition = { x: '0px', y: '0px' };
   indexImage: any;
   isProduitElement: boolean = true;
 
-
+  allCategorie: any;
+  isEdited: boolean = false;
+  index:any;
 
 
   constructor(
     private produitService: ProduitService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getProduit();
@@ -117,6 +133,8 @@ export class ProduitsComponent implements OnInit {
       this.spinner.hide(this.spinner_list_Produit);//stop loader
     }, 500);
     /************************************** */
+
+    this.getCategorie();
   }
 
 
@@ -379,13 +397,15 @@ export class ProduitsComponent implements OnInit {
     let body = {
       id_produits: this.produitSelected,
       acteur: "rakoto"
-    } 
+    }
     console.log(body);
     const dialogRef = this.dialog.open(this.dialogBox); //ouverture dialog
     dialogRef.afterClosed().subscribe(result => {       //recuperation decision utilisateur:  result= boolean
       if (result) {
         if (this.state_to_change == 'sandbox') {
-          this.oneProduit.etat = "live";
+          for (let i = 0; i < this.produitSelected.length; i++) {
+            this.produitSelected[i].etat = "live";
+          }
           this.produitService.launchMultiple(body).subscribe(result => {
             console.log("success", result);
             /**--------------snackbar-------- blue-snackbar dans style.css----- */
@@ -393,7 +413,10 @@ export class ProduitsComponent implements OnInit {
           });
 
         } else if (this.state_to_change == 'live') {
-          this.oneProduit.etat = "archived";
+          // this.oneProduit.etat = "archived";
+          for (let i = 0; i < this.produitSelected.length; i++) {
+            this.produitSelected[i].etat = "archived";
+          }
           this.produitService.archivedMultiple(body).subscribe(result => {
             console.log("success", result);
             /**--------------snackbar-------- blue-snackbar dans style.css----- */
@@ -401,36 +424,30 @@ export class ProduitsComponent implements OnInit {
           });
         }
 
-        else if (this.state_to_change == 'archived') {          
-          let id_produits = [];
+        else if (this.state_to_change == 'archived') {
+          let multipleID = [];
           for (let i = 0; i < this.produitSelected.length; i++) {
-            id_produits.push(this.produitSelected[i]._id);
-            console.log(id_produits, "coucouc");
-          };
+            multipleID.push(this.produitSelected[i]._id);
+          }
+          console.log(multipleID, "coucou");
 
-          this.produitService.deleteMultiple(id_produits).subscribe(result => {
-            console.log("success", result);
-            this.produits.splice(this.indexProduit, 1);
+          let data = {
+            id_produits: multipleID
+          }
+          console.log(data);
+          this.produitService.deleteMultiple(data).subscribe(result => {
+            console.log("success", result); 
+
+          for(let i = 0; i < this.produitSelected.length; i++) {
+            let index = this.produits.findIndex(p => { return p._id == this.produitSelected[i]._id });
+            console.log("index = ", index);
+            this.produits.splice(index, 1);
+          }
+          this.totalProduits = multipleID.length;
+          console.log("total produits = ", this.totalProduits);
           });
-
-
-
           /**--------------snackbar-------- blue-snackbar dans style.css----- */
-          // this.snackBar.open("[" + this.oneProduit.titre + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
-
-          // if (this.indexProduit != 0) {
-          //   this.oneProduit = this.produits[this.indexProduit - 1];
-          //   document.getElementById("one_" + this.produits[this.indexProduit - 1]._id).focus();
-          // } else {
-          //   if (this.produits.length >= 2) {
-          //     this.oneProduit = this.produits[this.indexProduit + 1];
-          //     document.getElementById("one_" + this.produits[this.indexProduit + 1]._id).focus();
-          //   } else {
-
-          //   }
-          // }
-
-
+          this.snackBar.open("[" + this.totalProduits + "] produits ont été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
         }
       }
     });
@@ -708,6 +725,12 @@ export class ProduitsComponent implements OnInit {
       this.showCategorieCreate = false;
       this.Transparent_overlay = false;
     }
+
+    this.categorie = {
+      _id: "",
+      nom: "",
+      description: ""
+    }
   }
 
 
@@ -718,6 +741,7 @@ export class ProduitsComponent implements OnInit {
     this.showFilter = false;
     this.showDetailListStat = false;
     this.showCategorieCreate = false;
+    this.showCategorieEdit = false;
   }
 
   popupImageProduits(index): void {
@@ -942,6 +966,165 @@ export class ProduitsComponent implements OnInit {
   deplacerConfirme() {
     event.preventDefault();// evider l'evenement native du navigateur
     document.getElementById("button_confirm_one").focus();
+  }
+
+  addCategorie() {
+    const cat_object = {
+      nom: this.categorie.nom,
+      description: this.categorie.description
+    }
+
+    let isValid = false;
+    let listInputAndTextearea = Object.keys(cat_object);    
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
+      let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+      if (element.value == "") {
+        element.style.borderColor = "red";
+        isValid = true;
+      } else {
+        element.style.borderColor = "#d5d5d5";
+      }
+    }
+
+    if(!isValid) {
+      const dialogRef = this.dialog.open(this.categorieBox);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.addCategorie(cat_object).subscribe(result => {
+            console.log("success", result);
+            this.showCategorieCreate = false;
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été ajouté avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.allCategorie.push(this.categorie);
+          });
+        }
+        this.getCategorie();
+      });
+    }
+      
+  }
+
+  getCategorie() {
+    return this.produitService.getCategorie().subscribe(data => {
+      this.allCategorie = data["value"][0]; 
+      console.log("Liste catégorie", this.allCategorie);
+    });
+  }
+  
+  editCategorie(c,i) {
+    if (this.showCategorieEdit == false) {
+      this.showCategorieEdit = true;
+      this.Transparent_overlay = true;
+    }
+    else {
+      this.showCategorieEdit = false;
+      this.Transparent_overlay = false;
+    }
+    this.categorie = c;
+    console.log(this.categorie, "categ");
+  }
+
+  updateCategorie() {
+    const body = {
+      nom: this.categorie.nom,
+      description: this.categorie.description
+    }
+
+    let isValid = false;
+    let listInputAndTextearea = Object.keys(body);    
+    for (let i = 0; i < listInputAndTextearea.length; i++) {
+      let element = document.getElementById(listInputAndTextearea[i]) as HTMLInputElement;
+      if (element.value == "") {
+        element.style.borderColor = "red";
+        isValid = true;
+      } else {
+        element.style.borderColor = "#d5d5d5";
+      }
+    }
+
+    if(!isValid) {
+      const dialogRef = this.dialog.open(this.categorieBoxEdit);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.updateCategorie(body, this.categorie._id).subscribe(result => {
+            console.log("Categorie updated ", result);
+            this.showCategorieEdit = false;
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été modifié avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            // this.allCategorie;
+            this.getCategorie();
+          });
+        }
+      });
+    }
+  }
+
+  deleteCategorie(categorie, i) {
+
+    const dialogRef = this.dialog.open(this.categorieBoxDelete);
+      dialogRef.afterClosed().subscribe(data => {  
+        if(data) {
+          this.produitService.deleteCategorie(categorie).subscribe(result => {
+            console.log("Categorie deleted ", result);
+            this.snackBar.open("[" + this.categorie['nom'] + "] a été supprimé avec success", 'ok', { duration: this.durationSnackBar, panelClass: ['blue-snackbar'] });
+            this.allCategorie.splice(i, 1);
+          });
+        }
+      });
+  }
+
+  isEditedBtn() {
+    console.log("hello");
+    this.isEdited = !this.isEdited;
+  }
+
+  // Create catégorie
+  leaveNom() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    if (nom_categorie.value == "") { nom_categorie.style.borderColor = "red";
+    } else { nom_categorie.style.borderColor = "lightgray";
+    }
+  }
+
+  enterNom() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    nom_categorie.style.borderColor = "lightgray";
+  }
+
+  enterDescri() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    if (description.value == "") { description.style.borderColor = "red";
+    } else { description.style.borderColor = "lightgray";
+    }
+  }
+
+  leaveDescri() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    description.style.borderColor = "lightgray";
+  }
+
+
+  // Update catégorie
+  leaveNomEdit() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    if (nom_categorie.value == "") { nom_categorie.style.borderColor = "red";
+    } else { nom_categorie.style.borderColor = "lightgray";
+    }
+  }
+
+  enterNomEdit() {
+    var nom_categorie = document.getElementById("nom") as HTMLInputElement;
+    nom_categorie.style.borderColor = "lightgray";
+  }
+
+  enterDescriEdit() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    if (description.value == "") { description.style.borderColor = "red";
+    } else { description.style.borderColor = "lightgray";
+    }
+  }
+
+  leaveDescriEdit() {
+    var description = document.getElementById("description") as HTMLInputElement;
+    description.style.borderColor = "lightgray";
   }
 
 
