@@ -539,6 +539,7 @@ export class ProduitsComponent implements OnInit {
     this.produitService.getAllProduits(this.paramGetCustomized).subscribe(resultat => {
       console.log("resultat", resultat);
       this.produits = resultat['produits'];
+      console.log('test fotsiny',this.produits)
       this.oneProduit = this.produits[0];
       this.indexProduit = 0;
     });

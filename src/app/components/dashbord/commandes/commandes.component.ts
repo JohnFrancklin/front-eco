@@ -34,11 +34,13 @@ export class CommandesComponent implements OnInit {
   spinner_background = "rgba(100,100,100,0.1)"
   //------------------------------------//
   selectClient = [];
+
   // variable pour datatable//
 
   //---------------------------------------------------//
 
   // Commandes
+  indexCommamdes:any;
  detailCmd : any = 
     {
       _id: "",
@@ -103,14 +105,15 @@ export class CommandesComponent implements OnInit {
         /************************************** */
 
         this.getCommandes();
+      
   }
 
 
 
   getCommandes(){     
     this.commandes = this.commandesService.getCommandes();
-    console.log("les commandes", this.commandes);
-    
+    // console.log("les commandes", this.commandes);
+    this.detailCmd = this.commandes[0];
   }
 
 
@@ -200,7 +203,7 @@ export class CommandesComponent implements OnInit {
 
 
       this.paramGetCustomized = this.paramGetCustomized + 1;
-      console.log("Le parametre de recuperation", this.paramGetCustomized);
+      // console.log("Le parametre de recuperation", this.paramGetCustomized);
 
       this.loadMore = true;
       this.spinner.show(this.spinner_loadMore);
@@ -223,9 +226,20 @@ export class CommandesComponent implements OnInit {
 
   // OAKOKAOAKOAKO****
   getOneCommande(c) {
-  
-      this.detailCmd = c;
-      this.createType = false;
-      console.log("ETO EG", this.detailCmd);
+      this.detailCmd = c;   
   }
+
+  getTotal (){
+    let total = 0;  
+      let com = this.commandes[0];
+      console.log('commande liste',com)
+        for ( let j=0; j<com.commandes.length; j++){
+          let listCom = com.commandes[j];
+          total = (listCom.prix_unitaire * listCom.quantite) + total;
+          // console.log('liste' , listCom)
+        }   
+    // console.log('Le total est', total)
+    return total;
+}
+
 }

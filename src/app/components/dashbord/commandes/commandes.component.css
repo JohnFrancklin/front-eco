@@ -964,6 +964,7 @@ tr:hover {
 .if_save{
     color:#42a7ff;
     float:right;
+    margin-right: 5px;
     font-size: small;
     font-weight:450;
 }
