@@ -1,0 +1,9 @@
+<div class="enfant">
+    Nom: {{NomEtudiant}}
+    <br />
+    Question de mon prof: {{QuestiondeMonEnseignant}}
+    <br />
+    <input type="text" (input)=setResponse($event)>
+    <br /><br />
+    <button type="button" (click)="addReponse()">Envoyer reponse</button>
+</div>

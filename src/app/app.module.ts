@@ -40,6 +40,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EnseignantComponent } from './testEvent/enseignant/enseignant.component';
+import { EtudiantComponent } from './testEvent/etudiant/etudiant.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DetailComponent,
     BoxclientComponent,
     CommandesComponent,
+    EnseignantComponent,
+    EtudiantComponent,
     
 
   ],
