@@ -1,5 +1,16 @@
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + document.cookie
+  })
+}
+
+const endPoint = environment.api + "commande"
 @Injectable({
   providedIn: 'root'
 })
@@ -68,11 +79,16 @@ export class CommandesService {
   ]
 
 
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 
 
   getCommandes() {
     return this.commandes;
+  }
+
+  getAllCommandes(){
+    return this.http.get<any[]>(endPoint,httpOptions);
   }
 
 

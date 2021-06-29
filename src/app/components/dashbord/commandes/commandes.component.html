@@ -199,7 +199,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let c of commandes ; let in = index"  (click)="getOneCommande(c)"  >
+                                        <tr *ngFor="let c of commandes ; let i = index"  (click)="getOneCommande(c,i)"  >
                                             <td class="numero_commande">{{c.numero_commande}}</td>
                                             <td class="client">{{c.client}}</td>
                                             <td class="etat">{{c.etat}}</td>
@@ -261,7 +261,7 @@
                                 {{detailCmd.etat}}
                             </span><br>
                             <span class="date_com">
-                                {{detailCmd.user.dateInscription | date : 'yyyy-MM-dd'}}
+                                {{detailCmd.date_creation | date : 'yyyy-MM-dd'}}
                             </span>
                         </div>
                     </div>
@@ -280,9 +280,9 @@
                             </div>
 
                             <div class="type-right">
-                                <span class="style_text">{{detailCmd.user.pays}}</span><br>
-                                <span class="style_text">{{detailCmd.user.ville}}</span><br>
-                                <span class="style_text">{{detailCmd.user.adresse}}</span><br>
+                                <span class="style_text">{{detailCmd.adresse}}</span><br>
+                                <span class="style_text">{{detailCmd.adresse}}</span><br>
+                                <span class="style_text">{{detailCmd.adresse}}</span><br>
                             </div>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
                     </div>
 
                     <div class="type_paiement">
-                        <input class="style_text"disabled [(ngModel)]="detailCmd.tracage.tel"><br>
+                        <input class="style_text"disabled [(ngModel)]="detailCmd.payment.methode"><br>
                         <input class="style_text"disabled [(ngModel)]="detailCmd.payment.transaction_id"><br>
                         <input class="style_text"disabled [(ngModel)]="detailCmd.payment.amount">
                     </div>
@@ -317,7 +317,7 @@
                     </div>
 
                     <div class="type_deli">
-                        <input class="style_text" disabled value ="{{detailCmd.tracage.estimation_delivrance | date : 'yyyy-MM-dd'}}"><br>
+                        <input class="style_text" disabled value ="{{detailCmd.tracage.estimation_delivrance }}"><br>
                         <span class="if_save">Enregistrer</span>
                     </div>
                 </div>
@@ -386,7 +386,7 @@
                         <div class="detail_prod">
                             <div class="name_prod">
                                 <span class="lbl_left">
-                                    {{com.id_produit.categorie.nom}}
+                                   categorie
                                 </span>
                                 <span class="lbl_text">
                                     #Mobile
@@ -426,7 +426,7 @@
                     <div class="groupe_content">
                         <div class="leftSide sideToside">
                             <div class="detail_to_change">
-                                <input class="input_tochange" disabled [(ngModel)]="detailCmd.user.pays">
+                                <input class="input_tochange" disabled [(ngModel)]="detailCmd.adresse">
                                 <div class="label_change">
                                     Pays
                                 </div>
@@ -434,7 +434,7 @@
                         </div>
                         <div class="rightSide sideToside">
                             <div class="detail_to_change">
-                                <input class="input_tochange rightNumber" disabled [(ngModel)]="detailCmd.user.ville">
+                                <input class="input_tochange rightNumber" disabled [(ngModel)]="detailCmd.adresse">
                                 <div class="label_change">
                                     Ville
                                 </div>
@@ -443,7 +443,7 @@
                     </div>
 
                     <div class="box_Adresse">
-                        Mahamasina, Lot 5623 en face Stade municipale
+                       {{detailCmd.adresse}}
                     </div>
                     <span class="text_bottom">
                         Adresse

@@ -18,7 +18,8 @@ export class CommandesComponent implements OnInit {
   listDetailToShow: string;  // vote ou favoris ou vu ou commande
   titleDetailListStat: string;
   loadMore: boolean = false;
-  
+  indexCommande = 0;
+  totalCommande:any;
   commandes: any;
   scrollSpace = 0;  // espace vide scroll
   createType: boolean = false;
@@ -41,49 +42,35 @@ export class CommandesComponent implements OnInit {
   // Commandes
  detailCmd : any = 
     {
-      _id: "",
-      numero_commande: "",
-      user: {
-        nom: "",
-        prenom: "",
-        tel: "",
-        email: "",
-        pays: "",
-        ville: "",
-        codePostal: "",
-        adresse: "",
-        dateInscription: ""
-      },
-      client: "",
-      adresse: "",
-      codePostal: "",
-      note_delivrance: "",
-      date_creation: "",
-      etat: "",
-      tracage: {
-        email: "",
-        tel: "",
+      id : "",
+    updateAt : "",
+    client : "",
+    adresse : "",
+    note_delivrance : "",
+    etat : "",
+    tracage : {
+        email : "",
+        tel : "",
         estimation_delivrance: ""
       },
       payment: {
-        method: "",
-        transaction_id: "",
-        amount: "",
-        codePromo: ""
+        methode : "",
+        transaction_id : "",
+        amount : "",
+        codepromo : ""
       },
-      commandes: 
+      commandes : [
         {
-          id_produit: {
-            categorie: {
-              nom: ""
-            },
-            images: [],
-          },
-          title: "",
-          quantite: "",
-          prix_unitaire: "",
-          currency: ""
-        }    
+        
+          title : "",
+          quantite : "",
+          prix_unitaire :"",
+          curency : ""
+        }
+      ],
+    date_creation :"",
+      numero_commande : "",
+       
     }
   
 
@@ -101,19 +88,29 @@ export class CommandesComponent implements OnInit {
           this.spinner.hide(this.spinner_list_utilisateurs);//stop loader
         }, 500);
         /************************************** */
-
-        this.getCommandes();
-      
+    
+        // this.getCommandes();
+        this.getAllCommandes();     
+        
   }
 
 
 
-  getCommandes(){     
-    this.commandes = this.commandesService.getCommandes();
-    // console.log("les commandes", this.commandes);
-    this.detailCmd = this.commandes[0];
-  }
+  // getCommandes(){     
+  //   this.commandes = this.commandesService.getCommandes();
+  //   console.log("les commandes", this.commandes);
+  //   this.detailCmd = this.commandes[0];
+  //   console.log('Liste des commandes',this.detailCmd)
+  // }
 
+  getAllCommandes(){
+    this.commandesService.getAllCommandes().subscribe(resultat => {
+      console.log("resultat", resultat);
+      this.commandes = resultat['value'][0];
+      this.detailCmd = this.commandes[0];
+    });
+
+  }
 
    sort(ascending, columnClassName, tableId)
 		{
@@ -223,20 +220,24 @@ export class CommandesComponent implements OnInit {
   }
 
   // OAKOKAOAKOAKO****
-  getOneCommande(c) {
-      this.detailCmd = c;   
+  getOneCommande(c,i) {
+      this.detailCmd = c;
+      this.detailCmd['index']=i;
+      this.indexCommande =i;
+      console.log("index commande", this.indexCommande)  
+      this.getTotal()
   }
 
   getTotal (){
+    let i = this.indexCommande;
     let total = 0;  
-      let com = this.commandes[0];
-      console.log('commande liste',com)
+      let com = this.commandes[i];
+      // console.log('commande liste',com)
         for ( let j=0; j<com.commandes.length; j++){
           let listCom = com.commandes[j];
           total = (listCom.prix_unitaire * listCom.quantite) + total;
-          // console.log('liste' , listCom)
+          this.totalCommande = total;
         }   
-    // console.log('Le total est', total)
     return total;
 }
 

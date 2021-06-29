@@ -809,17 +809,23 @@ tr:hover {
     padding: 5px;
 }
 .value_date{
-    margin-top: 27px;
+    margin-top: 27px; 
+    height:41px;
+    text-align: justify;
+
 }
 .text_value{
     color:#42a66a;
-    margin-left:10px;
+    margin:-6px;
     font-weight:450;
     font-size: small;
+    position: fixed;
+    text-align: left;
 }
 .date_com{
-    margin-left:4px;
+    margin-left:-6px;
     font-weight:450;
+    text-align: left;
     font-size: small;
 }
 .inf_cli{
